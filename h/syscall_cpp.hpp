@@ -6,7 +6,7 @@
 #define OSMIUM_SYSCALL_CPP_HPP
 
 #include "../lib/hw.h"
-#include "syscall_c.hpp"
+#include "syscall_c.h"
 
 void *operator new(size_t size);
 

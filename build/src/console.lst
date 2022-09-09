@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccOoFxHE.s 			page 1
+GAS LISTING /tmp/ccgoK6IN.s 			page 1
 
 
    1              		.file	"console.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccOoFxHE.s 			page 1
   14:src/console.cpp **** }...
   45              		.loc 1 14 1 is_stmt 0
   46 0028 03348100 		ld	s0,8(sp)
-GAS LISTING /tmp/ccOoFxHE.s 			page 2
+GAS LISTING /tmp/ccgoK6IN.s 			page 2
 
 
   47              		.cfi_restore 8
@@ -70,74 +70,74 @@ GAS LISTING /tmp/ccOoFxHE.s 			page 1
   53              	.LFE3:
   55              	.Letext0:
   56              		.file 2 "src/../h/../lib/hw.h"
-  57              		.file 3 "src/../h/syscall_c.hpp"
+  57              		.file 3 "src/../h/syscall_c.h"
   58              		.file 4 "src/../h/syscall_cpp.hpp"
-GAS LISTING /tmp/ccOoFxHE.s 			page 3
+GAS LISTING /tmp/ccgoK6IN.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 console.cpp
-     /tmp/ccOoFxHE.s:9      .text:0000000000000000 _ZN7Console4getcEv
-     /tmp/ccOoFxHE.s:13     .text:0000000000000000 .L0 
-     /tmp/ccOoFxHE.s:14     .text:0000000000000000 .L0 
-     /tmp/ccOoFxHE.s:15     .text:0000000000000004 .L0 
-     /tmp/ccOoFxHE.s:17     .text:0000000000000008 .L0 
-     /tmp/ccOoFxHE.s:19     .text:000000000000000c .L0 
-     /tmp/ccOoFxHE.s:21     .text:000000000000000c .L0 
-     /tmp/ccOoFxHE.s:22     .text:000000000000000c .L0 
-     /tmp/ccOoFxHE.s:24     .text:0000000000000014 .L0 
-     /tmp/ccOoFxHE.s:25     .text:0000000000000014 .L0 
-     /tmp/ccOoFxHE.s:27     .text:0000000000000018 .L0 
-     /tmp/ccOoFxHE.s:29     .text:000000000000001c .L0 
-     /tmp/ccOoFxHE.s:35     .text:000000000000001c _ZN7Console4putcEc
-     /tmp/ccOoFxHE.s:38     .text:000000000000001c .L0 
-     /tmp/ccOoFxHE.s:39     .text:000000000000001c .L0 
-     /tmp/ccOoFxHE.s:40     .text:0000000000000020 .L0 
-     /tmp/ccOoFxHE.s:42     .text:0000000000000024 .L0 
-     /tmp/ccOoFxHE.s:44     .text:0000000000000028 .L0 
-     /tmp/ccOoFxHE.s:46     .text:0000000000000028 .L0 
-     /tmp/ccOoFxHE.s:47     .text:000000000000002c .L0 
-     /tmp/ccOoFxHE.s:48     .text:000000000000002c .L0 
-     /tmp/ccOoFxHE.s:50     .text:0000000000000030 .L0 
-     /tmp/ccOoFxHE.s:52     .text:0000000000000034 .L0 
-     /tmp/ccOoFxHE.s:59     .text:0000000000000034 .L0 
-     /tmp/ccOoFxHE.s:250    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccOoFxHE.s:573    .debug_str:0000000000000129 .LASF18
-     /tmp/ccOoFxHE.s:547    .debug_str:000000000000004f .LASF19
-     /tmp/ccOoFxHE.s:557    .debug_str:0000000000000097 .LASF20
-     /tmp/ccOoFxHE.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccOoFxHE.s:55     .text:0000000000000034 .Letext0
-     /tmp/ccOoFxHE.s:533    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccOoFxHE.s:535    .debug_str:0000000000000000 .LASF0
-     /tmp/ccOoFxHE.s:571    .debug_str:0000000000000116 .LASF1
-     /tmp/ccOoFxHE.s:537    .debug_str:000000000000000d .LASF2
-     /tmp/ccOoFxHE.s:553    .debug_str:0000000000000084 .LASF4
-     /tmp/ccOoFxHE.s:549    .debug_str:000000000000005f .LASF3
-     /tmp/ccOoFxHE.s:543    .debug_str:0000000000000038 .LASF5
-     /tmp/ccOoFxHE.s:551    .debug_str:0000000000000071 .LASF6
-     /tmp/ccOoFxHE.s:569    .debug_str:0000000000000103 .LASF7
-     /tmp/ccOoFxHE.s:581    .debug_str:0000000000000214 .LASF8
-     /tmp/ccOoFxHE.s:539    .debug_str:000000000000001b .LASF9
-     /tmp/ccOoFxHE.s:541    .debug_str:0000000000000029 .LASF10
-     /tmp/ccOoFxHE.s:575    .debug_str:00000000000001ed .LASF11
-     /tmp/ccOoFxHE.s:545    .debug_str:000000000000003f .LASF12
-     /tmp/ccOoFxHE.s:583    .debug_str:0000000000000224 .LASF13
-     /tmp/ccOoFxHE.s:555    .debug_str:000000000000008b .LASF14
-     /tmp/ccOoFxHE.s:567    .debug_str:00000000000000ed .LASF15
-     /tmp/ccOoFxHE.s:563    .debug_str:00000000000000c4 .LASF16
-     /tmp/ccOoFxHE.s:585    .debug_str:0000000000000234 .LASF21
-     /tmp/ccOoFxHE.s:561    .debug_str:00000000000000bf .LASF22
-     /tmp/ccOoFxHE.s:565    .debug_str:00000000000000da .LASF23
-     /tmp/ccOoFxHE.s:579    .debug_str:000000000000020f .LASF24
-     /tmp/ccOoFxHE.s:577    .debug_str:00000000000001fc .LASF25
-     /tmp/ccOoFxHE.s:559    .debug_str:00000000000000ba .LASF17
-     /tmp/ccOoFxHE.s:36     .text:000000000000001c .LFB3
-GAS LISTING /tmp/ccOoFxHE.s 			page 4
+     /tmp/ccgoK6IN.s:9      .text:0000000000000000 _ZN7Console4getcEv
+     /tmp/ccgoK6IN.s:13     .text:0000000000000000 .L0 
+     /tmp/ccgoK6IN.s:14     .text:0000000000000000 .L0 
+     /tmp/ccgoK6IN.s:15     .text:0000000000000004 .L0 
+     /tmp/ccgoK6IN.s:17     .text:0000000000000008 .L0 
+     /tmp/ccgoK6IN.s:19     .text:000000000000000c .L0 
+     /tmp/ccgoK6IN.s:21     .text:000000000000000c .L0 
+     /tmp/ccgoK6IN.s:22     .text:000000000000000c .L0 
+     /tmp/ccgoK6IN.s:24     .text:0000000000000014 .L0 
+     /tmp/ccgoK6IN.s:25     .text:0000000000000014 .L0 
+     /tmp/ccgoK6IN.s:27     .text:0000000000000018 .L0 
+     /tmp/ccgoK6IN.s:29     .text:000000000000001c .L0 
+     /tmp/ccgoK6IN.s:35     .text:000000000000001c _ZN7Console4putcEc
+     /tmp/ccgoK6IN.s:38     .text:000000000000001c .L0 
+     /tmp/ccgoK6IN.s:39     .text:000000000000001c .L0 
+     /tmp/ccgoK6IN.s:40     .text:0000000000000020 .L0 
+     /tmp/ccgoK6IN.s:42     .text:0000000000000024 .L0 
+     /tmp/ccgoK6IN.s:44     .text:0000000000000028 .L0 
+     /tmp/ccgoK6IN.s:46     .text:0000000000000028 .L0 
+     /tmp/ccgoK6IN.s:47     .text:000000000000002c .L0 
+     /tmp/ccgoK6IN.s:48     .text:000000000000002c .L0 
+     /tmp/ccgoK6IN.s:50     .text:0000000000000030 .L0 
+     /tmp/ccgoK6IN.s:52     .text:0000000000000034 .L0 
+     /tmp/ccgoK6IN.s:59     .text:0000000000000034 .L0 
+     /tmp/ccgoK6IN.s:250    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccgoK6IN.s:573    .debug_str:0000000000000129 .LASF18
+     /tmp/ccgoK6IN.s:547    .debug_str:000000000000004f .LASF19
+     /tmp/ccgoK6IN.s:557    .debug_str:0000000000000097 .LASF20
+     /tmp/ccgoK6IN.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccgoK6IN.s:55     .text:0000000000000034 .Letext0
+     /tmp/ccgoK6IN.s:533    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccgoK6IN.s:535    .debug_str:0000000000000000 .LASF0
+     /tmp/ccgoK6IN.s:571    .debug_str:0000000000000116 .LASF1
+     /tmp/ccgoK6IN.s:537    .debug_str:000000000000000d .LASF2
+     /tmp/ccgoK6IN.s:553    .debug_str:0000000000000084 .LASF4
+     /tmp/ccgoK6IN.s:549    .debug_str:000000000000005f .LASF3
+     /tmp/ccgoK6IN.s:543    .debug_str:0000000000000038 .LASF5
+     /tmp/ccgoK6IN.s:551    .debug_str:0000000000000071 .LASF6
+     /tmp/ccgoK6IN.s:569    .debug_str:0000000000000103 .LASF7
+     /tmp/ccgoK6IN.s:581    .debug_str:0000000000000214 .LASF8
+     /tmp/ccgoK6IN.s:539    .debug_str:000000000000001b .LASF9
+     /tmp/ccgoK6IN.s:541    .debug_str:0000000000000029 .LASF10
+     /tmp/ccgoK6IN.s:575    .debug_str:00000000000001ed .LASF11
+     /tmp/ccgoK6IN.s:545    .debug_str:000000000000003f .LASF12
+     /tmp/ccgoK6IN.s:583    .debug_str:0000000000000224 .LASF13
+     /tmp/ccgoK6IN.s:555    .debug_str:000000000000008b .LASF14
+     /tmp/ccgoK6IN.s:567    .debug_str:00000000000000ed .LASF15
+     /tmp/ccgoK6IN.s:563    .debug_str:00000000000000c4 .LASF16
+     /tmp/ccgoK6IN.s:585    .debug_str:0000000000000234 .LASF21
+     /tmp/ccgoK6IN.s:561    .debug_str:00000000000000bf .LASF22
+     /tmp/ccgoK6IN.s:565    .debug_str:00000000000000da .LASF23
+     /tmp/ccgoK6IN.s:579    .debug_str:000000000000020f .LASF24
+     /tmp/ccgoK6IN.s:577    .debug_str:00000000000001fc .LASF25
+     /tmp/ccgoK6IN.s:559    .debug_str:00000000000000ba .LASF17
+     /tmp/ccgoK6IN.s:36     .text:000000000000001c .LFB3
+GAS LISTING /tmp/ccgoK6IN.s 			page 4
 
 
-     /tmp/ccOoFxHE.s:53     .text:0000000000000034 .LFE3
-     /tmp/ccOoFxHE.s:10     .text:0000000000000000 .LFB2
-     /tmp/ccOoFxHE.s:30     .text:000000000000001c .LFE2
-     /tmp/ccOoFxHE.s:60     .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccgoK6IN.s:53     .text:0000000000000034 .LFE3
+     /tmp/ccgoK6IN.s:10     .text:0000000000000000 .LFB2
+     /tmp/ccgoK6IN.s:30     .text:000000000000001c .LFE2
+     /tmp/ccgoK6IN.s:60     .debug_info:0000000000000000 .Ldebug_info0
 
 NO UNDEFINED SYMBOLS

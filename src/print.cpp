@@ -6,11 +6,11 @@
 #include "../h/riscv.hpp"
 #include "../lib/console.h"
 
-void printString(char const *string) {
+void __print_string(char const *string) {
     for (char const *c = string; *c != '\0'; c++) __putc(*c);
 }
 
-void printUint64(uint64 integer) {
+void __print_uint64(uint64 integer) {
     static char digits[] = "0123456789";
     char output[20];
     int i = 0;
@@ -20,9 +20,9 @@ void printUint64(uint64 integer) {
     while(--i >= 0) __putc(output[i]);
 }
 
-void printInt(long long int integer) {
+void __print_int(long long int integer) {
     if (integer < 0) __putc('-'), integer *= -1;
-    printUint64(integer);
+    __print_uint64(integer);
 }
 
 void printInteger(uint64 integer)

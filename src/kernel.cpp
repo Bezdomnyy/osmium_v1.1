@@ -27,9 +27,9 @@ void Kernel::supervisorTrapHandler() {
     }
     if (scause == 0x07) {
         uint64 sepc = RiscV::readSepc() + 4;
-        printString("Nedozvoljena adresa upisa.\n");
-        printString("scause: ");
-        printUint64(scause);
+        __print_string("Nedozvoljena adresa upisa.\n");
+        __print_string("scause: ");
+        __print_uint64(scause);
         __putc('\n');
         //RiscV::clearSip(RiscV::SEIP);
         RiscV::writeSepc(sepc);
@@ -37,9 +37,9 @@ void Kernel::supervisorTrapHandler() {
     }
 
     uint64 sepc = RiscV::readSepc() + 4;
-    printString("Neobradjen izuzetak.\n");
-    printString("scause: ");
-    printUint64(scause);
+    __print_string("Neobradjen izuzetak.\n");
+    __print_string("scause: ");
+    __print_uint64(scause);
     __putc('\n');
     RiscV::clearSip(RiscV::SEIP);
     console_handler();

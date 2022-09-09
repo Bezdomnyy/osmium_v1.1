@@ -2,8 +2,8 @@
 // Created by os on 8/10/22.
 //
 
-#ifndef OSMIUM_SYSCALL_C_HPP
-#define OSMIUM_SYSCALL_C_HPP
+#ifndef OSMIUM_SYSCALL_C_H
+#define OSMIUM_SYSCALL_C_H
 
 #include "../lib/hw.h"
 //using size_t = decltype(sizeof(0));
@@ -122,4 +122,4 @@ void putc(char);
 /* Ispisuje dati znak na konzolu. */
 
 
-#endif //OSMIUM_SYSCALL_C_HPP
+#endif //OSMIUM_SYSCALL_C_H
