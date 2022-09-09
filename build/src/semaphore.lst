@@ -1,0 +1,159 @@
+GAS LISTING /tmp/ccTfLuYp.s 			page 1
+
+
+   1              		.file	"semaphore.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   7              		.globl	_ZN9Semaphore4waitEv
+   9              	_ZN9Semaphore4waitEv:
+  10              	.LFB2:
+  11              		.file 1 "src/semaphore.cpp"
+   1:src/semaphore.cpp **** //
+   2:src/semaphore.cpp **** // Created by os on 9/9/22.
+   3:src/semaphore.cpp **** //
+   4:src/semaphore.cpp **** 
+   5:src/semaphore.cpp **** #include "../h/syscall_cpp.hpp"
+   6:src/semaphore.cpp **** 
+   7:src/semaphore.cpp **** /*Semaphore::Semaphore(unsigned int init) {
+   8:src/semaphore.cpp **** 
+   9:src/semaphore.cpp **** }*/
+  10:src/semaphore.cpp **** 
+  11:src/semaphore.cpp **** int Semaphore::wait() {
+  12              		.loc 1 11 23
+  13              		.cfi_startproc
+  14              	.LVL0:
+  15 0000 130101FF 		addi	sp,sp,-16
+  16              		.cfi_def_cfa_offset 16
+  17 0004 23348100 		sd	s0,8(sp)
+  18              		.cfi_offset 8, -8
+  19 0008 13040101 		addi	s0,sp,16
+  20              		.cfi_def_cfa 8, 0
+  12:src/semaphore.cpp ****     return 0;
+  21              		.loc 1 12 5
+  13:src/semaphore.cpp **** }
+  22              		.loc 1 13 1 is_stmt 0
+  23 000c 13050000 		li	a0,0
+  24              	.LVL1:
+  25 0010 03348100 		ld	s0,8(sp)
+  26              		.cfi_restore 8
+  27              		.cfi_def_cfa 2, 16
+  28 0014 13010101 		addi	sp,sp,16
+  29              		.cfi_def_cfa_offset 0
+  30 0018 67800000 		jr	ra
+  31              		.cfi_endproc
+  32              	.LFE2:
+  34              		.align	2
+  35              		.globl	_ZN9Semaphore6signalEv
+  37              	_ZN9Semaphore6signalEv:
+  38              	.LFB3:
+  14:src/semaphore.cpp **** 
+  15:src/semaphore.cpp **** int Semaphore::signal() {
+  39              		.loc 1 15 25 is_stmt 1
+  40              		.cfi_startproc
+  41              	.LVL2:
+  42 001c 130101FF 		addi	sp,sp,-16
+  43              		.cfi_def_cfa_offset 16
+  44 0020 23348100 		sd	s0,8(sp)
+  45              		.cfi_offset 8, -8
+GAS LISTING /tmp/ccTfLuYp.s 			page 2
+
+
+  46 0024 13040101 		addi	s0,sp,16
+  47              		.cfi_def_cfa 8, 0
+  16:src/semaphore.cpp ****     return 0;
+  48              		.loc 1 16 5
+  17:src/semaphore.cpp **** }
+  49              		.loc 1 17 1 is_stmt 0
+  50 0028 13050000 		li	a0,0
+  51              	.LVL3:
+  52 002c 03348100 		ld	s0,8(sp)
+  53              		.cfi_restore 8
+  54              		.cfi_def_cfa 2, 16
+  55 0030 13010101 		addi	sp,sp,16
+  56              		.cfi_def_cfa_offset 0
+  57 0034 67800000 		jr	ra
+  58              		.cfi_endproc
+  59              	.LFE3:
+  61              	.Letext0:
+  62              		.file 2 "src/../h/../lib/hw.h"
+  63              		.file 3 "src/../h/syscall_c.hpp"
+GAS LISTING /tmp/ccTfLuYp.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 semaphore.cpp
+     /tmp/ccTfLuYp.s:9      .text:0000000000000000 _ZN9Semaphore4waitEv
+     /tmp/ccTfLuYp.s:13     .text:0000000000000000 .L0 
+     /tmp/ccTfLuYp.s:15     .text:0000000000000000 .L0 
+     /tmp/ccTfLuYp.s:16     .text:0000000000000004 .L0 
+     /tmp/ccTfLuYp.s:18     .text:0000000000000008 .L0 
+     /tmp/ccTfLuYp.s:20     .text:000000000000000c .L0 
+     /tmp/ccTfLuYp.s:22     .text:000000000000000c .L0 
+     /tmp/ccTfLuYp.s:23     .text:000000000000000c .L0 
+     /tmp/ccTfLuYp.s:26     .text:0000000000000014 .L0 
+     /tmp/ccTfLuYp.s:27     .text:0000000000000014 .L0 
+     /tmp/ccTfLuYp.s:29     .text:0000000000000018 .L0 
+     /tmp/ccTfLuYp.s:31     .text:000000000000001c .L0 
+     /tmp/ccTfLuYp.s:37     .text:000000000000001c _ZN9Semaphore6signalEv
+     /tmp/ccTfLuYp.s:40     .text:000000000000001c .L0 
+     /tmp/ccTfLuYp.s:42     .text:000000000000001c .L0 
+     /tmp/ccTfLuYp.s:43     .text:0000000000000020 .L0 
+     /tmp/ccTfLuYp.s:45     .text:0000000000000024 .L0 
+     /tmp/ccTfLuYp.s:47     .text:0000000000000028 .L0 
+     /tmp/ccTfLuYp.s:49     .text:0000000000000028 .L0 
+     /tmp/ccTfLuYp.s:50     .text:0000000000000028 .L0 
+     /tmp/ccTfLuYp.s:53     .text:0000000000000030 .L0 
+     /tmp/ccTfLuYp.s:54     .text:0000000000000030 .L0 
+     /tmp/ccTfLuYp.s:56     .text:0000000000000034 .L0 
+     /tmp/ccTfLuYp.s:58     .text:0000000000000038 .L0 
+     /tmp/ccTfLuYp.s:64     .text:0000000000000038 .L0 
+     /tmp/ccTfLuYp.s:264    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccTfLuYp.s:615    .debug_str:000000000000010d .LASF19
+     /tmp/ccTfLuYp.s:629    .debug_str:0000000000000236 .LASF20
+     /tmp/ccTfLuYp.s:603    .debug_str:0000000000000093 .LASF21
+     /tmp/ccTfLuYp.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccTfLuYp.s:61     .text:0000000000000038 .Letext0
+     /tmp/ccTfLuYp.s:577    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccTfLuYp.s:579    .debug_str:0000000000000000 .LASF0
+     /tmp/ccTfLuYp.s:613    .debug_str:00000000000000fa .LASF1
+     /tmp/ccTfLuYp.s:583    .debug_str:0000000000000012 .LASF2
+     /tmp/ccTfLuYp.s:597    .debug_str:0000000000000079 .LASF4
+     /tmp/ccTfLuYp.s:593    .debug_str:0000000000000054 .LASF3
+     /tmp/ccTfLuYp.s:589    .debug_str:000000000000003d .LASF5
+     /tmp/ccTfLuYp.s:595    .debug_str:0000000000000066 .LASF6
+     /tmp/ccTfLuYp.s:611    .debug_str:00000000000000e7 .LASF7
+     /tmp/ccTfLuYp.s:625    .debug_str:0000000000000216 .LASF8
+     /tmp/ccTfLuYp.s:585    .debug_str:0000000000000020 .LASF9
+     /tmp/ccTfLuYp.s:587    .debug_str:000000000000002e .LASF10
+     /tmp/ccTfLuYp.s:617    .debug_str:00000000000001d1 .LASF11
+     /tmp/ccTfLuYp.s:591    .debug_str:0000000000000044 .LASF12
+     /tmp/ccTfLuYp.s:627    .debug_str:0000000000000226 .LASF13
+     /tmp/ccTfLuYp.s:601    .debug_str:0000000000000087 .LASF14
+     /tmp/ccTfLuYp.s:609    .debug_str:00000000000000d1 .LASF15
+     /tmp/ccTfLuYp.s:605    .debug_str:00000000000000b6 .LASF16
+     /tmp/ccTfLuYp.s:631    .debug_str:0000000000000248 .LASF17
+     /tmp/ccTfLuYp.s:619    .debug_str:00000000000001e0 .LASF22
+     /tmp/ccTfLuYp.s:599    .debug_str:0000000000000080 .LASF23
+     /tmp/ccTfLuYp.s:623    .debug_str:00000000000001ff .LASF24
+     /tmp/ccTfLuYp.s:581    .debug_str:000000000000000d .LASF25
+     /tmp/ccTfLuYp.s:621    .debug_str:00000000000001ea .LASF26
+GAS LISTING /tmp/ccTfLuYp.s 			page 4
+
+
+     /tmp/ccTfLuYp.s:38     .text:000000000000001c .LFB3
+     /tmp/ccTfLuYp.s:59     .text:0000000000000038 .LFE3
+     /tmp/ccTfLuYp.s:607    .debug_str:00000000000000cc .LASF18
+     /tmp/ccTfLuYp.s:536    .debug_loc:0000000000000000 .LLST1
+     /tmp/ccTfLuYp.s:10     .text:0000000000000000 .LFB2
+     /tmp/ccTfLuYp.s:32     .text:000000000000001c .LFE2
+     /tmp/ccTfLuYp.s:550    .debug_loc:0000000000000039 .LLST0
+     /tmp/ccTfLuYp.s:41     .text:000000000000001c .LVL2
+     /tmp/ccTfLuYp.s:51     .text:000000000000002c .LVL3
+     /tmp/ccTfLuYp.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccTfLuYp.s:24     .text:0000000000000010 .LVL1
+     /tmp/ccTfLuYp.s:65     .debug_info:0000000000000000 .Ldebug_info0
+
+NO UNDEFINED SYMBOLS
