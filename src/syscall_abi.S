@@ -1,13 +1,17 @@
 .global mem_alloc
 mem_alloc:
-    mv a1, a0
-    addi a0, zero, 0x01
+    addi a7, zero, 0x01
     ecall
     ret
 
 .global mem_free
 mem_free:
-    mv a1, a0
-    addi a0, zero, 0x02
+    addi a7, zero, 0x02
+    ecall
+    ret
+
+.global mem_free
+mem_free:
+    addi a7, zero, 0x02
     ecall
     ret

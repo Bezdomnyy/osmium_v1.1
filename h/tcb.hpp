@@ -6,6 +6,8 @@
 #define OSMIUM_TCB_HPP
 
 #include "../lib/hw.h"
+#include "../h/scheduler.hpp"
+#include "../h/riscv.hpp"
 
 class TCB {
 public:
@@ -19,12 +21,17 @@ public:
 
     static TCB* running;
 
-    static void yield();
+    static void dispatch();
 
 private:
-    TCB(Body body, void* args) {
-
+    TCB(Body body, void* args)
+        : body(body), args(args), stack(new uint64[DEFAULT_STACK_SIZE]), finished(false),
+        context({(uint64)body, (uint64)&stack[DEFAULT_STACK_SIZE]})
+        {
+        if (body != nullptr) Scheduler::put(this);
     }
+
+    TCB() : body(nullptr), args(nullptr), stack(nullptr), finished(false), context({0, 0}){}
 
     struct Context {
         uint64 ra;
@@ -33,13 +40,13 @@ private:
 
     Body body;
     void *args;
-    Context context;
     uint64 *stack;
     bool finished;
+    Context context;
 
-    static void contextSwitch();
+    static void contextSwitch(Context*, Context*);
 
-    static void dispatch();
+    static void putForward();
 
 };
 

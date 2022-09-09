@@ -7,6 +7,7 @@
 #include "../h/kernel.hpp"
 #include "../h/memory_allocator.hpp"
 #include "../h/riscv.hpp"
+#include "../h/tcb.hpp"
 //#include "../test/userMain.cpp"
 extern void userMain();
 
@@ -52,17 +53,26 @@ void Kernel::supervisorTrapHandler() {
 void Kernel::syscall_handler() {
     //uint64 sepc = RiscV::readSepc();
     volatile uint64 syscall_id;
-    asm volatile ("mv %[syscall_id], a0": [syscall_id] "=r" (syscall_id));
+    asm volatile ("mv %[syscall_id], a7": [syscall_id] "=r" (syscall_id));
 
-    volatile uint64 arg0;
+    volatile uint64 arg0, arg1, arg2;
     switch(syscall_id) {
         case 0x01:
-            asm volatile ("mv %[arg0], a1": [arg0] "=r"(arg0));
+            asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
             MemoryAllocator::allocate((size_t)arg0);
             break;
         case 0x02:
-            asm volatile ("mv %[arg0], a1": [arg0] "=r"(arg0));
+            asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
             MemoryAllocator::free((void*)arg0);
+            break;
+        case 0x03:
+            /*asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
+            asm volatile ("mv %[arg1], a1": [arg1] "=r"(arg1));
+            asm volatile ("mv %[arg2], a2": [arg2] "=r"(arg2));
+
+            *(TCB**)arg0 = TCB::createTCB((TCB::Body)arg1, (void*)arg2);
+
+            if (*(TCB**)arg0) */
             break;
     }
     //RiscV::writeSepc(sepc);

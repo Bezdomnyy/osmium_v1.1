@@ -4,6 +4,8 @@
 
 #include "../h/scheduler.hpp"
 
+List<TCB> Scheduler::readyQueue;
+
 TCB* Scheduler::get() {
     return readyQueue.takeFirst();
 }

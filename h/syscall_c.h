@@ -32,8 +32,8 @@ extern "C" int mem_free(void *);
 
 
 //0x11
-class _thread;
-typedef _thread *thread_t;
+class TCB;
+typedef TCB *thread_t;
 
 int thread_create(
         thread_t *handle,
