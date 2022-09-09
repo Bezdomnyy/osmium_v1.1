@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccbAERfc.s 			page 1
+GAS LISTING /tmp/cc8yHneM.s 			page 1
 
 
    1              		.file	"main.cpp"
@@ -6,17 +6,11 @@ GAS LISTING /tmp/ccbAERfc.s 			page 1
    3              		.option norelax
    4              		.text
    5              	.Ltext0:
-   6              		.section	.rodata.str1.8,"aMS",@progbits,1
-   7              		.align	3
-   8              	.LC0:
-   9 0000 48657265 		.string	"Here"
-   9      00
-  10              		.text
-  11              		.align	2
-  12              		.globl	main
-  14              	main:
-  15              	.LFB14:
-  16              		.file 1 "src/main.cpp"
+   6              		.align	2
+   7              		.globl	main
+   9              	main:
+  10              	.LFB14:
+  11              		.file 1 "src/main.cpp"
    1:src/main.cpp  **** #include "../lib/console.h"
    2:src/main.cpp  **** #include "../lib/hw.h"
    3:src/main.cpp  **** #include "../h/syscall_c.h"
@@ -27,243 +21,100 @@ GAS LISTING /tmp/ccbAERfc.s 			page 1
    8:src/main.cpp  **** 
    9:src/main.cpp  **** 
   10:src/main.cpp  **** void main() {
-  17              		.loc 1 10 13
-  18              		.cfi_startproc
-  19 0000 130101FE 		addi	sp,sp,-32
-  20              		.cfi_def_cfa_offset 32
-  21 0004 233C1100 		sd	ra,24(sp)
-  22 0008 23388100 		sd	s0,16(sp)
-  23 000c 23349100 		sd	s1,8(sp)
-  24              		.cfi_offset 1, -8
-  25              		.cfi_offset 8, -16
-  26              		.cfi_offset 9, -24
-  27 0010 13040102 		addi	s0,sp,32
-  28              		.cfi_def_cfa 8, 0
+  12              		.loc 1 10 13
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23341100 		sd	ra,8(sp)
+  17 0008 23308100 		sd	s0,0(sp)
+  18              		.cfi_offset 1, -8
+  19              		.cfi_offset 8, -16
+  20 000c 13040101 		addi	s0,sp,16
+  21              		.cfi_def_cfa 8, 0
   11:src/main.cpp  ****     Kernel::initKernel();
-  29              		.loc 1 11 5
-  30              		.loc 1 11 23 is_stmt 0
-  31 0014 97000000 		call	_ZN6Kernel10initKernelEv@plt
-  31      E7800000 
-  32              	.LVL0:
-  12:src/main.cpp  ****     __print_string("Here");
-  33              		.loc 1 12 5 is_stmt 1
-  34              		.loc 1 12 19 is_stmt 0
-  35 001c 17050000 		lla	a0,.LC0
-  35      13050500 
-  36 0024 97000000 		call	_Z14__print_stringPKc@plt
-  36      E7800000 
-  37              	.LVL1:
-  13:src/main.cpp  ****     int *a = new int[100000000];
-  38              		.loc 1 13 5 is_stmt 1
-  39              		.loc 1 13 31 is_stmt 0
-  40 002c 3785D717 		li	a0,399998976
-  41 0030 13050540 		addi	a0,a0,1024
-GAS LISTING /tmp/ccbAERfc.s 			page 2
-
-
-  42 0034 97000000 		call	_Znam@plt
-  42      E7800000 
-  43              	.LVL2:
-  44 003c 93040500 		mv	s1,a0
-  45              	.LVL3:
-  14:src/main.cpp  ****     //a[0] = 48; a[1] = 49; a[2] = 50; a[3] = 51; a[4] = 52;
-  15:src/main.cpp  ****     /*for (int i = 0; i < 5; i++)
-  16:src/main.cpp  ****         __putc(a[i]);*/
-  17:src/main.cpp  **** 
-  18:src/main.cpp  ****     __print_string("Here");
-  46              		.loc 1 18 5 is_stmt 1
-  47              		.loc 1 18 19 is_stmt 0
-  48 0040 17050000 		lla	a0,.LC0
-  48      13050500 
-  49 0048 97000000 		call	_Z14__print_stringPKc@plt
-  49      E7800000 
-  50              	.LVL4:
-  19:src/main.cpp  ****     delete[] a;
-  51              		.loc 1 19 5 is_stmt 1
-  52              		.loc 1 19 15 is_stmt 0
-  53 0050 63880400 		beqz	s1,.L2
-  54              		.loc 1 19 14 discriminator 1
-  55 0054 13850400 		mv	a0,s1
-  56 0058 97000000 		call	_ZdaPv@plt
-  56      E7800000 
-  57              	.LVL5:
-  58              	.L2:
-  20:src/main.cpp  ****     int *b = (int*) mem_alloc(sizeof (int));
-  59              		.loc 1 20 5 is_stmt 1
-  60              		.loc 1 20 30 is_stmt 0
-  61 0060 13054000 		li	a0,4
-  62 0064 97000000 		call	mem_alloc@plt
-  62      E7800000 
-  63              	.LVL6:
-  64 006c 93040500 		mv	s1,a0
-  65              	.LVL7:
-  21:src/main.cpp  ****     *b = 48;
-  66              		.loc 1 21 5 is_stmt 1
-  67              		.loc 1 21 8 is_stmt 0
-  68 0070 93070003 		li	a5,48
-  69 0074 2320F500 		sw	a5,0(a0)
-  22:src/main.cpp  ****     __print_string("Here");
-  70              		.loc 1 22 5 is_stmt 1
-  71              		.loc 1 22 19 is_stmt 0
-  72 0078 17050000 		lla	a0,.LC0
-  72      13050500 
-  73 0080 97000000 		call	_Z14__print_stringPKc@plt
-  73      E7800000 
-  74              	.LVL8:
-  23:src/main.cpp  ****     __putc(*b);
-  75              		.loc 1 23 5 is_stmt 1
-  76              		.loc 1 23 11 is_stmt 0
-  77 0088 03C50400 		lbu	a0,0(s1)
-  78 008c 97000000 		call	__putc@plt
-  78      E7800000 
-  79              	.LVL9:
-  24:src/main.cpp  ****     mem_free(b);
-GAS LISTING /tmp/ccbAERfc.s 			page 3
-
-
-  80              		.loc 1 24 5 is_stmt 1
-  81              		.loc 1 24 13 is_stmt 0
-  82 0094 13850400 		mv	a0,s1
-  83 0098 97000000 		call	mem_free@plt
-  83      E7800000 
-  84              	.LVL10:
-  25:src/main.cpp  **** }...
-  85              		.loc 1 25 1
-  86 00a0 83308101 		ld	ra,24(sp)
-  87              		.cfi_restore 1
-  88 00a4 03340101 		ld	s0,16(sp)
-  89              		.cfi_restore 8
-  90              		.cfi_def_cfa 2, 32
-  91 00a8 83348100 		ld	s1,8(sp)
-  92              		.cfi_restore 9
-  93              	.LVL11:
-  94 00ac 13010102 		addi	sp,sp,32
-  95              		.cfi_def_cfa_offset 0
-  96 00b0 67800000 		jr	ra
-  97              		.cfi_endproc
-  98              	.LFE14:
- 100              	.Letext0:
- 101              		.file 2 "src/../lib/hw.h"
- 102              		.file 3 "src/../h/kernel.hpp"
- 103              		.file 4 "src/../h/syscall_c.h"
- 104              		.file 5 "src/../h/print.hpp"
- 105              		.file 6 "src/../lib/console.h"
-GAS LISTING /tmp/ccbAERfc.s 			page 4
+  22              		.loc 1 11 5
+  23              		.loc 1 11 23 is_stmt 0
+  24 0010 97000000 		call	_ZN6Kernel10initKernelEv@plt
+  24      E7800000 
+  25              	.LVL0:
+  12:src/main.cpp  **** }...
+  26              		.loc 1 12 1
+  27 0018 83308100 		ld	ra,8(sp)
+  28              		.cfi_restore 1
+  29 001c 03340100 		ld	s0,0(sp)
+  30              		.cfi_restore 8
+  31              		.cfi_def_cfa 2, 16
+  32 0020 13010101 		addi	sp,sp,16
+  33              		.cfi_def_cfa_offset 0
+  34 0024 67800000 		jr	ra
+  35              		.cfi_endproc
+  36              	.LFE14:
+  38              	.Letext0:
+  39              		.file 2 "src/../lib/hw.h"
+  40              		.file 3 "src/../h/kernel.hpp"
+  41              		.file 4 "src/../h/syscall_c.h"
+GAS LISTING /tmp/cc8yHneM.s 			page 2
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/ccbAERfc.s:14     .text:0000000000000000 main
-     /tmp/ccbAERfc.s:18     .text:0000000000000000 .L0 
-     /tmp/ccbAERfc.s:19     .text:0000000000000000 .L0 
-     /tmp/ccbAERfc.s:20     .text:0000000000000004 .L0 
-     /tmp/ccbAERfc.s:24     .text:0000000000000010 .L0 
-     /tmp/ccbAERfc.s:25     .text:0000000000000010 .L0 
-     /tmp/ccbAERfc.s:26     .text:0000000000000010 .L0 
-     /tmp/ccbAERfc.s:28     .text:0000000000000014 .L0 
-     /tmp/ccbAERfc.s:30     .text:0000000000000014 .L0 
-     /tmp/ccbAERfc.s:31     .text:0000000000000014 .L0 
-     /tmp/ccbAERfc.s:34     .text:000000000000001c .L0 
-     /tmp/ccbAERfc.s:35     .text:000000000000001c .L0 
-     /tmp/ccbAERfc.s:39     .text:000000000000002c .L0 
-     /tmp/ccbAERfc.s:40     .text:000000000000002c .L0 
-     /tmp/ccbAERfc.s:47     .text:0000000000000040 .L0 
-     /tmp/ccbAERfc.s:48     .text:0000000000000040 .L0 
-     /tmp/ccbAERfc.s:52     .text:0000000000000050 .L0 
-     /tmp/ccbAERfc.s:53     .text:0000000000000050 .L0 
-     /tmp/ccbAERfc.s:55     .text:0000000000000054 .L0 
-     /tmp/ccbAERfc.s:60     .text:0000000000000060 .L0 
-     /tmp/ccbAERfc.s:61     .text:0000000000000060 .L0 
-     /tmp/ccbAERfc.s:67     .text:0000000000000070 .L0 
-     /tmp/ccbAERfc.s:68     .text:0000000000000070 .L0 
-     /tmp/ccbAERfc.s:71     .text:0000000000000078 .L0 
-     /tmp/ccbAERfc.s:72     .text:0000000000000078 .L0 
-     /tmp/ccbAERfc.s:76     .text:0000000000000088 .L0 
-     /tmp/ccbAERfc.s:77     .text:0000000000000088 .L0 
-     /tmp/ccbAERfc.s:81     .text:0000000000000094 .L0 
-     /tmp/ccbAERfc.s:82     .text:0000000000000094 .L0 
-     /tmp/ccbAERfc.s:86     .text:00000000000000a0 .L0 
-     /tmp/ccbAERfc.s:87     .text:00000000000000a4 .L0 
-     /tmp/ccbAERfc.s:89     .text:00000000000000a8 .L0 
-     /tmp/ccbAERfc.s:90     .text:00000000000000a8 .L0 
-     /tmp/ccbAERfc.s:92     .text:00000000000000ac .L0 
-     /tmp/ccbAERfc.s:95     .text:00000000000000b0 .L0 
-     /tmp/ccbAERfc.s:97     .text:00000000000000b4 .L0 
-     /tmp/ccbAERfc.s:106    .text:00000000000000b4 .L0 
-     /tmp/ccbAERfc.s:8      .rodata.str1.8:0000000000000000 .LC0
-     /tmp/ccbAERfc.s:35     .text:000000000000001c .L0 
-     /tmp/ccbAERfc.s:48     .text:0000000000000040 .L0 
-     /tmp/ccbAERfc.s:72     .text:0000000000000078 .L0 
-     /tmp/ccbAERfc.s:58     .text:0000000000000060 .L2
-     /tmp/ccbAERfc.s:416    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccbAERfc.s:831    .debug_str:0000000000000211 .LASF34
-     /tmp/ccbAERfc.s:787    .debug_str:00000000000000a0 .LASF35
-     /tmp/ccbAERfc.s:797    .debug_str:0000000000000103 .LASF36
-     /tmp/ccbAERfc.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccbAERfc.s:100    .text:00000000000000b4 .Letext0
-     /tmp/ccbAERfc.s:763    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccbAERfc.s:801    .debug_str:0000000000000139 .LASF0
-     /tmp/ccbAERfc.s:805    .debug_str:000000000000015c .LASF1
-     /tmp/ccbAERfc.s:795    .debug_str:00000000000000f5 .LASF2
-     /tmp/ccbAERfc.s:785    .debug_str:0000000000000099 .LASF4
-     /tmp/ccbAERfc.s:819    .debug_str:00000000000001bc .LASF3
-     /tmp/ccbAERfc.s:771    .debug_str:000000000000003c .LASF5
-GAS LISTING /tmp/ccbAERfc.s 			page 5
+     /tmp/cc8yHneM.s:9      .text:0000000000000000 main
+     /tmp/cc8yHneM.s:13     .text:0000000000000000 .L0 
+     /tmp/cc8yHneM.s:14     .text:0000000000000000 .L0 
+     /tmp/cc8yHneM.s:15     .text:0000000000000004 .L0 
+     /tmp/cc8yHneM.s:18     .text:000000000000000c .L0 
+     /tmp/cc8yHneM.s:19     .text:000000000000000c .L0 
+     /tmp/cc8yHneM.s:21     .text:0000000000000010 .L0 
+     /tmp/cc8yHneM.s:23     .text:0000000000000010 .L0 
+     /tmp/cc8yHneM.s:24     .text:0000000000000010 .L0 
+     /tmp/cc8yHneM.s:27     .text:0000000000000018 .L0 
+     /tmp/cc8yHneM.s:28     .text:000000000000001c .L0 
+     /tmp/cc8yHneM.s:30     .text:0000000000000020 .L0 
+     /tmp/cc8yHneM.s:31     .text:0000000000000020 .L0 
+     /tmp/cc8yHneM.s:33     .text:0000000000000024 .L0 
+     /tmp/cc8yHneM.s:35     .text:0000000000000028 .L0 
+     /tmp/cc8yHneM.s:42     .text:0000000000000028 .L0 
+     /tmp/cc8yHneM.s:226    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cc8yHneM.s:527    .debug_str:00000000000001a2 .LASF25
+     /tmp/cc8yHneM.s:495    .debug_str:000000000000007b .LASF26
+     /tmp/cc8yHneM.s:505    .debug_str:00000000000000de .LASF27
+     /tmp/cc8yHneM.s:5      .text:0000000000000000 .Ltext0
+     /tmp/cc8yHneM.s:38     .text:0000000000000028 .Letext0
+     /tmp/cc8yHneM.s:477    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cc8yHneM.s:509    .debug_str:0000000000000114 .LASF0
+     /tmp/cc8yHneM.s:511    .debug_str:0000000000000121 .LASF1
+     /tmp/cc8yHneM.s:503    .debug_str:00000000000000d0 .LASF2
+     /tmp/cc8yHneM.s:493    .debug_str:0000000000000074 .LASF4
+     /tmp/cc8yHneM.s:521    .debug_str:0000000000000171 .LASF3
+     /tmp/cc8yHneM.s:483    .debug_str:000000000000002d .LASF5
+     /tmp/cc8yHneM.s:513    .debug_str:0000000000000134 .LASF6
+     /tmp/cc8yHneM.s:507    .debug_str:0000000000000101 .LASF7
+     /tmp/cc8yHneM.s:531    .debug_str:0000000000000275 .LASF8
+     /tmp/cc8yHneM.s:491    .debug_str:0000000000000066 .LASF9
+     /tmp/cc8yHneM.s:517    .debug_str:000000000000014c .LASF10
+     /tmp/cc8yHneM.s:529    .debug_str:0000000000000266 .LASF11
+     /tmp/cc8yHneM.s:485    .debug_str:0000000000000034 .LASF12
+     /tmp/cc8yHneM.s:479    .debug_str:0000000000000000 .LASF13
+     /tmp/cc8yHneM.s:487    .debug_str:0000000000000044 .LASF14
+     /tmp/cc8yHneM.s:519    .debug_str:000000000000015b .LASF15
+     /tmp/cc8yHneM.s:489    .debug_str:0000000000000050 .LASF16
+     /tmp/cc8yHneM.s:533    .debug_str:0000000000000285 .LASF28
+     /tmp/cc8yHneM.s:501    .debug_str:00000000000000c5 .LASF17
+     /tmp/cc8yHneM.s:499    .debug_str:00000000000000ac .LASF19
+     /tmp/cc8yHneM.s:525    .debug_str:0000000000000193 .LASF18
+     /tmp/cc8yHneM.s:481    .debug_str:0000000000000010 .LASF20
+     /tmp/cc8yHneM.s:537    .debug_str:00000000000002aa .LASF21
+     /tmp/cc8yHneM.s:497    .debug_str:0000000000000088 .LASF23
+     /tmp/cc8yHneM.s:523    .debug_str:0000000000000183 .LASF22
+     /tmp/cc8yHneM.s:535    .debug_str:000000000000028c .LASF24
+     /tmp/cc8yHneM.s:515    .debug_str:0000000000000147 .LASF29
+     /tmp/cc8yHneM.s:10     .text:0000000000000000 .LFB14
+     /tmp/cc8yHneM.s:36     .text:0000000000000028 .LFE14
+     /tmp/cc8yHneM.s:25     .text:0000000000000018 .LVL0
+     /tmp/cc8yHneM.s:43     .debug_info:0000000000000000 .Ldebug_info0
 
+GAS LISTING /tmp/cc8yHneM.s 			page 3
 
-     /tmp/ccbAERfc.s:807    .debug_str:000000000000016f .LASF6
-     /tmp/ccbAERfc.s:799    .debug_str:0000000000000126 .LASF7
-     /tmp/ccbAERfc.s:835    .debug_str:00000000000002e4 .LASF8
-     /tmp/ccbAERfc.s:783    .debug_str:000000000000008b .LASF9
-     /tmp/ccbAERfc.s:811    .debug_str:0000000000000187 .LASF10
-     /tmp/ccbAERfc.s:833    .debug_str:00000000000002d5 .LASF11
-     /tmp/ccbAERfc.s:773    .debug_str:0000000000000043 .LASF12
-     /tmp/ccbAERfc.s:767    .debug_str:000000000000000f .LASF13
-     /tmp/ccbAERfc.s:775    .debug_str:0000000000000053 .LASF14
-     /tmp/ccbAERfc.s:815    .debug_str:000000000000019f .LASF15
-     /tmp/ccbAERfc.s:777    .debug_str:000000000000005f .LASF16
-     /tmp/ccbAERfc.s:837    .debug_str:00000000000002f4 .LASF37
-     /tmp/ccbAERfc.s:793    .debug_str:00000000000000ea .LASF17
-     /tmp/ccbAERfc.s:791    .debug_str:00000000000000d1 .LASF19
-     /tmp/ccbAERfc.s:825    .debug_str:00000000000001e8 .LASF18
-     /tmp/ccbAERfc.s:769    .debug_str:000000000000001f .LASF20
-     /tmp/ccbAERfc.s:841    .debug_str:0000000000000319 .LASF21
-     /tmp/ccbAERfc.s:789    .debug_str:00000000000000ad .LASF23
-     /tmp/ccbAERfc.s:821    .debug_str:00000000000001ce .LASF22
-     /tmp/ccbAERfc.s:839    .debug_str:00000000000002fb .LASF24
-     /tmp/ccbAERfc.s:809    .debug_str:0000000000000182 .LASF38
-     /tmp/ccbAERfc.s:15     .text:0000000000000000 .LFB14
-     /tmp/ccbAERfc.s:98     .text:00000000000000b4 .LFE14
-     /tmp/ccbAERfc.s:736    .debug_loc:0000000000000000 .LLST0
-     /tmp/ccbAERfc.s:743    .debug_loc:0000000000000023 .LLST1
-     /tmp/ccbAERfc.s:32     .text:000000000000001c .LVL0
-     /tmp/ccbAERfc.s:37     .text:000000000000002c .LVL1
-     /tmp/ccbAERfc.s:43     .text:000000000000003c .LVL2
-     /tmp/ccbAERfc.s:50     .text:0000000000000050 .LVL4
-     /tmp/ccbAERfc.s:57     .text:0000000000000060 .LVL5
-     /tmp/ccbAERfc.s:63     .text:000000000000006c .LVL6
-     /tmp/ccbAERfc.s:74     .text:0000000000000088 .LVL8
-     /tmp/ccbAERfc.s:79     .text:0000000000000094 .LVL9
-     /tmp/ccbAERfc.s:84     .text:00000000000000a0 .LVL10
-     /tmp/ccbAERfc.s:803    .debug_str:0000000000000146 .LASF29
-     /tmp/ccbAERfc.s:765    .debug_str:0000000000000000 .LASF31
-     /tmp/ccbAERfc.s:779    .debug_str:0000000000000075 .LASF25
-     /tmp/ccbAERfc.s:781    .debug_str:000000000000007b .LASF27
-     /tmp/ccbAERfc.s:817    .debug_str:00000000000001b5 .LASF26
-     /tmp/ccbAERfc.s:827    .debug_str:00000000000001f7 .LASF28
-     /tmp/ccbAERfc.s:823    .debug_str:00000000000001de .LASF30
-     /tmp/ccbAERfc.s:829    .debug_str:000000000000020a .LASF32
-     /tmp/ccbAERfc.s:813    .debug_str:0000000000000196 .LASF33
-     /tmp/ccbAERfc.s:45     .text:0000000000000040 .LVL3
-     /tmp/ccbAERfc.s:65     .text:0000000000000070 .LVL7
-     /tmp/ccbAERfc.s:93     .text:00000000000000ac .LVL11
-     /tmp/ccbAERfc.s:107    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 _ZN6Kernel10initKernelEv
-_Z14__print_stringPKc
-_Znam
-_ZdaPv
-mem_alloc
-__putc
-mem_free

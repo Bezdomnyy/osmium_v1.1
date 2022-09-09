@@ -7,10 +7,13 @@
 #include "../h/kernel.hpp"
 #include "../h/memory_allocator.hpp"
 #include "../h/riscv.hpp"
+//#include "../test/userMain.cpp"
+extern void userMain();
 
 void Kernel::initKernel() {
     RiscV::writeStvec((uint64) &supervisorTrap);
     MemoryAllocator::initMem();
+
 }
 
 void Kernel::supervisorTrapHandler() {
