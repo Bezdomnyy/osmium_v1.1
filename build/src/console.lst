@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccNbPtFT.s 			page 1
+GAS LISTING /tmp/ccpUOqOE.s 			page 1
 
 
    1              		.file	"console.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccNbPtFT.s 			page 1
   14:src/console.cpp **** }...
   45              		.loc 1 14 1 is_stmt 0
   46 0028 03348100 		ld	s0,8(sp)
-GAS LISTING /tmp/ccNbPtFT.s 			page 2
+GAS LISTING /tmp/ccpUOqOE.s 			page 2
 
 
   47              		.cfi_restore 8
@@ -72,72 +72,72 @@ GAS LISTING /tmp/ccNbPtFT.s 			page 1
   56              		.file 2 "src/../h/../lib/hw.h"
   57              		.file 3 "src/../h/syscall_c.h"
   58              		.file 4 "src/../h/syscall_cpp.hpp"
-GAS LISTING /tmp/ccNbPtFT.s 			page 3
+GAS LISTING /tmp/ccpUOqOE.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 console.cpp
-     /tmp/ccNbPtFT.s:9      .text:0000000000000000 _ZN7Console4getcEv
-     /tmp/ccNbPtFT.s:13     .text:0000000000000000 .L0 
-     /tmp/ccNbPtFT.s:14     .text:0000000000000000 .L0 
-     /tmp/ccNbPtFT.s:15     .text:0000000000000004 .L0 
-     /tmp/ccNbPtFT.s:17     .text:0000000000000008 .L0 
-     /tmp/ccNbPtFT.s:19     .text:000000000000000c .L0 
-     /tmp/ccNbPtFT.s:21     .text:000000000000000c .L0 
-     /tmp/ccNbPtFT.s:22     .text:000000000000000c .L0 
-     /tmp/ccNbPtFT.s:24     .text:0000000000000014 .L0 
-     /tmp/ccNbPtFT.s:25     .text:0000000000000014 .L0 
-     /tmp/ccNbPtFT.s:27     .text:0000000000000018 .L0 
-     /tmp/ccNbPtFT.s:29     .text:000000000000001c .L0 
-     /tmp/ccNbPtFT.s:35     .text:000000000000001c _ZN7Console4putcEc
-     /tmp/ccNbPtFT.s:38     .text:000000000000001c .L0 
-     /tmp/ccNbPtFT.s:39     .text:000000000000001c .L0 
-     /tmp/ccNbPtFT.s:40     .text:0000000000000020 .L0 
-     /tmp/ccNbPtFT.s:42     .text:0000000000000024 .L0 
-     /tmp/ccNbPtFT.s:44     .text:0000000000000028 .L0 
-     /tmp/ccNbPtFT.s:46     .text:0000000000000028 .L0 
-     /tmp/ccNbPtFT.s:47     .text:000000000000002c .L0 
-     /tmp/ccNbPtFT.s:48     .text:000000000000002c .L0 
-     /tmp/ccNbPtFT.s:50     .text:0000000000000030 .L0 
-     /tmp/ccNbPtFT.s:52     .text:0000000000000034 .L0 
-     /tmp/ccNbPtFT.s:59     .text:0000000000000034 .L0 
-     /tmp/ccNbPtFT.s:250    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccNbPtFT.s:573    .debug_str:0000000000000129 .LASF18
-     /tmp/ccNbPtFT.s:547    .debug_str:000000000000004f .LASF19
-     /tmp/ccNbPtFT.s:557    .debug_str:0000000000000097 .LASF20
-     /tmp/ccNbPtFT.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccNbPtFT.s:55     .text:0000000000000034 .Letext0
-     /tmp/ccNbPtFT.s:533    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccNbPtFT.s:535    .debug_str:0000000000000000 .LASF0
-     /tmp/ccNbPtFT.s:571    .debug_str:0000000000000116 .LASF1
-     /tmp/ccNbPtFT.s:537    .debug_str:000000000000000d .LASF2
-     /tmp/ccNbPtFT.s:553    .debug_str:0000000000000084 .LASF4
-     /tmp/ccNbPtFT.s:549    .debug_str:000000000000005f .LASF3
-     /tmp/ccNbPtFT.s:543    .debug_str:0000000000000038 .LASF5
-     /tmp/ccNbPtFT.s:551    .debug_str:0000000000000071 .LASF6
-     /tmp/ccNbPtFT.s:569    .debug_str:0000000000000103 .LASF7
-     /tmp/ccNbPtFT.s:581    .debug_str:0000000000000214 .LASF8
-     /tmp/ccNbPtFT.s:539    .debug_str:000000000000001b .LASF9
-     /tmp/ccNbPtFT.s:541    .debug_str:0000000000000029 .LASF10
-     /tmp/ccNbPtFT.s:575    .debug_str:00000000000001ed .LASF11
-     /tmp/ccNbPtFT.s:545    .debug_str:000000000000003f .LASF12
-     /tmp/ccNbPtFT.s:583    .debug_str:0000000000000224 .LASF13
-     /tmp/ccNbPtFT.s:555    .debug_str:000000000000008b .LASF14
-     /tmp/ccNbPtFT.s:567    .debug_str:00000000000000ed .LASF15
-     /tmp/ccNbPtFT.s:563    .debug_str:00000000000000c4 .LASF16
-     /tmp/ccNbPtFT.s:585    .debug_str:0000000000000234 .LASF21
-     /tmp/ccNbPtFT.s:561    .debug_str:00000000000000bf .LASF22
-     /tmp/ccNbPtFT.s:565    .debug_str:00000000000000da .LASF23
-     /tmp/ccNbPtFT.s:579    .debug_str:000000000000020f .LASF24
-     /tmp/ccNbPtFT.s:577    .debug_str:00000000000001fc .LASF25
-     /tmp/ccNbPtFT.s:559    .debug_str:00000000000000ba .LASF17
-     /tmp/ccNbPtFT.s:36     .text:000000000000001c .LFB3
-GAS LISTING /tmp/ccNbPtFT.s 			page 4
+     /tmp/ccpUOqOE.s:9      .text:0000000000000000 _ZN7Console4getcEv
+     /tmp/ccpUOqOE.s:13     .text:0000000000000000 .L0 
+     /tmp/ccpUOqOE.s:14     .text:0000000000000000 .L0 
+     /tmp/ccpUOqOE.s:15     .text:0000000000000004 .L0 
+     /tmp/ccpUOqOE.s:17     .text:0000000000000008 .L0 
+     /tmp/ccpUOqOE.s:19     .text:000000000000000c .L0 
+     /tmp/ccpUOqOE.s:21     .text:000000000000000c .L0 
+     /tmp/ccpUOqOE.s:22     .text:000000000000000c .L0 
+     /tmp/ccpUOqOE.s:24     .text:0000000000000014 .L0 
+     /tmp/ccpUOqOE.s:25     .text:0000000000000014 .L0 
+     /tmp/ccpUOqOE.s:27     .text:0000000000000018 .L0 
+     /tmp/ccpUOqOE.s:29     .text:000000000000001c .L0 
+     /tmp/ccpUOqOE.s:35     .text:000000000000001c _ZN7Console4putcEc
+     /tmp/ccpUOqOE.s:38     .text:000000000000001c .L0 
+     /tmp/ccpUOqOE.s:39     .text:000000000000001c .L0 
+     /tmp/ccpUOqOE.s:40     .text:0000000000000020 .L0 
+     /tmp/ccpUOqOE.s:42     .text:0000000000000024 .L0 
+     /tmp/ccpUOqOE.s:44     .text:0000000000000028 .L0 
+     /tmp/ccpUOqOE.s:46     .text:0000000000000028 .L0 
+     /tmp/ccpUOqOE.s:47     .text:000000000000002c .L0 
+     /tmp/ccpUOqOE.s:48     .text:000000000000002c .L0 
+     /tmp/ccpUOqOE.s:50     .text:0000000000000030 .L0 
+     /tmp/ccpUOqOE.s:52     .text:0000000000000034 .L0 
+     /tmp/ccpUOqOE.s:59     .text:0000000000000034 .L0 
+     /tmp/ccpUOqOE.s:250    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccpUOqOE.s:573    .debug_str:0000000000000129 .LASF18
+     /tmp/ccpUOqOE.s:547    .debug_str:000000000000004f .LASF19
+     /tmp/ccpUOqOE.s:557    .debug_str:0000000000000097 .LASF20
+     /tmp/ccpUOqOE.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccpUOqOE.s:55     .text:0000000000000034 .Letext0
+     /tmp/ccpUOqOE.s:533    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccpUOqOE.s:535    .debug_str:0000000000000000 .LASF0
+     /tmp/ccpUOqOE.s:571    .debug_str:0000000000000116 .LASF1
+     /tmp/ccpUOqOE.s:537    .debug_str:000000000000000d .LASF2
+     /tmp/ccpUOqOE.s:553    .debug_str:0000000000000084 .LASF4
+     /tmp/ccpUOqOE.s:549    .debug_str:000000000000005f .LASF3
+     /tmp/ccpUOqOE.s:543    .debug_str:0000000000000038 .LASF5
+     /tmp/ccpUOqOE.s:551    .debug_str:0000000000000071 .LASF6
+     /tmp/ccpUOqOE.s:569    .debug_str:0000000000000103 .LASF7
+     /tmp/ccpUOqOE.s:581    .debug_str:0000000000000214 .LASF8
+     /tmp/ccpUOqOE.s:539    .debug_str:000000000000001b .LASF9
+     /tmp/ccpUOqOE.s:541    .debug_str:0000000000000029 .LASF10
+     /tmp/ccpUOqOE.s:575    .debug_str:00000000000001ed .LASF11
+     /tmp/ccpUOqOE.s:545    .debug_str:000000000000003f .LASF12
+     /tmp/ccpUOqOE.s:583    .debug_str:0000000000000224 .LASF13
+     /tmp/ccpUOqOE.s:555    .debug_str:000000000000008b .LASF14
+     /tmp/ccpUOqOE.s:567    .debug_str:00000000000000ed .LASF15
+     /tmp/ccpUOqOE.s:563    .debug_str:00000000000000c4 .LASF16
+     /tmp/ccpUOqOE.s:585    .debug_str:0000000000000234 .LASF21
+     /tmp/ccpUOqOE.s:561    .debug_str:00000000000000bf .LASF22
+     /tmp/ccpUOqOE.s:565    .debug_str:00000000000000da .LASF23
+     /tmp/ccpUOqOE.s:579    .debug_str:000000000000020f .LASF24
+     /tmp/ccpUOqOE.s:577    .debug_str:00000000000001fc .LASF25
+     /tmp/ccpUOqOE.s:559    .debug_str:00000000000000ba .LASF17
+     /tmp/ccpUOqOE.s:36     .text:000000000000001c .LFB3
+GAS LISTING /tmp/ccpUOqOE.s 			page 4
 
 
-     /tmp/ccNbPtFT.s:53     .text:0000000000000034 .LFE3
-     /tmp/ccNbPtFT.s:10     .text:0000000000000000 .LFB2
-     /tmp/ccNbPtFT.s:30     .text:000000000000001c .LFE2
-     /tmp/ccNbPtFT.s:60     .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccpUOqOE.s:53     .text:0000000000000034 .LFE3
+     /tmp/ccpUOqOE.s:10     .text:0000000000000000 .LFB2
+     /tmp/ccpUOqOE.s:30     .text:000000000000001c .LFE2
+     /tmp/ccpUOqOE.s:60     .debug_info:0000000000000000 .Ldebug_info0
 
 NO UNDEFINED SYMBOLS

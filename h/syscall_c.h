@@ -35,7 +35,7 @@ extern "C" int mem_free(void *);
 class TCB;
 typedef TCB *thread_t;
 
-int thread_create(
+extern "C" int thread_create(
         thread_t *handle,
         void(*start_routine)(void *),
         void *arg
@@ -50,12 +50,12 @@ int thread_create(
 
 
 //0x12
-int thread_exit();
+extern "C" int thread_exit();
 /* Gasi tekuću nit. U slučaju neuspeha vraća negativnu vrednost (kôd greške). */
 
 
 //0x13
-void thread_dispatch();
+extern "C" void thread_dispatch();
 /* Potencijalno oduzima procesor tekućoj i daje nekoj drugoj (ili istoj) niti. */
 
 

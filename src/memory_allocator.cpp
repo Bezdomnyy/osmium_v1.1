@@ -72,7 +72,7 @@ void *MemoryAllocator::allocBlocks(MemoryAllocator::FreeMem *node, size_t size) 
         }
 
         *(size_t*)node = allocSize;
-        ret = (void*)((uint64)node + sizeof(size_t));
+        ret = (void*)((uint64)node + (uint64)sizeof(size_t));
 
     }
     return ret;

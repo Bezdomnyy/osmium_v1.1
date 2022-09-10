@@ -3,6 +3,7 @@
 //
 
 #include "../h/tcb.hpp"
+#include "../h/print.hpp"
 
 TCB *TCB::running = nullptr;
 
@@ -10,24 +11,19 @@ TCB *TCB::createTCB(TCB::Body body, void *args) {
     return new TCB(body, args);
 }
 
-TCB *TCB::createTCB() {
-    return new TCB();
-}
-
-
-void TCB::dispatch() {
+void TCB::yield() {
     RiscV::pushRegisters();
 
-    putForward();
+    dispatch();
 
     RiscV::popRegisters();
 }
 
-void TCB::putForward() {
-    TCB* old = running;
+void TCB::dispatch()
+{
+    TCB *old = running;
+    if (!old->isFinished()) { Scheduler::put(old); }
     running = Scheduler::get();
-    if (!old->isFinished()) Scheduler::put(old);
 
-    contextSwitch(&old->context, &running->context);
-
+    TCB::contextSwitch(&old->context, &running->context);
 }

@@ -7,9 +7,12 @@
 List<TCB> Scheduler::readyQueue;
 
 TCB* Scheduler::get() {
-    return readyQueue.takeFirst();
+    TCB* ret = readyQueue.removeFirst();
+    //readyQueue.printStatus();
+    return ret;
 }
 
 void Scheduler::put(TCB* tcb) {
-    readyQueue.putLast(tcb);
+    readyQueue.addLast(tcb);
+    //readyQueue.printStatus();
 }

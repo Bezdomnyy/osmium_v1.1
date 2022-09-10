@@ -5,7 +5,7 @@
 #include "../h/syscall_c.h"
 #include "../lib/console.h"
 
-int thread_create(thread_t *handle,void(*start_routine)(void *),void *arg) {
+/*int thread_create(thread_t *handle,void(*start_routine)(void *),void *arg) {
     return 0;
 }
 
@@ -14,7 +14,7 @@ int thread_exit() {
 }
 
 
-void thread_dispatch();
+void thread_dispatch();*/
 
 int sem_open( sem_t *handle, unsigned init) {
     return 0;
