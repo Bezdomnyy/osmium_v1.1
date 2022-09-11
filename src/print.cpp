@@ -25,7 +25,7 @@ void __print_int(long long int integer) {
     __print_uint64(integer);
 }
 
-void printInteger(uint64 integer)
+/*void printInteger(uint64 integer)
 {
     static char digits[] = "0123456789";
     char buf[16];
@@ -52,4 +52,4 @@ void printInteger(uint64 integer)
 
     while (--i >= 0)
         __putc(buf[i]);
-}
+}*/

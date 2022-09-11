@@ -10,15 +10,24 @@ const void* MemoryAllocator::FreeMemEnd = HEAP_END_ADDR;
 const size_t MemoryAllocator::BlockSize = MEM_BLOCK_SIZE;*/
 
 void *MemoryAllocator::allocate(size_t size) {
-    return allocBlocks(firstFit(size), size);
+    //printMem();
+    //__print_string("mem_alloc\n");
+    void *ret = allocBlocks(firstFit(size), size);
+    //__print_uint64((uint64)ret);
+    //__putc('\n');
+    //printMem();
+    //__putc('\n');
+    return ret;
 }
 
 void MemoryAllocator::free(void* addr) {
+    //printMem();
+    //__print_string("mem_free\n");
     addr = (void*)((uint64)addr - sizeof(size_t));
     size_t deallocSize = *(size_t*)addr;
 
     FreeMem* curr = nullptr;
-    if (fMemHead && addr>(void*)fMemHead)
+    if (fMemHead && (addr>(void*)fMemHead))
         for(curr = fMemHead; curr->next != 0 && (void*)curr->next < addr; curr = curr->next);
 
     FreeMem* newNode = (FreeMem*)addr;
@@ -30,7 +39,7 @@ void MemoryAllocator::free(void* addr) {
 
     tryToMerge(newNode);
     tryToMerge(curr);
-
+    //printMem();
 }
 
 void MemoryAllocator::initMem()  {
@@ -67,7 +76,7 @@ void *MemoryAllocator::allocBlocks(MemoryAllocator::FreeMem *node, size_t size) 
         }
         else {
             if (node->prev) node->prev->next = node->next;
-            else fMemHead = newNode;
+            else fMemHead = node->next;
             if (node->next) node->next->prev = node->prev;
         }
 
@@ -87,7 +96,7 @@ size_t MemoryAllocator::calcSize(size_t size) {
 
 void MemoryAllocator::tryToMerge(MemoryAllocator::FreeMem *node) {
     if(!node) return;
-    if (!node->next && node + node->size != node->next) return;
+    if (!(node->next && ((uint64)node + (uint64)node->size == (uint64)node->next))) return;
 
     node->size += node->next->size;
     node->next = node->next->next;

@@ -21,9 +21,20 @@ void TCB::yield() {
 
 void TCB::dispatch()
 {
+
+    //__print_string("TCB::dispatch()\n");
+
     TCB *old = running;
     if (!old->isFinished()) { Scheduler::put(old); }
     running = Scheduler::get();
+
+
+
+   /* __print_string("old: ");
+    __print_uint64((uint64)old); __putc('\n');
+
+    __print_string("running: ");
+    __print_uint64((uint64)running); __putc('\n');*/
 
     TCB::contextSwitch(&old->context, &running->context);
 }

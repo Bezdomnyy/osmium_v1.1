@@ -22,6 +22,27 @@ public:
         FreeMem *prev;
         FreeMem *next;
     };
+
+    static void printMem() {
+        if (!fMemHead) __print_string("it happened :/\n"), initMem();
+        FreeMem* curr = fMemHead;
+        __print_string("Memory Insight:\n");
+        int i = 0;
+        while(curr) {
+            __print_string("FreeMem["); __putc(i+48);
+            __print_string("]: ");
+            __print_uint64((uint64)curr);
+            __putc('\n');
+            __print_string("  size: ");
+            __print_uint64((uint64)curr->size);
+            __putc('\n');
+            __print_string("  next: ");
+            __print_uint64((uint64)curr->next);
+            __putc('\n');
+            i++;
+            curr = curr->next;
+        }
+    }
 private:
 
     static FreeMem* fMemHead;

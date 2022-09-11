@@ -8,7 +8,7 @@
 #include "../lib/console.h"
 #include "../h/print.hpp"
 
-/*template <typename T>
+template <typename T>
 class List {
 private:
     struct Node {
@@ -75,7 +75,7 @@ public:
         return tail->data;
     }
 
-    ~List() = default; *//*{
+    ~List() = default; /*{
         while (head) {
             Node *old = head;
             head = head->next;
@@ -83,10 +83,10 @@ public:
         }
 
         tail = 0;
-    }*//*
-};*/
+    }*/
+};
 
-template<typename T>
+/*template<typename T>
 class List
 {
 private:
@@ -98,14 +98,14 @@ private:
         Elem(T *data, Elem *next) : data(data), next(next) {}
     };
 
-    Elem *head, *tail;
+    Elem *head = 0, *tail = 0;
 
 public:
     List() : head(0), tail(0) {}
 
-    //List(const List<T> &) = delete;
+    List(const List<T> &) = delete;
 
-    //List<T> &operator=(const List<T> &) = delete;
+    List<T> &operator=(const List<T> &) = delete;
 
     void addFirst(T *data)
     {
@@ -115,13 +115,14 @@ public:
         Elem *elem = new Elem(data, head);
         head = elem;
         if (!tail) { tail = head; }
+
     }
 
     void addLast(T *data)
     {
-        /*__putc('i');
+        __putc('i');
         __putc('l');
-        __putc('\n');*/
+        __putc('\n');
 
         Elem *elem = new Elem(data, 0);
         if (tail)
@@ -130,18 +131,19 @@ public:
             tail = elem;
         } else
         {
-            __print_string("help2\n");
+           // __print_string("help2\n");
             head = tail = elem;
         }
+        printStatus();
     }
 
     T *removeFirst()
     {
-        /*__putc('o');
+        __putc('o');
         __putc('f');
-        __putc('\n');*/
+        __putc('\n');
         if (!head) {
-            __print_string("help1\n");
+            //__print_string("help1\n");
             return 0;
         }
 
@@ -151,6 +153,7 @@ public:
 
         T *ret = elem->data;
         delete elem;
+        printStatus();
         return ret;
     }
 
@@ -191,12 +194,31 @@ public:
 
     void printStatus() {
         Elem* curr = head;
+        __print_string("list contents:\n");
+        __print_string(">head: ");
+        __print_uint64((uint64)head);
+        __putc('\n');
+        __print_string(">tail: ");
+        __print_uint64((uint64)tail);
+        __putc('\n');
+        int i = 0;
         while(curr) {
-            __putc('i');
+            __print_string("Node["); __putc(i+48);
+            __print_string("]: ");
+            __print_uint64((uint64)curr);
+            __putc('\n');
+            __print_string("  data: ");
+            __print_uint64((uint64)curr->data);
+            __putc('\n');
+            __print_string("  next: ");
+            __print_uint64((uint64)curr->next);
+            __putc('\n');
+            i++;
             curr = curr->next;
         }
         __putc('\n');
+        __putc('\n');
     }
-};
+};*/
 
 #endif //OSMIUM_LIST_H
