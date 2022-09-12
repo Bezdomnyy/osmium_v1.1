@@ -19,27 +19,31 @@ public:
 
     void setFinished(bool val) { finished = val; }
 
+    uint64 getTimeSlice() const { return timeSlice; }
+
     static TCB* running;
 
-    static void yield();
+    //static void yield();
+
+    static void dispatch();
+
+    static void incTimeSliceCounter() { timeSliceCounter++; }
+    static uint64 getTimeSliceCounter() { return timeSliceCounter; }
+    static void resetTimeSliceCounter() { timeSliceCounter = 0; }
+
+    ~TCB() { delete[] stack; }
 
 private:
-    /*TCB(Body body, void* args)
-        : body(body), args(args), stack(new uint64[DEFAULT_STACK_SIZE]), finished(false),
-        context({(uint64)body, (uint64)&stack[DEFAULT_STACK_SIZE]})
-        {
-        if (body != nullptr) Scheduler::put(this);
-    }
+    //friend class Kernel;
 
-    TCB() : body(nullptr), args(nullptr), stack(nullptr), finished(false), context({0, 0}){}*/
-
-    TCB(Body body, void* args)
+    TCB(Body body, void* args, uint64 timeSlice)
             : body(body),
             args(args),
             stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
             finished(false),
+            timeSlice(timeSlice),
             context({
-                body != nullptr ? (uint64) body : 0,
+                body != nullptr ? (uint64) &threadWrapper : 0,
                 stack != nullptr ? (uint64) &stack[DEFAULT_STACK_SIZE] : 0
             })
     {
@@ -51,15 +55,18 @@ private:
         uint64 sp;
     };
 
+    static uint64 timeSliceCounter;
+
     Body body;
     void *args;
     uint64 *stack;
     bool finished;
+    uint64 timeSlice;
     Context context;
 
     static void contextSwitch(Context*, Context*);
 
-    static void dispatch();
+    static void threadWrapper();
 
 };
 

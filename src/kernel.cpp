@@ -19,17 +19,18 @@ void Kernel::initKernel() {
 void Kernel::supervisorTrapHandler() {
     uint64 scause = RiscV::readScause();
 
-    if (scause == 0x08 || scause == 0x09) {
+    if (scause == 0x0000000000000008UL || scause == 0x0000000000000009UL) {
         uint64 sepc = RiscV::readSepc() + 4;
         uint64 sstatus = RiscV::readSstatus();
-        //RiscV::clearSip(RiscV::SSIP);
+
         syscall_handler();
+
         asm volatile ("sd a0, 80(s0)");
         RiscV::writeSstatus(sstatus);
         RiscV::writeSepc(sepc);
         return;
     }
-    if (scause == 0x07) {
+    if (scause == 0x0000000000000007UL) {
         uint64 sepc = RiscV::readSepc() + 4;
         __print_string("Nedozvoljena adresa upisa.\n");
         __print_string("scause: ");
@@ -40,6 +41,16 @@ void Kernel::supervisorTrapHandler() {
         return;
     }
     if (scause == 0x8000000000000001UL) {
+        TCB::incTimeSliceCounter();
+        if (TCB::getTimeSliceCounter() >= TCB::running->getTimeSlice())
+        {
+            uint64 sepc = RiscV::readSepc();
+            uint64 sstatus = RiscV::readSstatus();
+            TCB::resetTimeSliceCounter();
+            TCB::dispatch();
+            RiscV::writeSstatus(sstatus);
+            RiscV::writeSepc(sepc);
+        }
         RiscV::clearSip(RiscV::SSIP);
         return;
     }
@@ -48,7 +59,7 @@ void Kernel::supervisorTrapHandler() {
         return;
     }
 
-    uint64 sepc = RiscV::readSepc() + 4;
+    //uint64 sepc = RiscV::readSepc() + 4;
     __print_string("Neobradjen izuzetak.\n");
     __print_string("scause: ");
     //scause = RiscV::readScause();
@@ -57,7 +68,7 @@ void Kernel::supervisorTrapHandler() {
     /*RiscV::clearSip(RiscV::SSIP);
     //RiscV::writeSip(0);
     //console_handler();*/
-    RiscV::writeSepc(sepc);
+    //RiscV::writeSepc(sepc);
     return;
 }
 

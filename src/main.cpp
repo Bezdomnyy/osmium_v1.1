@@ -90,7 +90,7 @@ void main() {
     TCB::running = threads[0];
 
     //thread_dispatch();
-    //__print_string("hey!\n");
+    __print_string("hey!\n");
     while(!threads[1]->isFinished()) { thread_dispatch(); }
 
     __print_string("Finished\n");

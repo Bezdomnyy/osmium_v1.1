@@ -65,14 +65,16 @@ inline void Kernel::thread_create_handler() {
 inline void Kernel::thread_exit_handler() {
     asm volatile ("addi a0, zero, 0");
     TCB::running->setFinished(true);
-    TCB::yield();
+    //TCB::yield();
+    TCB::dispatch();
 }
 
 
 
 //0x13
 inline void Kernel::thread_dispatch_handler() {
-    TCB::yield();
+    //TCB::yield();
+    TCB::dispatch();
 }
 
 #endif //OSMIUM_KERNEL_HPP

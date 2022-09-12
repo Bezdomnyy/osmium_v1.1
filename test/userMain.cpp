@@ -26,7 +26,7 @@ void userMain() {
     //__print_string("I am here too!\n");
     //thread_dispatch();
     __print_string("I am here again!\n");
-    thread_exit();
+    //thread_exit();
     /*TCB::running->setFinished(true);
     thread_dispatch();*/
 }

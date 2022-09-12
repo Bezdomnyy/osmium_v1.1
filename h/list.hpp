@@ -75,7 +75,7 @@ public:
         return tail->data;
     }
 
-    ~List() = default; /*{
+    /*~List() {
         while (head) {
             Node *old = head;
             head = head->next;
