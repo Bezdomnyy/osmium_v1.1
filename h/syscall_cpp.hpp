@@ -51,6 +51,8 @@ private:
 
 
 class PeriodicThread : public Thread {
+private:
+    time_t period;
 protected:
     PeriodicThread(time_t period);
 

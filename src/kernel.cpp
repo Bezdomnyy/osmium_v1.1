@@ -7,6 +7,7 @@
 #include "../h/kernel.hpp"
 #include "../h/memory_allocator.hpp"
 #include "../h/riscv.hpp"
+#include "../h/console_interface.hpp"
 
 extern void userMain();
 
@@ -41,6 +42,7 @@ void Kernel::supervisorTrapHandler() {
         return;
     }
     if (scause == 0x8000000000000001UL) {
+        Scheduler::timerInterrupt();
         TCB::incTimeSliceCounter();
         if (TCB::getTimeSliceCounter() >= TCB::running->getTimeSlice())
         {
@@ -56,6 +58,7 @@ void Kernel::supervisorTrapHandler() {
     }
     if (scause == 0x8000000000000009UL) {
         console_handler();
+        //ConsoleInterface::console_handler();
         return;
     }
 
@@ -93,6 +96,24 @@ void Kernel::syscall_handler() {
             break;
         case 0x13:
             Kernel::thread_dispatch_handler();
+            break;
+        case 0x14:
+            Kernel::thread_create_deactivated_handler();
+            break;
+        case 0x21:
+            Kernel::sem_open_handler();
+            break;
+        case 0x22:
+            Kernel::sem_close_handler();
+            break;
+        case 0x23:
+            Kernel::sem_wait_handler();
+            break;
+        case 0x24:
+            Kernel::sem_signal_handler();
+            break;
+        case 0x31:
+            Kernel::time_sleep_handler();
             break;
         default:
             asm volatile ("addi a0, zero, -1");

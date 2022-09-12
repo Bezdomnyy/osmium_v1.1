@@ -16,7 +16,7 @@ int thread_exit() {
 
 void thread_dispatch();*/
 
-int sem_open( sem_t *handle, unsigned init) {
+/*int sem_open( sem_t *handle, unsigned init) {
     return 0;
 }
 
@@ -30,7 +30,7 @@ int sem_wait(sem_t id){
 
 int sem_signal(sem_t id){
     return 0;
-}
+}*/
 
 int time_sleep(time_t){
     return 0;

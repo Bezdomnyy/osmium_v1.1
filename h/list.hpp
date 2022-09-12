@@ -40,6 +40,21 @@ public:
         }
     }
 
+    void putSorted(T* data) {
+        Node *newNode = new Node(data, 0);
+        if (!head) { head = tail = newNode; return; }
+        Node* curr = head, *prev = nullptr;
+        while (curr && *(uint64*)data > *(uint64*)(curr->data)) {
+            prev = curr;
+            curr = curr->next;
+            *(uint64*)data -= *(uint64*)curr;
+        }
+        newNode->next = curr;
+        if (prev) prev->next = newNode;
+        else head = newNode;
+        if(!curr) tail = newNode;
+    }
+
     T* takeFirst() {
         if (!head) return 0;
 

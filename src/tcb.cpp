@@ -5,13 +5,18 @@
 #include "../h/tcb.hpp"
 #include "../h/print.hpp"
 #include "../h/syscall_c.h"
+#include "../h/scheduler.hpp"
 
 TCB *TCB::running = nullptr;
 
 uint64 TCB::timeSliceCounter = 0;
 
 TCB *TCB::createTCB(TCB::Body body, void *args) {
-    return new TCB(body, args, DEFAULT_TIME_SLICE);
+    return new TCB(body, args, DEFAULT_TIME_SLICE, 1);
+}
+
+TCB *TCB::createDeactivatedTCB(TCB::Body body, void *args) {
+    return new TCB(body, args, DEFAULT_TIME_SLICE, 0);
 }
 
 /*void TCB::yield() {
@@ -22,6 +27,22 @@ TCB *TCB::createTCB(TCB::Body body, void *args) {
     RiscV::popRegisters();
 }*/
 
+
+TCB::TCB(Body body, void* args, uint64 timeSlice, bool ready)
+: body(body),
+args(args),
+stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
+finished(false),
+timeSlice(timeSlice),
+context({
+                body != nullptr ? (uint64) &threadWrapper : 0,
+                stack != nullptr ? (uint64) &stack[DEFAULT_STACK_SIZE] : 0
+        })
+{
+    if (body != nullptr && ready) Scheduler::put(this);
+}
+
+
 void TCB::dispatch()
 {
 
@@ -30,6 +51,7 @@ void TCB::dispatch()
     TCB *old = running;
     if (!old->isFinished()) { Scheduler::put(old); }
     running = Scheduler::get();
+    while (!running) { Scheduler::get(); }
 
    /* __print_string("old: ");
     __print_uint64((uint64)old); __putc('\n');

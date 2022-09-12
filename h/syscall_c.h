@@ -59,11 +59,17 @@ extern "C" void thread_dispatch();
 /* Potencijalno oduzima procesor tekućoj i daje nekoj drugoj (ili istoj) niti. */
 
 
-//0x21
-class _sem;
-typedef _sem *sem_t;
+extern "C" int thread_create_deactivated(
+        thread_t *handle,
+        void(*start_routine)(void *),
+        void *arg
+);
 
-int sem_open(
+//0x21
+class SEM;
+typedef SEM *sem_t;
+
+extern "C" int sem_open(
         sem_t *handle,
         unsigned init
 );
@@ -76,14 +82,14 @@ int sem_open(
  */
 
 //0x22
-int sem_close(sem_t handle);
+extern "C" int sem_close(sem_t handle);
 /* Oslobađa semafor sa datom ručkom. Sve niti koje su se zatekle da čekaju na semaforu
  * se deblokiraju, pri čemu njihov wait vraća grešku. U slučaju uspeha vraća 0,
  * a u slučaju neuspeha vraća negativnu vrednost (kôd greške).
  */
 
 //0x23
-int sem_wait(sem_t id);
+extern "C" int sem_wait(sem_t id);
 /* Operacija wait na semaforu sa datom ručkom.
  * U slučaju uspeha vraća 0, a u slučaju neuspeha,
  * uključujući i slučaj kada jesemafor dealociran dok je pozivajuća nit na njemu čekala,
@@ -92,7 +98,7 @@ int sem_wait(sem_t id);
 
 
 //0x24
-int sem_signal(sem_t id);
+extern "C" int sem_signal(sem_t id);
 /* Operacija signal na semaforu sa datom ručkom.
  * U slučaju uspeha vraća 0, a u slučaju neuspeha vraća negativnu vrednost (kôd greške).
  */
@@ -101,7 +107,7 @@ int sem_signal(sem_t id);
 //0x31
 typedef unsigned long time_t;
 
-int time_sleep(time_t);
+extern "C" int time_sleep(time_t);
 /* Uspavljuje pozivajuću nit na zadati period u internim jedinicama vremena (periodama tajmera).
  * U slučaju uspeha vraća 0, a u slučaju neuspeha vraća negativnu vrednost (kôd greške).
  */

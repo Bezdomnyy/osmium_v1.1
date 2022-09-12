@@ -27,3 +27,33 @@ thread_dispatch:
     addi a7, zero, 0x13
     ecall
     ret
+
+.global thread_create_deactivated
+thread_create_deactivated:
+    addi a7, zero, 0x14
+    ecall
+    ret
+
+.global sem_open
+sem_open:
+    addi a7, zero, 0x21
+    ecall
+    ret
+
+.global sem_close
+sem_close:
+    addi a7, zero, 0x22
+    ecall
+    ret
+
+.global sem_wait
+sem_wait:
+    addi a7, zero, 0x23
+    ecall
+    ret
+
+.global sem_signal
+sem_signal:
+    addi a7, zero, 0x24
+    ecall
+    ret

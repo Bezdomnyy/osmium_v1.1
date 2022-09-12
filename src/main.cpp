@@ -82,7 +82,7 @@ void main() {
 
 
 
-    TCB* threads[3];
+    TCB* threads[2] = {nullptr, nullptr};
     thread_create(&threads[0], nullptr, nullptr);
     //__putc('?'); __putc('\n');
     thread_create(&threads[1], (void(*)(void*))userMain, nullptr);

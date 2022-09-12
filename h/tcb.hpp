@@ -6,14 +6,19 @@
 #define OSMIUM_TCB_HPP
 
 #include "../lib/hw.h"
-#include "../h/scheduler.hpp"
+//#include "../h/scheduler.hpp"
 #include "../h/riscv.hpp"
+
+class Scheduler;
+
 
 class TCB {
 public:
     using Body = void (*)(void*);
 
     static TCB* createTCB(Body body, void* args);
+
+    static TCB* createDeactivatedTCB(Body body, void* args);
 
     bool isFinished() const { return finished; }
 
@@ -36,7 +41,7 @@ public:
 private:
     //friend class Kernel;
 
-    TCB(Body body, void* args, uint64 timeSlice)
+    /*TCB(Body body, void* args, uint64 timeSlice)
             : body(body),
             args(args),
             stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
@@ -48,7 +53,9 @@ private:
             })
     {
         if (body != nullptr) Scheduler::put(this);
-    }
+    }*/
+
+    TCB(Body body, void* args, uint64 timeSlice, bool ready);
 
     struct Context {
         uint64 ra;
