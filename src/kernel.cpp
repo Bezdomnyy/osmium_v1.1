@@ -42,6 +42,7 @@ void Kernel::supervisorTrapHandler() {
         return;
     }*/
     if (scause == 0x8000000000000001UL) {
+        if (!TCB::running) { RiscV::clearSip(RiscV::SSIP); return; }
         Scheduler::timerInterrupt();
         TCB::incTimeSliceCounter();
         if (TCB::getTimeSliceCounter() >= TCB::running->getTimeSlice())

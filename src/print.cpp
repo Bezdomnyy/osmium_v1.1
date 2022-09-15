@@ -5,24 +5,34 @@
 #include "../h/print.hpp"
 #include "../h/riscv.hpp"
 #include "../lib/console.h"
+#include "../h/syscall_c.h"
 
 void __print_string(char const *string) {
-    for (char const *c = string; *c != '\0'; c++) __putc(*c);
+    //uint64 sstatus = RiscV::readSstatus();
+    //RiscV::clearSstatus(RiscV::SIE);
+    for (char const *c = string; *c != '\0'; c++) putc(*c);
+    //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
 }
 
 void __print_uint64(uint64 integer) {
+    //uint64 sstatus = RiscV::readSstatus();
+    //RiscV::clearSstatus(RiscV::SIE);
     static char digits[] = "0123456789";
     char output[20];
     int i = 0;
     do {
         output[i++] = digits[integer % 10];
     } while ((integer/=10) != 0);
-    while(--i >= 0) __putc(output[i]);
+    while(--i >= 0) putc(output[i]);
+    //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
 }
 
 void __print_int(long long int integer) {
-    if (integer < 0) __putc('-'), integer *= -1;
+    //uint64 sstatus = RiscV::readSstatus();
+    //RiscV::clearSstatus(RiscV::SIE);
+    if (integer < 0) putc('-'), integer *= -1;
     __print_uint64(integer);
+    //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
 }
 
 /*void printInteger(uint64 integer)

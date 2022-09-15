@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccDicmRL.s 			page 1
+GAS LISTING /tmp/ccsdniZi.s 			page 1
 
 
    1              		.file	"memory_allocator.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
   45:src/memory_allocator.cpp **** void MemoryAllocator::initMem()  {
   12              		.loc 1 45 34
   13              		.cfi_startproc
-GAS LISTING /tmp/ccDicmRL.s 			page 2
+GAS LISTING /tmp/ccsdniZi.s 			page 2
 
 
   14 0000 130101FF 		addi	sp,sp,-16
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
   58              		.cfi_startproc
   59              	.LVL0:
   60 0050 130101FF 		addi	sp,sp,-16
-GAS LISTING /tmp/ccDicmRL.s 			page 3
+GAS LISTING /tmp/ccsdniZi.s 			page 3
 
 
   61              		.cfi_def_cfa_offset 16
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  107              		.cfi_def_cfa 2, 16
  108 009c 13010101 		addi	sp,sp,16
  109              		.cfi_def_cfa_offset 0
-GAS LISTING /tmp/ccDicmRL.s 			page 4
+GAS LISTING /tmp/ccsdniZi.s 			page 4
 
 
  110 00a0 67800000 		jr	ra
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
   91:src/memory_allocator.cpp ****     size_t allocSize = size + sizeof(size_t);
  135              		.loc 1 91 5
  136              		.loc 1 91 12 is_stmt 0
-GAS LISTING /tmp/ccDicmRL.s 			page 5
+GAS LISTING /tmp/ccsdniZi.s 			page 5
 
 
  137 00b8 13058500 		addi	a0,a0,8
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  186              	.LBB2:
  187 00f4 630C0504 		beqz	a0,.L12
  188 00f8 13850500 		mv	a0,a1
-GAS LISTING /tmp/ccDicmRL.s 			page 6
+GAS LISTING /tmp/ccsdniZi.s 			page 6
 
 
  189              	.LVL13:
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  223              		.loc 1 73 13
  224 012c 63840700 		beqz	a5,.L17
   73:src/memory_allocator.cpp ****             newNode->next = node->next;
-GAS LISTING /tmp/ccDicmRL.s 			page 7
+GAS LISTING /tmp/ccsdniZi.s 			page 7
 
 
  225              		.loc 1 73 29 is_stmt 1 discriminator 1
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  267              	.LBB5:
  268              	.LBB4:
   72:src/memory_allocator.cpp ****             if (node->next) node->next->prev = newNode;
-GAS LISTING /tmp/ccDicmRL.s 			page 8
+GAS LISTING /tmp/ccsdniZi.s 			page 8
 
 
  269              		.loc 1 72 18 is_stmt 1
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  305              	.LBE5:
  306              		.cfi_endproc
  307              	.LFE5:
-GAS LISTING /tmp/ccDicmRL.s 			page 9
+GAS LISTING /tmp/ccsdniZi.s 			page 9
 
 
  309              		.align	2
@@ -538,7 +538,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  357              		.cfi_startproc
  358              	.LVL25:
  359 01e0 130101FF 		addi	sp,sp,-16
-GAS LISTING /tmp/ccDicmRL.s 			page 10
+GAS LISTING /tmp/ccsdniZi.s 			page 10
 
 
  360              		.cfi_def_cfa_offset 16
@@ -598,7 +598,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  409              	.LFB2:
   23:src/memory_allocator.cpp ****     //printMem();
  410              		.loc 1 23 40 is_stmt 1
-GAS LISTING /tmp/ccDicmRL.s 			page 11
+GAS LISTING /tmp/ccsdniZi.s 			page 11
 
 
  411              		.cfi_startproc
@@ -658,7 +658,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  451              	.L34:
   29:src/memory_allocator.cpp ****     if (fMemHead && (addr>(void*)fMemHead))
  452              		.loc 1 29 14
-GAS LISTING /tmp/ccDicmRL.s 			page 12
+GAS LISTING /tmp/ccsdniZi.s 			page 12
 
 
  453 026c 93040700 		mv	s1,a4
@@ -718,7 +718,7 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
   41:src/memory_allocator.cpp ****     //printMem();
  489              		.loc 1 41 15 is_stmt 0
  490 02a0 13850400 		mv	a0,s1
-GAS LISTING /tmp/ccDicmRL.s 			page 13
+GAS LISTING /tmp/ccsdniZi.s 			page 13
 
 
  491 02a4 97000000 		call	_ZN15MemoryAllocator10tryToMergeEPNS_7FreeMemE
@@ -764,420 +764,420 @@ GAS LISTING /tmp/ccDicmRL.s 			page 1
  527              	.Letext0:
  528              		.file 2 "src/../h/../lib/hw.h"
  529              		.file 3 "src/../h/memory_allocator.hpp"
-GAS LISTING /tmp/ccDicmRL.s 			page 14
+GAS LISTING /tmp/ccsdniZi.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 memory_allocator.cpp
-     /tmp/ccDicmRL.s:9      .text:0000000000000000 _ZN15MemoryAllocator7initMemEv
-     /tmp/ccDicmRL.s:13     .text:0000000000000000 .L0 
-     /tmp/ccDicmRL.s:14     .text:0000000000000000 .L0 
-     /tmp/ccDicmRL.s:15     .text:0000000000000004 .L0 
-     /tmp/ccDicmRL.s:17     .text:0000000000000008 .L0 
-     /tmp/ccDicmRL.s:19     .text:000000000000000c .L0 
-     /tmp/ccDicmRL.s:21     .text:000000000000000c .L0 
-     /tmp/ccDicmRL.s:22     .text:000000000000000c .L0 
-     /tmp/ccDicmRL.s:27     .text:0000000000000024 .L0 
-     /tmp/ccDicmRL.s:28     .text:0000000000000024 .L0 
-     /tmp/ccDicmRL.s:31     .text:0000000000000030 .L0 
-     /tmp/ccDicmRL.s:33     .text:0000000000000034 .L0 
-     /tmp/ccDicmRL.s:35     .text:0000000000000038 .L0 
-     /tmp/ccDicmRL.s:36     .text:0000000000000038 .L0 
-     /tmp/ccDicmRL.s:38     .text:000000000000003c .L0 
-     /tmp/ccDicmRL.s:40     .text:0000000000000040 .L0 
-     /tmp/ccDicmRL.s:41     .text:0000000000000040 .L0 
-     /tmp/ccDicmRL.s:43     .text:0000000000000044 .L0 
-     /tmp/ccDicmRL.s:44     .text:0000000000000048 .L0 
-     /tmp/ccDicmRL.s:45     .text:0000000000000048 .L0 
-     /tmp/ccDicmRL.s:47     .text:000000000000004c .L0 
-     /tmp/ccDicmRL.s:49     .text:0000000000000050 .L0 
-     /tmp/ccDicmRL.s:55     .text:0000000000000050 _ZN15MemoryAllocator8firstFitEm
-     /tmp/ccDicmRL.s:58     .text:0000000000000050 .L0 
-     /tmp/ccDicmRL.s:60     .text:0000000000000050 .L0 
-     /tmp/ccDicmRL.s:61     .text:0000000000000054 .L0 
-     /tmp/ccDicmRL.s:63     .text:0000000000000058 .L0 
-     /tmp/ccDicmRL.s:65     .text:000000000000005c .L0 
-     /tmp/ccDicmRL.s:68     .text:0000000000000060 .L0 
-     /tmp/ccDicmRL.s:69     .text:0000000000000060 .L0 
-     /tmp/ccDicmRL.s:73     .text:0000000000000068 .L0 
-     /tmp/ccDicmRL.s:74     .text:0000000000000068 .L0 
-     /tmp/ccDicmRL.s:76     .text:000000000000006c .L0 
-     /tmp/ccDicmRL.s:78     .text:0000000000000070 .L0 
-     /tmp/ccDicmRL.s:80     .text:0000000000000074 .L0 
-     /tmp/ccDicmRL.s:81     .text:0000000000000074 .L0 
-     /tmp/ccDicmRL.s:83     .text:0000000000000078 .L0 
-     /tmp/ccDicmRL.s:85     .text:000000000000007c .L0 
-     /tmp/ccDicmRL.s:87     .text:0000000000000080 .L0 
-     /tmp/ccDicmRL.s:93     .text:0000000000000088 .L0 
-     /tmp/ccDicmRL.s:95     .text:000000000000008c .L0 
-     /tmp/ccDicmRL.s:98     .text:0000000000000090 .L0 
-     /tmp/ccDicmRL.s:100    .text:0000000000000094 .L0 
-     /tmp/ccDicmRL.s:104    .text:0000000000000098 .L0 
-     /tmp/ccDicmRL.s:105    .text:000000000000009c .L0 
-     /tmp/ccDicmRL.s:106    .text:000000000000009c .L0 
-     /tmp/ccDicmRL.s:107    .text:000000000000009c .L0 
-     /tmp/ccDicmRL.s:109    .text:00000000000000a0 .L0 
-     /tmp/ccDicmRL.s:113    .text:00000000000000a4 .L0 
-     /tmp/ccDicmRL.s:115    .text:00000000000000a4 .L0 
-     /tmp/ccDicmRL.s:118    .text:00000000000000ac .L0 
-     /tmp/ccDicmRL.s:124    .text:00000000000000ac _ZN15MemoryAllocator8calcSizeEm
-     /tmp/ccDicmRL.s:127    .text:00000000000000ac .L0 
-     /tmp/ccDicmRL.s:129    .text:00000000000000ac .L0 
-     /tmp/ccDicmRL.s:130    .text:00000000000000b0 .L0 
-GAS LISTING /tmp/ccDicmRL.s 			page 15
+     /tmp/ccsdniZi.s:9      .text:0000000000000000 _ZN15MemoryAllocator7initMemEv
+     /tmp/ccsdniZi.s:13     .text:0000000000000000 .L0 
+     /tmp/ccsdniZi.s:14     .text:0000000000000000 .L0 
+     /tmp/ccsdniZi.s:15     .text:0000000000000004 .L0 
+     /tmp/ccsdniZi.s:17     .text:0000000000000008 .L0 
+     /tmp/ccsdniZi.s:19     .text:000000000000000c .L0 
+     /tmp/ccsdniZi.s:21     .text:000000000000000c .L0 
+     /tmp/ccsdniZi.s:22     .text:000000000000000c .L0 
+     /tmp/ccsdniZi.s:27     .text:0000000000000024 .L0 
+     /tmp/ccsdniZi.s:28     .text:0000000000000024 .L0 
+     /tmp/ccsdniZi.s:31     .text:0000000000000030 .L0 
+     /tmp/ccsdniZi.s:33     .text:0000000000000034 .L0 
+     /tmp/ccsdniZi.s:35     .text:0000000000000038 .L0 
+     /tmp/ccsdniZi.s:36     .text:0000000000000038 .L0 
+     /tmp/ccsdniZi.s:38     .text:000000000000003c .L0 
+     /tmp/ccsdniZi.s:40     .text:0000000000000040 .L0 
+     /tmp/ccsdniZi.s:41     .text:0000000000000040 .L0 
+     /tmp/ccsdniZi.s:43     .text:0000000000000044 .L0 
+     /tmp/ccsdniZi.s:44     .text:0000000000000048 .L0 
+     /tmp/ccsdniZi.s:45     .text:0000000000000048 .L0 
+     /tmp/ccsdniZi.s:47     .text:000000000000004c .L0 
+     /tmp/ccsdniZi.s:49     .text:0000000000000050 .L0 
+     /tmp/ccsdniZi.s:55     .text:0000000000000050 _ZN15MemoryAllocator8firstFitEm
+     /tmp/ccsdniZi.s:58     .text:0000000000000050 .L0 
+     /tmp/ccsdniZi.s:60     .text:0000000000000050 .L0 
+     /tmp/ccsdniZi.s:61     .text:0000000000000054 .L0 
+     /tmp/ccsdniZi.s:63     .text:0000000000000058 .L0 
+     /tmp/ccsdniZi.s:65     .text:000000000000005c .L0 
+     /tmp/ccsdniZi.s:68     .text:0000000000000060 .L0 
+     /tmp/ccsdniZi.s:69     .text:0000000000000060 .L0 
+     /tmp/ccsdniZi.s:73     .text:0000000000000068 .L0 
+     /tmp/ccsdniZi.s:74     .text:0000000000000068 .L0 
+     /tmp/ccsdniZi.s:76     .text:000000000000006c .L0 
+     /tmp/ccsdniZi.s:78     .text:0000000000000070 .L0 
+     /tmp/ccsdniZi.s:80     .text:0000000000000074 .L0 
+     /tmp/ccsdniZi.s:81     .text:0000000000000074 .L0 
+     /tmp/ccsdniZi.s:83     .text:0000000000000078 .L0 
+     /tmp/ccsdniZi.s:85     .text:000000000000007c .L0 
+     /tmp/ccsdniZi.s:87     .text:0000000000000080 .L0 
+     /tmp/ccsdniZi.s:93     .text:0000000000000088 .L0 
+     /tmp/ccsdniZi.s:95     .text:000000000000008c .L0 
+     /tmp/ccsdniZi.s:98     .text:0000000000000090 .L0 
+     /tmp/ccsdniZi.s:100    .text:0000000000000094 .L0 
+     /tmp/ccsdniZi.s:104    .text:0000000000000098 .L0 
+     /tmp/ccsdniZi.s:105    .text:000000000000009c .L0 
+     /tmp/ccsdniZi.s:106    .text:000000000000009c .L0 
+     /tmp/ccsdniZi.s:107    .text:000000000000009c .L0 
+     /tmp/ccsdniZi.s:109    .text:00000000000000a0 .L0 
+     /tmp/ccsdniZi.s:113    .text:00000000000000a4 .L0 
+     /tmp/ccsdniZi.s:115    .text:00000000000000a4 .L0 
+     /tmp/ccsdniZi.s:118    .text:00000000000000ac .L0 
+     /tmp/ccsdniZi.s:124    .text:00000000000000ac _ZN15MemoryAllocator8calcSizeEm
+     /tmp/ccsdniZi.s:127    .text:00000000000000ac .L0 
+     /tmp/ccsdniZi.s:129    .text:00000000000000ac .L0 
+     /tmp/ccsdniZi.s:130    .text:00000000000000b0 .L0 
+GAS LISTING /tmp/ccsdniZi.s 			page 15
 
 
-     /tmp/ccDicmRL.s:132    .text:00000000000000b4 .L0 
-     /tmp/ccDicmRL.s:134    .text:00000000000000b8 .L0 
-     /tmp/ccDicmRL.s:136    .text:00000000000000b8 .L0 
-     /tmp/ccDicmRL.s:137    .text:00000000000000b8 .L0 
-     /tmp/ccDicmRL.s:140    .text:00000000000000bc .L0 
-     /tmp/ccDicmRL.s:141    .text:00000000000000bc .L0 
-     /tmp/ccDicmRL.s:142    .text:00000000000000bc .L0 
-     /tmp/ccDicmRL.s:144    .text:00000000000000c0 .L0 
-     /tmp/ccDicmRL.s:146    .text:00000000000000c4 .L0 
-     /tmp/ccDicmRL.s:147    .text:00000000000000c4 .L0 
-     /tmp/ccDicmRL.s:150    .text:00000000000000cc .L0 
-     /tmp/ccDicmRL.s:154    .text:00000000000000d0 .L0 
-     /tmp/ccDicmRL.s:155    .text:00000000000000d0 .L0 
-     /tmp/ccDicmRL.s:156    .text:00000000000000d4 .L0 
-     /tmp/ccDicmRL.s:157    .text:00000000000000d4 .L0 
-     /tmp/ccDicmRL.s:159    .text:00000000000000d8 .L0 
-     /tmp/ccDicmRL.s:161    .text:00000000000000dc .L0 
-     /tmp/ccDicmRL.s:167    .text:00000000000000dc _ZN15MemoryAllocator11allocBlocksEPNS_7FreeMemEm
-     /tmp/ccDicmRL.s:170    .text:00000000000000dc .L0 
-     /tmp/ccDicmRL.s:172    .text:00000000000000dc .L0 
-     /tmp/ccDicmRL.s:173    .text:00000000000000e0 .L0 
-     /tmp/ccDicmRL.s:177    .text:00000000000000ec .L0 
-     /tmp/ccDicmRL.s:178    .text:00000000000000ec .L0 
-     /tmp/ccDicmRL.s:179    .text:00000000000000ec .L0 
-     /tmp/ccDicmRL.s:181    .text:00000000000000f0 .L0 
-     /tmp/ccDicmRL.s:185    .text:00000000000000f4 .L0 
-     /tmp/ccDicmRL.s:187    .text:00000000000000f4 .L0 
-     /tmp/ccDicmRL.s:192    .text:00000000000000fc .L0 
-     /tmp/ccDicmRL.s:193    .text:00000000000000fc .L0 
-     /tmp/ccDicmRL.s:196    .text:0000000000000104 .L0 
-     /tmp/ccDicmRL.s:197    .text:0000000000000104 .L0 
-     /tmp/ccDicmRL.s:198    .text:0000000000000104 .L0 
-     /tmp/ccDicmRL.s:200    .text:0000000000000108 .L0 
-     /tmp/ccDicmRL.s:202    .text:000000000000010c .L0 
-     /tmp/ccDicmRL.s:205    .text:0000000000000114 .L0 
-     /tmp/ccDicmRL.s:206    .text:0000000000000114 .L0 
-     /tmp/ccDicmRL.s:209    .text:0000000000000118 .L0 
-     /tmp/ccDicmRL.s:210    .text:0000000000000118 .L0 
-     /tmp/ccDicmRL.s:212    .text:000000000000011c .L0 
-     /tmp/ccDicmRL.s:213    .text:000000000000011c .L0 
-     /tmp/ccDicmRL.s:215    .text:0000000000000120 .L0 
-     /tmp/ccDicmRL.s:217    .text:0000000000000124 .L0 
-     /tmp/ccDicmRL.s:218    .text:0000000000000124 .L0 
-     /tmp/ccDicmRL.s:221    .text:0000000000000128 .L0 
-     /tmp/ccDicmRL.s:222    .text:0000000000000128 .L0 
-     /tmp/ccDicmRL.s:224    .text:000000000000012c .L0 
-     /tmp/ccDicmRL.s:226    .text:0000000000000130 .L0 
-     /tmp/ccDicmRL.s:227    .text:0000000000000130 .L0 
-     /tmp/ccDicmRL.s:230    .text:0000000000000134 .L0 
-     /tmp/ccDicmRL.s:231    .text:0000000000000134 .L0 
-     /tmp/ccDicmRL.s:233    .text:0000000000000138 .L0 
-     /tmp/ccDicmRL.s:235    .text:000000000000013c .L0 
-     /tmp/ccDicmRL.s:236    .text:000000000000013c .L0 
-     /tmp/ccDicmRL.s:238    .text:0000000000000140 .L0 
-     /tmp/ccDicmRL.s:242    .text:0000000000000144 .L0 
-     /tmp/ccDicmRL.s:243    .text:0000000000000144 .L0 
-     /tmp/ccDicmRL.s:245    .text:0000000000000148 .L0 
-GAS LISTING /tmp/ccDicmRL.s 			page 16
+     /tmp/ccsdniZi.s:132    .text:00000000000000b4 .L0 
+     /tmp/ccsdniZi.s:134    .text:00000000000000b8 .L0 
+     /tmp/ccsdniZi.s:136    .text:00000000000000b8 .L0 
+     /tmp/ccsdniZi.s:137    .text:00000000000000b8 .L0 
+     /tmp/ccsdniZi.s:140    .text:00000000000000bc .L0 
+     /tmp/ccsdniZi.s:141    .text:00000000000000bc .L0 
+     /tmp/ccsdniZi.s:142    .text:00000000000000bc .L0 
+     /tmp/ccsdniZi.s:144    .text:00000000000000c0 .L0 
+     /tmp/ccsdniZi.s:146    .text:00000000000000c4 .L0 
+     /tmp/ccsdniZi.s:147    .text:00000000000000c4 .L0 
+     /tmp/ccsdniZi.s:150    .text:00000000000000cc .L0 
+     /tmp/ccsdniZi.s:154    .text:00000000000000d0 .L0 
+     /tmp/ccsdniZi.s:155    .text:00000000000000d0 .L0 
+     /tmp/ccsdniZi.s:156    .text:00000000000000d4 .L0 
+     /tmp/ccsdniZi.s:157    .text:00000000000000d4 .L0 
+     /tmp/ccsdniZi.s:159    .text:00000000000000d8 .L0 
+     /tmp/ccsdniZi.s:161    .text:00000000000000dc .L0 
+     /tmp/ccsdniZi.s:167    .text:00000000000000dc _ZN15MemoryAllocator11allocBlocksEPNS_7FreeMemEm
+     /tmp/ccsdniZi.s:170    .text:00000000000000dc .L0 
+     /tmp/ccsdniZi.s:172    .text:00000000000000dc .L0 
+     /tmp/ccsdniZi.s:173    .text:00000000000000e0 .L0 
+     /tmp/ccsdniZi.s:177    .text:00000000000000ec .L0 
+     /tmp/ccsdniZi.s:178    .text:00000000000000ec .L0 
+     /tmp/ccsdniZi.s:179    .text:00000000000000ec .L0 
+     /tmp/ccsdniZi.s:181    .text:00000000000000f0 .L0 
+     /tmp/ccsdniZi.s:185    .text:00000000000000f4 .L0 
+     /tmp/ccsdniZi.s:187    .text:00000000000000f4 .L0 
+     /tmp/ccsdniZi.s:192    .text:00000000000000fc .L0 
+     /tmp/ccsdniZi.s:193    .text:00000000000000fc .L0 
+     /tmp/ccsdniZi.s:196    .text:0000000000000104 .L0 
+     /tmp/ccsdniZi.s:197    .text:0000000000000104 .L0 
+     /tmp/ccsdniZi.s:198    .text:0000000000000104 .L0 
+     /tmp/ccsdniZi.s:200    .text:0000000000000108 .L0 
+     /tmp/ccsdniZi.s:202    .text:000000000000010c .L0 
+     /tmp/ccsdniZi.s:205    .text:0000000000000114 .L0 
+     /tmp/ccsdniZi.s:206    .text:0000000000000114 .L0 
+     /tmp/ccsdniZi.s:209    .text:0000000000000118 .L0 
+     /tmp/ccsdniZi.s:210    .text:0000000000000118 .L0 
+     /tmp/ccsdniZi.s:212    .text:000000000000011c .L0 
+     /tmp/ccsdniZi.s:213    .text:000000000000011c .L0 
+     /tmp/ccsdniZi.s:215    .text:0000000000000120 .L0 
+     /tmp/ccsdniZi.s:217    .text:0000000000000124 .L0 
+     /tmp/ccsdniZi.s:218    .text:0000000000000124 .L0 
+     /tmp/ccsdniZi.s:221    .text:0000000000000128 .L0 
+     /tmp/ccsdniZi.s:222    .text:0000000000000128 .L0 
+     /tmp/ccsdniZi.s:224    .text:000000000000012c .L0 
+     /tmp/ccsdniZi.s:226    .text:0000000000000130 .L0 
+     /tmp/ccsdniZi.s:227    .text:0000000000000130 .L0 
+     /tmp/ccsdniZi.s:230    .text:0000000000000134 .L0 
+     /tmp/ccsdniZi.s:231    .text:0000000000000134 .L0 
+     /tmp/ccsdniZi.s:233    .text:0000000000000138 .L0 
+     /tmp/ccsdniZi.s:235    .text:000000000000013c .L0 
+     /tmp/ccsdniZi.s:236    .text:000000000000013c .L0 
+     /tmp/ccsdniZi.s:238    .text:0000000000000140 .L0 
+     /tmp/ccsdniZi.s:242    .text:0000000000000144 .L0 
+     /tmp/ccsdniZi.s:243    .text:0000000000000144 .L0 
+     /tmp/ccsdniZi.s:245    .text:0000000000000148 .L0 
+GAS LISTING /tmp/ccsdniZi.s 			page 16
 
 
-     /tmp/ccDicmRL.s:246    .text:0000000000000148 .L0 
-     /tmp/ccDicmRL.s:252    .text:000000000000014c .L0 
-     /tmp/ccDicmRL.s:253    .text:0000000000000150 .L0 
-     /tmp/ccDicmRL.s:254    .text:0000000000000150 .L0 
-     /tmp/ccDicmRL.s:256    .text:0000000000000154 .L0 
-     /tmp/ccDicmRL.s:257    .text:0000000000000154 .L0 
-     /tmp/ccDicmRL.s:259    .text:0000000000000158 .L0 
-     /tmp/ccDicmRL.s:262    .text:000000000000015c .L0 
-     /tmp/ccDicmRL.s:266    .text:0000000000000160 .L0 
-     /tmp/ccDicmRL.s:270    .text:0000000000000160 .L0 
-     /tmp/ccDicmRL.s:271    .text:0000000000000160 .L0 
-     /tmp/ccDicmRL.s:276    .text:000000000000016c .L0 
-     /tmp/ccDicmRL.s:277    .text:000000000000016c .L0 
-     /tmp/ccDicmRL.s:279    .text:0000000000000170 .L0 
-     /tmp/ccDicmRL.s:281    .text:0000000000000174 .L0 
-     /tmp/ccDicmRL.s:282    .text:0000000000000174 .L0 
-     /tmp/ccDicmRL.s:284    .text:0000000000000178 .L0 
-     /tmp/ccDicmRL.s:287    .text:000000000000017c .L0 
-     /tmp/ccDicmRL.s:288    .text:000000000000017c .L0 
-     /tmp/ccDicmRL.s:290    .text:0000000000000180 .L0 
-     /tmp/ccDicmRL.s:292    .text:0000000000000184 .L0 
-     /tmp/ccDicmRL.s:293    .text:0000000000000184 .L0 
-     /tmp/ccDicmRL.s:295    .text:0000000000000188 .L0 
-     /tmp/ccDicmRL.s:299    .text:0000000000000190 .L0 
-     /tmp/ccDicmRL.s:300    .text:0000000000000190 .L0 
-     /tmp/ccDicmRL.s:302    .text:0000000000000194 .L0 
-     /tmp/ccDicmRL.s:306    .text:00000000000001a0 .L0 
-     /tmp/ccDicmRL.s:312    .text:00000000000001a0 _ZN15MemoryAllocator8allocateEm
-     /tmp/ccDicmRL.s:315    .text:00000000000001a0 .L0 
-     /tmp/ccDicmRL.s:317    .text:00000000000001a0 .L0 
-     /tmp/ccDicmRL.s:318    .text:00000000000001a4 .L0 
-     /tmp/ccDicmRL.s:322    .text:00000000000001b0 .L0 
-     /tmp/ccDicmRL.s:323    .text:00000000000001b0 .L0 
-     /tmp/ccDicmRL.s:324    .text:00000000000001b0 .L0 
-     /tmp/ccDicmRL.s:326    .text:00000000000001b4 .L0 
-     /tmp/ccDicmRL.s:329    .text:00000000000001b8 .L0 
-     /tmp/ccDicmRL.s:330    .text:00000000000001b8 .L0 
-     /tmp/ccDicmRL.s:336    .text:00000000000001cc .L0 
-     /tmp/ccDicmRL.s:337    .text:00000000000001cc .L0 
-     /tmp/ccDicmRL.s:338    .text:00000000000001d0 .L0 
-     /tmp/ccDicmRL.s:340    .text:00000000000001d4 .L0 
-     /tmp/ccDicmRL.s:341    .text:00000000000001d4 .L0 
-     /tmp/ccDicmRL.s:343    .text:00000000000001d8 .L0 
-     /tmp/ccDicmRL.s:346    .text:00000000000001dc .L0 
-     /tmp/ccDicmRL.s:348    .text:00000000000001e0 .L0 
-     /tmp/ccDicmRL.s:354    .text:00000000000001e0 _ZN15MemoryAllocator10tryToMergeEPNS_7FreeMemE
-     /tmp/ccDicmRL.s:357    .text:00000000000001e0 .L0 
-     /tmp/ccDicmRL.s:359    .text:00000000000001e0 .L0 
-     /tmp/ccDicmRL.s:360    .text:00000000000001e4 .L0 
-     /tmp/ccDicmRL.s:362    .text:00000000000001e8 .L0 
-     /tmp/ccDicmRL.s:364    .text:00000000000001ec .L0 
-     /tmp/ccDicmRL.s:366    .text:00000000000001ec .L0 
-     /tmp/ccDicmRL.s:368    .text:00000000000001f0 .L0 
-     /tmp/ccDicmRL.s:369    .text:00000000000001f0 .L0 
-     /tmp/ccDicmRL.s:371    .text:00000000000001f4 .L0 
-     /tmp/ccDicmRL.s:373    .text:00000000000001f8 .L0 
-     /tmp/ccDicmRL.s:375    .text:00000000000001fc .L0 
-GAS LISTING /tmp/ccDicmRL.s 			page 17
+     /tmp/ccsdniZi.s:246    .text:0000000000000148 .L0 
+     /tmp/ccsdniZi.s:252    .text:000000000000014c .L0 
+     /tmp/ccsdniZi.s:253    .text:0000000000000150 .L0 
+     /tmp/ccsdniZi.s:254    .text:0000000000000150 .L0 
+     /tmp/ccsdniZi.s:256    .text:0000000000000154 .L0 
+     /tmp/ccsdniZi.s:257    .text:0000000000000154 .L0 
+     /tmp/ccsdniZi.s:259    .text:0000000000000158 .L0 
+     /tmp/ccsdniZi.s:262    .text:000000000000015c .L0 
+     /tmp/ccsdniZi.s:266    .text:0000000000000160 .L0 
+     /tmp/ccsdniZi.s:270    .text:0000000000000160 .L0 
+     /tmp/ccsdniZi.s:271    .text:0000000000000160 .L0 
+     /tmp/ccsdniZi.s:276    .text:000000000000016c .L0 
+     /tmp/ccsdniZi.s:277    .text:000000000000016c .L0 
+     /tmp/ccsdniZi.s:279    .text:0000000000000170 .L0 
+     /tmp/ccsdniZi.s:281    .text:0000000000000174 .L0 
+     /tmp/ccsdniZi.s:282    .text:0000000000000174 .L0 
+     /tmp/ccsdniZi.s:284    .text:0000000000000178 .L0 
+     /tmp/ccsdniZi.s:287    .text:000000000000017c .L0 
+     /tmp/ccsdniZi.s:288    .text:000000000000017c .L0 
+     /tmp/ccsdniZi.s:290    .text:0000000000000180 .L0 
+     /tmp/ccsdniZi.s:292    .text:0000000000000184 .L0 
+     /tmp/ccsdniZi.s:293    .text:0000000000000184 .L0 
+     /tmp/ccsdniZi.s:295    .text:0000000000000188 .L0 
+     /tmp/ccsdniZi.s:299    .text:0000000000000190 .L0 
+     /tmp/ccsdniZi.s:300    .text:0000000000000190 .L0 
+     /tmp/ccsdniZi.s:302    .text:0000000000000194 .L0 
+     /tmp/ccsdniZi.s:306    .text:00000000000001a0 .L0 
+     /tmp/ccsdniZi.s:312    .text:00000000000001a0 _ZN15MemoryAllocator8allocateEm
+     /tmp/ccsdniZi.s:315    .text:00000000000001a0 .L0 
+     /tmp/ccsdniZi.s:317    .text:00000000000001a0 .L0 
+     /tmp/ccsdniZi.s:318    .text:00000000000001a4 .L0 
+     /tmp/ccsdniZi.s:322    .text:00000000000001b0 .L0 
+     /tmp/ccsdniZi.s:323    .text:00000000000001b0 .L0 
+     /tmp/ccsdniZi.s:324    .text:00000000000001b0 .L0 
+     /tmp/ccsdniZi.s:326    .text:00000000000001b4 .L0 
+     /tmp/ccsdniZi.s:329    .text:00000000000001b8 .L0 
+     /tmp/ccsdniZi.s:330    .text:00000000000001b8 .L0 
+     /tmp/ccsdniZi.s:336    .text:00000000000001cc .L0 
+     /tmp/ccsdniZi.s:337    .text:00000000000001cc .L0 
+     /tmp/ccsdniZi.s:338    .text:00000000000001d0 .L0 
+     /tmp/ccsdniZi.s:340    .text:00000000000001d4 .L0 
+     /tmp/ccsdniZi.s:341    .text:00000000000001d4 .L0 
+     /tmp/ccsdniZi.s:343    .text:00000000000001d8 .L0 
+     /tmp/ccsdniZi.s:346    .text:00000000000001dc .L0 
+     /tmp/ccsdniZi.s:348    .text:00000000000001e0 .L0 
+     /tmp/ccsdniZi.s:354    .text:00000000000001e0 _ZN15MemoryAllocator10tryToMergeEPNS_7FreeMemE
+     /tmp/ccsdniZi.s:357    .text:00000000000001e0 .L0 
+     /tmp/ccsdniZi.s:359    .text:00000000000001e0 .L0 
+     /tmp/ccsdniZi.s:360    .text:00000000000001e4 .L0 
+     /tmp/ccsdniZi.s:362    .text:00000000000001e8 .L0 
+     /tmp/ccsdniZi.s:364    .text:00000000000001ec .L0 
+     /tmp/ccsdniZi.s:366    .text:00000000000001ec .L0 
+     /tmp/ccsdniZi.s:368    .text:00000000000001f0 .L0 
+     /tmp/ccsdniZi.s:369    .text:00000000000001f0 .L0 
+     /tmp/ccsdniZi.s:371    .text:00000000000001f4 .L0 
+     /tmp/ccsdniZi.s:373    .text:00000000000001f8 .L0 
+     /tmp/ccsdniZi.s:375    .text:00000000000001fc .L0 
+GAS LISTING /tmp/ccsdniZi.s 			page 17
 
 
-     /tmp/ccDicmRL.s:377    .text:0000000000000200 .L0 
-     /tmp/ccDicmRL.s:379    .text:0000000000000204 .L0 
-     /tmp/ccDicmRL.s:380    .text:0000000000000204 .L0 
-     /tmp/ccDicmRL.s:382    .text:0000000000000208 .L0 
-     /tmp/ccDicmRL.s:385    .text:0000000000000210 .L0 
-     /tmp/ccDicmRL.s:386    .text:0000000000000210 .L0 
-     /tmp/ccDicmRL.s:388    .text:0000000000000214 .L0 
-     /tmp/ccDicmRL.s:390    .text:0000000000000218 .L0 
-     /tmp/ccDicmRL.s:392    .text:000000000000021c .L0 
-     /tmp/ccDicmRL.s:393    .text:000000000000021c .L0 
-     /tmp/ccDicmRL.s:396    .text:0000000000000220 .L0 
-     /tmp/ccDicmRL.s:397    .text:0000000000000224 .L0 
-     /tmp/ccDicmRL.s:398    .text:0000000000000224 .L0 
-     /tmp/ccDicmRL.s:400    .text:0000000000000228 .L0 
-     /tmp/ccDicmRL.s:402    .text:000000000000022c .L0 
-     /tmp/ccDicmRL.s:408    .text:000000000000022c _ZN15MemoryAllocator4freeEPv
-     /tmp/ccDicmRL.s:411    .text:000000000000022c .L0 
-     /tmp/ccDicmRL.s:413    .text:000000000000022c .L0 
-     /tmp/ccDicmRL.s:414    .text:0000000000000230 .L0 
-     /tmp/ccDicmRL.s:418    .text:000000000000023c .L0 
-     /tmp/ccDicmRL.s:419    .text:000000000000023c .L0 
-     /tmp/ccDicmRL.s:420    .text:000000000000023c .L0 
-     /tmp/ccDicmRL.s:422    .text:0000000000000240 .L0 
-     /tmp/ccDicmRL.s:424    .text:0000000000000240 .L0 
-     /tmp/ccDicmRL.s:425    .text:0000000000000240 .L0 
-     /tmp/ccDicmRL.s:428    .text:0000000000000244 .L0 
-     /tmp/ccDicmRL.s:429    .text:0000000000000244 .L0 
-     /tmp/ccDicmRL.s:430    .text:0000000000000244 .L0 
-     /tmp/ccDicmRL.s:431    .text:0000000000000244 .L0 
-     /tmp/ccDicmRL.s:433    .text:000000000000024c .L0 
-     /tmp/ccDicmRL.s:435    .text:0000000000000250 .L0 
-     /tmp/ccDicmRL.s:437    .text:0000000000000254 .L0 
-     /tmp/ccDicmRL.s:441    .text:0000000000000258 .L0 
-     /tmp/ccDicmRL.s:443    .text:000000000000025c .L0 
-     /tmp/ccDicmRL.s:446    .text:0000000000000260 .L0 
-     /tmp/ccDicmRL.s:448    .text:0000000000000264 .L0 
-     /tmp/ccDicmRL.s:453    .text:000000000000026c .L0 
-     /tmp/ccDicmRL.s:460    .text:0000000000000278 .L0 
-     /tmp/ccDicmRL.s:461    .text:0000000000000278 .L0 
-     /tmp/ccDicmRL.s:462    .text:0000000000000278 .L0 
-     /tmp/ccDicmRL.s:463    .text:0000000000000278 .L0 
-     /tmp/ccDicmRL.s:466    .text:000000000000027c .L0 
-     /tmp/ccDicmRL.s:468    .text:0000000000000280 .L0 
-     /tmp/ccDicmRL.s:469    .text:0000000000000280 .L0 
-     /tmp/ccDicmRL.s:471    .text:0000000000000284 .L0 
-     /tmp/ccDicmRL.s:473    .text:0000000000000288 .L0 
-     /tmp/ccDicmRL.s:476    .text:000000000000028c .L0 
-     /tmp/ccDicmRL.s:477    .text:000000000000028c .L0 
-     /tmp/ccDicmRL.s:479    .text:0000000000000290 .L0 
-     /tmp/ccDicmRL.s:481    .text:0000000000000294 .L0 
-     /tmp/ccDicmRL.s:482    .text:0000000000000294 .L0 
-     /tmp/ccDicmRL.s:485    .text:0000000000000298 .L0 
-     /tmp/ccDicmRL.s:486    .text:0000000000000298 .L0 
-     /tmp/ccDicmRL.s:489    .text:00000000000002a0 .L0 
-     /tmp/ccDicmRL.s:490    .text:00000000000002a0 .L0 
-     /tmp/ccDicmRL.s:494    .text:00000000000002ac .L0 
-     /tmp/ccDicmRL.s:495    .text:00000000000002b0 .L0 
-GAS LISTING /tmp/ccDicmRL.s 			page 18
+     /tmp/ccsdniZi.s:377    .text:0000000000000200 .L0 
+     /tmp/ccsdniZi.s:379    .text:0000000000000204 .L0 
+     /tmp/ccsdniZi.s:380    .text:0000000000000204 .L0 
+     /tmp/ccsdniZi.s:382    .text:0000000000000208 .L0 
+     /tmp/ccsdniZi.s:385    .text:0000000000000210 .L0 
+     /tmp/ccsdniZi.s:386    .text:0000000000000210 .L0 
+     /tmp/ccsdniZi.s:388    .text:0000000000000214 .L0 
+     /tmp/ccsdniZi.s:390    .text:0000000000000218 .L0 
+     /tmp/ccsdniZi.s:392    .text:000000000000021c .L0 
+     /tmp/ccsdniZi.s:393    .text:000000000000021c .L0 
+     /tmp/ccsdniZi.s:396    .text:0000000000000220 .L0 
+     /tmp/ccsdniZi.s:397    .text:0000000000000224 .L0 
+     /tmp/ccsdniZi.s:398    .text:0000000000000224 .L0 
+     /tmp/ccsdniZi.s:400    .text:0000000000000228 .L0 
+     /tmp/ccsdniZi.s:402    .text:000000000000022c .L0 
+     /tmp/ccsdniZi.s:408    .text:000000000000022c _ZN15MemoryAllocator4freeEPv
+     /tmp/ccsdniZi.s:411    .text:000000000000022c .L0 
+     /tmp/ccsdniZi.s:413    .text:000000000000022c .L0 
+     /tmp/ccsdniZi.s:414    .text:0000000000000230 .L0 
+     /tmp/ccsdniZi.s:418    .text:000000000000023c .L0 
+     /tmp/ccsdniZi.s:419    .text:000000000000023c .L0 
+     /tmp/ccsdniZi.s:420    .text:000000000000023c .L0 
+     /tmp/ccsdniZi.s:422    .text:0000000000000240 .L0 
+     /tmp/ccsdniZi.s:424    .text:0000000000000240 .L0 
+     /tmp/ccsdniZi.s:425    .text:0000000000000240 .L0 
+     /tmp/ccsdniZi.s:428    .text:0000000000000244 .L0 
+     /tmp/ccsdniZi.s:429    .text:0000000000000244 .L0 
+     /tmp/ccsdniZi.s:430    .text:0000000000000244 .L0 
+     /tmp/ccsdniZi.s:431    .text:0000000000000244 .L0 
+     /tmp/ccsdniZi.s:433    .text:000000000000024c .L0 
+     /tmp/ccsdniZi.s:435    .text:0000000000000250 .L0 
+     /tmp/ccsdniZi.s:437    .text:0000000000000254 .L0 
+     /tmp/ccsdniZi.s:441    .text:0000000000000258 .L0 
+     /tmp/ccsdniZi.s:443    .text:000000000000025c .L0 
+     /tmp/ccsdniZi.s:446    .text:0000000000000260 .L0 
+     /tmp/ccsdniZi.s:448    .text:0000000000000264 .L0 
+     /tmp/ccsdniZi.s:453    .text:000000000000026c .L0 
+     /tmp/ccsdniZi.s:460    .text:0000000000000278 .L0 
+     /tmp/ccsdniZi.s:461    .text:0000000000000278 .L0 
+     /tmp/ccsdniZi.s:462    .text:0000000000000278 .L0 
+     /tmp/ccsdniZi.s:463    .text:0000000000000278 .L0 
+     /tmp/ccsdniZi.s:466    .text:000000000000027c .L0 
+     /tmp/ccsdniZi.s:468    .text:0000000000000280 .L0 
+     /tmp/ccsdniZi.s:469    .text:0000000000000280 .L0 
+     /tmp/ccsdniZi.s:471    .text:0000000000000284 .L0 
+     /tmp/ccsdniZi.s:473    .text:0000000000000288 .L0 
+     /tmp/ccsdniZi.s:476    .text:000000000000028c .L0 
+     /tmp/ccsdniZi.s:477    .text:000000000000028c .L0 
+     /tmp/ccsdniZi.s:479    .text:0000000000000290 .L0 
+     /tmp/ccsdniZi.s:481    .text:0000000000000294 .L0 
+     /tmp/ccsdniZi.s:482    .text:0000000000000294 .L0 
+     /tmp/ccsdniZi.s:485    .text:0000000000000298 .L0 
+     /tmp/ccsdniZi.s:486    .text:0000000000000298 .L0 
+     /tmp/ccsdniZi.s:489    .text:00000000000002a0 .L0 
+     /tmp/ccsdniZi.s:490    .text:00000000000002a0 .L0 
+     /tmp/ccsdniZi.s:494    .text:00000000000002ac .L0 
+     /tmp/ccsdniZi.s:495    .text:00000000000002b0 .L0 
+GAS LISTING /tmp/ccsdniZi.s 			page 18
 
 
-     /tmp/ccDicmRL.s:496    .text:00000000000002b0 .L0 
-     /tmp/ccDicmRL.s:498    .text:00000000000002b4 .L0 
-     /tmp/ccDicmRL.s:499    .text:00000000000002b4 .L0 
-     /tmp/ccDicmRL.s:501    .text:00000000000002b8 .L0 
-     /tmp/ccDicmRL.s:504    .text:00000000000002bc .L0 
-     /tmp/ccDicmRL.s:508    .text:00000000000002c0 .L0 
-     /tmp/ccDicmRL.s:510    .text:00000000000002c0 .L0 
-     /tmp/ccDicmRL.s:511    .text:00000000000002c0 .L0 
-     /tmp/ccDicmRL.s:513    .text:00000000000002c4 .L0 
-     /tmp/ccDicmRL.s:515    .text:00000000000002d0 .L0 
-     /tmp/ccDicmRL.s:524    .bss:0000000000000000 _ZN15MemoryAllocator8fMemHeadE
-     /tmp/ccDicmRL.s:521    .bss:0000000000000000 .LANCHOR0
-     /tmp/ccDicmRL.s:530    .text:00000000000002d0 .L0 
-     /tmp/ccDicmRL.s:22     .text:000000000000000c .L0 
-     /tmp/ccDicmRL.s:24     .text:0000000000000018 .L0 
-     /tmp/ccDicmRL.s:28     .text:0000000000000024 .L0 
-     /tmp/ccDicmRL.s:69     .text:0000000000000060 .L0 
-     /tmp/ccDicmRL.s:271    .text:0000000000000160 .L0 
-     /tmp/ccDicmRL.s:302    .text:0000000000000194 .L0 
-     /tmp/ccDicmRL.s:431    .text:0000000000000244 .L0 
-     /tmp/ccDicmRL.s:513    .text:00000000000002c4 .L0 
-     /tmp/ccDicmRL.s:91     .text:0000000000000088 .L4
-     /tmp/ccDicmRL.s:102    .text:0000000000000098 .L3
-     /tmp/ccDicmRL.s:71     .text:0000000000000068 .L6
-     /tmp/ccDicmRL.s:112    .text:00000000000000a4 .L8
-     /tmp/ccDicmRL.s:153    .text:00000000000000d0 .L9
-     /tmp/ccDicmRL.s:248    .text:000000000000014c .L12
-     /tmp/ccDicmRL.s:274    .text:000000000000016c .L14
-     /tmp/ccDicmRL.s:265    .text:0000000000000160 .L15
-     /tmp/ccDicmRL.s:228    .text:0000000000000134 .L17
-     /tmp/ccDicmRL.s:219    .text:0000000000000128 .L16
-     /tmp/ccDicmRL.s:297    .text:0000000000000190 .L19
-     /tmp/ccDicmRL.s:240    .text:0000000000000144 .L18
-     /tmp/ccDicmRL.s:285    .text:000000000000017c .L20
-     /tmp/ccDicmRL.s:394    .text:0000000000000220 .L25
-     /tmp/ccDicmRL.s:451    .text:000000000000026c .L34
-     /tmp/ccDicmRL.s:455    .text:0000000000000274 .L35
-     /tmp/ccDicmRL.s:458    .text:0000000000000278 .L29
-     /tmp/ccDicmRL.s:439    .text:0000000000000258 .L30
-     /tmp/ccDicmRL.s:507    .text:00000000000002c0 .L31
-     /tmp/ccDicmRL.s:483    .text:0000000000000298 .L33
-     /tmp/ccDicmRL.s:474    .text:000000000000028c .L32
-     /tmp/ccDicmRL.s:1038   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccDicmRL.s:1953   .debug_str:00000000000001a2 .LASF39
-     /tmp/ccDicmRL.s:1995   .debug_str:00000000000003c0 .LASF40
-     /tmp/ccDicmRL.s:1993   .debug_str:000000000000039d .LASF41
-     /tmp/ccDicmRL.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccDicmRL.s:527    .text:00000000000002d0 .Letext0
-     /tmp/ccDicmRL.s:1901   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccDicmRL.s:1961   .debug_str:00000000000002ac .LASF0
-     /tmp/ccDicmRL.s:1945   .debug_str:000000000000016e .LASF1
-     /tmp/ccDicmRL.s:1937   .debug_str:000000000000013e .LASF2
-     /tmp/ccDicmRL.s:1919   .debug_str:0000000000000089 .LASF4
-     /tmp/ccDicmRL.s:1943   .debug_str:000000000000015c .LASF3
-     /tmp/ccDicmRL.s:1907   .debug_str:0000000000000023 .LASF5
-     /tmp/ccDicmRL.s:1903   .debug_str:0000000000000000 .LASF6
-     /tmp/ccDicmRL.s:1933   .debug_str:000000000000011c .LASF7
-GAS LISTING /tmp/ccDicmRL.s 			page 19
+     /tmp/ccsdniZi.s:496    .text:00000000000002b0 .L0 
+     /tmp/ccsdniZi.s:498    .text:00000000000002b4 .L0 
+     /tmp/ccsdniZi.s:499    .text:00000000000002b4 .L0 
+     /tmp/ccsdniZi.s:501    .text:00000000000002b8 .L0 
+     /tmp/ccsdniZi.s:504    .text:00000000000002bc .L0 
+     /tmp/ccsdniZi.s:508    .text:00000000000002c0 .L0 
+     /tmp/ccsdniZi.s:510    .text:00000000000002c0 .L0 
+     /tmp/ccsdniZi.s:511    .text:00000000000002c0 .L0 
+     /tmp/ccsdniZi.s:513    .text:00000000000002c4 .L0 
+     /tmp/ccsdniZi.s:515    .text:00000000000002d0 .L0 
+     /tmp/ccsdniZi.s:524    .bss:0000000000000000 _ZN15MemoryAllocator8fMemHeadE
+     /tmp/ccsdniZi.s:521    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccsdniZi.s:530    .text:00000000000002d0 .L0 
+     /tmp/ccsdniZi.s:22     .text:000000000000000c .L0 
+     /tmp/ccsdniZi.s:24     .text:0000000000000018 .L0 
+     /tmp/ccsdniZi.s:28     .text:0000000000000024 .L0 
+     /tmp/ccsdniZi.s:69     .text:0000000000000060 .L0 
+     /tmp/ccsdniZi.s:271    .text:0000000000000160 .L0 
+     /tmp/ccsdniZi.s:302    .text:0000000000000194 .L0 
+     /tmp/ccsdniZi.s:431    .text:0000000000000244 .L0 
+     /tmp/ccsdniZi.s:513    .text:00000000000002c4 .L0 
+     /tmp/ccsdniZi.s:91     .text:0000000000000088 .L4
+     /tmp/ccsdniZi.s:102    .text:0000000000000098 .L3
+     /tmp/ccsdniZi.s:71     .text:0000000000000068 .L6
+     /tmp/ccsdniZi.s:112    .text:00000000000000a4 .L8
+     /tmp/ccsdniZi.s:153    .text:00000000000000d0 .L9
+     /tmp/ccsdniZi.s:248    .text:000000000000014c .L12
+     /tmp/ccsdniZi.s:274    .text:000000000000016c .L14
+     /tmp/ccsdniZi.s:265    .text:0000000000000160 .L15
+     /tmp/ccsdniZi.s:228    .text:0000000000000134 .L17
+     /tmp/ccsdniZi.s:219    .text:0000000000000128 .L16
+     /tmp/ccsdniZi.s:297    .text:0000000000000190 .L19
+     /tmp/ccsdniZi.s:240    .text:0000000000000144 .L18
+     /tmp/ccsdniZi.s:285    .text:000000000000017c .L20
+     /tmp/ccsdniZi.s:394    .text:0000000000000220 .L25
+     /tmp/ccsdniZi.s:451    .text:000000000000026c .L34
+     /tmp/ccsdniZi.s:455    .text:0000000000000274 .L35
+     /tmp/ccsdniZi.s:458    .text:0000000000000278 .L29
+     /tmp/ccsdniZi.s:439    .text:0000000000000258 .L30
+     /tmp/ccsdniZi.s:507    .text:00000000000002c0 .L31
+     /tmp/ccsdniZi.s:483    .text:0000000000000298 .L33
+     /tmp/ccsdniZi.s:474    .text:000000000000028c .L32
+     /tmp/ccsdniZi.s:1038   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccsdniZi.s:1953   .debug_str:00000000000001a2 .LASF39
+     /tmp/ccsdniZi.s:1995   .debug_str:00000000000003c0 .LASF40
+     /tmp/ccsdniZi.s:1993   .debug_str:000000000000039d .LASF41
+     /tmp/ccsdniZi.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccsdniZi.s:527    .text:00000000000002d0 .Letext0
+     /tmp/ccsdniZi.s:1901   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccsdniZi.s:1961   .debug_str:00000000000002ac .LASF0
+     /tmp/ccsdniZi.s:1945   .debug_str:000000000000016e .LASF1
+     /tmp/ccsdniZi.s:1937   .debug_str:000000000000013e .LASF2
+     /tmp/ccsdniZi.s:1919   .debug_str:0000000000000089 .LASF4
+     /tmp/ccsdniZi.s:1943   .debug_str:000000000000015c .LASF3
+     /tmp/ccsdniZi.s:1907   .debug_str:0000000000000023 .LASF5
+     /tmp/ccsdniZi.s:1903   .debug_str:0000000000000000 .LASF6
+     /tmp/ccsdniZi.s:1933   .debug_str:000000000000011c .LASF7
+GAS LISTING /tmp/ccsdniZi.s 			page 19
 
 
-     /tmp/ccDicmRL.s:1965   .debug_str:00000000000002d8 .LASF8
-     /tmp/ccDicmRL.s:1917   .debug_str:000000000000007b .LASF9
-     /tmp/ccDicmRL.s:2001   .debug_str:00000000000003e3 .LASF10
-     /tmp/ccDicmRL.s:1935   .debug_str:000000000000012f .LASF11
-     /tmp/ccDicmRL.s:1991   .debug_str:000000000000038d .LASF12
-     /tmp/ccDicmRL.s:1969   .debug_str:00000000000002fe .LASF13
-     /tmp/ccDicmRL.s:1949   .debug_str:000000000000018b .LASF14
-     /tmp/ccDicmRL.s:1929   .debug_str:0000000000000101 .LASF15
-     /tmp/ccDicmRL.s:1967   .debug_str:00000000000002e8 .LASF16
-     /tmp/ccDicmRL.s:1905   .debug_str:0000000000000013 .LASF42
-     /tmp/ccDicmRL.s:1939   .debug_str:000000000000014c .LASF43
-     /tmp/ccDicmRL.s:1997   .debug_str:00000000000003d9 .LASF17
-     /tmp/ccDicmRL.s:1999   .debug_str:00000000000003de .LASF18
-     /tmp/ccDicmRL.s:1909   .debug_str:000000000000002a .LASF19
-     /tmp/ccDicmRL.s:1959   .debug_str:00000000000002a3 .LASF44
-     /tmp/ccDicmRL.s:1915   .debug_str:000000000000005b .LASF45
-     /tmp/ccDicmRL.s:1971   .debug_str:000000000000030e .LASF24
-     /tmp/ccDicmRL.s:1927   .debug_str:00000000000000e4 .LASF26
-     /tmp/ccDicmRL.s:1975   .debug_str:0000000000000332 .LASF20
-     /tmp/ccDicmRL.s:1963   .debug_str:00000000000002b9 .LASF22
-     /tmp/ccDicmRL.s:1989   .debug_str:0000000000000384 .LASF21
-     /tmp/ccDicmRL.s:1921   .debug_str:0000000000000090 .LASF23
-     /tmp/ccDicmRL.s:1987   .debug_str:000000000000037b .LASF46
-     /tmp/ccDicmRL.s:1979   .debug_str:000000000000035a .LASF25
-     /tmp/ccDicmRL.s:1913   .debug_str:000000000000003b .LASF27
-     /tmp/ccDicmRL.s:1911   .debug_str:000000000000002f .LASF28
-     /tmp/ccDicmRL.s:1955   .debug_str:0000000000000266 .LASF29
-     /tmp/ccDicmRL.s:1985   .debug_str:0000000000000372 .LASF30
-     /tmp/ccDicmRL.s:1977   .debug_str:000000000000033a .LASF31
-     /tmp/ccDicmRL.s:1951   .debug_str:0000000000000197 .LASF47
-     /tmp/ccDicmRL.s:1923   .debug_str:00000000000000b0 .LASF48
-     /tmp/ccDicmRL.s:1973   .debug_str:0000000000000313 .LASF49
-     /tmp/ccDicmRL.s:355    .text:00000000000001e0 .LFB7
-     /tmp/ccDicmRL.s:403    .text:000000000000022c .LFE7
-     /tmp/ccDicmRL.s:1981   .debug_str:0000000000000363 .LASF32
-     /tmp/ccDicmRL.s:125    .text:00000000000000ac .LFB6
-     /tmp/ccDicmRL.s:162    .text:00000000000000dc .LFE6
-     /tmp/ccDicmRL.s:1635   .debug_loc:0000000000000000 .LLST2
-     /tmp/ccDicmRL.s:1983   .debug_str:0000000000000368 .LASF33
-     /tmp/ccDicmRL.s:1947   .debug_str:0000000000000181 .LASF34
-     /tmp/ccDicmRL.s:168    .text:00000000000000dc .LFB5
-     /tmp/ccDicmRL.s:307    .text:00000000000001a0 .LFE5
-     /tmp/ccDicmRL.s:1655   .debug_loc:000000000000004e .LLST3
-     /tmp/ccDicmRL.s:1677   .debug_loc:00000000000000ad .LLST4
-     /tmp/ccDicmRL.s:1691   .debug_loc:00000000000000e6 .LLST5
-     /tmp/ccDicmRL.s:1893   .debug_ranges:0000000000000000 .Ldebug_ranges0
-     /tmp/ccDicmRL.s:1704   .debug_loc:000000000000011e .LLST6
-     /tmp/ccDicmRL.s:1941   .debug_str:0000000000000154 .LASF35
-     /tmp/ccDicmRL.s:1715   .debug_loc:0000000000000154 .LLST7
-     /tmp/ccDicmRL.s:194    .text:0000000000000104 .LVL14
-     /tmp/ccDicmRL.s:56     .text:0000000000000050 .LFB4
-     /tmp/ccDicmRL.s:119    .text:00000000000000ac .LFE4
-     /tmp/ccDicmRL.s:1736   .debug_loc:00000000000001b2 .LLST0
-     /tmp/ccDicmRL.s:1925   .debug_str:00000000000000df .LASF36
-     /tmp/ccDicmRL.s:1766   .debug_loc:0000000000000228 .LLST1
-     /tmp/ccDicmRL.s:10     .text:0000000000000000 .LFB3
-     /tmp/ccDicmRL.s:50     .text:0000000000000050 .LFE3
-GAS LISTING /tmp/ccDicmRL.s 			page 20
+     /tmp/ccsdniZi.s:1965   .debug_str:00000000000002d8 .LASF8
+     /tmp/ccsdniZi.s:1917   .debug_str:000000000000007b .LASF9
+     /tmp/ccsdniZi.s:2001   .debug_str:00000000000003e3 .LASF10
+     /tmp/ccsdniZi.s:1935   .debug_str:000000000000012f .LASF11
+     /tmp/ccsdniZi.s:1991   .debug_str:000000000000038d .LASF12
+     /tmp/ccsdniZi.s:1969   .debug_str:00000000000002fe .LASF13
+     /tmp/ccsdniZi.s:1949   .debug_str:000000000000018b .LASF14
+     /tmp/ccsdniZi.s:1929   .debug_str:0000000000000101 .LASF15
+     /tmp/ccsdniZi.s:1967   .debug_str:00000000000002e8 .LASF16
+     /tmp/ccsdniZi.s:1905   .debug_str:0000000000000013 .LASF42
+     /tmp/ccsdniZi.s:1939   .debug_str:000000000000014c .LASF43
+     /tmp/ccsdniZi.s:1997   .debug_str:00000000000003d9 .LASF17
+     /tmp/ccsdniZi.s:1999   .debug_str:00000000000003de .LASF18
+     /tmp/ccsdniZi.s:1909   .debug_str:000000000000002a .LASF19
+     /tmp/ccsdniZi.s:1959   .debug_str:00000000000002a3 .LASF44
+     /tmp/ccsdniZi.s:1915   .debug_str:000000000000005b .LASF45
+     /tmp/ccsdniZi.s:1971   .debug_str:000000000000030e .LASF24
+     /tmp/ccsdniZi.s:1927   .debug_str:00000000000000e4 .LASF26
+     /tmp/ccsdniZi.s:1975   .debug_str:0000000000000332 .LASF20
+     /tmp/ccsdniZi.s:1963   .debug_str:00000000000002b9 .LASF22
+     /tmp/ccsdniZi.s:1989   .debug_str:0000000000000384 .LASF21
+     /tmp/ccsdniZi.s:1921   .debug_str:0000000000000090 .LASF23
+     /tmp/ccsdniZi.s:1987   .debug_str:000000000000037b .LASF46
+     /tmp/ccsdniZi.s:1979   .debug_str:000000000000035a .LASF25
+     /tmp/ccsdniZi.s:1913   .debug_str:000000000000003b .LASF27
+     /tmp/ccsdniZi.s:1911   .debug_str:000000000000002f .LASF28
+     /tmp/ccsdniZi.s:1955   .debug_str:0000000000000266 .LASF29
+     /tmp/ccsdniZi.s:1985   .debug_str:0000000000000372 .LASF30
+     /tmp/ccsdniZi.s:1977   .debug_str:000000000000033a .LASF31
+     /tmp/ccsdniZi.s:1951   .debug_str:0000000000000197 .LASF47
+     /tmp/ccsdniZi.s:1923   .debug_str:00000000000000b0 .LASF48
+     /tmp/ccsdniZi.s:1973   .debug_str:0000000000000313 .LASF49
+     /tmp/ccsdniZi.s:355    .text:00000000000001e0 .LFB7
+     /tmp/ccsdniZi.s:403    .text:000000000000022c .LFE7
+     /tmp/ccsdniZi.s:1981   .debug_str:0000000000000363 .LASF32
+     /tmp/ccsdniZi.s:125    .text:00000000000000ac .LFB6
+     /tmp/ccsdniZi.s:162    .text:00000000000000dc .LFE6
+     /tmp/ccsdniZi.s:1635   .debug_loc:0000000000000000 .LLST2
+     /tmp/ccsdniZi.s:1983   .debug_str:0000000000000368 .LASF33
+     /tmp/ccsdniZi.s:1947   .debug_str:0000000000000181 .LASF34
+     /tmp/ccsdniZi.s:168    .text:00000000000000dc .LFB5
+     /tmp/ccsdniZi.s:307    .text:00000000000001a0 .LFE5
+     /tmp/ccsdniZi.s:1655   .debug_loc:000000000000004e .LLST3
+     /tmp/ccsdniZi.s:1677   .debug_loc:00000000000000ad .LLST4
+     /tmp/ccsdniZi.s:1691   .debug_loc:00000000000000e6 .LLST5
+     /tmp/ccsdniZi.s:1893   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/ccsdniZi.s:1704   .debug_loc:000000000000011e .LLST6
+     /tmp/ccsdniZi.s:1941   .debug_str:0000000000000154 .LASF35
+     /tmp/ccsdniZi.s:1715   .debug_loc:0000000000000154 .LLST7
+     /tmp/ccsdniZi.s:194    .text:0000000000000104 .LVL14
+     /tmp/ccsdniZi.s:56     .text:0000000000000050 .LFB4
+     /tmp/ccsdniZi.s:119    .text:00000000000000ac .LFE4
+     /tmp/ccsdniZi.s:1736   .debug_loc:00000000000001b2 .LLST0
+     /tmp/ccsdniZi.s:1925   .debug_str:00000000000000df .LASF36
+     /tmp/ccsdniZi.s:1766   .debug_loc:0000000000000228 .LLST1
+     /tmp/ccsdniZi.s:10     .text:0000000000000000 .LFB3
+     /tmp/ccsdniZi.s:50     .text:0000000000000050 .LFE3
+GAS LISTING /tmp/ccsdniZi.s 			page 20
 
 
-     /tmp/ccDicmRL.s:409    .text:000000000000022c .LFB2
-     /tmp/ccDicmRL.s:516    .text:00000000000002d0 .LFE2
-     /tmp/ccDicmRL.s:1931   .debug_str:0000000000000117 .LASF37
-     /tmp/ccDicmRL.s:1781   .debug_loc:0000000000000271 .LLST9
-     /tmp/ccDicmRL.s:1957   .debug_str:0000000000000297 .LASF38
-     /tmp/ccDicmRL.s:1805   .debug_loc:00000000000002d2 .LLST10
-     /tmp/ccDicmRL.s:1813   .debug_loc:00000000000002f6 .LLST11
-     /tmp/ccDicmRL.s:1842   .debug_loc:000000000000037a .LLST12
-     /tmp/ccDicmRL.s:487    .text:00000000000002a0 .LVL33
-     /tmp/ccDicmRL.s:492    .text:00000000000002ac .LVL34
-     /tmp/ccDicmRL.s:313    .text:00000000000001a0 .LFB1
-     /tmp/ccDicmRL.s:349    .text:00000000000001e0 .LFE1
-     /tmp/ccDicmRL.s:1862   .debug_loc:00000000000003c8 .LLST8
-     /tmp/ccDicmRL.s:331    .text:00000000000001c0 .LVL22
-     /tmp/ccDicmRL.s:334    .text:00000000000001cc .LVL23
-     /tmp/ccDicmRL.s:128    .text:00000000000000ac .LVL8
-     /tmp/ccDicmRL.s:138    .text:00000000000000bc .LVL9
-     /tmp/ccDicmRL.s:151    .text:00000000000000d0 .LVL10
-     /tmp/ccDicmRL.s:171    .text:00000000000000dc .LVL11
-     /tmp/ccDicmRL.s:189    .text:00000000000000fc .LVL13
-     /tmp/ccDicmRL.s:260    .text:0000000000000158 .LVL18
-     /tmp/ccDicmRL.s:264    .text:0000000000000160 .LVL19
-     /tmp/ccDicmRL.s:184    .text:00000000000000f4 .LVL12
-     /tmp/ccDicmRL.s:247    .text:000000000000014c .LVL17
-     /tmp/ccDicmRL.s:207    .text:0000000000000118 .LVL15
-     /tmp/ccDicmRL.s:239    .text:0000000000000144 .LVL16
-     /tmp/ccDicmRL.s:273    .text:000000000000016c .LVL20
-     /tmp/ccDicmRL.s:59     .text:0000000000000050 .LVL0
-     /tmp/ccDicmRL.s:70     .text:0000000000000068 .LVL1
-     /tmp/ccDicmRL.s:96     .text:0000000000000090 .LVL4
-     /tmp/ccDicmRL.s:101    .text:0000000000000098 .LVL5
-     /tmp/ccDicmRL.s:111    .text:00000000000000a4 .LVL6
-     /tmp/ccDicmRL.s:88     .text:0000000000000084 .LVL2
-     /tmp/ccDicmRL.s:90     .text:0000000000000088 .LVL3
-     /tmp/ccDicmRL.s:116    .text:00000000000000a8 .LVL7
-     /tmp/ccDicmRL.s:412    .text:000000000000022c .LVL26
-     /tmp/ccDicmRL.s:426    .text:0000000000000244 .LVL27
-     /tmp/ccDicmRL.s:506    .text:00000000000002c0 .LVL36
-     /tmp/ccDicmRL.s:464    .text:000000000000027c .LVL32
-     /tmp/ccDicmRL.s:438    .text:0000000000000258 .LVL28
-     /tmp/ccDicmRL.s:444    .text:0000000000000260 .LVL29
-     /tmp/ccDicmRL.s:450    .text:000000000000026c .LVL30
-     /tmp/ccDicmRL.s:457    .text:0000000000000278 .LVL31
-     /tmp/ccDicmRL.s:502    .text:00000000000002b8 .LVL35
-     /tmp/ccDicmRL.s:316    .text:00000000000001a0 .LVL21
-     /tmp/ccDicmRL.s:344    .text:00000000000001d8 .LVL24
-     /tmp/ccDicmRL.s:531    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/ccDicmRL.s:190    .text:00000000000000fc .LBB3
-     /tmp/ccDicmRL.s:249    .text:000000000000014c .LBE3
-     /tmp/ccDicmRL.s:268    .text:0000000000000160 .LBB4
-     /tmp/ccDicmRL.s:304    .text:00000000000001a0 .LBE4
+     /tmp/ccsdniZi.s:409    .text:000000000000022c .LFB2
+     /tmp/ccsdniZi.s:516    .text:00000000000002d0 .LFE2
+     /tmp/ccsdniZi.s:1931   .debug_str:0000000000000117 .LASF37
+     /tmp/ccsdniZi.s:1781   .debug_loc:0000000000000271 .LLST9
+     /tmp/ccsdniZi.s:1957   .debug_str:0000000000000297 .LASF38
+     /tmp/ccsdniZi.s:1805   .debug_loc:00000000000002d2 .LLST10
+     /tmp/ccsdniZi.s:1813   .debug_loc:00000000000002f6 .LLST11
+     /tmp/ccsdniZi.s:1842   .debug_loc:000000000000037a .LLST12
+     /tmp/ccsdniZi.s:487    .text:00000000000002a0 .LVL33
+     /tmp/ccsdniZi.s:492    .text:00000000000002ac .LVL34
+     /tmp/ccsdniZi.s:313    .text:00000000000001a0 .LFB1
+     /tmp/ccsdniZi.s:349    .text:00000000000001e0 .LFE1
+     /tmp/ccsdniZi.s:1862   .debug_loc:00000000000003c8 .LLST8
+     /tmp/ccsdniZi.s:331    .text:00000000000001c0 .LVL22
+     /tmp/ccsdniZi.s:334    .text:00000000000001cc .LVL23
+     /tmp/ccsdniZi.s:128    .text:00000000000000ac .LVL8
+     /tmp/ccsdniZi.s:138    .text:00000000000000bc .LVL9
+     /tmp/ccsdniZi.s:151    .text:00000000000000d0 .LVL10
+     /tmp/ccsdniZi.s:171    .text:00000000000000dc .LVL11
+     /tmp/ccsdniZi.s:189    .text:00000000000000fc .LVL13
+     /tmp/ccsdniZi.s:260    .text:0000000000000158 .LVL18
+     /tmp/ccsdniZi.s:264    .text:0000000000000160 .LVL19
+     /tmp/ccsdniZi.s:184    .text:00000000000000f4 .LVL12
+     /tmp/ccsdniZi.s:247    .text:000000000000014c .LVL17
+     /tmp/ccsdniZi.s:207    .text:0000000000000118 .LVL15
+     /tmp/ccsdniZi.s:239    .text:0000000000000144 .LVL16
+     /tmp/ccsdniZi.s:273    .text:000000000000016c .LVL20
+     /tmp/ccsdniZi.s:59     .text:0000000000000050 .LVL0
+     /tmp/ccsdniZi.s:70     .text:0000000000000068 .LVL1
+     /tmp/ccsdniZi.s:96     .text:0000000000000090 .LVL4
+     /tmp/ccsdniZi.s:101    .text:0000000000000098 .LVL5
+     /tmp/ccsdniZi.s:111    .text:00000000000000a4 .LVL6
+     /tmp/ccsdniZi.s:88     .text:0000000000000084 .LVL2
+     /tmp/ccsdniZi.s:90     .text:0000000000000088 .LVL3
+     /tmp/ccsdniZi.s:116    .text:00000000000000a8 .LVL7
+     /tmp/ccsdniZi.s:412    .text:000000000000022c .LVL26
+     /tmp/ccsdniZi.s:426    .text:0000000000000244 .LVL27
+     /tmp/ccsdniZi.s:506    .text:00000000000002c0 .LVL36
+     /tmp/ccsdniZi.s:464    .text:000000000000027c .LVL32
+     /tmp/ccsdniZi.s:438    .text:0000000000000258 .LVL28
+     /tmp/ccsdniZi.s:444    .text:0000000000000260 .LVL29
+     /tmp/ccsdniZi.s:450    .text:000000000000026c .LVL30
+     /tmp/ccsdniZi.s:457    .text:0000000000000278 .LVL31
+     /tmp/ccsdniZi.s:502    .text:00000000000002b8 .LVL35
+     /tmp/ccsdniZi.s:316    .text:00000000000001a0 .LVL21
+     /tmp/ccsdniZi.s:344    .text:00000000000001d8 .LVL24
+     /tmp/ccsdniZi.s:531    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccsdniZi.s:190    .text:00000000000000fc .LBB3
+     /tmp/ccsdniZi.s:249    .text:000000000000014c .LBE3
+     /tmp/ccsdniZi.s:268    .text:0000000000000160 .LBB4
+     /tmp/ccsdniZi.s:304    .text:00000000000001a0 .LBE4
 
 UNDEFINED SYMBOLS
 HEAP_START_ADDR

@@ -52,9 +52,9 @@ void TCB::dispatch()
     TCB *old = running;
     if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
-    while (!running) { Scheduler::get(); }
+    //while (!running) { __print_string("oh no1\n"); Scheduler::get(); }
 
-   /* __print_string("old: ");
+    /*__print_string("old: ");
     __print_uint64((uint64)old); __putc('\n');
 
     __print_string("running: ");

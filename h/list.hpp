@@ -32,12 +32,16 @@ public:
     }
 
     void putLast(T *data) {
+        /*__putc('i');
+        __putc('l');
+        __putc('\n');*/
         Node *newNode = new Node(data, 0);
         if (!tail) head = tail = newNode;
         else {
             tail->next = newNode;
             tail = newNode;
         }
+        //printStatus();
     }
 
     void putSorted(T* data) {
@@ -56,6 +60,9 @@ public:
     }
 
     T* takeFirst() {
+        /*__putc('o');
+        __putc('f');
+        __putc('\n');*/
         if (!head) return 0;
 
         T* ret = head->data;
@@ -63,6 +70,7 @@ public:
         head = head->next;
         if (!head) tail = 0;
         delete old;
+        //printStatus();
 
         return ret;
     }
@@ -99,6 +107,34 @@ public:
 
         tail = 0;
     }*/
+
+    void printStatus() {
+        Node* curr = head;
+        __print_string("list contents:\n");
+        __print_string(">head: ");
+        __print_uint64((uint64)head);
+        __putc('\n');
+        __print_string(">tail: ");
+        __print_uint64((uint64)tail);
+        __putc('\n');
+        int i = 0;
+        while(curr) {
+            __print_string("Node["); __putc(i+48);
+            __print_string("]: ");
+            __print_uint64((uint64)curr);
+            __putc('\n');
+            __print_string("  data: ");
+            __print_uint64((uint64)curr->data);
+            __putc('\n');
+            __print_string("  next: ");
+            __print_uint64((uint64)curr->next);
+            __putc('\n');
+            i++;
+            curr = curr->next;
+        }
+        __putc('\n');
+        __putc('\n');
+    }
 };
 
 /*template<typename T>

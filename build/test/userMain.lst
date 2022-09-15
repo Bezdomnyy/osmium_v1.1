@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cc673G5Z.s 			page 1
+GAS LISTING /tmp/cciiKsHz.s 			page 1
 
 
    1              		.file	"userMain.cpp"
@@ -6,11 +6,17 @@ GAS LISTING /tmp/cc673G5Z.s 			page 1
    3              		.option norelax
    4              		.text
    5              	.Ltext0:
-   6              		.align	2
-   7              		.globl	_Z16producerKeyboardPv
-   9              	_Z16producerKeyboardPv:
-  10              	.LFB0:
-  11              		.file 1 "test/../test/ConsumerProducer_C_API_test.h"
+   6              		.section	.rodata.str1.8,"aMS",@progbits,1
+   7              		.align	3
+   8              	.LC0:
+   9 0000 6B65790A 		.string	"key\n"
+   9      00
+  10              		.text
+  11              		.align	2
+  12              		.globl	_Z16producerKeyboardPv
+  14              	_Z16producerKeyboardPv:
+  15              	.LFB0:
+  16              		.file 1 "test/../test/ConsumerProducer_C_API_test.h"
    1:test/../test/ConsumerProducer_C_API_test.h **** //
    2:test/../test/ConsumerProducer_C_API_test.h **** // Created by os on 4/17/22.
    3:test/../test/ConsumerProducer_C_API_test.h **** //
@@ -33,1174 +39,1158 @@ GAS LISTING /tmp/cc673G5Z.s 			page 1
   20:test/../test/ConsumerProducer_C_API_test.h **** volatile int threadEnd = 0;
   21:test/../test/ConsumerProducer_C_API_test.h **** 
   22:test/../test/ConsumerProducer_C_API_test.h **** void producerKeyboard(void *arg) {
-  12              		.loc 1 22 34
-  13              		.cfi_startproc
-  14              	.LVL0:
-  15 0000 130101FE 		addi	sp,sp,-32
-  16              		.cfi_def_cfa_offset 32
-  17 0004 233C1100 		sd	ra,24(sp)
-  18 0008 23388100 		sd	s0,16(sp)
-  19 000c 23349100 		sd	s1,8(sp)
-  20 0010 23302101 		sd	s2,0(sp)
-  21              		.cfi_offset 1, -8
-  22              		.cfi_offset 8, -16
-  23              		.cfi_offset 9, -24
-  24              		.cfi_offset 18, -32
-  25 0014 13040102 		addi	s0,sp,32
-  26              		.cfi_def_cfa 8, 0
-  27 0018 93040500 		mv	s1,a0
-  23:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data *data = (struct thread_data *) arg;
-  28              		.loc 1 23 5
-  29              	.LVL1:
-  24:test/../test/ConsumerProducer_C_API_test.h **** 
-  25:test/../test/ConsumerProducer_C_API_test.h ****     int key;
-  30              		.loc 1 25 5
-  26:test/../test/ConsumerProducer_C_API_test.h ****     int i = 0;
-  31              		.loc 1 26 5
-  32              		.loc 1 26 9 is_stmt 0
-GAS LISTING /tmp/cc673G5Z.s 			page 2
+  17              		.loc 1 22 34
+  18              		.cfi_startproc
+  19              	.LVL0:
+  20 0000 130101FD 		addi	sp,sp,-48
+  21              		.cfi_def_cfa_offset 48
+  22 0004 23341102 		sd	ra,40(sp)
+  23 0008 23308102 		sd	s0,32(sp)
+  24 000c 233C9100 		sd	s1,24(sp)
+  25 0010 23382101 		sd	s2,16(sp)
+  26 0014 23343101 		sd	s3,8(sp)
+  27              		.cfi_offset 1, -8
+  28              		.cfi_offset 8, -16
+  29              		.cfi_offset 9, -24
+  30              		.cfi_offset 18, -32
+  31              		.cfi_offset 19, -40
+  32 0018 13040103 		addi	s0,sp,48
+  33              		.cfi_def_cfa 8, 0
+  34 001c 13090500 		mv	s2,a0
+  23:test/../test/ConsumerProducer_C_API_test.h **** 
+GAS LISTING /tmp/cciiKsHz.s 			page 2
 
 
-  33 001c 13090000 		li	s2,0
-  34 0020 6F00C000 		j	.L2
-  35              	.LVL2:
-  36              	.L6:
-  27:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
-  28:test/../test/ConsumerProducer_C_API_test.h ****         data->buffer->put(key);
-  29:test/../test/ConsumerProducer_C_API_test.h ****         i++;
-  30:test/../test/ConsumerProducer_C_API_test.h **** 
-  31:test/../test/ConsumerProducer_C_API_test.h ****         if (i % (10 * data->id) == 0) {
-  32:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
-  37              		.loc 1 32 13 is_stmt 1
-  38              		.loc 1 32 28 is_stmt 0
-  39 0024 97000000 		call	thread_dispatch@plt
-  39      E7800000 
-  40              	.LVL3:
-  41              	.L2:
-  27:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
-  42              		.loc 1 27 5 is_stmt 1
-  27:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
-  43              		.loc 1 27 27
-  27:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
-  44              		.loc 1 27 23 is_stmt 0
-  45 002c 97000000 		call	getc@plt
-  45      E7800000 
-  46              	.LVL4:
-  27:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
-  47              		.loc 1 27 17
-  48 0034 9B050500 		sext.w	a1,a0
-  49              	.LVL5:
-  27:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
-  50              		.loc 1 27 27
-  51 0038 9307B001 		li	a5,27
-  52 003c 638AF502 		beq	a1,a5,.L3
-  28:test/../test/ConsumerProducer_C_API_test.h ****         i++;
-  53              		.loc 1 28 9 is_stmt 1
-  28:test/../test/ConsumerProducer_C_API_test.h ****         i++;
-  54              		.loc 1 28 26 is_stmt 0
-  55 0040 03B58400 		ld	a0,8(s1)
-  56 0044 97000000 		call	_ZN6Buffer3putEi@plt
-  56      E7800000 
-  57              	.LVL6:
-  29:test/../test/ConsumerProducer_C_API_test.h **** 
-  58              		.loc 1 29 9 is_stmt 1
-  29:test/../test/ConsumerProducer_C_API_test.h **** 
-  59              		.loc 1 29 10 is_stmt 0
-  60 004c 1B071900 		addiw	a4,s2,1
-  61 0050 1B090700 		sext.w	s2,a4
-  62              	.LVL7:
-  31:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
-  63              		.loc 1 31 9 is_stmt 1
-  31:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
-  64              		.loc 1 31 29 is_stmt 0
-  65 0054 83A60400 		lw	a3,0(s1)
-  31:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
-  66              		.loc 1 31 21
-  67 0058 9B972600 		slliw	a5,a3,2
-  68 005c BB87D700 		addw	a5,a5,a3
-GAS LISTING /tmp/cc673G5Z.s 			page 3
+  24:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data *data = (struct thread_data *) arg;
+  35              		.loc 1 24 5
+  36              	.LVL1:
+  25:test/../test/ConsumerProducer_C_API_test.h **** 
+  26:test/../test/ConsumerProducer_C_API_test.h ****     int key;
+  37              		.loc 1 26 5
+  27:test/../test/ConsumerProducer_C_API_test.h ****     int i = 0;
+  38              		.loc 1 27 5
+  39              		.loc 1 27 9 is_stmt 0
+  40 0020 93090000 		li	s3,0
+  41 0024 6F00C000 		j	.L2
+  42              	.LVL2:
+  43              	.L6:
+  28:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
+  29:test/../test/ConsumerProducer_C_API_test.h ****         printString("key\n");
+  30:test/../test/ConsumerProducer_C_API_test.h ****         data->buffer->put(key);
+  31:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+  32:test/../test/ConsumerProducer_C_API_test.h **** 
+  33:test/../test/ConsumerProducer_C_API_test.h ****         if (i % (10 * data->id) == 0) {
+  34:test/../test/ConsumerProducer_C_API_test.h **** 
+  35:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
+  44              		.loc 1 35 13 is_stmt 1
+  45              		.loc 1 35 28 is_stmt 0
+  46 0028 97000000 		call	thread_dispatch@plt
+  46      E7800000 
+  47              	.LVL3:
+  48              	.L2:
+  28:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
+  49              		.loc 1 28 5 is_stmt 1
+  28:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
+  50              		.loc 1 28 27
+  28:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
+  51              		.loc 1 28 23 is_stmt 0
+  52 0030 97000000 		call	getc@plt
+  52      E7800000 
+  53              	.LVL4:
+  28:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
+  54              		.loc 1 28 17
+  55 0038 9B040500 		sext.w	s1,a0
+  56              	.LVL5:
+  28:test/../test/ConsumerProducer_C_API_test.h ****     while ((key = getc()) != 0x1b) {
+  57              		.loc 1 28 27
+  58 003c 9307B001 		li	a5,27
+  59 0040 6384F404 		beq	s1,a5,.L3
+  29:test/../test/ConsumerProducer_C_API_test.h ****         data->buffer->put(key);
+  60              		.loc 1 29 9 is_stmt 1
+  29:test/../test/ConsumerProducer_C_API_test.h ****         data->buffer->put(key);
+  61              		.loc 1 29 20 is_stmt 0
+  62 0044 17050000 		lla	a0,.LC0
+  62      13050500 
+  63 004c 97000000 		call	_Z11printStringPKc@plt
+  63      E7800000 
+  64              	.LVL6:
+  30:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+  65              		.loc 1 30 9 is_stmt 1
+  30:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+  66              		.loc 1 30 26 is_stmt 0
+GAS LISTING /tmp/cciiKsHz.s 			page 3
 
 
-  69 0060 9B971700 		slliw	a5,a5,1
-  31:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
-  70              		.loc 1 31 15
-  71 0064 BB67F702 		remw	a5,a4,a5
-  31:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
-  72              		.loc 1 31 9
-  73 0068 E39207FC 		bnez	a5,.L2
-  74 006c 6FF09FFB 		j	.L6
+  67 0054 93850400 		mv	a1,s1
+  68 0058 03358900 		ld	a0,8(s2)
+  69 005c 97000000 		call	_ZN6Buffer3putEi@plt
+  69      E7800000 
+  70              	.LVL7:
+  31:test/../test/ConsumerProducer_C_API_test.h **** 
+  71              		.loc 1 31 9 is_stmt 1
+  31:test/../test/ConsumerProducer_C_API_test.h **** 
+  72              		.loc 1 31 10 is_stmt 0
+  73 0064 1B871900 		addiw	a4,s3,1
+  74 0068 9B090700 		sext.w	s3,a4
   75              	.LVL8:
-  76              	.L3:
-  33:test/../test/ConsumerProducer_C_API_test.h ****         }
-  34:test/../test/ConsumerProducer_C_API_test.h ****     }
-  35:test/../test/ConsumerProducer_C_API_test.h **** 
-  36:test/../test/ConsumerProducer_C_API_test.h ****     threadEnd = 1;
-  77              		.loc 1 36 5 is_stmt 1
-  78              		.loc 1 36 15 is_stmt 0
-  79 0070 93071000 		li	a5,1
-  80 0074 17070000 		sw	a5,.LANCHOR0,a4
-  80      2320F700 
-  37:test/../test/ConsumerProducer_C_API_test.h ****     data->buffer->put('!');
-  81              		.loc 1 37 5 is_stmt 1
-  82              		.loc 1 37 22 is_stmt 0
-  83 007c 93051002 		li	a1,33
-  84              	.LVL9:
-  85 0080 03B58400 		ld	a0,8(s1)
-  86              	.LVL10:
-  87 0084 97000000 		call	_ZN6Buffer3putEi@plt
-  87      E7800000 
-  88              	.LVL11:
+  33:test/../test/ConsumerProducer_C_API_test.h **** 
+  76              		.loc 1 33 9 is_stmt 1
+  33:test/../test/ConsumerProducer_C_API_test.h **** 
+  77              		.loc 1 33 29 is_stmt 0
+  78 006c 83260900 		lw	a3,0(s2)
+  33:test/../test/ConsumerProducer_C_API_test.h **** 
+  79              		.loc 1 33 21
+  80 0070 9B972600 		slliw	a5,a3,2
+  81 0074 BB87D700 		addw	a5,a5,a3
+  82 0078 9B971700 		slliw	a5,a5,1
+  33:test/../test/ConsumerProducer_C_API_test.h **** 
+  83              		.loc 1 33 15
+  84 007c BB67F702 		remw	a5,a4,a5
+  33:test/../test/ConsumerProducer_C_API_test.h **** 
+  85              		.loc 1 33 9
+  86 0080 E39807FA 		bnez	a5,.L2
+  87 0084 6FF05FFA 		j	.L6
+  88              	.LVL9:
+  89              	.L3:
+  36:test/../test/ConsumerProducer_C_API_test.h ****         }
+  37:test/../test/ConsumerProducer_C_API_test.h ****     }
   38:test/../test/ConsumerProducer_C_API_test.h **** 
-  39:test/../test/ConsumerProducer_C_API_test.h ****     printInt((uint64)data->wait);
-  89              		.loc 1 39 5 is_stmt 1
-  90              		.loc 1 39 13 is_stmt 0
-  91 008c 13060000 		li	a2,0
-  92 0090 9305A000 		li	a1,10
-  93 0094 03A50401 		lw	a0,16(s1)
-  94 0098 97000000 		call	_Z8printIntiii@plt
-  94      E7800000 
-  95              	.LVL12:
-  40:test/../test/ConsumerProducer_C_API_test.h **** 
-  41:test/../test/ConsumerProducer_C_API_test.h ****     sem_signal(data->wait);
-  96              		.loc 1 41 5 is_stmt 1
-  97              		.loc 1 41 15 is_stmt 0
-  98 00a0 03B50401 		ld	a0,16(s1)
-  99 00a4 97000000 		call	sem_signal@plt
-  99      E7800000 
- 100              	.LVL13:
-  42:test/../test/ConsumerProducer_C_API_test.h **** }
- 101              		.loc 1 42 1
- 102 00ac 83308101 		ld	ra,24(sp)
- 103              		.cfi_restore 1
- 104 00b0 03340101 		ld	s0,16(sp)
- 105              		.cfi_restore 8
- 106              		.cfi_def_cfa 2, 32
- 107 00b4 83348100 		ld	s1,8(sp)
- 108              		.cfi_restore 9
- 109              	.LVL14:
-GAS LISTING /tmp/cc673G5Z.s 			page 4
-
-
- 110 00b8 03390100 		ld	s2,0(sp)
- 111              		.cfi_restore 18
- 112              	.LVL15:
- 113 00bc 13010102 		addi	sp,sp,32
- 114              		.cfi_def_cfa_offset 0
- 115 00c0 67800000 		jr	ra
- 116              		.cfi_endproc
- 117              	.LFE0:
- 119              		.align	2
- 120              		.globl	_Z8producerPv
- 122              	_Z8producerPv:
- 123              	.LFB1:
+  39:test/../test/ConsumerProducer_C_API_test.h ****     threadEnd = 1;
+  90              		.loc 1 39 5 is_stmt 1
+  91              		.loc 1 39 15 is_stmt 0
+  92 0088 93071000 		li	a5,1
+  93 008c 17070000 		sw	a5,.LANCHOR0,a4
+  93      2320F700 
+  40:test/../test/ConsumerProducer_C_API_test.h ****     data->buffer->put('!');
+  94              		.loc 1 40 5 is_stmt 1
+  95              		.loc 1 40 22 is_stmt 0
+  96 0094 93051002 		li	a1,33
+  97 0098 03358900 		ld	a0,8(s2)
+  98 009c 97000000 		call	_ZN6Buffer3putEi@plt
+  98      E7800000 
+  99              	.LVL10:
+  41:test/../test/ConsumerProducer_C_API_test.h **** 
+  42:test/../test/ConsumerProducer_C_API_test.h ****     //printInt((uint64)data->wait);
   43:test/../test/ConsumerProducer_C_API_test.h **** 
-  44:test/../test/ConsumerProducer_C_API_test.h **** void producer(void *arg) {
- 124              		.loc 1 44 26 is_stmt 1
- 125              		.cfi_startproc
- 126              	.LVL16:
- 127 00c4 130101FE 		addi	sp,sp,-32
- 128              		.cfi_def_cfa_offset 32
- 129 00c8 233C1100 		sd	ra,24(sp)
- 130 00cc 23388100 		sd	s0,16(sp)
- 131 00d0 23349100 		sd	s1,8(sp)
- 132 00d4 23302101 		sd	s2,0(sp)
- 133              		.cfi_offset 1, -8
- 134              		.cfi_offset 8, -16
- 135              		.cfi_offset 9, -24
- 136              		.cfi_offset 18, -32
- 137 00d8 13040102 		addi	s0,sp,32
- 138              		.cfi_def_cfa 8, 0
- 139 00dc 93040500 		mv	s1,a0
-  45:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data *data = (struct thread_data *) arg;
- 140              		.loc 1 45 5
- 141              	.LVL17:
+  44:test/../test/ConsumerProducer_C_API_test.h ****     sem_signal(data->wait);
+ 100              		.loc 1 44 5 is_stmt 1
+ 101              		.loc 1 44 15 is_stmt 0
+ 102 00a4 03350901 		ld	a0,16(s2)
+ 103 00a8 97000000 		call	sem_signal@plt
+ 103      E7800000 
+GAS LISTING /tmp/cciiKsHz.s 			page 4
+
+
+ 104              	.LVL11:
+  45:test/../test/ConsumerProducer_C_API_test.h **** }
+ 105              		.loc 1 45 1
+ 106 00b0 83308102 		ld	ra,40(sp)
+ 107              		.cfi_restore 1
+ 108 00b4 03340102 		ld	s0,32(sp)
+ 109              		.cfi_restore 8
+ 110              		.cfi_def_cfa 2, 48
+ 111 00b8 83348101 		ld	s1,24(sp)
+ 112              		.cfi_restore 9
+ 113              	.LVL12:
+ 114 00bc 03390101 		ld	s2,16(sp)
+ 115              		.cfi_restore 18
+ 116              	.LVL13:
+ 117 00c0 83398100 		ld	s3,8(sp)
+ 118              		.cfi_restore 19
+ 119              	.LVL14:
+ 120 00c4 13010103 		addi	sp,sp,48
+ 121              		.cfi_def_cfa_offset 0
+ 122 00c8 67800000 		jr	ra
+ 123              		.cfi_endproc
+ 124              	.LFE0:
+ 126              		.section	.rodata.str1.8
+ 127 0005 000000   		.align	3
+ 128              	.LC1:
+ 129 0008 70726F64 		.string	"prod\n"
+ 129      0A00
+ 130              		.text
+ 131              		.align	2
+ 132              		.globl	_Z8producerPv
+ 134              	_Z8producerPv:
+ 135              	.LFB1:
   46:test/../test/ConsumerProducer_C_API_test.h **** 
-  47:test/../test/ConsumerProducer_C_API_test.h ****     int i = 0;
- 142              		.loc 1 47 5
- 143              		.loc 1 47 9 is_stmt 0
- 144 00e0 13090000 		li	s2,0
- 145 00e4 6F00C000 		j	.L8
- 146              	.LVL18:
- 147              	.L12:
-  48:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
-  49:test/../test/ConsumerProducer_C_API_test.h ****         data->buffer->put(data->id + '0');
-  50:test/../test/ConsumerProducer_C_API_test.h ****         i++;
-  51:test/../test/ConsumerProducer_C_API_test.h **** 
-  52:test/../test/ConsumerProducer_C_API_test.h ****         if (i % (10 * data->id) == 0) {
-  53:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 148              		.loc 1 53 13 is_stmt 1
- 149              		.loc 1 53 28 is_stmt 0
- 150 00e8 97000000 		call	thread_dispatch@plt
- 150      E7800000 
- 151              	.LVL19:
- 152              	.L8:
-  48:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
- 153              		.loc 1 48 5 is_stmt 1
-  48:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
- 154              		.loc 1 48 12
-GAS LISTING /tmp/cc673G5Z.s 			page 5
+  47:test/../test/ConsumerProducer_C_API_test.h **** void producer(void *arg) {
+ 136              		.loc 1 47 26 is_stmt 1
+ 137              		.cfi_startproc
+ 138              	.LVL15:
+ 139 00cc 130101FE 		addi	sp,sp,-32
+ 140              		.cfi_def_cfa_offset 32
+ 141 00d0 233C1100 		sd	ra,24(sp)
+ 142 00d4 23388100 		sd	s0,16(sp)
+ 143 00d8 23349100 		sd	s1,8(sp)
+ 144 00dc 23302101 		sd	s2,0(sp)
+ 145              		.cfi_offset 1, -8
+ 146              		.cfi_offset 8, -16
+ 147              		.cfi_offset 9, -24
+ 148              		.cfi_offset 18, -32
+ 149 00e0 13040102 		addi	s0,sp,32
+ 150              		.cfi_def_cfa 8, 0
+ 151 00e4 93040500 		mv	s1,a0
+  48:test/../test/ConsumerProducer_C_API_test.h **** 
+  49:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data *data = (struct thread_data *) arg;
+ 152              		.loc 1 49 5
+ 153              	.LVL16:
+  50:test/../test/ConsumerProducer_C_API_test.h **** 
+  51:test/../test/ConsumerProducer_C_API_test.h ****     int i = 0;
+ 154              		.loc 1 51 5
+GAS LISTING /tmp/cciiKsHz.s 			page 5
 
 
- 155 00f0 97070000 		lw	a5,.LANCHOR0
- 155      83A70700 
- 156 00f8 639E0702 		bnez	a5,.L9
-  49:test/../test/ConsumerProducer_C_API_test.h ****         i++;
- 157              		.loc 1 49 9
-  49:test/../test/ConsumerProducer_C_API_test.h ****         i++;
- 158              		.loc 1 49 33 is_stmt 0
- 159 00fc 83A50400 		lw	a1,0(s1)
-  49:test/../test/ConsumerProducer_C_API_test.h ****         i++;
- 160              		.loc 1 49 26
- 161 0100 9B850503 		addiw	a1,a1,48
- 162 0104 03B58400 		ld	a0,8(s1)
- 163 0108 97000000 		call	_ZN6Buffer3putEi@plt
+ 155              		.loc 1 51 9 is_stmt 0
+ 156 00e8 13090000 		li	s2,0
+ 157 00ec 6F00C001 		j	.L8
+ 158              	.LVL17:
+ 159              	.L12:
+  52:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
+  53:test/../test/ConsumerProducer_C_API_test.h ****         data->buffer->put(data->id + '0');
+  54:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+  55:test/../test/ConsumerProducer_C_API_test.h **** 
+  56:test/../test/ConsumerProducer_C_API_test.h ****         if (i % (10 * data->id) == 0) {
+  57:test/../test/ConsumerProducer_C_API_test.h ****             printString("prod\n");
+ 160              		.loc 1 57 13 is_stmt 1
+ 161              		.loc 1 57 24 is_stmt 0
+ 162 00f0 17050000 		lla	a0,.LC1
+ 162      13050500 
+ 163 00f8 97000000 		call	_Z11printStringPKc@plt
  163      E7800000 
- 164              	.LVL20:
-  50:test/../test/ConsumerProducer_C_API_test.h **** 
- 165              		.loc 1 50 9 is_stmt 1
-  50:test/../test/ConsumerProducer_C_API_test.h **** 
- 166              		.loc 1 50 10 is_stmt 0
- 167 0110 1B071900 		addiw	a4,s2,1
- 168 0114 1B090700 		sext.w	s2,a4
- 169              	.LVL21:
-  52:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 170              		.loc 1 52 9 is_stmt 1
-  52:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 171              		.loc 1 52 29 is_stmt 0
- 172 0118 83A60400 		lw	a3,0(s1)
-  52:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 173              		.loc 1 52 21
- 174 011c 9B972600 		slliw	a5,a3,2
- 175 0120 BB87D700 		addw	a5,a5,a3
- 176 0124 9B971700 		slliw	a5,a5,1
-  52:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 177              		.loc 1 52 15
- 178 0128 BB67F702 		remw	a5,a4,a5
-  52:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 179              		.loc 1 52 9
- 180 012c E39207FC 		bnez	a5,.L8
- 181 0130 6FF09FFB 		j	.L12
- 182              	.LVL22:
- 183              	.L9:
-  54:test/../test/ConsumerProducer_C_API_test.h ****         }
-  55:test/../test/ConsumerProducer_C_API_test.h ****     }
-  56:test/../test/ConsumerProducer_C_API_test.h **** 
-  57:test/../test/ConsumerProducer_C_API_test.h ****     printInt((uint64)data->wait);
- 184              		.loc 1 57 5 is_stmt 1
- 185              		.loc 1 57 13 is_stmt 0
- 186 0134 13060000 		li	a2,0
- 187 0138 9305A000 		li	a1,10
- 188 013c 03A50401 		lw	a0,16(s1)
- 189 0140 97000000 		call	_Z8printIntiii@plt
- 189      E7800000 
- 190              	.LVL23:
-  58:test/../test/ConsumerProducer_C_API_test.h **** 
-  59:test/../test/ConsumerProducer_C_API_test.h ****     sem_signal(data->wait);
- 191              		.loc 1 59 5 is_stmt 1
- 192              		.loc 1 59 15 is_stmt 0
-GAS LISTING /tmp/cc673G5Z.s 			page 6
+ 164              	.LVL18:
+  58:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
+ 165              		.loc 1 58 13 is_stmt 1
+ 166              		.loc 1 58 28 is_stmt 0
+ 167 0100 97000000 		call	thread_dispatch@plt
+ 167      E7800000 
+ 168              	.LVL19:
+ 169              	.L8:
+  52:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
+ 170              		.loc 1 52 5 is_stmt 1
+  52:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
+ 171              		.loc 1 52 12
+ 172 0108 97070000 		lw	a5,.LANCHOR0
+ 172      83A70700 
+ 173 0110 639E0702 		bnez	a5,.L9
+  53:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+ 174              		.loc 1 53 9
+  53:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+ 175              		.loc 1 53 33 is_stmt 0
+ 176 0114 83A50400 		lw	a1,0(s1)
+  53:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+ 177              		.loc 1 53 26
+ 178 0118 9B850503 		addiw	a1,a1,48
+ 179 011c 03B58400 		ld	a0,8(s1)
+ 180 0120 97000000 		call	_ZN6Buffer3putEi@plt
+ 180      E7800000 
+ 181              	.LVL20:
+  54:test/../test/ConsumerProducer_C_API_test.h **** 
+ 182              		.loc 1 54 9 is_stmt 1
+  54:test/../test/ConsumerProducer_C_API_test.h **** 
+ 183              		.loc 1 54 10 is_stmt 0
+ 184 0128 1B071900 		addiw	a4,s2,1
+ 185 012c 1B090700 		sext.w	s2,a4
+ 186              	.LVL21:
+  56:test/../test/ConsumerProducer_C_API_test.h ****             printString("prod\n");
+ 187              		.loc 1 56 9 is_stmt 1
+  56:test/../test/ConsumerProducer_C_API_test.h ****             printString("prod\n");
+ 188              		.loc 1 56 29 is_stmt 0
+ 189 0130 83A60400 		lw	a3,0(s1)
+  56:test/../test/ConsumerProducer_C_API_test.h ****             printString("prod\n");
+GAS LISTING /tmp/cciiKsHz.s 			page 6
 
 
- 193 0148 03B50401 		ld	a0,16(s1)
- 194 014c 97000000 		call	sem_signal@plt
- 194      E7800000 
- 195              	.LVL24:
-  60:test/../test/ConsumerProducer_C_API_test.h **** }
- 196              		.loc 1 60 1
- 197 0154 83308101 		ld	ra,24(sp)
- 198              		.cfi_restore 1
- 199 0158 03340101 		ld	s0,16(sp)
- 200              		.cfi_restore 8
- 201              		.cfi_def_cfa 2, 32
- 202 015c 83348100 		ld	s1,8(sp)
- 203              		.cfi_restore 9
- 204              	.LVL25:
- 205 0160 03390100 		ld	s2,0(sp)
- 206              		.cfi_restore 18
- 207              	.LVL26:
- 208 0164 13010102 		addi	sp,sp,32
- 209              		.cfi_def_cfa_offset 0
- 210 0168 67800000 		jr	ra
- 211              		.cfi_endproc
- 212              	.LFE1:
- 214              		.align	2
- 215              		.globl	_Z8consumerPv
- 217              	_Z8consumerPv:
- 218              	.LFB2:
+ 190              		.loc 1 56 21
+ 191 0134 9B972600 		slliw	a5,a3,2
+ 192 0138 BB87D700 		addw	a5,a5,a3
+ 193 013c 9B971700 		slliw	a5,a5,1
+  56:test/../test/ConsumerProducer_C_API_test.h ****             printString("prod\n");
+ 194              		.loc 1 56 15
+ 195 0140 BB67F702 		remw	a5,a4,a5
+  56:test/../test/ConsumerProducer_C_API_test.h ****             printString("prod\n");
+ 196              		.loc 1 56 9
+ 197 0144 E39207FC 		bnez	a5,.L8
+ 198 0148 6FF09FFA 		j	.L12
+ 199              	.LVL22:
+ 200              	.L9:
+  59:test/../test/ConsumerProducer_C_API_test.h ****         }
+  60:test/../test/ConsumerProducer_C_API_test.h ****     }
   61:test/../test/ConsumerProducer_C_API_test.h **** 
-  62:test/../test/ConsumerProducer_C_API_test.h **** void consumer(void *arg) {
- 219              		.loc 1 62 26 is_stmt 1
- 220              		.cfi_startproc
- 221              	.LVL27:
- 222 016c 130101FD 		addi	sp,sp,-48
- 223              		.cfi_def_cfa_offset 48
- 224 0170 23341102 		sd	ra,40(sp)
- 225 0174 23308102 		sd	s0,32(sp)
- 226 0178 233C9100 		sd	s1,24(sp)
- 227 017c 23382101 		sd	s2,16(sp)
- 228 0180 23343101 		sd	s3,8(sp)
- 229              		.cfi_offset 1, -8
- 230              		.cfi_offset 8, -16
- 231              		.cfi_offset 9, -24
- 232              		.cfi_offset 18, -32
- 233              		.cfi_offset 19, -40
- 234 0184 13040103 		addi	s0,sp,48
- 235              		.cfi_def_cfa 8, 0
- 236 0188 13090500 		mv	s2,a0
-  63:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data *data = (struct thread_data *) arg;
- 237              		.loc 1 63 5
- 238              	.LVL28:
-  64:test/../test/ConsumerProducer_C_API_test.h **** 
-  65:test/../test/ConsumerProducer_C_API_test.h ****     int i = 0;
- 239              		.loc 1 65 5
- 240              		.loc 1 65 9 is_stmt 0
- 241 018c 93090000 		li	s3,0
- 242 0190 6F00C001 		j	.L14
- 243              	.LVL29:
- 244              	.L20:
-GAS LISTING /tmp/cc673G5Z.s 			page 7
+  62:test/../test/ConsumerProducer_C_API_test.h ****     //printInt((uint64)data->wait);
+  63:test/../test/ConsumerProducer_C_API_test.h **** 
+  64:test/../test/ConsumerProducer_C_API_test.h ****     sem_signal(data->wait);
+ 201              		.loc 1 64 5 is_stmt 1
+ 202              		.loc 1 64 15 is_stmt 0
+ 203 014c 03B50401 		ld	a0,16(s1)
+ 204 0150 97000000 		call	sem_signal@plt
+ 204      E7800000 
+ 205              	.LVL23:
+  65:test/../test/ConsumerProducer_C_API_test.h **** }
+ 206              		.loc 1 65 1
+ 207 0158 83308101 		ld	ra,24(sp)
+ 208              		.cfi_restore 1
+ 209 015c 03340101 		ld	s0,16(sp)
+ 210              		.cfi_restore 8
+ 211              		.cfi_def_cfa 2, 32
+ 212 0160 83348100 		ld	s1,8(sp)
+ 213              		.cfi_restore 9
+ 214              	.LVL24:
+ 215 0164 03390100 		ld	s2,0(sp)
+ 216              		.cfi_restore 18
+ 217              	.LVL25:
+ 218 0168 13010102 		addi	sp,sp,32
+ 219              		.cfi_def_cfa_offset 0
+ 220 016c 67800000 		jr	ra
+ 221              		.cfi_endproc
+ 222              	.LFE1:
+ 224              		.section	.rodata.str1.8
+ 225 000e 0000     		.align	3
+ 226              	.LC2:
+ 227 0010 636F6E73 		.string	"cons\n"
+ 227      0A00
+ 228              		.text
+ 229              		.align	2
+ 230              		.globl	_Z8consumerPv
+ 232              	_Z8consumerPv:
+ 233              	.LFB2:
+  66:test/../test/ConsumerProducer_C_API_test.h **** 
+  67:test/../test/ConsumerProducer_C_API_test.h **** void consumer(void *arg) {
+ 234              		.loc 1 67 26 is_stmt 1
+ 235              		.cfi_startproc
+GAS LISTING /tmp/cciiKsHz.s 			page 7
 
 
- 245              	.LBB2:
-  66:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
-  67:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
-  68:test/../test/ConsumerProducer_C_API_test.h ****         i++;
-  69:test/../test/ConsumerProducer_C_API_test.h **** 
-  70:test/../test/ConsumerProducer_C_API_test.h ****         putc(key);
-  71:test/../test/ConsumerProducer_C_API_test.h **** 
-  72:test/../test/ConsumerProducer_C_API_test.h ****         if (i % (5 * data->id) == 0) {
-  73:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 246              		.loc 1 73 13 is_stmt 1
- 247              		.loc 1 73 28 is_stmt 0
- 248 0194 97000000 		call	thread_dispatch@plt
- 248      E7800000 
- 249              	.LVL30:
- 250 019c 6F000005 		j	.L16
- 251              	.LVL31:
- 252              	.L21:
-  74:test/../test/ConsumerProducer_C_API_test.h ****         }
+ 236              	.LVL26:
+ 237 0170 130101FD 		addi	sp,sp,-48
+ 238              		.cfi_def_cfa_offset 48
+ 239 0174 23341102 		sd	ra,40(sp)
+ 240 0178 23308102 		sd	s0,32(sp)
+ 241 017c 233C9100 		sd	s1,24(sp)
+ 242 0180 23382101 		sd	s2,16(sp)
+ 243 0184 23343101 		sd	s3,8(sp)
+ 244              		.cfi_offset 1, -8
+ 245              		.cfi_offset 8, -16
+ 246              		.cfi_offset 9, -24
+ 247              		.cfi_offset 18, -32
+ 248              		.cfi_offset 19, -40
+ 249 0188 13040103 		addi	s0,sp,48
+ 250              		.cfi_def_cfa 8, 0
+ 251 018c 13090500 		mv	s2,a0
+  68:test/../test/ConsumerProducer_C_API_test.h **** 
+  69:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data *data = (struct thread_data *) arg;
+ 252              		.loc 1 69 5
+ 253              	.LVL27:
+  70:test/../test/ConsumerProducer_C_API_test.h **** 
+  71:test/../test/ConsumerProducer_C_API_test.h ****     int i = 0;
+ 254              		.loc 1 71 5
+ 255              		.loc 1 71 9 is_stmt 0
+ 256 0190 93090000 		li	s3,0
+ 257 0194 6F00C002 		j	.L14
+ 258              	.LVL28:
+ 259              	.L20:
+ 260              	.LBB2:
+  72:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
+  73:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+  74:test/../test/ConsumerProducer_C_API_test.h ****         i++;
   75:test/../test/ConsumerProducer_C_API_test.h **** 
-  76:test/../test/ConsumerProducer_C_API_test.h ****         if (i % 80 == 0) {
-  77:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
- 253              		.loc 1 77 13 is_stmt 1
- 254              		.loc 1 77 17 is_stmt 0
- 255 01a0 1305A000 		li	a0,10
- 256 01a4 97000000 		call	putc@plt
- 256      E7800000 
- 257              	.LVL32:
- 258              	.L14:
- 259              	.LBE2:
-  66:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
- 260              		.loc 1 66 5 is_stmt 1
-  66:test/../test/ConsumerProducer_C_API_test.h ****     while (!threadEnd) {
- 261              		.loc 1 66 12
- 262 01ac 97070000 		lw	a5,.LANCHOR0
- 262      83A70700 
- 263 01b4 63900706 		bnez	a5,.L15
- 264              	.LBB3:
-  67:test/../test/ConsumerProducer_C_API_test.h ****         i++;
- 265              		.loc 1 67 9
-  67:test/../test/ConsumerProducer_C_API_test.h ****         i++;
- 266              		.loc 1 67 36 is_stmt 0
- 267 01b8 03358900 		ld	a0,8(s2)
- 268 01bc 97000000 		call	_ZN6Buffer3getEv@plt
+  76:test/../test/ConsumerProducer_C_API_test.h ****         putc(key);
+  77:test/../test/ConsumerProducer_C_API_test.h **** 
+  78:test/../test/ConsumerProducer_C_API_test.h ****         if (i % (5 * data->id) == 0) {
+  79:test/../test/ConsumerProducer_C_API_test.h ****             printString("cons\n");
+ 261              		.loc 1 79 13 is_stmt 1
+ 262              		.loc 1 79 24 is_stmt 0
+ 263 0198 17050000 		lla	a0,.LC2
+ 263      13050500 
+ 264 01a0 97000000 		call	_Z11printStringPKc@plt
+ 264      E7800000 
+ 265              	.LVL29:
+  80:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
+ 266              		.loc 1 80 13 is_stmt 1
+ 267              		.loc 1 80 28 is_stmt 0
+ 268 01a8 97000000 		call	thread_dispatch@plt
  268      E7800000 
- 269              	.LVL33:
-  68:test/../test/ConsumerProducer_C_API_test.h **** 
- 270              		.loc 1 68 9 is_stmt 1
-  68:test/../test/ConsumerProducer_C_API_test.h **** 
- 271              		.loc 1 68 10 is_stmt 0
- 272 01c4 9B841900 		addiw	s1,s3,1
- 273 01c8 9B890400 		sext.w	s3,s1
- 274              	.LVL34:
-  70:test/../test/ConsumerProducer_C_API_test.h **** 
- 275              		.loc 1 70 9 is_stmt 1
-  70:test/../test/ConsumerProducer_C_API_test.h **** 
- 276              		.loc 1 70 13 is_stmt 0
- 277 01cc 1375F50F 		andi	a0,a0,0xff
-GAS LISTING /tmp/cc673G5Z.s 			page 8
+ 269              	.LVL30:
+ 270 01b0 6F000005 		j	.L16
+ 271              	.LVL31:
+ 272              	.L21:
+  81:test/../test/ConsumerProducer_C_API_test.h ****         }
+  82:test/../test/ConsumerProducer_C_API_test.h **** 
+  83:test/../test/ConsumerProducer_C_API_test.h ****         if (i % 80 == 0) {
+  84:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
+GAS LISTING /tmp/cciiKsHz.s 			page 8
 
 
- 278              	.LVL35:
- 279 01d0 97000000 		call	putc@plt
- 279      E7800000 
- 280              	.LVL36:
-  72:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 281              		.loc 1 72 9 is_stmt 1
-  72:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 282              		.loc 1 72 28 is_stmt 0
- 283 01d8 03270900 		lw	a4,0(s2)
-  72:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 284              		.loc 1 72 20
- 285 01dc 9B172700 		slliw	a5,a4,2
- 286 01e0 BB87E700 		addw	a5,a5,a4
-  72:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 287              		.loc 1 72 15
- 288 01e4 BBE7F402 		remw	a5,s1,a5
-  72:test/../test/ConsumerProducer_C_API_test.h ****             thread_dispatch();
- 289              		.loc 1 72 9
- 290 01e8 E38607FA 		beqz	a5,.L20
- 291              	.L16:
-  76:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
- 292              		.loc 1 76 9 is_stmt 1
-  76:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
- 293              		.loc 1 76 15 is_stmt 0
- 294 01ec 93070005 		li	a5,80
- 295 01f0 BBE4F402 		remw	s1,s1,a5
- 296              	.LVL37:
-  76:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
- 297              		.loc 1 76 9
- 298 01f4 E39C04FA 		bnez	s1,.L14
- 299 01f8 6FF09FFA 		j	.L21
- 300              	.L22:
- 301              	.LBE3:
- 302              	.LBB4:
-  78:test/../test/ConsumerProducer_C_API_test.h ****         }
-  79:test/../test/ConsumerProducer_C_API_test.h ****     }
-  80:test/../test/ConsumerProducer_C_API_test.h **** 
-  81:test/../test/ConsumerProducer_C_API_test.h ****     while (data->buffer->getCnt() > 0) {
-  82:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
- 303              		.loc 1 82 9 is_stmt 1
- 304              		.loc 1 82 36 is_stmt 0
- 305 01fc 03358900 		ld	a0,8(s2)
- 306 0200 97000000 		call	_ZN6Buffer3getEv@plt
- 306      E7800000 
- 307              	.LVL38:
-  83:test/../test/ConsumerProducer_C_API_test.h ****         putc(key);
- 308              		.loc 1 83 9 is_stmt 1
- 309              		.loc 1 83 13 is_stmt 0
- 310 0208 1375F50F 		andi	a0,a0,0xff
- 311              	.LVL39:
- 312 020c 97000000 		call	putc@plt
- 312      E7800000 
- 313              	.LVL40:
- 314              	.L15:
- 315              	.LBE4:
-  81:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
- 316              		.loc 1 81 5 is_stmt 1
-GAS LISTING /tmp/cc673G5Z.s 			page 9
+ 273              		.loc 1 84 13 is_stmt 1
+ 274              		.loc 1 84 17 is_stmt 0
+ 275 01b4 1305A000 		li	a0,10
+ 276 01b8 97000000 		call	putc@plt
+ 276      E7800000 
+ 277              	.LVL32:
+ 278              	.L14:
+ 279              	.LBE2:
+  72:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 280              		.loc 1 72 5 is_stmt 1
+  72:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 281              		.loc 1 72 12
+ 282 01c0 97070000 		lw	a5,.LANCHOR0
+ 282      83A70700 
+ 283 01c8 63900706 		bnez	a5,.L15
+ 284              	.LBB3:
+  73:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+ 285              		.loc 1 73 9
+  73:test/../test/ConsumerProducer_C_API_test.h ****         i++;
+ 286              		.loc 1 73 36 is_stmt 0
+ 287 01cc 03358900 		ld	a0,8(s2)
+ 288 01d0 97000000 		call	_ZN6Buffer3getEv@plt
+ 288      E7800000 
+ 289              	.LVL33:
+  74:test/../test/ConsumerProducer_C_API_test.h **** 
+ 290              		.loc 1 74 9 is_stmt 1
+  74:test/../test/ConsumerProducer_C_API_test.h **** 
+ 291              		.loc 1 74 10 is_stmt 0
+ 292 01d8 9B841900 		addiw	s1,s3,1
+ 293 01dc 9B890400 		sext.w	s3,s1
+ 294              	.LVL34:
+  76:test/../test/ConsumerProducer_C_API_test.h **** 
+ 295              		.loc 1 76 9 is_stmt 1
+  76:test/../test/ConsumerProducer_C_API_test.h **** 
+ 296              		.loc 1 76 13 is_stmt 0
+ 297 01e0 1375F50F 		andi	a0,a0,0xff
+ 298              	.LVL35:
+ 299 01e4 97000000 		call	putc@plt
+ 299      E7800000 
+ 300              	.LVL36:
+  78:test/../test/ConsumerProducer_C_API_test.h ****             printString("cons\n");
+ 301              		.loc 1 78 9 is_stmt 1
+  78:test/../test/ConsumerProducer_C_API_test.h ****             printString("cons\n");
+ 302              		.loc 1 78 28 is_stmt 0
+ 303 01ec 03270900 		lw	a4,0(s2)
+  78:test/../test/ConsumerProducer_C_API_test.h ****             printString("cons\n");
+ 304              		.loc 1 78 20
+ 305 01f0 9B172700 		slliw	a5,a4,2
+ 306 01f4 BB87E700 		addw	a5,a5,a4
+  78:test/../test/ConsumerProducer_C_API_test.h ****             printString("cons\n");
+ 307              		.loc 1 78 15
+ 308 01f8 BBE7F402 		remw	a5,s1,a5
+  78:test/../test/ConsumerProducer_C_API_test.h ****             printString("cons\n");
+ 309              		.loc 1 78 9
+ 310 01fc E38E07F8 		beqz	a5,.L20
+ 311              	.L16:
+  83:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
+GAS LISTING /tmp/cciiKsHz.s 			page 9
 
 
-  81:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
- 317              		.loc 1 81 35
-  81:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
- 318              		.loc 1 81 32 is_stmt 0
- 319 0214 03358900 		ld	a0,8(s2)
- 320 0218 97000000 		call	_ZN6Buffer6getCntEv@plt
- 320      E7800000 
- 321              	.LVL41:
-  81:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
- 322              		.loc 1 81 35
- 323 0220 E34EA0FC 		bgtz	a0,.L22
-  84:test/../test/ConsumerProducer_C_API_test.h ****     }
-  85:test/../test/ConsumerProducer_C_API_test.h **** 
-  86:test/../test/ConsumerProducer_C_API_test.h ****     printInt((uint64)data->wait);
- 324              		.loc 1 86 5 is_stmt 1
- 325              		.loc 1 86 13 is_stmt 0
- 326 0224 13060000 		li	a2,0
- 327 0228 9305A000 		li	a1,10
- 328 022c 03250901 		lw	a0,16(s2)
- 329 0230 97000000 		call	_Z8printIntiii@plt
- 329      E7800000 
- 330              	.LVL42:
+ 312              		.loc 1 83 9 is_stmt 1
+  83:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
+ 313              		.loc 1 83 15 is_stmt 0
+ 314 0200 93070005 		li	a5,80
+ 315 0204 BBE4F402 		remw	s1,s1,a5
+ 316              	.LVL37:
+  83:test/../test/ConsumerProducer_C_API_test.h ****             putc('\n');
+ 317              		.loc 1 83 9
+ 318 0208 E39C04FA 		bnez	s1,.L14
+ 319 020c 6FF09FFA 		j	.L21
+ 320              	.L22:
+ 321              	.LBE3:
+ 322              	.LBB4:
+  85:test/../test/ConsumerProducer_C_API_test.h ****         }
+  86:test/../test/ConsumerProducer_C_API_test.h ****     }
   87:test/../test/ConsumerProducer_C_API_test.h **** 
-  88:test/../test/ConsumerProducer_C_API_test.h ****     sem_signal(data->wait);
- 331              		.loc 1 88 5 is_stmt 1
- 332              		.loc 1 88 15 is_stmt 0
- 333 0238 03350901 		ld	a0,16(s2)
- 334 023c 97000000 		call	sem_signal@plt
- 334      E7800000 
- 335              	.LVL43:
-  89:test/../test/ConsumerProducer_C_API_test.h **** }
- 336              		.loc 1 89 1
- 337 0244 83308102 		ld	ra,40(sp)
- 338              		.cfi_restore 1
- 339 0248 03340102 		ld	s0,32(sp)
- 340              		.cfi_restore 8
- 341              		.cfi_def_cfa 2, 48
- 342 024c 83348101 		ld	s1,24(sp)
- 343              		.cfi_restore 9
- 344 0250 03390101 		ld	s2,16(sp)
- 345              		.cfi_restore 18
- 346              	.LVL44:
- 347 0254 83398100 		ld	s3,8(sp)
- 348              		.cfi_restore 19
- 349              	.LVL45:
- 350 0258 13010103 		addi	sp,sp,48
- 351              		.cfi_def_cfa_offset 0
- 352 025c 67800000 		jr	ra
- 353              		.cfi_endproc
- 354              	.LFE2:
- 356              		.section	.rodata.str1.8,"aMS",@progbits,1
- 357              		.align	3
- 358              	.LC0:
- 359 0000 556E6573 		.string	"Unesite broj proizvodjaca?\n"
- 359      69746520 
- 359      62726F6A 
- 359      2070726F 
-GAS LISTING /tmp/cc673G5Z.s 			page 10
-
-
- 359      697A766F 
- 360 001c 00000000 		.align	3
- 361              	.LC1:
- 362 0020 556E6573 		.string	"Unesite velicinu bafera?\n"
- 362      69746520 
- 362      76656C69 
- 362      63696E75 
- 362      20626166 
- 363 003a 00000000 		.align	3
- 363      0000
- 364              	.LC2:
- 365 0040 42726F6A 		.string	"Broj proizvodjaca "
- 365      2070726F 
- 365      697A766F 
- 365      646A6163 
- 365      612000
- 366 0053 00000000 		.align	3
- 366      00
- 367              	.LC3:
- 368 0058 20692076 		.string	" i velicina bafera "
- 368      656C6963 
- 368      696E6120 
- 368      62616665 
- 368      72612000 
- 369 006c 00000000 		.align	3
- 370              	.LC4:
- 371 0070 2E0A00   		.string	".\n"
- 372 0073 00000000 		.align	3
- 372      00
- 373              	.LC5:
- 374 0078 42726F6A 		.string	"Broj proizvodjaca ne sme biti manji od velicine bafera!\n"
- 374      2070726F 
- 374      697A766F 
- 374      646A6163 
- 374      61206E65 
- 375 00b1 00000000 		.align	3
- 375      000000
- 376              	.LC6:
- 377 00b8 42726F6A 		.string	"Broj proizvodjaca mora biti veci od nula!\n"
- 377      2070726F 
- 377      697A766F 
- 377      646A6163 
- 377      61206D6F 
- 378 00e3 00000000 		.align	3
- 378      00
- 379              	.LC7:
- 380 00e8 68657265 		.string	"here1\n"
- 380      310A00
- 381 00ef 00       		.align	3
- 382              	.LC8:
- 383 00f0 68657265 		.string	"here2\n"
- 383      320A00
- 384              		.text
- 385              		.align	2
- 386              		.globl	_Z22producerConsumer_C_APIv
- 388              	_Z22producerConsumer_C_APIv:
- 389              	.LFB3:
-GAS LISTING /tmp/cc673G5Z.s 			page 11
-
-
-  90:test/../test/ConsumerProducer_C_API_test.h **** 
-  91:test/../test/ConsumerProducer_C_API_test.h **** void producerConsumer_C_API() {
- 390              		.loc 1 91 31 is_stmt 1
- 391              		.cfi_startproc
- 392              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
- 393              		.cfi_lsda 0x1b,.LLSDA3
- 394 0260 130101F9 		addi	sp,sp,-112
- 395              		.cfi_def_cfa_offset 112
- 396 0264 23341106 		sd	ra,104(sp)
- 397 0268 23308106 		sd	s0,96(sp)
- 398 026c 233C9104 		sd	s1,88(sp)
- 399 0270 23382105 		sd	s2,80(sp)
- 400 0274 23343105 		sd	s3,72(sp)
- 401 0278 23304105 		sd	s4,64(sp)
- 402 027c 233C5103 		sd	s5,56(sp)
- 403 0280 23386103 		sd	s6,48(sp)
- 404              		.cfi_offset 1, -8
- 405              		.cfi_offset 8, -16
- 406              		.cfi_offset 9, -24
- 407              		.cfi_offset 18, -32
- 408              		.cfi_offset 19, -40
- 409              		.cfi_offset 20, -48
- 410              		.cfi_offset 21, -56
- 411              		.cfi_offset 22, -64
- 412 0284 13040107 		addi	s0,sp,112
- 413              		.cfi_def_cfa 8, 0
-  92:test/../test/ConsumerProducer_C_API_test.h ****     char input[30];
-  93:test/../test/ConsumerProducer_C_API_test.h ****     int n, threadNum;
+  88:test/../test/ConsumerProducer_C_API_test.h ****     while (data->buffer->getCnt() > 0) {
+  89:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 323              		.loc 1 89 9 is_stmt 1
+ 324              		.loc 1 89 36 is_stmt 0
+ 325 0210 03358900 		ld	a0,8(s2)
+ 326 0214 97000000 		call	_ZN6Buffer3getEv@plt
+ 326      E7800000 
+ 327              	.LVL38:
+  90:test/../test/ConsumerProducer_C_API_test.h ****         putc(key);
+ 328              		.loc 1 90 9 is_stmt 1
+ 329              		.loc 1 90 13 is_stmt 0
+ 330 021c 1375F50F 		andi	a0,a0,0xff
+ 331              	.LVL39:
+ 332 0220 97000000 		call	putc@plt
+ 332      E7800000 
+ 333              	.LVL40:
+ 334              	.L15:
+ 335              	.LBE4:
+  88:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 336              		.loc 1 88 5 is_stmt 1
+  88:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 337              		.loc 1 88 35
+  88:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 338              		.loc 1 88 32 is_stmt 0
+ 339 0228 03358900 		ld	a0,8(s2)
+ 340 022c 97000000 		call	_ZN6Buffer6getCntEv@plt
+ 340      E7800000 
+ 341              	.LVL41:
+  88:test/../test/ConsumerProducer_C_API_test.h ****         int key = data->buffer->get();
+ 342              		.loc 1 88 35
+ 343 0234 E34EA0FC 		bgtz	a0,.L22
+  91:test/../test/ConsumerProducer_C_API_test.h ****     }
+  92:test/../test/ConsumerProducer_C_API_test.h **** 
+  93:test/../test/ConsumerProducer_C_API_test.h ****     //printInt((uint64)data->wait);
   94:test/../test/ConsumerProducer_C_API_test.h **** 
-  95:test/../test/ConsumerProducer_C_API_test.h ****     printString("Unesite broj proizvodjaca?\n");
-  96:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
-  97:test/../test/ConsumerProducer_C_API_test.h ****     threadNum = stringToInt(input);
-  98:test/../test/ConsumerProducer_C_API_test.h **** 
-  99:test/../test/ConsumerProducer_C_API_test.h ****     printString("Unesite velicinu bafera?\n");
- 100:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
- 101:test/../test/ConsumerProducer_C_API_test.h ****     n = stringToInt(input);
- 102:test/../test/ConsumerProducer_C_API_test.h **** 
- 103:test/../test/ConsumerProducer_C_API_test.h ****     printString("Broj proizvodjaca "); printInt(threadNum);
- 104:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
- 105:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
- 106:test/../test/ConsumerProducer_C_API_test.h **** 
- 107:test/../test/ConsumerProducer_C_API_test.h ****     if(threadNum > n) {
- 108:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca ne sme biti manji od velicine bafera!\n");
- 109:test/../test/ConsumerProducer_C_API_test.h ****         return;
- 110:test/../test/ConsumerProducer_C_API_test.h ****     } else if (threadNum < 1) {
- 111:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca mora biti veci od nula!\n");
- 112:test/../test/ConsumerProducer_C_API_test.h ****         return;
- 113:test/../test/ConsumerProducer_C_API_test.h ****     }
- 114:test/../test/ConsumerProducer_C_API_test.h **** 
- 115:test/../test/ConsumerProducer_C_API_test.h ****     Buffer *buffer = new Buffer(n);
- 116:test/../test/ConsumerProducer_C_API_test.h **** 
- 117:test/../test/ConsumerProducer_C_API_test.h ****     sem_open(&waitForAll, 0);
- 118:test/../test/ConsumerProducer_C_API_test.h **** 
- 119:test/../test/ConsumerProducer_C_API_test.h ****     printInt((uint64)waitForAll);
- 120:test/../test/ConsumerProducer_C_API_test.h **** 
- 121:test/../test/ConsumerProducer_C_API_test.h ****     thread_t threads[threadNum];
- 122:test/../test/ConsumerProducer_C_API_test.h ****     thread_t consumerThread;
-GAS LISTING /tmp/cc673G5Z.s 			page 12
+  95:test/../test/ConsumerProducer_C_API_test.h ****     sem_signal(data->wait);
+ 344              		.loc 1 95 5 is_stmt 1
+ 345              		.loc 1 95 15 is_stmt 0
+ 346 0238 03350901 		ld	a0,16(s2)
+ 347 023c 97000000 		call	sem_signal@plt
+ 347      E7800000 
+GAS LISTING /tmp/cciiKsHz.s 			page 10
 
 
+ 348              	.LVL42:
+  96:test/../test/ConsumerProducer_C_API_test.h **** }
+ 349              		.loc 1 96 1
+ 350 0244 83308102 		ld	ra,40(sp)
+ 351              		.cfi_restore 1
+ 352 0248 03340102 		ld	s0,32(sp)
+ 353              		.cfi_restore 8
+ 354              		.cfi_def_cfa 2, 48
+ 355 024c 83348101 		ld	s1,24(sp)
+ 356              		.cfi_restore 9
+ 357 0250 03390101 		ld	s2,16(sp)
+ 358              		.cfi_restore 18
+ 359              	.LVL43:
+ 360 0254 83398100 		ld	s3,8(sp)
+ 361              		.cfi_restore 19
+ 362              	.LVL44:
+ 363 0258 13010103 		addi	sp,sp,48
+ 364              		.cfi_def_cfa_offset 0
+ 365 025c 67800000 		jr	ra
+ 366              		.cfi_endproc
+ 367              	.LFE2:
+ 369              		.section	.rodata.str1.8
+ 370 0016 0000     		.align	3
+ 371              	.LC3:
+ 372 0018 556E6573 		.string	"Unesite broj proizvodjaca?\n"
+ 372      69746520 
+ 372      62726F6A 
+ 372      2070726F 
+ 372      697A766F 
+ 373 0034 00000000 		.align	3
+ 374              	.LC4:
+ 375 0038 556E6573 		.string	"Unesite velicinu bafera?\n"
+ 375      69746520 
+ 375      76656C69 
+ 375      63696E75 
+ 375      20626166 
+ 376 0052 00000000 		.align	3
+ 376      0000
+ 377              	.LC5:
+ 378 0058 42726F6A 		.string	"Broj proizvodjaca "
+ 378      2070726F 
+ 378      697A766F 
+ 378      646A6163 
+ 378      612000
+ 379 006b 00000000 		.align	3
+ 379      00
+ 380              	.LC6:
+ 381 0070 20692076 		.string	" i velicina bafera "
+ 381      656C6963 
+ 381      696E6120 
+ 381      62616665 
+ 381      72612000 
+ 382 0084 00000000 		.align	3
+ 383              	.LC7:
+ 384 0088 2E0A00   		.string	".\n"
+ 385 008b 00000000 		.align	3
+ 385      00
+GAS LISTING /tmp/cciiKsHz.s 			page 11
+
+
+ 386              	.LC8:
+ 387 0090 42726F6A 		.string	"Broj proizvodjaca ne sme biti manji od velicine bafera!\n"
+ 387      2070726F 
+ 387      697A766F 
+ 387      646A6163 
+ 387      61206E65 
+ 388 00c9 00000000 		.align	3
+ 388      000000
+ 389              	.LC9:
+ 390 00d0 42726F6A 		.string	"Broj proizvodjaca mora biti veci od nula!\n"
+ 390      2070726F 
+ 390      697A766F 
+ 390      646A6163 
+ 390      61206D6F 
+ 391              		.text
+ 392              		.align	2
+ 393              		.globl	_Z22producerConsumer_C_APIv
+ 395              	_Z22producerConsumer_C_APIv:
+ 396              	.LFB3:
+  97:test/../test/ConsumerProducer_C_API_test.h **** 
+  98:test/../test/ConsumerProducer_C_API_test.h **** void producerConsumer_C_API() {
+ 397              		.loc 1 98 31 is_stmt 1
+ 398              		.cfi_startproc
+ 399              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 400              		.cfi_lsda 0x1b,.LLSDA3
+ 401 0260 130101F9 		addi	sp,sp,-112
+ 402              		.cfi_def_cfa_offset 112
+ 403 0264 23341106 		sd	ra,104(sp)
+ 404 0268 23308106 		sd	s0,96(sp)
+ 405 026c 233C9104 		sd	s1,88(sp)
+ 406 0270 23382105 		sd	s2,80(sp)
+ 407 0274 23343105 		sd	s3,72(sp)
+ 408 0278 23304105 		sd	s4,64(sp)
+ 409 027c 233C5103 		sd	s5,56(sp)
+ 410 0280 23386103 		sd	s6,48(sp)
+ 411              		.cfi_offset 1, -8
+ 412              		.cfi_offset 8, -16
+ 413              		.cfi_offset 9, -24
+ 414              		.cfi_offset 18, -32
+ 415              		.cfi_offset 19, -40
+ 416              		.cfi_offset 20, -48
+ 417              		.cfi_offset 21, -56
+ 418              		.cfi_offset 22, -64
+ 419 0284 13040107 		addi	s0,sp,112
+ 420              		.cfi_def_cfa 8, 0
+  99:test/../test/ConsumerProducer_C_API_test.h ****     char input[30];
+ 100:test/../test/ConsumerProducer_C_API_test.h ****     int n, threadNum;
+ 101:test/../test/ConsumerProducer_C_API_test.h **** 
+ 102:test/../test/ConsumerProducer_C_API_test.h ****     printString("Unesite broj proizvodjaca?\n");
+ 103:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
+ 104:test/../test/ConsumerProducer_C_API_test.h ****     threadNum = stringToInt(input);
+ 105:test/../test/ConsumerProducer_C_API_test.h **** 
+ 106:test/../test/ConsumerProducer_C_API_test.h ****     printString("Unesite velicinu bafera?\n");
+ 107:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
+ 108:test/../test/ConsumerProducer_C_API_test.h ****     n = stringToInt(input);
+ 109:test/../test/ConsumerProducer_C_API_test.h **** 
+ 110:test/../test/ConsumerProducer_C_API_test.h ****     printString("Broj proizvodjaca "); printInt(threadNum);
+GAS LISTING /tmp/cciiKsHz.s 			page 12
+
+
+ 111:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
+ 112:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
+ 113:test/../test/ConsumerProducer_C_API_test.h **** 
+ 114:test/../test/ConsumerProducer_C_API_test.h ****     if(threadNum > n) {
+ 115:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca ne sme biti manji od velicine bafera!\n");
+ 116:test/../test/ConsumerProducer_C_API_test.h ****         return;
+ 117:test/../test/ConsumerProducer_C_API_test.h ****     } else if (threadNum < 1) {
+ 118:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca mora biti veci od nula!\n");
+ 119:test/../test/ConsumerProducer_C_API_test.h ****         return;
+ 120:test/../test/ConsumerProducer_C_API_test.h ****     }
+ 121:test/../test/ConsumerProducer_C_API_test.h **** 
+ 122:test/../test/ConsumerProducer_C_API_test.h ****     Buffer *buffer = new Buffer(n);
  123:test/../test/ConsumerProducer_C_API_test.h **** 
- 124:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data data[threadNum + 1];
+ 124:test/../test/ConsumerProducer_C_API_test.h ****     sem_open(&waitForAll, 0);
  125:test/../test/ConsumerProducer_C_API_test.h **** 
- 126:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].id = threadNum;
- 127:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].buffer = buffer;
- 128:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].wait = waitForAll;
- 129:test/../test/ConsumerProducer_C_API_test.h ****     thread_create(&consumerThread, consumer, data + threadNum);
+ 126:test/../test/ConsumerProducer_C_API_test.h ****     //printInt((uint64)waitForAll);
+ 127:test/../test/ConsumerProducer_C_API_test.h **** 
+ 128:test/../test/ConsumerProducer_C_API_test.h ****     thread_t threads[threadNum];
+ 129:test/../test/ConsumerProducer_C_API_test.h ****     thread_t consumerThread;
  130:test/../test/ConsumerProducer_C_API_test.h **** 
- 131:test/../test/ConsumerProducer_C_API_test.h ****     for (int i = 0; i < threadNum; i++) {
- 132:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
- 133:test/../test/ConsumerProducer_C_API_test.h ****         data[i].buffer = buffer;
- 134:test/../test/ConsumerProducer_C_API_test.h ****         data[i].wait = waitForAll;
- 135:test/../test/ConsumerProducer_C_API_test.h **** 
- 136:test/../test/ConsumerProducer_C_API_test.h ****         thread_create(threads + i,
- 137:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 138:test/../test/ConsumerProducer_C_API_test.h ****                       data + i);
- 139:test/../test/ConsumerProducer_C_API_test.h ****     }
- 140:test/../test/ConsumerProducer_C_API_test.h **** 
- 141:test/../test/ConsumerProducer_C_API_test.h ****     printString("here1\n");
+ 131:test/../test/ConsumerProducer_C_API_test.h ****     struct thread_data data[threadNum + 1];
+ 132:test/../test/ConsumerProducer_C_API_test.h **** 
+ 133:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].id = threadNum;
+ 134:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].buffer = buffer;
+ 135:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].wait = waitForAll;
+ 136:test/../test/ConsumerProducer_C_API_test.h ****     thread_create(&consumerThread, consumer, data + threadNum);
+ 137:test/../test/ConsumerProducer_C_API_test.h **** 
+ 138:test/../test/ConsumerProducer_C_API_test.h ****     for (int i = 0; i < threadNum; i++) {
+ 139:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
+ 140:test/../test/ConsumerProducer_C_API_test.h ****         data[i].buffer = buffer;
+ 141:test/../test/ConsumerProducer_C_API_test.h ****         data[i].wait = waitForAll;
  142:test/../test/ConsumerProducer_C_API_test.h **** 
- 143:test/../test/ConsumerProducer_C_API_test.h ****     thread_dispatch();
- 144:test/../test/ConsumerProducer_C_API_test.h **** 
- 145:test/../test/ConsumerProducer_C_API_test.h ****     printString("here2\n");
- 146:test/../test/ConsumerProducer_C_API_test.h **** 
- 147:test/../test/ConsumerProducer_C_API_test.h ****     for (int i = 0; i <= threadNum; i++) {
- 148:test/../test/ConsumerProducer_C_API_test.h ****         sem_wait(waitForAll);
- 149:test/../test/ConsumerProducer_C_API_test.h ****     }
- 150:test/../test/ConsumerProducer_C_API_test.h **** 
+ 143:test/../test/ConsumerProducer_C_API_test.h ****         thread_create(threads + i,
+ 144:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 145:test/../test/ConsumerProducer_C_API_test.h ****                       data + i);
+ 146:test/../test/ConsumerProducer_C_API_test.h ****     }
+ 147:test/../test/ConsumerProducer_C_API_test.h **** 
+ 148:test/../test/ConsumerProducer_C_API_test.h ****     //printString("here1\n");
+ 149:test/../test/ConsumerProducer_C_API_test.h **** 
+ 150:test/../test/ConsumerProducer_C_API_test.h ****     thread_dispatch();
  151:test/../test/ConsumerProducer_C_API_test.h **** 
- 152:test/../test/ConsumerProducer_C_API_test.h ****     sem_close(waitForAll);
+ 152:test/../test/ConsumerProducer_C_API_test.h ****     //printString("here2\n");
  153:test/../test/ConsumerProducer_C_API_test.h **** 
- 154:test/../test/ConsumerProducer_C_API_test.h ****     delete buffer;
- 414              		.loc 1 154 18 is_stmt 0
- 415 0288 130B0100 		mv	s6,sp
-  92:test/../test/ConsumerProducer_C_API_test.h ****     char input[30];
- 416              		.loc 1 92 5 is_stmt 1
-  93:test/../test/ConsumerProducer_C_API_test.h **** 
- 417              		.loc 1 93 5
-  95:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
- 418              		.loc 1 95 5
-  95:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
- 419              		.loc 1 95 16 is_stmt 0
- 420 028c 17050000 		lla	a0,.LC0
- 420      13050500 
- 421              	.LEHB0:
- 422 0294 97000000 		call	_Z11printStringPKc@plt
- 422      E7800000 
- 423              	.LVL46:
-  96:test/../test/ConsumerProducer_C_API_test.h ****     threadNum = stringToInt(input);
- 424              		.loc 1 96 5 is_stmt 1
-  96:test/../test/ConsumerProducer_C_API_test.h ****     threadNum = stringToInt(input);
- 425              		.loc 1 96 14 is_stmt 0
- 426 029c 9305E001 		li	a1,30
- 427 02a0 930404FA 		addi	s1,s0,-96
- 428 02a4 13850400 		mv	a0,s1
- 429 02a8 97000000 		call	_Z9getStringPci@plt
+ 154:test/../test/ConsumerProducer_C_API_test.h ****     for (int i = 0; i <= threadNum; i++) {
+ 155:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here3\n");
+ 156:test/../test/ConsumerProducer_C_API_test.h ****         sem_wait(waitForAll);
+ 157:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here4\n");
+ 158:test/../test/ConsumerProducer_C_API_test.h ****     }
+ 159:test/../test/ConsumerProducer_C_API_test.h **** 
+ 160:test/../test/ConsumerProducer_C_API_test.h **** 
+ 161:test/../test/ConsumerProducer_C_API_test.h ****     sem_close(waitForAll);
+ 162:test/../test/ConsumerProducer_C_API_test.h **** 
+ 163:test/../test/ConsumerProducer_C_API_test.h ****     delete buffer;
+ 421              		.loc 1 163 18 is_stmt 0
+ 422 0288 130B0100 		mv	s6,sp
+  99:test/../test/ConsumerProducer_C_API_test.h ****     char input[30];
+ 423              		.loc 1 99 5 is_stmt 1
+GAS LISTING /tmp/cciiKsHz.s 			page 13
+
+
+ 100:test/../test/ConsumerProducer_C_API_test.h **** 
+ 424              		.loc 1 100 5
+ 102:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
+ 425              		.loc 1 102 5
+ 102:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
+ 426              		.loc 1 102 16 is_stmt 0
+ 427 028c 17050000 		lla	a0,.LC3
+ 427      13050500 
+ 428              	.LEHB0:
+ 429 0294 97000000 		call	_Z11printStringPKc@plt
  429      E7800000 
-GAS LISTING /tmp/cc673G5Z.s 			page 13
-
-
- 430              	.LVL47:
-  97:test/../test/ConsumerProducer_C_API_test.h **** 
- 431              		.loc 1 97 5 is_stmt 1
-  97:test/../test/ConsumerProducer_C_API_test.h **** 
- 432              		.loc 1 97 28 is_stmt 0
- 433 02b0 13850400 		mv	a0,s1
- 434 02b4 97000000 		call	_Z11stringToIntPKc@plt
- 434      E7800000 
- 435              	.LVL48:
- 436 02bc 13090500 		mv	s2,a0
- 437              	.LVL49:
-  99:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
- 438              		.loc 1 99 5 is_stmt 1
-  99:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
- 439              		.loc 1 99 16 is_stmt 0
- 440 02c0 17050000 		lla	a0,.LC1
- 440      13050500 
- 441 02c8 97000000 		call	_Z11printStringPKc@plt
+ 430              	.LVL45:
+ 103:test/../test/ConsumerProducer_C_API_test.h ****     threadNum = stringToInt(input);
+ 431              		.loc 1 103 5 is_stmt 1
+ 103:test/../test/ConsumerProducer_C_API_test.h ****     threadNum = stringToInt(input);
+ 432              		.loc 1 103 14 is_stmt 0
+ 433 029c 9305E001 		li	a1,30
+ 434 02a0 930404FA 		addi	s1,s0,-96
+ 435 02a4 13850400 		mv	a0,s1
+ 436 02a8 97000000 		call	_Z9getStringPci@plt
+ 436      E7800000 
+ 437              	.LVL46:
+ 104:test/../test/ConsumerProducer_C_API_test.h **** 
+ 438              		.loc 1 104 5 is_stmt 1
+ 104:test/../test/ConsumerProducer_C_API_test.h **** 
+ 439              		.loc 1 104 28 is_stmt 0
+ 440 02b0 13850400 		mv	a0,s1
+ 441 02b4 97000000 		call	_Z11stringToIntPKc@plt
  441      E7800000 
- 442              	.LVL50:
- 100:test/../test/ConsumerProducer_C_API_test.h ****     n = stringToInt(input);
- 443              		.loc 1 100 5 is_stmt 1
- 100:test/../test/ConsumerProducer_C_API_test.h ****     n = stringToInt(input);
- 444              		.loc 1 100 14 is_stmt 0
- 445 02d0 9305E001 		li	a1,30
- 446 02d4 13850400 		mv	a0,s1
- 447 02d8 97000000 		call	_Z9getStringPci@plt
- 447      E7800000 
- 448              	.LVL51:
- 101:test/../test/ConsumerProducer_C_API_test.h **** 
- 449              		.loc 1 101 5 is_stmt 1
- 101:test/../test/ConsumerProducer_C_API_test.h **** 
- 450              		.loc 1 101 20 is_stmt 0
- 451 02e0 13850400 		mv	a0,s1
- 452 02e4 97000000 		call	_Z11stringToIntPKc@plt
- 452      E7800000 
- 453              	.LVL52:
- 454 02ec 93040500 		mv	s1,a0
- 455              	.LVL53:
- 103:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
- 456              		.loc 1 103 5 is_stmt 1
- 103:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
- 457              		.loc 1 103 16 is_stmt 0
- 458 02f0 17050000 		lla	a0,.LC2
- 458      13050500 
- 459 02f8 97000000 		call	_Z11printStringPKc@plt
+ 442              	.LVL47:
+ 443 02bc 13090500 		mv	s2,a0
+ 444              	.LVL48:
+ 106:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
+ 445              		.loc 1 106 5 is_stmt 1
+ 106:test/../test/ConsumerProducer_C_API_test.h ****     getString(input, 30);
+ 446              		.loc 1 106 16 is_stmt 0
+ 447 02c0 17050000 		lla	a0,.LC4
+ 447      13050500 
+ 448 02c8 97000000 		call	_Z11printStringPKc@plt
+ 448      E7800000 
+ 449              	.LVL49:
+ 107:test/../test/ConsumerProducer_C_API_test.h ****     n = stringToInt(input);
+ 450              		.loc 1 107 5 is_stmt 1
+ 107:test/../test/ConsumerProducer_C_API_test.h ****     n = stringToInt(input);
+ 451              		.loc 1 107 14 is_stmt 0
+ 452 02d0 9305E001 		li	a1,30
+ 453 02d4 13850400 		mv	a0,s1
+ 454 02d8 97000000 		call	_Z9getStringPci@plt
+ 454      E7800000 
+ 455              	.LVL50:
+ 108:test/../test/ConsumerProducer_C_API_test.h **** 
+ 456              		.loc 1 108 5 is_stmt 1
+ 108:test/../test/ConsumerProducer_C_API_test.h **** 
+ 457              		.loc 1 108 20 is_stmt 0
+ 458 02e0 13850400 		mv	a0,s1
+ 459 02e4 97000000 		call	_Z11stringToIntPKc@plt
  459      E7800000 
- 460              	.LVL54:
- 103:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
- 461              		.loc 1 103 40 is_stmt 1
- 103:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
- 462              		.loc 1 103 48 is_stmt 0
- 463 0300 13060000 		li	a2,0
- 464 0304 9305A000 		li	a1,10
- 465 0308 13050900 		mv	a0,s2
- 466 030c 97000000 		call	_Z8printIntiii@plt
+GAS LISTING /tmp/cciiKsHz.s 			page 14
+
+
+ 460              	.LVL51:
+ 461 02ec 93040500 		mv	s1,a0
+ 462              	.LVL52:
+ 110:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
+ 463              		.loc 1 110 5 is_stmt 1
+ 110:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
+ 464              		.loc 1 110 16 is_stmt 0
+ 465 02f0 17050000 		lla	a0,.LC5
+ 465      13050500 
+ 466 02f8 97000000 		call	_Z11printStringPKc@plt
  466      E7800000 
-GAS LISTING /tmp/cc673G5Z.s 			page 14
-
-
- 467              	.LVL55:
- 104:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
- 468              		.loc 1 104 5 is_stmt 1
- 104:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
- 469              		.loc 1 104 16 is_stmt 0
- 470 0314 17050000 		lla	a0,.LC3
- 470      13050500 
- 471 031c 97000000 		call	_Z11printStringPKc@plt
- 471      E7800000 
- 472              	.LVL56:
- 104:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
- 473              		.loc 1 104 41 is_stmt 1
- 104:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
- 474              		.loc 1 104 49 is_stmt 0
- 475 0324 13060000 		li	a2,0
- 476 0328 9305A000 		li	a1,10
- 477 032c 13850400 		mv	a0,s1
- 478 0330 97000000 		call	_Z8printIntiii@plt
+ 467              	.LVL53:
+ 110:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
+ 468              		.loc 1 110 40 is_stmt 1
+ 110:test/../test/ConsumerProducer_C_API_test.h ****     printString(" i velicina bafera "); printInt(n);
+ 469              		.loc 1 110 48 is_stmt 0
+ 470 0300 13060000 		li	a2,0
+ 471 0304 9305A000 		li	a1,10
+ 472 0308 13050900 		mv	a0,s2
+ 473 030c 97000000 		call	_Z8printIntiii@plt
+ 473      E7800000 
+ 474              	.LVL54:
+ 111:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
+ 475              		.loc 1 111 5 is_stmt 1
+ 111:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
+ 476              		.loc 1 111 16 is_stmt 0
+ 477 0314 17050000 		lla	a0,.LC6
+ 477      13050500 
+ 478 031c 97000000 		call	_Z11printStringPKc@plt
  478      E7800000 
- 479              	.LVL57:
- 105:test/../test/ConsumerProducer_C_API_test.h **** 
- 480              		.loc 1 105 5 is_stmt 1
- 105:test/../test/ConsumerProducer_C_API_test.h **** 
- 481              		.loc 1 105 16 is_stmt 0
- 482 0338 17050000 		lla	a0,.LC4
- 482      13050500 
- 483 0340 97000000 		call	_Z11printStringPKc@plt
- 483      E7800000 
- 484              	.LVL58:
- 107:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca ne sme biti manji od velicine bafera!\n");
- 485              		.loc 1 107 5 is_stmt 1
- 486 0348 63C42403 		bgt	s2,s1,.L38
- 110:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca mora biti veci od nula!\n");
- 487              		.loc 1 110 12
- 488 034c 635C2003 		blez	s2,.L39
- 115:test/../test/ConsumerProducer_C_API_test.h **** 
- 489              		.loc 1 115 5
- 115:test/../test/ConsumerProducer_C_API_test.h **** 
- 490              		.loc 1 115 34 is_stmt 0
- 491 0350 13058003 		li	a0,56
- 492 0354 97000000 		call	_Znwm@plt
- 492      E7800000 
- 493              	.LVL59:
- 494              	.LEHE0:
- 495 035c 130A0500 		mv	s4,a0
- 496 0360 93850400 		mv	a1,s1
- 497              	.LEHB1:
- 498 0364 97000000 		call	_ZN6BufferC1Ei@plt
- 498      E7800000 
- 499              	.LVL60:
- 500              	.LEHE1:
- 501 036c 6F000003 		j	.L40
- 502              	.L38:
- 108:test/../test/ConsumerProducer_C_API_test.h ****         return;
- 503              		.loc 1 108 9 is_stmt 1
- 108:test/../test/ConsumerProducer_C_API_test.h ****         return;
- 504              		.loc 1 108 20 is_stmt 0
-GAS LISTING /tmp/cc673G5Z.s 			page 15
-
-
- 505 0370 17050000 		lla	a0,.LC5
- 505      13050500 
- 506              	.LEHB2:
- 507 0378 97000000 		call	_Z11printStringPKc@plt
- 507      E7800000 
- 508              	.LVL61:
- 109:test/../test/ConsumerProducer_C_API_test.h ****     } else if (threadNum < 1) {
- 509              		.loc 1 109 9 is_stmt 1
- 510 0380 6F004001 		j	.L25
- 511              	.L39:
- 111:test/../test/ConsumerProducer_C_API_test.h ****         return;
- 512              		.loc 1 111 9
- 111:test/../test/ConsumerProducer_C_API_test.h ****         return;
- 513              		.loc 1 111 20 is_stmt 0
- 514 0384 17050000 		lla	a0,.LC6
- 514      13050500 
- 515 038c 97000000 		call	_Z11printStringPKc@plt
- 515      E7800000 
- 516              	.LVL62:
- 112:test/../test/ConsumerProducer_C_API_test.h ****     }
- 517              		.loc 1 112 9 is_stmt 1
- 518              	.L25:
- 519 0394 13010B00 		mv	sp,s6
- 520 0398 6F008018 		j	.L23
- 521              	.L40:
- 522              	.LVL63:
- 117:test/../test/ConsumerProducer_C_API_test.h **** 
- 523              		.loc 1 117 5 discriminator 3
- 117:test/../test/ConsumerProducer_C_API_test.h **** 
- 524              		.loc 1 117 13 is_stmt 0 discriminator 3
- 525 039c 97040000 		lla	s1,.LANCHOR0
- 525      93840400 
- 526              	.LVL64:
- 527 03a4 93050000 		li	a1,0
- 528 03a8 17050000 		lla	a0,.LANCHOR0+8
- 528      13050500 
- 529 03b0 97000000 		call	sem_open@plt
- 529      E7800000 
- 530              	.LVL65:
- 119:test/../test/ConsumerProducer_C_API_test.h **** 
- 531              		.loc 1 119 5 is_stmt 1 discriminator 3
- 119:test/../test/ConsumerProducer_C_API_test.h **** 
- 532              		.loc 1 119 13 is_stmt 0 discriminator 3
- 533 03b8 13060000 		li	a2,0
- 534 03bc 9305A000 		li	a1,10
- 535 03c0 03A58400 		lw	a0,8(s1)
- 536 03c4 97000000 		call	_Z8printIntiii@plt
- 536      E7800000 
- 537              	.LVL66:
- 121:test/../test/ConsumerProducer_C_API_test.h ****     thread_t consumerThread;
- 538              		.loc 1 121 5 is_stmt 1 discriminator 3
- 121:test/../test/ConsumerProducer_C_API_test.h ****     thread_t consumerThread;
- 539              		.loc 1 121 14 is_stmt 0 discriminator 3
- 540 03cc 93173900 		slli	a5,s2,3
- 541 03d0 9387F700 		addi	a5,a5,15
- 542 03d4 93F707FF 		andi	a5,a5,-16
- 543 03d8 3301F140 		sub	sp,sp,a5
-GAS LISTING /tmp/cc673G5Z.s 			page 16
-
-
- 544 03dc 930A0100 		mv	s5,sp
- 545              	.LVL67:
+ 479              	.LVL55:
+ 111:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
+ 480              		.loc 1 111 41 is_stmt 1
+ 111:test/../test/ConsumerProducer_C_API_test.h ****     printString(".\n");
+ 481              		.loc 1 111 49 is_stmt 0
+ 482 0324 13060000 		li	a2,0
+ 483 0328 9305A000 		li	a1,10
+ 484 032c 13850400 		mv	a0,s1
+ 485 0330 97000000 		call	_Z8printIntiii@plt
+ 485      E7800000 
+ 486              	.LVL56:
+ 112:test/../test/ConsumerProducer_C_API_test.h **** 
+ 487              		.loc 1 112 5 is_stmt 1
+ 112:test/../test/ConsumerProducer_C_API_test.h **** 
+ 488              		.loc 1 112 16 is_stmt 0
+ 489 0338 17050000 		lla	a0,.LC7
+ 489      13050500 
+ 490 0340 97000000 		call	_Z11printStringPKc@plt
+ 490      E7800000 
+ 491              	.LVL57:
+ 114:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca ne sme biti manji od velicine bafera!\n");
+ 492              		.loc 1 114 5 is_stmt 1
+ 493 0348 63C42403 		bgt	s2,s1,.L38
+ 117:test/../test/ConsumerProducer_C_API_test.h ****         printString("Broj proizvodjaca mora biti veci od nula!\n");
+ 494              		.loc 1 117 12
+ 495 034c 635C2003 		blez	s2,.L39
  122:test/../test/ConsumerProducer_C_API_test.h **** 
- 546              		.loc 1 122 5 is_stmt 1 discriminator 3
+GAS LISTING /tmp/cciiKsHz.s 			page 15
+
+
+ 496              		.loc 1 122 5
+ 122:test/../test/ConsumerProducer_C_API_test.h **** 
+ 497              		.loc 1 122 34 is_stmt 0
+ 498 0350 13058003 		li	a0,56
+ 499 0354 97000000 		call	_Znwm@plt
+ 499      E7800000 
+ 500              	.LVL58:
+ 501              	.LEHE0:
+ 502 035c 130A0500 		mv	s4,a0
+ 503 0360 93850400 		mv	a1,s1
+ 504              	.LEHB1:
+ 505 0364 97000000 		call	_ZN6BufferC1Ei@plt
+ 505      E7800000 
+ 506              	.LVL59:
+ 507              	.LEHE1:
+ 508 036c 6F000003 		j	.L40
+ 509              	.L38:
+ 115:test/../test/ConsumerProducer_C_API_test.h ****         return;
+ 510              		.loc 1 115 9 is_stmt 1
+ 115:test/../test/ConsumerProducer_C_API_test.h ****         return;
+ 511              		.loc 1 115 20 is_stmt 0
+ 512 0370 17050000 		lla	a0,.LC8
+ 512      13050500 
+ 513              	.LEHB2:
+ 514 0378 97000000 		call	_Z11printStringPKc@plt
+ 514      E7800000 
+ 515              	.LVL60:
+ 116:test/../test/ConsumerProducer_C_API_test.h ****     } else if (threadNum < 1) {
+ 516              		.loc 1 116 9 is_stmt 1
+ 517 0380 6F004001 		j	.L25
+ 518              	.L39:
+ 118:test/../test/ConsumerProducer_C_API_test.h ****         return;
+ 519              		.loc 1 118 9
+ 118:test/../test/ConsumerProducer_C_API_test.h ****         return;
+ 520              		.loc 1 118 20 is_stmt 0
+ 521 0384 17050000 		lla	a0,.LC9
+ 521      13050500 
+ 522 038c 97000000 		call	_Z11printStringPKc@plt
+ 522      E7800000 
+ 523              	.LVL61:
+ 119:test/../test/ConsumerProducer_C_API_test.h ****     }
+ 524              		.loc 1 119 9 is_stmt 1
+ 525              	.L25:
+ 526 0394 13010B00 		mv	sp,s6
+ 527 0398 6F000015 		j	.L23
+ 528              	.L40:
+ 529              	.LVL62:
  124:test/../test/ConsumerProducer_C_API_test.h **** 
- 547              		.loc 1 124 5 discriminator 3
+ 530              		.loc 1 124 5 discriminator 3
  124:test/../test/ConsumerProducer_C_API_test.h **** 
- 548              		.loc 1 124 39 is_stmt 0 discriminator 3
- 549 03e0 1B071900 		addiw	a4,s2,1
- 550              	.LVL68:
- 124:test/../test/ConsumerProducer_C_API_test.h **** 
- 551              		.loc 1 124 24 discriminator 3
- 552 03e4 93171700 		slli	a5,a4,1
- 553 03e8 B387E700 		add	a5,a5,a4
- 554 03ec 93973700 		slli	a5,a5,3
- 555 03f0 9387F700 		addi	a5,a5,15
- 556 03f4 93F707FF 		andi	a5,a5,-16
- 557 03f8 3301F140 		sub	sp,sp,a5
- 558              	.LVL69:
- 559 03fc 93090100 		mv	s3,sp
- 560              	.LVL70:
- 126:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].buffer = buffer;
- 561              		.loc 1 126 5 is_stmt 1 discriminator 3
- 126:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].buffer = buffer;
- 562              		.loc 1 126 24 is_stmt 0 discriminator 3
- 563 0400 13161900 		slli	a2,s2,1
- 564 0404 B3072601 		add	a5,a2,s2
- 565 0408 93973700 		slli	a5,a5,3
- 566 040c B387F900 		add	a5,s3,a5
- 567 0410 23A02701 		sw	s2,0(a5)
- 127:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].wait = waitForAll;
- 568              		.loc 1 127 5 is_stmt 1 discriminator 3
- 127:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].wait = waitForAll;
- 569              		.loc 1 127 28 is_stmt 0 discriminator 3
- 570 0414 23B44701 		sd	s4,8(a5)
- 128:test/../test/ConsumerProducer_C_API_test.h ****     thread_create(&consumerThread, consumer, data + threadNum);
- 571              		.loc 1 128 5 is_stmt 1 discriminator 3
- 128:test/../test/ConsumerProducer_C_API_test.h ****     thread_create(&consumerThread, consumer, data + threadNum);
- 572              		.loc 1 128 26 is_stmt 0 discriminator 3
- 573 0418 03B78400 		ld	a4,8(s1)
- 574 041c 23B8E700 		sd	a4,16(a5)
+ 531              		.loc 1 124 13 is_stmt 0 discriminator 3
+ 532 039c 93050000 		li	a1,0
+ 533 03a0 17050000 		lla	a0,.LANCHOR0+8
+ 533      13050500 
+ 534 03a8 97000000 		call	sem_open@plt
+ 534      E7800000 
+ 535              	.LVL63:
+GAS LISTING /tmp/cciiKsHz.s 			page 16
+
+
+ 128:test/../test/ConsumerProducer_C_API_test.h ****     thread_t consumerThread;
+ 536              		.loc 1 128 5 is_stmt 1 discriminator 3
+ 128:test/../test/ConsumerProducer_C_API_test.h ****     thread_t consumerThread;
+ 537              		.loc 1 128 14 is_stmt 0 discriminator 3
+ 538 03b0 93173900 		slli	a5,s2,3
+ 539 03b4 9387F700 		addi	a5,a5,15
+ 540 03b8 93F707FF 		andi	a5,a5,-16
+ 541 03bc 3301F140 		sub	sp,sp,a5
+ 542 03c0 930A0100 		mv	s5,sp
+ 543              	.LVL64:
  129:test/../test/ConsumerProducer_C_API_test.h **** 
- 575              		.loc 1 129 5 is_stmt 1 discriminator 3
- 129:test/../test/ConsumerProducer_C_API_test.h **** 
- 576              		.loc 1 129 18 is_stmt 0 discriminator 3
- 577 0420 13860700 		mv	a2,a5
- 578 0424 97050000 		lla	a1,_Z8consumerPv
- 578      93850500 
- 579 042c 130584F9 		addi	a0,s0,-104
- 580 0430 97000000 		call	thread_create@plt
- 580      E7800000 
- 581              	.LVL71:
- 582              	.LBB5:
- 131:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
- 583              		.loc 1 131 14 discriminator 3
- 584 0438 93040000 		li	s1,0
- 585 043c 6F008002 		j	.L29
-GAS LISTING /tmp/cc673G5Z.s 			page 17
+ 544              		.loc 1 129 5 is_stmt 1 discriminator 3
+ 131:test/../test/ConsumerProducer_C_API_test.h **** 
+ 545              		.loc 1 131 5 discriminator 3
+ 131:test/../test/ConsumerProducer_C_API_test.h **** 
+ 546              		.loc 1 131 39 is_stmt 0 discriminator 3
+ 547 03c4 1B071900 		addiw	a4,s2,1
+ 548              	.LVL65:
+ 131:test/../test/ConsumerProducer_C_API_test.h **** 
+ 549              		.loc 1 131 24 discriminator 3
+ 550 03c8 93171700 		slli	a5,a4,1
+ 551 03cc B387E700 		add	a5,a5,a4
+ 552 03d0 93973700 		slli	a5,a5,3
+ 553 03d4 9387F700 		addi	a5,a5,15
+ 554 03d8 93F707FF 		andi	a5,a5,-16
+ 555 03dc 3301F140 		sub	sp,sp,a5
+ 556              	.LVL66:
+ 557 03e0 93090100 		mv	s3,sp
+ 558              	.LVL67:
+ 133:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].buffer = buffer;
+ 559              		.loc 1 133 5 is_stmt 1 discriminator 3
+ 133:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].buffer = buffer;
+ 560              		.loc 1 133 24 is_stmt 0 discriminator 3
+ 561 03e4 13161900 		slli	a2,s2,1
+ 562 03e8 B3072601 		add	a5,a2,s2
+ 563 03ec 93973700 		slli	a5,a5,3
+ 564 03f0 B387F900 		add	a5,s3,a5
+ 565 03f4 23A02701 		sw	s2,0(a5)
+ 134:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].wait = waitForAll;
+ 566              		.loc 1 134 5 is_stmt 1 discriminator 3
+ 134:test/../test/ConsumerProducer_C_API_test.h ****     data[threadNum].wait = waitForAll;
+ 567              		.loc 1 134 28 is_stmt 0 discriminator 3
+ 568 03f8 23B44701 		sd	s4,8(a5)
+ 135:test/../test/ConsumerProducer_C_API_test.h ****     thread_create(&consumerThread, consumer, data + threadNum);
+ 569              		.loc 1 135 5 is_stmt 1 discriminator 3
+ 135:test/../test/ConsumerProducer_C_API_test.h ****     thread_create(&consumerThread, consumer, data + threadNum);
+ 570              		.loc 1 135 26 is_stmt 0 discriminator 3
+ 571 03fc 17070000 		ld	a4,.LANCHOR0+8
+ 571      03370700 
+ 572 0404 23B8E700 		sd	a4,16(a5)
+ 136:test/../test/ConsumerProducer_C_API_test.h **** 
+ 573              		.loc 1 136 5 is_stmt 1 discriminator 3
+ 136:test/../test/ConsumerProducer_C_API_test.h **** 
+ 574              		.loc 1 136 18 is_stmt 0 discriminator 3
+ 575 0408 13860700 		mv	a2,a5
+ 576 040c 97050000 		lla	a1,_Z8consumerPv
+ 576      93850500 
+GAS LISTING /tmp/cciiKsHz.s 			page 17
 
 
- 586              	.LVL72:
- 587              	.L35:
- 136:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 588              		.loc 1 136 22
- 589 0440 97050000 		lla	a1,_Z16producerKeyboardPv
- 589      93850500 
- 590              	.L28:
- 138:test/../test/ConsumerProducer_C_API_test.h ****     }
- 591              		.loc 1 138 28 discriminator 4
- 592 0448 13961700 		slli	a2,a5,1
- 593 044c 3306F600 		add	a2,a2,a5
- 594 0450 13163600 		slli	a2,a2,3
- 136:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 595              		.loc 1 136 22 discriminator 4
- 596 0454 3386C900 		add	a2,s3,a2
- 597 0458 97000000 		call	thread_create@plt
- 597      E7800000 
- 598              	.LVL73:
- 131:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
- 599              		.loc 1 131 5 is_stmt 1 discriminator 4
- 600 0460 9B841400 		addiw	s1,s1,1
- 601              	.LVL74:
- 602              	.L29:
- 131:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
- 603              		.loc 1 131 23 discriminator 1
- 604 0464 63D22405 		bge	s1,s2,.L27
- 132:test/../test/ConsumerProducer_C_API_test.h ****         data[i].buffer = buffer;
- 605              		.loc 1 132 9
- 132:test/../test/ConsumerProducer_C_API_test.h ****         data[i].buffer = buffer;
- 606              		.loc 1 132 20 is_stmt 0
- 607 0468 93971400 		slli	a5,s1,1
- 608 046c B3879700 		add	a5,a5,s1
- 609 0470 93973700 		slli	a5,a5,3
- 610 0474 B387F900 		add	a5,s3,a5
- 611 0478 23A09700 		sw	s1,0(a5)
- 133:test/../test/ConsumerProducer_C_API_test.h ****         data[i].wait = waitForAll;
- 612              		.loc 1 133 9 is_stmt 1
- 133:test/../test/ConsumerProducer_C_API_test.h ****         data[i].wait = waitForAll;
- 613              		.loc 1 133 24 is_stmt 0
- 614 047c 23B44701 		sd	s4,8(a5)
- 134:test/../test/ConsumerProducer_C_API_test.h **** 
- 615              		.loc 1 134 9 is_stmt 1
- 134:test/../test/ConsumerProducer_C_API_test.h **** 
- 616              		.loc 1 134 22 is_stmt 0
- 617 0480 17070000 		ld	a4,.LANCHOR0+8
- 617      03370700 
- 618 0488 23B8E700 		sd	a4,16(a5)
- 136:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 619              		.loc 1 136 9 is_stmt 1
- 136:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 620              		.loc 1 136 33 is_stmt 0
- 621 048c 93870400 		mv	a5,s1
- 136:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 622              		.loc 1 136 31
- 623 0490 13953400 		slli	a0,s1,3
- 136:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
- 624              		.loc 1 136 22
-GAS LISTING /tmp/cc673G5Z.s 			page 18
-
-
- 625 0494 3385AA00 		add	a0,s5,a0
- 626 0498 E35490FA 		blez	s1,.L35
- 627 049c 97050000 		lla	a1,_Z8producerPv
- 627      93850500 
- 628 04a4 6FF05FFA 		j	.L28
- 629              	.L27:
- 630              	.LBE5:
+ 577 0414 130584F9 		addi	a0,s0,-104
+ 578 0418 97000000 		call	thread_create@plt
+ 578      E7800000 
+ 579              	.LVL68:
+ 580              	.LBB5:
+ 138:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
+ 581              		.loc 1 138 14 discriminator 3
+ 582 0420 93040000 		li	s1,0
+ 583              	.LVL69:
+ 584 0424 6F008002 		j	.L29
+ 585              	.LVL70:
+ 586              	.L35:
+ 143:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 587              		.loc 1 143 22
+ 588 0428 97050000 		lla	a1,_Z16producerKeyboardPv
+ 588      93850500 
+ 589              	.L28:
+ 145:test/../test/ConsumerProducer_C_API_test.h ****     }
+ 590              		.loc 1 145 28 discriminator 4
+ 591 0430 13961700 		slli	a2,a5,1
+ 592 0434 3306F600 		add	a2,a2,a5
+ 593 0438 13163600 		slli	a2,a2,3
+ 143:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 594              		.loc 1 143 22 discriminator 4
+ 595 043c 3386C900 		add	a2,s3,a2
+ 596 0440 97000000 		call	thread_create@plt
+ 596      E7800000 
+ 597              	.LVL71:
+ 138:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
+ 598              		.loc 1 138 5 is_stmt 1 discriminator 4
+ 599 0448 9B841400 		addiw	s1,s1,1
+ 600              	.LVL72:
+ 601              	.L29:
+ 138:test/../test/ConsumerProducer_C_API_test.h ****         data[i].id = i;
+ 602              		.loc 1 138 23 discriminator 1
+ 603 044c 63D22405 		bge	s1,s2,.L27
+ 139:test/../test/ConsumerProducer_C_API_test.h ****         data[i].buffer = buffer;
+ 604              		.loc 1 139 9
+ 139:test/../test/ConsumerProducer_C_API_test.h ****         data[i].buffer = buffer;
+ 605              		.loc 1 139 20 is_stmt 0
+ 606 0450 93971400 		slli	a5,s1,1
+ 607 0454 B3879700 		add	a5,a5,s1
+ 608 0458 93973700 		slli	a5,a5,3
+ 609 045c B387F900 		add	a5,s3,a5
+ 610 0460 23A09700 		sw	s1,0(a5)
+ 140:test/../test/ConsumerProducer_C_API_test.h ****         data[i].wait = waitForAll;
+ 611              		.loc 1 140 9 is_stmt 1
+ 140:test/../test/ConsumerProducer_C_API_test.h ****         data[i].wait = waitForAll;
+ 612              		.loc 1 140 24 is_stmt 0
+ 613 0464 23B44701 		sd	s4,8(a5)
  141:test/../test/ConsumerProducer_C_API_test.h **** 
- 631              		.loc 1 141 5 is_stmt 1
+ 614              		.loc 1 141 9 is_stmt 1
  141:test/../test/ConsumerProducer_C_API_test.h **** 
- 632              		.loc 1 141 16 is_stmt 0
- 633 04a8 17050000 		lla	a0,.LC7
- 633      13050500 
- 634 04b0 97000000 		call	_Z11printStringPKc@plt
- 634      E7800000 
- 635              	.LVL75:
- 143:test/../test/ConsumerProducer_C_API_test.h **** 
- 636              		.loc 1 143 5 is_stmt 1
- 143:test/../test/ConsumerProducer_C_API_test.h **** 
- 637              		.loc 1 143 20 is_stmt 0
- 638 04b8 97000000 		call	thread_dispatch@plt
- 638      E7800000 
- 639              	.LVL76:
- 145:test/../test/ConsumerProducer_C_API_test.h **** 
- 640              		.loc 1 145 5 is_stmt 1
- 145:test/../test/ConsumerProducer_C_API_test.h **** 
- 641              		.loc 1 145 16 is_stmt 0
- 642 04c0 17050000 		lla	a0,.LC8
- 642      13050500 
- 643 04c8 97000000 		call	_Z11printStringPKc@plt
- 643      E7800000 
- 644              	.LVL77:
- 645              	.LBB6:
- 147:test/../test/ConsumerProducer_C_API_test.h ****         sem_wait(waitForAll);
- 646              		.loc 1 147 14
- 647 04d0 93040000 		li	s1,0
- 648              	.LVL78:
- 649              	.L31:
- 147:test/../test/ConsumerProducer_C_API_test.h ****         sem_wait(waitForAll);
- 650              		.loc 1 147 23 is_stmt 1 discriminator 1
- 651 04d4 634E9900 		bgt	s1,s2,.L30
- 148:test/../test/ConsumerProducer_C_API_test.h ****     }
- 652              		.loc 1 148 9
- 148:test/../test/ConsumerProducer_C_API_test.h ****     }
- 653              		.loc 1 148 17 is_stmt 0
- 654 04d8 17050000 		ld	a0,.LANCHOR0+8
- 654      03350500 
- 655 04e0 97000000 		call	sem_wait@plt
- 655      E7800000 
- 656              	.LVL79:
- 147:test/../test/ConsumerProducer_C_API_test.h ****         sem_wait(waitForAll);
- 657              		.loc 1 147 5 is_stmt 1
- 658 04e8 9B841400 		addiw	s1,s1,1
- 659              	.LVL80:
- 660 04ec 6FF09FFE 		j	.L31
- 661              	.LVL81:
- 662              	.L30:
-GAS LISTING /tmp/cc673G5Z.s 			page 19
+ 615              		.loc 1 141 22 is_stmt 0
+ 616 0468 17070000 		ld	a4,.LANCHOR0+8
+ 616      03370700 
+ 617 0470 23B8E700 		sd	a4,16(a5)
+GAS LISTING /tmp/cciiKsHz.s 			page 18
 
 
- 663              	.LBE6:
- 152:test/../test/ConsumerProducer_C_API_test.h **** 
- 664              		.loc 1 152 5
- 152:test/../test/ConsumerProducer_C_API_test.h **** 
- 665              		.loc 1 152 14 is_stmt 0
- 666 04f0 17050000 		ld	a0,.LANCHOR0+8
- 666      03350500 
- 667 04f8 97000000 		call	sem_close@plt
- 667      E7800000 
- 668              	.LVL82:
- 669              		.loc 1 154 5 is_stmt 1
- 670              		.loc 1 154 18 is_stmt 0
- 671 0500 630E0A00 		beqz	s4,.L32
- 672              		.loc 1 154 12 discriminator 1
- 673 0504 13050A00 		mv	a0,s4
- 674 0508 97000000 		call	_ZN6BufferD1Ev@plt
- 674      E7800000 
- 675              	.LVL83:
- 676 0510 13050A00 		mv	a0,s4
- 677 0514 97000000 		call	_ZdlPv@plt
- 677      E7800000 
- 678              	.LVL84:
- 679              	.L32:
- 680 051c 13010B00 		mv	sp,s6
- 681              	.LVL85:
- 682              	.L23:
- 155:test/../test/ConsumerProducer_C_API_test.h **** 
- 156:test/../test/ConsumerProducer_C_API_test.h **** }
- 683              		.loc 1 156 1
- 684 0520 130104F9 		addi	sp,s0,-112
- 685              		.cfi_remember_state
- 686              		.cfi_def_cfa 2, 112
- 687 0524 83308106 		ld	ra,104(sp)
- 688              		.cfi_restore 1
- 689 0528 03340106 		ld	s0,96(sp)
- 690              		.cfi_restore 8
- 691 052c 83348105 		ld	s1,88(sp)
- 692              		.cfi_restore 9
- 693 0530 03390105 		ld	s2,80(sp)
- 694              		.cfi_restore 18
- 695              	.LVL86:
- 696 0534 83398104 		ld	s3,72(sp)
- 697              		.cfi_restore 19
- 698 0538 033A0104 		ld	s4,64(sp)
- 699              		.cfi_restore 20
- 700 053c 833A8103 		ld	s5,56(sp)
- 701              		.cfi_restore 21
- 702 0540 033B0103 		ld	s6,48(sp)
- 703              		.cfi_restore 22
- 704 0544 13010107 		addi	sp,sp,112
- 705              		.cfi_def_cfa_offset 0
- 706 0548 67800000 		jr	ra
- 707              	.LVL87:
- 708              	.L36:
- 709              		.cfi_restore_state
- 710 054c 93040500 		mv	s1,a0
- 711              	.LVL88:
-GAS LISTING /tmp/cc673G5Z.s 			page 20
+ 143:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 618              		.loc 1 143 9 is_stmt 1
+ 143:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 619              		.loc 1 143 33 is_stmt 0
+ 620 0474 93870400 		mv	a5,s1
+ 143:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 621              		.loc 1 143 31
+ 622 0478 13953400 		slli	a0,s1,3
+ 143:test/../test/ConsumerProducer_C_API_test.h ****                       i > 0 ? producer : producerKeyboard,
+ 623              		.loc 1 143 22
+ 624 047c 3385AA00 		add	a0,s5,a0
+ 625 0480 E35490FA 		blez	s1,.L35
+ 626 0484 97050000 		lla	a1,_Z8producerPv
+ 626      93850500 
+ 627 048c 6FF05FFA 		j	.L28
+ 628              	.L27:
+ 629              	.LBE5:
+ 150:test/../test/ConsumerProducer_C_API_test.h **** 
+ 630              		.loc 1 150 5 is_stmt 1
+ 150:test/../test/ConsumerProducer_C_API_test.h **** 
+ 631              		.loc 1 150 20 is_stmt 0
+ 632 0490 97000000 		call	thread_dispatch@plt
+ 632      E7800000 
+ 633              	.LVL73:
+ 634              	.LBB6:
+ 154:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here3\n");
+ 635              		.loc 1 154 14
+ 636 0498 93040000 		li	s1,0
+ 637              	.LVL74:
+ 638              	.L31:
+ 154:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here3\n");
+ 639              		.loc 1 154 23 is_stmt 1 discriminator 1
+ 640 049c 634E9900 		bgt	s1,s2,.L30
+ 156:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here4\n");
+ 641              		.loc 1 156 9
+ 156:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here4\n");
+ 642              		.loc 1 156 17 is_stmt 0
+ 643 04a0 17050000 		ld	a0,.LANCHOR0+8
+ 643      03350500 
+ 644 04a8 97000000 		call	sem_wait@plt
+ 644      E7800000 
+ 645              	.LVL75:
+ 154:test/../test/ConsumerProducer_C_API_test.h ****         //printString("here3\n");
+ 646              		.loc 1 154 5 is_stmt 1
+ 647 04b0 9B841400 		addiw	s1,s1,1
+ 648              	.LVL76:
+ 649 04b4 6FF09FFE 		j	.L31
+ 650              	.LVL77:
+ 651              	.L30:
+ 652              	.LBE6:
+ 161:test/../test/ConsumerProducer_C_API_test.h **** 
+ 653              		.loc 1 161 5
+ 161:test/../test/ConsumerProducer_C_API_test.h **** 
+ 654              		.loc 1 161 14 is_stmt 0
+ 655 04b8 17050000 		ld	a0,.LANCHOR0+8
+ 655      03350500 
+ 656 04c0 97000000 		call	sem_close@plt
+GAS LISTING /tmp/cciiKsHz.s 			page 19
 
 
- 115:test/../test/ConsumerProducer_C_API_test.h **** 
- 712              		.loc 1 115 34
- 713 0550 13050A00 		mv	a0,s4
- 714 0554 97000000 		call	_ZdlPv@plt
- 714      E7800000 
- 715              	.LVL89:
- 716 055c 13850400 		mv	a0,s1
- 717 0560 97000000 		call	_Unwind_Resume@plt
- 717      E7800000 
- 718              	.LVL90:
- 719              	.LEHE2:
- 720              		.cfi_endproc
- 721              	.LFE3:
- 722              		.globl	__gxx_personality_v0
- 723              		.section	.gcc_except_table,"a",@progbits
- 724              	.LLSDA3:
- 725 0000 FF       		.byte	0xff
- 726 0001 FF       		.byte	0xff
- 727 0002 03       		.byte	0x3
- 728 0003 27       		.byte	0x27
- 729 0004 00000000 		.4byte	.LEHB0-.LFB3
- 730 0008 00000000 		.4byte	.LEHE0-.LEHB0
- 731 000c 00000000 		.4byte	0
- 732 0010 00       		.byte	0
- 733 0011 00000000 		.4byte	.LEHB1-.LFB3
- 734 0015 00000000 		.4byte	.LEHE1-.LEHB1
- 735 0019 00000000 		.4byte	.L36-.LFB3
- 736 001d 00       		.byte	0
- 737 001e 00000000 		.4byte	.LEHB2-.LFB3
- 738 0022 00000000 		.4byte	.LEHE2-.LEHB2
- 739 0026 00000000 		.4byte	0
- 740 002a 00       		.byte	0
- 741              		.text
- 743              		.section	.rodata.str1.8
- 744 00f7 00       		.align	3
- 745              	.LC9:
- 746 00f8 4920616D 		.string	"I am here!\n"
- 746      20686572 
- 746      65210A00 
- 747 0104 00000000 		.align	3
- 748              	.LC10:
- 749 0108 4920616D 		.string	"I am here again!\n"
- 749      20686572 
- 749      65206167 
- 749      61696E21 
- 749      0A00
- 750              		.text
- 751              		.align	2
- 752              		.globl	_Z8userMainv
- 754              	_Z8userMainv:
- 755              	.LFB29:
- 756              		.file 2 "test/userMain.cpp"
+ 656      E7800000 
+ 657              	.LVL78:
+ 658              		.loc 1 163 5 is_stmt 1
+ 659              		.loc 1 163 18 is_stmt 0
+ 660 04c8 630E0A00 		beqz	s4,.L32
+ 661              		.loc 1 163 12 discriminator 1
+ 662 04cc 13050A00 		mv	a0,s4
+ 663 04d0 97000000 		call	_ZN6BufferD1Ev@plt
+ 663      E7800000 
+ 664              	.LVL79:
+ 665 04d8 13050A00 		mv	a0,s4
+ 666 04dc 97000000 		call	_ZdlPv@plt
+ 666      E7800000 
+ 667              	.LVL80:
+ 668              	.L32:
+ 669 04e4 13010B00 		mv	sp,s6
+ 670              	.LVL81:
+ 671              	.L23:
+ 164:test/../test/ConsumerProducer_C_API_test.h **** 
+ 165:test/../test/ConsumerProducer_C_API_test.h **** }
+ 672              		.loc 1 165 1
+ 673 04e8 130104F9 		addi	sp,s0,-112
+ 674              		.cfi_remember_state
+ 675              		.cfi_def_cfa 2, 112
+ 676 04ec 83308106 		ld	ra,104(sp)
+ 677              		.cfi_restore 1
+ 678 04f0 03340106 		ld	s0,96(sp)
+ 679              		.cfi_restore 8
+ 680 04f4 83348105 		ld	s1,88(sp)
+ 681              		.cfi_restore 9
+ 682 04f8 03390105 		ld	s2,80(sp)
+ 683              		.cfi_restore 18
+ 684              	.LVL82:
+ 685 04fc 83398104 		ld	s3,72(sp)
+ 686              		.cfi_restore 19
+ 687 0500 033A0104 		ld	s4,64(sp)
+ 688              		.cfi_restore 20
+ 689 0504 833A8103 		ld	s5,56(sp)
+ 690              		.cfi_restore 21
+ 691 0508 033B0103 		ld	s6,48(sp)
+ 692              		.cfi_restore 22
+ 693 050c 13010107 		addi	sp,sp,112
+ 694              		.cfi_def_cfa_offset 0
+ 695 0510 67800000 		jr	ra
+ 696              	.LVL83:
+ 697              	.L36:
+ 698              		.cfi_restore_state
+ 699 0514 93040500 		mv	s1,a0
+ 700              	.LVL84:
+ 122:test/../test/ConsumerProducer_C_API_test.h **** 
+ 701              		.loc 1 122 34
+ 702 0518 13050A00 		mv	a0,s4
+ 703 051c 97000000 		call	_ZdlPv@plt
+ 703      E7800000 
+ 704              	.LVL85:
+ 705 0524 13850400 		mv	a0,s1
+ 706 0528 97000000 		call	_Unwind_Resume@plt
+GAS LISTING /tmp/cciiKsHz.s 			page 20
+
+
+ 706      E7800000 
+ 707              	.LVL86:
+ 708              	.LEHE2:
+ 709              		.cfi_endproc
+ 710              	.LFE3:
+ 711              		.globl	__gxx_personality_v0
+ 712              		.section	.gcc_except_table,"a",@progbits
+ 713              	.LLSDA3:
+ 714 0000 FF       		.byte	0xff
+ 715 0001 FF       		.byte	0xff
+ 716 0002 03       		.byte	0x3
+ 717 0003 27       		.byte	0x27
+ 718 0004 00000000 		.4byte	.LEHB0-.LFB3
+ 719 0008 00000000 		.4byte	.LEHE0-.LEHB0
+ 720 000c 00000000 		.4byte	0
+ 721 0010 00       		.byte	0
+ 722 0011 00000000 		.4byte	.LEHB1-.LFB3
+ 723 0015 00000000 		.4byte	.LEHE1-.LEHB1
+ 724 0019 00000000 		.4byte	.L36-.LFB3
+ 725 001d 00       		.byte	0
+ 726 001e 00000000 		.4byte	.LEHB2-.LFB3
+ 727 0022 00000000 		.4byte	.LEHE2-.LEHB2
+ 728 0026 00000000 		.4byte	0
+ 729 002a 00       		.byte	0
+ 730              		.text
+ 732              		.section	.rodata.str1.8
+ 733 00fb 00000000 		.align	3
+ 733      00
+ 734              	.LC10:
+ 735 0100 4920616D 		.string	"I am here!\n"
+ 735      20686572 
+ 735      65210A00 
+ 736 010c 00000000 		.align	3
+ 737              	.LC11:
+ 738 0110 4920616D 		.string	"I am here again!\n"
+ 738      20686572 
+ 738      65206167 
+ 738      61696E21 
+ 738      0A00
+ 739              		.text
+ 740              		.align	2
+ 741              		.globl	_Z8userMainv
+ 743              	_Z8userMainv:
+ 744              	.LFB29:
+ 745              		.file 2 "test/userMain.cpp"
    1:test/userMain.cpp **** //#include "../test/Threads_C_API_test.hpp" // zadatak 2, niti C API i sinhrona promena konteksta
    2:test/userMain.cpp **** //#include "../test/Threads_CPP_API_test.hpp" // zadatak 2., niti CPP API i sinhrona promena kontek
    3:test/userMain.cpp **** 
    4:test/userMain.cpp **** #include "../test/ConsumerProducer_C_API_test.h" // zadatak 3., kompletan C API sa semaforima, sinh
    5:test/userMain.cpp **** //#include "../test/ConsumerProducer_CPP_Sync_API_test.hpp" // zadatak 3., kompletan CPP API sa sem
-GAS LISTING /tmp/cc673G5Z.s 			page 21
-
-
    6:test/userMain.cpp **** 
    7:test/userMain.cpp **** //#include "../test/ThreadSleep_C_API_test.hpp" // thread_sleep test C API
    8:test/userMain.cpp **** //#include "../test/ConsumerProducer_CPP_API_test.hpp" // zadatak 4. CPP API i asinhrona promena ko
@@ -1208,36 +1198,39 @@ GAS LISTING /tmp/cc673G5Z.s 			page 1
   10:test/userMain.cpp **** #include "../h/print.hpp"
   11:test/userMain.cpp **** #include "../h/tcb.hpp"
   12:test/userMain.cpp **** #include "../h/syscall_c.h"
+GAS LISTING /tmp/cciiKsHz.s 			page 21
+
+
   13:test/userMain.cpp **** 
   14:test/userMain.cpp **** void userMain() {
- 757              		.loc 2 14 17 is_stmt 1
- 758              		.cfi_startproc
- 759 0568 130101FF 		addi	sp,sp,-16
- 760              		.cfi_def_cfa_offset 16
- 761 056c 23341100 		sd	ra,8(sp)
- 762 0570 23308100 		sd	s0,0(sp)
- 763              		.cfi_offset 1, -8
- 764              		.cfi_offset 8, -16
- 765 0574 13040101 		addi	s0,sp,16
- 766              		.cfi_def_cfa 8, 0
+ 746              		.loc 2 14 17 is_stmt 1
+ 747              		.cfi_startproc
+ 748 0530 130101FF 		addi	sp,sp,-16
+ 749              		.cfi_def_cfa_offset 16
+ 750 0534 23341100 		sd	ra,8(sp)
+ 751 0538 23308100 		sd	s0,0(sp)
+ 752              		.cfi_offset 1, -8
+ 753              		.cfi_offset 8, -16
+ 754 053c 13040101 		addi	s0,sp,16
+ 755              		.cfi_def_cfa 8, 0
   15:test/userMain.cpp ****     __print_string("I am here!\n");
- 767              		.loc 2 15 5
- 768              		.loc 2 15 19 is_stmt 0
- 769 0578 17050000 		lla	a0,.LC9
- 769      13050500 
- 770 0580 97000000 		call	_Z14__print_stringPKc@plt
- 770      E7800000 
- 771              	.LVL91:
+ 756              		.loc 2 15 5
+ 757              		.loc 2 15 19 is_stmt 0
+ 758 0540 17050000 		lla	a0,.LC10
+ 758      13050500 
+ 759 0548 97000000 		call	_Z14__print_stringPKc@plt
+ 759      E7800000 
+ 760              	.LVL87:
   16:test/userMain.cpp ****     //printString("I am here!");
   17:test/userMain.cpp ****     //Threads_C_API_test(); // zadatak 2., niti C API i sinhrona promena konteksta
   18:test/userMain.cpp ****     //Threads_CPP_API_test(); // zadatak 2., niti CPP API i sinhrona promena konteksta
   19:test/userMain.cpp **** 
   20:test/userMain.cpp ****     producerConsumer_C_API(); // zadatak 3., kompletan C API sa semaforima, sinhrona promena kontek
- 772              		.loc 2 20 5 is_stmt 1
- 773              		.loc 2 20 27 is_stmt 0
- 774 0588 97000000 		call	_Z22producerConsumer_C_APIv
- 774      E7800000 
- 775              	.LVL92:
+ 761              		.loc 2 20 5 is_stmt 1
+ 762              		.loc 2 20 27 is_stmt 0
+ 763 0550 97000000 		call	_Z22producerConsumer_C_APIv
+ 763      E7800000 
+ 764              	.LVL88:
   21:test/userMain.cpp ****     //producerConsumer_CPP_Sync_API(); // zadatak 3., kompletan CPP API sa semaforima, sinhrona pro
   22:test/userMain.cpp **** 
   23:test/userMain.cpp ****     //testSleeping(); // thread_sleep test C API
@@ -1246,702 +1239,696 @@ GAS LISTING /tmp/cc673G5Z.s 			page 1
   26:test/userMain.cpp ****     //__print_string("I am here too!\n");
   27:test/userMain.cpp ****     //thread_dispatch();
   28:test/userMain.cpp ****     __print_string("I am here again!\n");
- 776              		.loc 2 28 5 is_stmt 1
- 777              		.loc 2 28 19 is_stmt 0
- 778 0590 17050000 		lla	a0,.LC10
- 778      13050500 
- 779 0598 97000000 		call	_Z14__print_stringPKc@plt
- 779      E7800000 
- 780              	.LVL93:
+ 765              		.loc 2 28 5 is_stmt 1
+ 766              		.loc 2 28 19 is_stmt 0
+ 767 0558 17050000 		lla	a0,.LC11
+ 767      13050500 
+ 768 0560 97000000 		call	_Z14__print_stringPKc@plt
+ 768      E7800000 
+ 769              	.LVL89:
   29:test/userMain.cpp ****     //thread_exit();
   30:test/userMain.cpp ****     /*TCB::running->setFinished(true);
   31:test/userMain.cpp ****     thread_dispatch();*/
   32:test/userMain.cpp **** }...
- 781              		.loc 2 32 1
-GAS LISTING /tmp/cc673G5Z.s 			page 22
+ 770              		.loc 2 32 1
+ 771 0568 83308100 		ld	ra,8(sp)
+ 772              		.cfi_restore 1
+ 773 056c 03340100 		ld	s0,0(sp)
+ 774              		.cfi_restore 8
+ 775              		.cfi_def_cfa 2, 16
+ 776 0570 13010101 		addi	sp,sp,16
+ 777              		.cfi_def_cfa_offset 0
+GAS LISTING /tmp/cciiKsHz.s 			page 22
 
 
- 782 05a0 83308100 		ld	ra,8(sp)
- 783              		.cfi_restore 1
- 784 05a4 03340100 		ld	s0,0(sp)
- 785              		.cfi_restore 8
- 786              		.cfi_def_cfa 2, 16
- 787 05a8 13010101 		addi	sp,sp,16
- 788              		.cfi_def_cfa_offset 0
- 789 05ac 67800000 		jr	ra
- 790              		.cfi_endproc
- 791              	.LFE29:
- 793              		.globl	threadEnd
- 794              		.globl	waitForAll
- 795              		.bss
- 796              		.align	3
- 797              		.set	.LANCHOR0,. + 0
- 800              	threadEnd:
- 801 0000 00000000 		.zero	4
- 802 0004 00000000 		.zero	4
- 805              	waitForAll:
- 806 0008 00000000 		.zero	8
- 806      00000000 
- 807              		.text
- 808              	.Letext0:
- 809              		.file 3 "test/../test/../h/../lib/hw.h"
- 810              		.file 4 "test/../test/../h/syscall_c.h"
- 811              		.file 5 "test/../h/tcb.hpp"
- 812              		.file 6 "test/../test/buffer.hpp"
- 813              		.file 7 "test/../h/print.hpp"
- 814              		.file 8 "test/../test/printing.hpp"
- 3698              		.align	3
- 3701              	DW.ref.__gxx_personality_v0:
- 3702 0000 00000000 		.dword	__gxx_personality_v0
- 3702      00000000 
- 3703              		.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0"
- 3704              		.section	.note.GNU-stack,"",@progbits
-GAS LISTING /tmp/cc673G5Z.s 			page 23
+ 778 0574 67800000 		jr	ra
+ 779              		.cfi_endproc
+ 780              	.LFE29:
+ 782              		.globl	threadEnd
+ 783              		.globl	waitForAll
+ 784              		.bss
+ 785              		.align	3
+ 786              		.set	.LANCHOR0,. + 0
+ 789              	threadEnd:
+ 790 0000 00000000 		.zero	4
+ 791 0004 00000000 		.zero	4
+ 794              	waitForAll:
+ 795 0008 00000000 		.zero	8
+ 795      00000000 
+ 796              		.text
+ 797              	.Letext0:
+ 798              		.file 3 "test/../test/../h/../lib/hw.h"
+ 799              		.file 4 "test/../test/../h/syscall_c.h"
+ 800              		.file 5 "test/../h/tcb.hpp"
+ 801              		.file 6 "test/../test/buffer.hpp"
+ 802              		.file 7 "test/../h/print.hpp"
+ 803              		.file 8 "test/../test/printing.hpp"
+ 3642              		.align	3
+ 3645              	DW.ref.__gxx_personality_v0:
+ 3646 0000 00000000 		.dword	__gxx_personality_v0
+ 3646      00000000 
+ 3647              		.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0"
+ 3648              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cciiKsHz.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 userMain.cpp
-     /tmp/cc673G5Z.s:9      .text:0000000000000000 _Z16producerKeyboardPv
-     /tmp/cc673G5Z.s:13     .text:0000000000000000 .L0 
-     /tmp/cc673G5Z.s:15     .text:0000000000000000 .L0 
-     /tmp/cc673G5Z.s:16     .text:0000000000000004 .L0 
-     /tmp/cc673G5Z.s:21     .text:0000000000000014 .L0 
-     /tmp/cc673G5Z.s:22     .text:0000000000000014 .L0 
-     /tmp/cc673G5Z.s:23     .text:0000000000000014 .L0 
-     /tmp/cc673G5Z.s:24     .text:0000000000000014 .L0 
-     /tmp/cc673G5Z.s:26     .text:0000000000000018 .L0 
-     /tmp/cc673G5Z.s:30     .text:000000000000001c .L0 
-     /tmp/cc673G5Z.s:31     .text:000000000000001c .L0 
-     /tmp/cc673G5Z.s:32     .text:000000000000001c .L0 
-     /tmp/cc673G5Z.s:33     .text:000000000000001c .L0 
-     /tmp/cc673G5Z.s:38     .text:0000000000000024 .L0 
-     /tmp/cc673G5Z.s:39     .text:0000000000000024 .L0 
-     /tmp/cc673G5Z.s:43     .text:000000000000002c .L0 
-     /tmp/cc673G5Z.s:44     .text:000000000000002c .L0 
-     /tmp/cc673G5Z.s:45     .text:000000000000002c .L0 
-     /tmp/cc673G5Z.s:48     .text:0000000000000034 .L0 
-     /tmp/cc673G5Z.s:51     .text:0000000000000038 .L0 
-     /tmp/cc673G5Z.s:54     .text:0000000000000040 .L0 
-     /tmp/cc673G5Z.s:55     .text:0000000000000040 .L0 
-     /tmp/cc673G5Z.s:59     .text:000000000000004c .L0 
-     /tmp/cc673G5Z.s:60     .text:000000000000004c .L0 
-     /tmp/cc673G5Z.s:64     .text:0000000000000054 .L0 
-     /tmp/cc673G5Z.s:65     .text:0000000000000054 .L0 
-     /tmp/cc673G5Z.s:67     .text:0000000000000058 .L0 
-     /tmp/cc673G5Z.s:71     .text:0000000000000064 .L0 
-     /tmp/cc673G5Z.s:73     .text:0000000000000068 .L0 
-     /tmp/cc673G5Z.s:78     .text:0000000000000070 .L0 
-     /tmp/cc673G5Z.s:79     .text:0000000000000070 .L0 
-     /tmp/cc673G5Z.s:82     .text:000000000000007c .L0 
-     /tmp/cc673G5Z.s:83     .text:000000000000007c .L0 
-     /tmp/cc673G5Z.s:90     .text:000000000000008c .L0 
-     /tmp/cc673G5Z.s:91     .text:000000000000008c .L0 
-     /tmp/cc673G5Z.s:97     .text:00000000000000a0 .L0 
-     /tmp/cc673G5Z.s:98     .text:00000000000000a0 .L0 
-     /tmp/cc673G5Z.s:102    .text:00000000000000ac .L0 
-     /tmp/cc673G5Z.s:103    .text:00000000000000b0 .L0 
-     /tmp/cc673G5Z.s:105    .text:00000000000000b4 .L0 
-     /tmp/cc673G5Z.s:106    .text:00000000000000b4 .L0 
-     /tmp/cc673G5Z.s:108    .text:00000000000000b8 .L0 
-     /tmp/cc673G5Z.s:111    .text:00000000000000bc .L0 
-     /tmp/cc673G5Z.s:114    .text:00000000000000c0 .L0 
-     /tmp/cc673G5Z.s:116    .text:00000000000000c4 .L0 
-     /tmp/cc673G5Z.s:122    .text:00000000000000c4 _Z8producerPv
-     /tmp/cc673G5Z.s:125    .text:00000000000000c4 .L0 
-     /tmp/cc673G5Z.s:127    .text:00000000000000c4 .L0 
-     /tmp/cc673G5Z.s:128    .text:00000000000000c8 .L0 
-     /tmp/cc673G5Z.s:133    .text:00000000000000d8 .L0 
-     /tmp/cc673G5Z.s:134    .text:00000000000000d8 .L0 
-     /tmp/cc673G5Z.s:135    .text:00000000000000d8 .L0 
-     /tmp/cc673G5Z.s:136    .text:00000000000000d8 .L0 
-     /tmp/cc673G5Z.s:138    .text:00000000000000dc .L0 
-     /tmp/cc673G5Z.s:142    .text:00000000000000e0 .L0 
-GAS LISTING /tmp/cc673G5Z.s 			page 24
+     /tmp/cciiKsHz.s:14     .text:0000000000000000 _Z16producerKeyboardPv
+     /tmp/cciiKsHz.s:18     .text:0000000000000000 .L0 
+     /tmp/cciiKsHz.s:20     .text:0000000000000000 .L0 
+     /tmp/cciiKsHz.s:21     .text:0000000000000004 .L0 
+     /tmp/cciiKsHz.s:27     .text:0000000000000018 .L0 
+     /tmp/cciiKsHz.s:28     .text:0000000000000018 .L0 
+     /tmp/cciiKsHz.s:29     .text:0000000000000018 .L0 
+     /tmp/cciiKsHz.s:30     .text:0000000000000018 .L0 
+     /tmp/cciiKsHz.s:31     .text:0000000000000018 .L0 
+     /tmp/cciiKsHz.s:33     .text:000000000000001c .L0 
+     /tmp/cciiKsHz.s:37     .text:0000000000000020 .L0 
+     /tmp/cciiKsHz.s:38     .text:0000000000000020 .L0 
+     /tmp/cciiKsHz.s:39     .text:0000000000000020 .L0 
+     /tmp/cciiKsHz.s:40     .text:0000000000000020 .L0 
+     /tmp/cciiKsHz.s:45     .text:0000000000000028 .L0 
+     /tmp/cciiKsHz.s:46     .text:0000000000000028 .L0 
+     /tmp/cciiKsHz.s:50     .text:0000000000000030 .L0 
+     /tmp/cciiKsHz.s:51     .text:0000000000000030 .L0 
+     /tmp/cciiKsHz.s:52     .text:0000000000000030 .L0 
+     /tmp/cciiKsHz.s:55     .text:0000000000000038 .L0 
+     /tmp/cciiKsHz.s:58     .text:000000000000003c .L0 
+     /tmp/cciiKsHz.s:61     .text:0000000000000044 .L0 
+     /tmp/cciiKsHz.s:62     .text:0000000000000044 .L0 
+     /tmp/cciiKsHz.s:66     .text:0000000000000054 .L0 
+     /tmp/cciiKsHz.s:67     .text:0000000000000054 .L0 
+     /tmp/cciiKsHz.s:72     .text:0000000000000064 .L0 
+     /tmp/cciiKsHz.s:73     .text:0000000000000064 .L0 
+     /tmp/cciiKsHz.s:77     .text:000000000000006c .L0 
+     /tmp/cciiKsHz.s:78     .text:000000000000006c .L0 
+     /tmp/cciiKsHz.s:80     .text:0000000000000070 .L0 
+     /tmp/cciiKsHz.s:84     .text:000000000000007c .L0 
+     /tmp/cciiKsHz.s:86     .text:0000000000000080 .L0 
+     /tmp/cciiKsHz.s:91     .text:0000000000000088 .L0 
+     /tmp/cciiKsHz.s:92     .text:0000000000000088 .L0 
+     /tmp/cciiKsHz.s:95     .text:0000000000000094 .L0 
+     /tmp/cciiKsHz.s:96     .text:0000000000000094 .L0 
+     /tmp/cciiKsHz.s:101    .text:00000000000000a4 .L0 
+     /tmp/cciiKsHz.s:102    .text:00000000000000a4 .L0 
+     /tmp/cciiKsHz.s:106    .text:00000000000000b0 .L0 
+     /tmp/cciiKsHz.s:107    .text:00000000000000b4 .L0 
+     /tmp/cciiKsHz.s:109    .text:00000000000000b8 .L0 
+     /tmp/cciiKsHz.s:110    .text:00000000000000b8 .L0 
+     /tmp/cciiKsHz.s:112    .text:00000000000000bc .L0 
+     /tmp/cciiKsHz.s:115    .text:00000000000000c0 .L0 
+     /tmp/cciiKsHz.s:118    .text:00000000000000c4 .L0 
+     /tmp/cciiKsHz.s:121    .text:00000000000000c8 .L0 
+     /tmp/cciiKsHz.s:123    .text:00000000000000cc .L0 
+     /tmp/cciiKsHz.s:134    .text:00000000000000cc _Z8producerPv
+     /tmp/cciiKsHz.s:137    .text:00000000000000cc .L0 
+     /tmp/cciiKsHz.s:139    .text:00000000000000cc .L0 
+     /tmp/cciiKsHz.s:140    .text:00000000000000d0 .L0 
+     /tmp/cciiKsHz.s:145    .text:00000000000000e0 .L0 
+     /tmp/cciiKsHz.s:146    .text:00000000000000e0 .L0 
+     /tmp/cciiKsHz.s:147    .text:00000000000000e0 .L0 
+     /tmp/cciiKsHz.s:148    .text:00000000000000e0 .L0 
+GAS LISTING /tmp/cciiKsHz.s 			page 24
 
 
-     /tmp/cc673G5Z.s:143    .text:00000000000000e0 .L0 
-     /tmp/cc673G5Z.s:144    .text:00000000000000e0 .L0 
-     /tmp/cc673G5Z.s:149    .text:00000000000000e8 .L0 
-     /tmp/cc673G5Z.s:150    .text:00000000000000e8 .L0 
-     /tmp/cc673G5Z.s:154    .text:00000000000000f0 .L0 
-     /tmp/cc673G5Z.s:155    .text:00000000000000f0 .L0 
-     /tmp/cc673G5Z.s:158    .text:00000000000000fc .L0 
-     /tmp/cc673G5Z.s:159    .text:00000000000000fc .L0 
-     /tmp/cc673G5Z.s:161    .text:0000000000000100 .L0 
-     /tmp/cc673G5Z.s:166    .text:0000000000000110 .L0 
-     /tmp/cc673G5Z.s:167    .text:0000000000000110 .L0 
-     /tmp/cc673G5Z.s:171    .text:0000000000000118 .L0 
-     /tmp/cc673G5Z.s:172    .text:0000000000000118 .L0 
-     /tmp/cc673G5Z.s:174    .text:000000000000011c .L0 
-     /tmp/cc673G5Z.s:178    .text:0000000000000128 .L0 
-     /tmp/cc673G5Z.s:180    .text:000000000000012c .L0 
-     /tmp/cc673G5Z.s:185    .text:0000000000000134 .L0 
-     /tmp/cc673G5Z.s:186    .text:0000000000000134 .L0 
-     /tmp/cc673G5Z.s:192    .text:0000000000000148 .L0 
-     /tmp/cc673G5Z.s:193    .text:0000000000000148 .L0 
-     /tmp/cc673G5Z.s:197    .text:0000000000000154 .L0 
-     /tmp/cc673G5Z.s:198    .text:0000000000000158 .L0 
-     /tmp/cc673G5Z.s:200    .text:000000000000015c .L0 
-     /tmp/cc673G5Z.s:201    .text:000000000000015c .L0 
-     /tmp/cc673G5Z.s:203    .text:0000000000000160 .L0 
-     /tmp/cc673G5Z.s:206    .text:0000000000000164 .L0 
-     /tmp/cc673G5Z.s:209    .text:0000000000000168 .L0 
-     /tmp/cc673G5Z.s:211    .text:000000000000016c .L0 
-     /tmp/cc673G5Z.s:217    .text:000000000000016c _Z8consumerPv
-     /tmp/cc673G5Z.s:220    .text:000000000000016c .L0 
-     /tmp/cc673G5Z.s:222    .text:000000000000016c .L0 
-     /tmp/cc673G5Z.s:223    .text:0000000000000170 .L0 
-     /tmp/cc673G5Z.s:229    .text:0000000000000184 .L0 
-     /tmp/cc673G5Z.s:230    .text:0000000000000184 .L0 
-     /tmp/cc673G5Z.s:231    .text:0000000000000184 .L0 
-     /tmp/cc673G5Z.s:232    .text:0000000000000184 .L0 
-     /tmp/cc673G5Z.s:233    .text:0000000000000184 .L0 
-     /tmp/cc673G5Z.s:235    .text:0000000000000188 .L0 
-     /tmp/cc673G5Z.s:239    .text:000000000000018c .L0 
-     /tmp/cc673G5Z.s:240    .text:000000000000018c .L0 
-     /tmp/cc673G5Z.s:241    .text:000000000000018c .L0 
-     /tmp/cc673G5Z.s:247    .text:0000000000000194 .L0 
-     /tmp/cc673G5Z.s:248    .text:0000000000000194 .L0 
-     /tmp/cc673G5Z.s:254    .text:00000000000001a0 .L0 
-     /tmp/cc673G5Z.s:255    .text:00000000000001a0 .L0 
-     /tmp/cc673G5Z.s:261    .text:00000000000001ac .L0 
-     /tmp/cc673G5Z.s:262    .text:00000000000001ac .L0 
-     /tmp/cc673G5Z.s:266    .text:00000000000001b8 .L0 
-     /tmp/cc673G5Z.s:267    .text:00000000000001b8 .L0 
-     /tmp/cc673G5Z.s:271    .text:00000000000001c4 .L0 
-     /tmp/cc673G5Z.s:272    .text:00000000000001c4 .L0 
-     /tmp/cc673G5Z.s:276    .text:00000000000001cc .L0 
-     /tmp/cc673G5Z.s:277    .text:00000000000001cc .L0 
-     /tmp/cc673G5Z.s:282    .text:00000000000001d8 .L0 
-     /tmp/cc673G5Z.s:283    .text:00000000000001d8 .L0 
-     /tmp/cc673G5Z.s:285    .text:00000000000001dc .L0 
-     /tmp/cc673G5Z.s:288    .text:00000000000001e4 .L0 
-GAS LISTING /tmp/cc673G5Z.s 			page 25
+     /tmp/cciiKsHz.s:150    .text:00000000000000e4 .L0 
+     /tmp/cciiKsHz.s:154    .text:00000000000000e8 .L0 
+     /tmp/cciiKsHz.s:155    .text:00000000000000e8 .L0 
+     /tmp/cciiKsHz.s:156    .text:00000000000000e8 .L0 
+     /tmp/cciiKsHz.s:161    .text:00000000000000f0 .L0 
+     /tmp/cciiKsHz.s:162    .text:00000000000000f0 .L0 
+     /tmp/cciiKsHz.s:166    .text:0000000000000100 .L0 
+     /tmp/cciiKsHz.s:167    .text:0000000000000100 .L0 
+     /tmp/cciiKsHz.s:171    .text:0000000000000108 .L0 
+     /tmp/cciiKsHz.s:172    .text:0000000000000108 .L0 
+     /tmp/cciiKsHz.s:175    .text:0000000000000114 .L0 
+     /tmp/cciiKsHz.s:176    .text:0000000000000114 .L0 
+     /tmp/cciiKsHz.s:178    .text:0000000000000118 .L0 
+     /tmp/cciiKsHz.s:183    .text:0000000000000128 .L0 
+     /tmp/cciiKsHz.s:184    .text:0000000000000128 .L0 
+     /tmp/cciiKsHz.s:188    .text:0000000000000130 .L0 
+     /tmp/cciiKsHz.s:189    .text:0000000000000130 .L0 
+     /tmp/cciiKsHz.s:191    .text:0000000000000134 .L0 
+     /tmp/cciiKsHz.s:195    .text:0000000000000140 .L0 
+     /tmp/cciiKsHz.s:197    .text:0000000000000144 .L0 
+     /tmp/cciiKsHz.s:202    .text:000000000000014c .L0 
+     /tmp/cciiKsHz.s:203    .text:000000000000014c .L0 
+     /tmp/cciiKsHz.s:207    .text:0000000000000158 .L0 
+     /tmp/cciiKsHz.s:208    .text:000000000000015c .L0 
+     /tmp/cciiKsHz.s:210    .text:0000000000000160 .L0 
+     /tmp/cciiKsHz.s:211    .text:0000000000000160 .L0 
+     /tmp/cciiKsHz.s:213    .text:0000000000000164 .L0 
+     /tmp/cciiKsHz.s:216    .text:0000000000000168 .L0 
+     /tmp/cciiKsHz.s:219    .text:000000000000016c .L0 
+     /tmp/cciiKsHz.s:221    .text:0000000000000170 .L0 
+     /tmp/cciiKsHz.s:232    .text:0000000000000170 _Z8consumerPv
+     /tmp/cciiKsHz.s:235    .text:0000000000000170 .L0 
+     /tmp/cciiKsHz.s:237    .text:0000000000000170 .L0 
+     /tmp/cciiKsHz.s:238    .text:0000000000000174 .L0 
+     /tmp/cciiKsHz.s:244    .text:0000000000000188 .L0 
+     /tmp/cciiKsHz.s:245    .text:0000000000000188 .L0 
+     /tmp/cciiKsHz.s:246    .text:0000000000000188 .L0 
+     /tmp/cciiKsHz.s:247    .text:0000000000000188 .L0 
+     /tmp/cciiKsHz.s:248    .text:0000000000000188 .L0 
+     /tmp/cciiKsHz.s:250    .text:000000000000018c .L0 
+     /tmp/cciiKsHz.s:254    .text:0000000000000190 .L0 
+     /tmp/cciiKsHz.s:255    .text:0000000000000190 .L0 
+     /tmp/cciiKsHz.s:256    .text:0000000000000190 .L0 
+     /tmp/cciiKsHz.s:262    .text:0000000000000198 .L0 
+     /tmp/cciiKsHz.s:263    .text:0000000000000198 .L0 
+     /tmp/cciiKsHz.s:267    .text:00000000000001a8 .L0 
+     /tmp/cciiKsHz.s:268    .text:00000000000001a8 .L0 
+     /tmp/cciiKsHz.s:274    .text:00000000000001b4 .L0 
+     /tmp/cciiKsHz.s:275    .text:00000000000001b4 .L0 
+     /tmp/cciiKsHz.s:281    .text:00000000000001c0 .L0 
+     /tmp/cciiKsHz.s:282    .text:00000000000001c0 .L0 
+     /tmp/cciiKsHz.s:286    .text:00000000000001cc .L0 
+     /tmp/cciiKsHz.s:287    .text:00000000000001cc .L0 
+     /tmp/cciiKsHz.s:291    .text:00000000000001d8 .L0 
+     /tmp/cciiKsHz.s:292    .text:00000000000001d8 .L0 
+     /tmp/cciiKsHz.s:296    .text:00000000000001e0 .L0 
+     /tmp/cciiKsHz.s:297    .text:00000000000001e0 .L0 
+GAS LISTING /tmp/cciiKsHz.s 			page 25
 
 
-     /tmp/cc673G5Z.s:290    .text:00000000000001e8 .L0 
-     /tmp/cc673G5Z.s:293    .text:00000000000001ec .L0 
-     /tmp/cc673G5Z.s:294    .text:00000000000001ec .L0 
-     /tmp/cc673G5Z.s:298    .text:00000000000001f4 .L0 
-     /tmp/cc673G5Z.s:304    .text:00000000000001fc .L0 
-     /tmp/cc673G5Z.s:305    .text:00000000000001fc .L0 
-     /tmp/cc673G5Z.s:309    .text:0000000000000208 .L0 
-     /tmp/cc673G5Z.s:310    .text:0000000000000208 .L0 
-     /tmp/cc673G5Z.s:317    .text:0000000000000214 .L0 
-     /tmp/cc673G5Z.s:318    .text:0000000000000214 .L0 
-     /tmp/cc673G5Z.s:319    .text:0000000000000214 .L0 
-     /tmp/cc673G5Z.s:323    .text:0000000000000220 .L0 
-     /tmp/cc673G5Z.s:325    .text:0000000000000224 .L0 
-     /tmp/cc673G5Z.s:326    .text:0000000000000224 .L0 
-     /tmp/cc673G5Z.s:332    .text:0000000000000238 .L0 
-     /tmp/cc673G5Z.s:333    .text:0000000000000238 .L0 
-     /tmp/cc673G5Z.s:337    .text:0000000000000244 .L0 
-     /tmp/cc673G5Z.s:338    .text:0000000000000248 .L0 
-     /tmp/cc673G5Z.s:340    .text:000000000000024c .L0 
-     /tmp/cc673G5Z.s:341    .text:000000000000024c .L0 
-     /tmp/cc673G5Z.s:343    .text:0000000000000250 .L0 
-     /tmp/cc673G5Z.s:345    .text:0000000000000254 .L0 
-     /tmp/cc673G5Z.s:348    .text:0000000000000258 .L0 
-     /tmp/cc673G5Z.s:351    .text:000000000000025c .L0 
-     /tmp/cc673G5Z.s:353    .text:0000000000000260 .L0 
-     /tmp/cc673G5Z.s:388    .text:0000000000000260 _Z22producerConsumer_C_APIv
-     /tmp/cc673G5Z.s:391    .text:0000000000000260 .L0 
-     /tmp/cc673G5Z.s:3701   .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
-     /tmp/cc673G5Z.s:394    .text:0000000000000260 .L0 
-     /tmp/cc673G5Z.s:395    .text:0000000000000264 .L0 
-     /tmp/cc673G5Z.s:404    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:405    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:406    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:407    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:408    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:409    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:410    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:411    .text:0000000000000284 .L0 
-     /tmp/cc673G5Z.s:413    .text:0000000000000288 .L0 
-     /tmp/cc673G5Z.s:415    .text:0000000000000288 .L0 
-     /tmp/cc673G5Z.s:417    .text:000000000000028c .L0 
-     /tmp/cc673G5Z.s:418    .text:000000000000028c .L0 
-     /tmp/cc673G5Z.s:419    .text:000000000000028c .L0 
-     /tmp/cc673G5Z.s:420    .text:000000000000028c .L0 
-     /tmp/cc673G5Z.s:425    .text:000000000000029c .L0 
-     /tmp/cc673G5Z.s:426    .text:000000000000029c .L0 
-     /tmp/cc673G5Z.s:432    .text:00000000000002b0 .L0 
-     /tmp/cc673G5Z.s:433    .text:00000000000002b0 .L0 
-     /tmp/cc673G5Z.s:439    .text:00000000000002c0 .L0 
-     /tmp/cc673G5Z.s:440    .text:00000000000002c0 .L0 
-     /tmp/cc673G5Z.s:444    .text:00000000000002d0 .L0 
-     /tmp/cc673G5Z.s:445    .text:00000000000002d0 .L0 
-     /tmp/cc673G5Z.s:450    .text:00000000000002e0 .L0 
-     /tmp/cc673G5Z.s:451    .text:00000000000002e0 .L0 
-     /tmp/cc673G5Z.s:457    .text:00000000000002f0 .L0 
-     /tmp/cc673G5Z.s:458    .text:00000000000002f0 .L0 
-     /tmp/cc673G5Z.s:462    .text:0000000000000300 .L0 
-GAS LISTING /tmp/cc673G5Z.s 			page 26
+     /tmp/cciiKsHz.s:302    .text:00000000000001ec .L0 
+     /tmp/cciiKsHz.s:303    .text:00000000000001ec .L0 
+     /tmp/cciiKsHz.s:305    .text:00000000000001f0 .L0 
+     /tmp/cciiKsHz.s:308    .text:00000000000001f8 .L0 
+     /tmp/cciiKsHz.s:310    .text:00000000000001fc .L0 
+     /tmp/cciiKsHz.s:313    .text:0000000000000200 .L0 
+     /tmp/cciiKsHz.s:314    .text:0000000000000200 .L0 
+     /tmp/cciiKsHz.s:318    .text:0000000000000208 .L0 
+     /tmp/cciiKsHz.s:324    .text:0000000000000210 .L0 
+     /tmp/cciiKsHz.s:325    .text:0000000000000210 .L0 
+     /tmp/cciiKsHz.s:329    .text:000000000000021c .L0 
+     /tmp/cciiKsHz.s:330    .text:000000000000021c .L0 
+     /tmp/cciiKsHz.s:337    .text:0000000000000228 .L0 
+     /tmp/cciiKsHz.s:338    .text:0000000000000228 .L0 
+     /tmp/cciiKsHz.s:339    .text:0000000000000228 .L0 
+     /tmp/cciiKsHz.s:343    .text:0000000000000234 .L0 
+     /tmp/cciiKsHz.s:345    .text:0000000000000238 .L0 
+     /tmp/cciiKsHz.s:346    .text:0000000000000238 .L0 
+     /tmp/cciiKsHz.s:350    .text:0000000000000244 .L0 
+     /tmp/cciiKsHz.s:351    .text:0000000000000248 .L0 
+     /tmp/cciiKsHz.s:353    .text:000000000000024c .L0 
+     /tmp/cciiKsHz.s:354    .text:000000000000024c .L0 
+     /tmp/cciiKsHz.s:356    .text:0000000000000250 .L0 
+     /tmp/cciiKsHz.s:358    .text:0000000000000254 .L0 
+     /tmp/cciiKsHz.s:361    .text:0000000000000258 .L0 
+     /tmp/cciiKsHz.s:364    .text:000000000000025c .L0 
+     /tmp/cciiKsHz.s:366    .text:0000000000000260 .L0 
+     /tmp/cciiKsHz.s:395    .text:0000000000000260 _Z22producerConsumer_C_APIv
+     /tmp/cciiKsHz.s:398    .text:0000000000000260 .L0 
+     /tmp/cciiKsHz.s:3645   .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/cciiKsHz.s:401    .text:0000000000000260 .L0 
+     /tmp/cciiKsHz.s:402    .text:0000000000000264 .L0 
+     /tmp/cciiKsHz.s:411    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:412    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:413    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:414    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:415    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:416    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:417    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:418    .text:0000000000000284 .L0 
+     /tmp/cciiKsHz.s:420    .text:0000000000000288 .L0 
+     /tmp/cciiKsHz.s:422    .text:0000000000000288 .L0 
+     /tmp/cciiKsHz.s:424    .text:000000000000028c .L0 
+     /tmp/cciiKsHz.s:425    .text:000000000000028c .L0 
+     /tmp/cciiKsHz.s:426    .text:000000000000028c .L0 
+     /tmp/cciiKsHz.s:427    .text:000000000000028c .L0 
+     /tmp/cciiKsHz.s:432    .text:000000000000029c .L0 
+     /tmp/cciiKsHz.s:433    .text:000000000000029c .L0 
+     /tmp/cciiKsHz.s:439    .text:00000000000002b0 .L0 
+     /tmp/cciiKsHz.s:440    .text:00000000000002b0 .L0 
+     /tmp/cciiKsHz.s:446    .text:00000000000002c0 .L0 
+     /tmp/cciiKsHz.s:447    .text:00000000000002c0 .L0 
+     /tmp/cciiKsHz.s:451    .text:00000000000002d0 .L0 
+     /tmp/cciiKsHz.s:452    .text:00000000000002d0 .L0 
+     /tmp/cciiKsHz.s:457    .text:00000000000002e0 .L0 
+     /tmp/cciiKsHz.s:458    .text:00000000000002e0 .L0 
+     /tmp/cciiKsHz.s:464    .text:00000000000002f0 .L0 
+GAS LISTING /tmp/cciiKsHz.s 			page 26
 
 
-     /tmp/cc673G5Z.s:463    .text:0000000000000300 .L0 
-     /tmp/cc673G5Z.s:469    .text:0000000000000314 .L0 
-     /tmp/cc673G5Z.s:470    .text:0000000000000314 .L0 
-     /tmp/cc673G5Z.s:474    .text:0000000000000324 .L0 
-     /tmp/cc673G5Z.s:475    .text:0000000000000324 .L0 
-     /tmp/cc673G5Z.s:481    .text:0000000000000338 .L0 
-     /tmp/cc673G5Z.s:482    .text:0000000000000338 .L0 
-     /tmp/cc673G5Z.s:486    .text:0000000000000348 .L0 
-     /tmp/cc673G5Z.s:488    .text:000000000000034c .L0 
-     /tmp/cc673G5Z.s:490    .text:0000000000000350 .L0 
-     /tmp/cc673G5Z.s:491    .text:0000000000000350 .L0 
-     /tmp/cc673G5Z.s:504    .text:0000000000000370 .L0 
-     /tmp/cc673G5Z.s:505    .text:0000000000000370 .L0 
-     /tmp/cc673G5Z.s:510    .text:0000000000000380 .L0 
-     /tmp/cc673G5Z.s:513    .text:0000000000000384 .L0 
-     /tmp/cc673G5Z.s:514    .text:0000000000000384 .L0 
-     /tmp/cc673G5Z.s:519    .text:0000000000000394 .L0 
-     /tmp/cc673G5Z.s:524    .text:000000000000039c .L0 
-     /tmp/cc673G5Z.s:525    .text:000000000000039c .L0 
-     /tmp/cc673G5Z.s:532    .text:00000000000003b8 .L0 
-     /tmp/cc673G5Z.s:533    .text:00000000000003b8 .L0 
-     /tmp/cc673G5Z.s:539    .text:00000000000003cc .L0 
-     /tmp/cc673G5Z.s:540    .text:00000000000003cc .L0 
-     /tmp/cc673G5Z.s:547    .text:00000000000003e0 .L0 
-     /tmp/cc673G5Z.s:548    .text:00000000000003e0 .L0 
-     /tmp/cc673G5Z.s:549    .text:00000000000003e0 .L0 
-     /tmp/cc673G5Z.s:552    .text:00000000000003e4 .L0 
-     /tmp/cc673G5Z.s:562    .text:0000000000000400 .L0 
-     /tmp/cc673G5Z.s:563    .text:0000000000000400 .L0 
-     /tmp/cc673G5Z.s:569    .text:0000000000000414 .L0 
-     /tmp/cc673G5Z.s:570    .text:0000000000000414 .L0 
-     /tmp/cc673G5Z.s:572    .text:0000000000000418 .L0 
-     /tmp/cc673G5Z.s:573    .text:0000000000000418 .L0 
-     /tmp/cc673G5Z.s:576    .text:0000000000000420 .L0 
-     /tmp/cc673G5Z.s:577    .text:0000000000000420 .L0 
-     /tmp/cc673G5Z.s:584    .text:0000000000000438 .L0 
-     /tmp/cc673G5Z.s:589    .text:0000000000000440 .L0 
-     /tmp/cc673G5Z.s:592    .text:0000000000000448 .L0 
-     /tmp/cc673G5Z.s:596    .text:0000000000000454 .L0 
-     /tmp/cc673G5Z.s:600    .text:0000000000000460 .L0 
-     /tmp/cc673G5Z.s:604    .text:0000000000000464 .L0 
-     /tmp/cc673G5Z.s:606    .text:0000000000000468 .L0 
-     /tmp/cc673G5Z.s:607    .text:0000000000000468 .L0 
-     /tmp/cc673G5Z.s:613    .text:000000000000047c .L0 
-     /tmp/cc673G5Z.s:614    .text:000000000000047c .L0 
-     /tmp/cc673G5Z.s:616    .text:0000000000000480 .L0 
-     /tmp/cc673G5Z.s:617    .text:0000000000000480 .L0 
-     /tmp/cc673G5Z.s:620    .text:000000000000048c .L0 
-     /tmp/cc673G5Z.s:621    .text:000000000000048c .L0 
-     /tmp/cc673G5Z.s:623    .text:0000000000000490 .L0 
-     /tmp/cc673G5Z.s:625    .text:0000000000000494 .L0 
-     /tmp/cc673G5Z.s:632    .text:00000000000004a8 .L0 
-     /tmp/cc673G5Z.s:633    .text:00000000000004a8 .L0 
-     /tmp/cc673G5Z.s:637    .text:00000000000004b8 .L0 
-     /tmp/cc673G5Z.s:638    .text:00000000000004b8 .L0 
-     /tmp/cc673G5Z.s:641    .text:00000000000004c0 .L0 
-     /tmp/cc673G5Z.s:642    .text:00000000000004c0 .L0 
-GAS LISTING /tmp/cc673G5Z.s 			page 27
+     /tmp/cciiKsHz.s:465    .text:00000000000002f0 .L0 
+     /tmp/cciiKsHz.s:469    .text:0000000000000300 .L0 
+     /tmp/cciiKsHz.s:470    .text:0000000000000300 .L0 
+     /tmp/cciiKsHz.s:476    .text:0000000000000314 .L0 
+     /tmp/cciiKsHz.s:477    .text:0000000000000314 .L0 
+     /tmp/cciiKsHz.s:481    .text:0000000000000324 .L0 
+     /tmp/cciiKsHz.s:482    .text:0000000000000324 .L0 
+     /tmp/cciiKsHz.s:488    .text:0000000000000338 .L0 
+     /tmp/cciiKsHz.s:489    .text:0000000000000338 .L0 
+     /tmp/cciiKsHz.s:493    .text:0000000000000348 .L0 
+     /tmp/cciiKsHz.s:495    .text:000000000000034c .L0 
+     /tmp/cciiKsHz.s:497    .text:0000000000000350 .L0 
+     /tmp/cciiKsHz.s:498    .text:0000000000000350 .L0 
+     /tmp/cciiKsHz.s:511    .text:0000000000000370 .L0 
+     /tmp/cciiKsHz.s:512    .text:0000000000000370 .L0 
+     /tmp/cciiKsHz.s:517    .text:0000000000000380 .L0 
+     /tmp/cciiKsHz.s:520    .text:0000000000000384 .L0 
+     /tmp/cciiKsHz.s:521    .text:0000000000000384 .L0 
+     /tmp/cciiKsHz.s:526    .text:0000000000000394 .L0 
+     /tmp/cciiKsHz.s:531    .text:000000000000039c .L0 
+     /tmp/cciiKsHz.s:532    .text:000000000000039c .L0 
+     /tmp/cciiKsHz.s:537    .text:00000000000003b0 .L0 
+     /tmp/cciiKsHz.s:538    .text:00000000000003b0 .L0 
+     /tmp/cciiKsHz.s:545    .text:00000000000003c4 .L0 
+     /tmp/cciiKsHz.s:546    .text:00000000000003c4 .L0 
+     /tmp/cciiKsHz.s:547    .text:00000000000003c4 .L0 
+     /tmp/cciiKsHz.s:550    .text:00000000000003c8 .L0 
+     /tmp/cciiKsHz.s:560    .text:00000000000003e4 .L0 
+     /tmp/cciiKsHz.s:561    .text:00000000000003e4 .L0 
+     /tmp/cciiKsHz.s:567    .text:00000000000003f8 .L0 
+     /tmp/cciiKsHz.s:568    .text:00000000000003f8 .L0 
+     /tmp/cciiKsHz.s:570    .text:00000000000003fc .L0 
+     /tmp/cciiKsHz.s:571    .text:00000000000003fc .L0 
+     /tmp/cciiKsHz.s:574    .text:0000000000000408 .L0 
+     /tmp/cciiKsHz.s:575    .text:0000000000000408 .L0 
+     /tmp/cciiKsHz.s:582    .text:0000000000000420 .L0 
+     /tmp/cciiKsHz.s:588    .text:0000000000000428 .L0 
+     /tmp/cciiKsHz.s:591    .text:0000000000000430 .L0 
+     /tmp/cciiKsHz.s:595    .text:000000000000043c .L0 
+     /tmp/cciiKsHz.s:599    .text:0000000000000448 .L0 
+     /tmp/cciiKsHz.s:603    .text:000000000000044c .L0 
+     /tmp/cciiKsHz.s:605    .text:0000000000000450 .L0 
+     /tmp/cciiKsHz.s:606    .text:0000000000000450 .L0 
+     /tmp/cciiKsHz.s:612    .text:0000000000000464 .L0 
+     /tmp/cciiKsHz.s:613    .text:0000000000000464 .L0 
+     /tmp/cciiKsHz.s:615    .text:0000000000000468 .L0 
+     /tmp/cciiKsHz.s:616    .text:0000000000000468 .L0 
+     /tmp/cciiKsHz.s:619    .text:0000000000000474 .L0 
+     /tmp/cciiKsHz.s:620    .text:0000000000000474 .L0 
+     /tmp/cciiKsHz.s:622    .text:0000000000000478 .L0 
+     /tmp/cciiKsHz.s:624    .text:000000000000047c .L0 
+     /tmp/cciiKsHz.s:631    .text:0000000000000490 .L0 
+     /tmp/cciiKsHz.s:632    .text:0000000000000490 .L0 
+     /tmp/cciiKsHz.s:636    .text:0000000000000498 .L0 
+     /tmp/cciiKsHz.s:640    .text:000000000000049c .L0 
+     /tmp/cciiKsHz.s:642    .text:00000000000004a0 .L0 
+     /tmp/cciiKsHz.s:643    .text:00000000000004a0 .L0 
+GAS LISTING /tmp/cciiKsHz.s 			page 27
 
 
-     /tmp/cc673G5Z.s:647    .text:00000000000004d0 .L0 
-     /tmp/cc673G5Z.s:651    .text:00000000000004d4 .L0 
-     /tmp/cc673G5Z.s:653    .text:00000000000004d8 .L0 
-     /tmp/cc673G5Z.s:654    .text:00000000000004d8 .L0 
-     /tmp/cc673G5Z.s:658    .text:00000000000004e8 .L0 
-     /tmp/cc673G5Z.s:665    .text:00000000000004f0 .L0 
-     /tmp/cc673G5Z.s:666    .text:00000000000004f0 .L0 
-     /tmp/cc673G5Z.s:670    .text:0000000000000500 .L0 
-     /tmp/cc673G5Z.s:671    .text:0000000000000500 .L0 
-     /tmp/cc673G5Z.s:673    .text:0000000000000504 .L0 
-     /tmp/cc673G5Z.s:684    .text:0000000000000520 .L0 
-     /tmp/cc673G5Z.s:685    .text:0000000000000524 .L0 
-     /tmp/cc673G5Z.s:686    .text:0000000000000524 .L0 
-     /tmp/cc673G5Z.s:688    .text:0000000000000528 .L0 
-     /tmp/cc673G5Z.s:690    .text:000000000000052c .L0 
-     /tmp/cc673G5Z.s:692    .text:0000000000000530 .L0 
-     /tmp/cc673G5Z.s:694    .text:0000000000000534 .L0 
-     /tmp/cc673G5Z.s:697    .text:0000000000000538 .L0 
-     /tmp/cc673G5Z.s:699    .text:000000000000053c .L0 
-     /tmp/cc673G5Z.s:701    .text:0000000000000540 .L0 
-     /tmp/cc673G5Z.s:703    .text:0000000000000544 .L0 
-     /tmp/cc673G5Z.s:705    .text:0000000000000548 .L0 
-     /tmp/cc673G5Z.s:709    .text:000000000000054c .L0 
-     /tmp/cc673G5Z.s:713    .text:0000000000000550 .L0 
-     /tmp/cc673G5Z.s:720    .text:0000000000000568 .L0 
-     /tmp/cc673G5Z.s:754    .text:0000000000000568 _Z8userMainv
-     /tmp/cc673G5Z.s:758    .text:0000000000000568 .L0 
-     /tmp/cc673G5Z.s:759    .text:0000000000000568 .L0 
-     /tmp/cc673G5Z.s:760    .text:000000000000056c .L0 
-     /tmp/cc673G5Z.s:763    .text:0000000000000574 .L0 
-     /tmp/cc673G5Z.s:764    .text:0000000000000574 .L0 
-     /tmp/cc673G5Z.s:766    .text:0000000000000578 .L0 
-     /tmp/cc673G5Z.s:768    .text:0000000000000578 .L0 
-     /tmp/cc673G5Z.s:769    .text:0000000000000578 .L0 
-     /tmp/cc673G5Z.s:773    .text:0000000000000588 .L0 
-     /tmp/cc673G5Z.s:774    .text:0000000000000588 .L0 
-     /tmp/cc673G5Z.s:777    .text:0000000000000590 .L0 
-     /tmp/cc673G5Z.s:778    .text:0000000000000590 .L0 
-     /tmp/cc673G5Z.s:782    .text:00000000000005a0 .L0 
-     /tmp/cc673G5Z.s:783    .text:00000000000005a4 .L0 
-     /tmp/cc673G5Z.s:785    .text:00000000000005a8 .L0 
-     /tmp/cc673G5Z.s:786    .text:00000000000005a8 .L0 
-     /tmp/cc673G5Z.s:788    .text:00000000000005ac .L0 
-     /tmp/cc673G5Z.s:790    .text:00000000000005b0 .L0 
-     /tmp/cc673G5Z.s:800    .bss:0000000000000000 threadEnd
-     /tmp/cc673G5Z.s:805    .bss:0000000000000008 waitForAll
-     /tmp/cc673G5Z.s:797    .bss:0000000000000000 .LANCHOR0
-     /tmp/cc673G5Z.s:815    .text:00000000000005b0 .L0 
-     /tmp/cc673G5Z.s:80     .text:0000000000000074 .L0 
-     /tmp/cc673G5Z.s:155    .text:00000000000000f0 .L0 
-     /tmp/cc673G5Z.s:262    .text:00000000000001ac .L0 
-     /tmp/cc673G5Z.s:358    .rodata.str1.8:0000000000000000 .LC0
-     /tmp/cc673G5Z.s:420    .text:000000000000028c .L0 
-     /tmp/cc673G5Z.s:361    .rodata.str1.8:0000000000000020 .LC1
-     /tmp/cc673G5Z.s:440    .text:00000000000002c0 .L0 
-     /tmp/cc673G5Z.s:364    .rodata.str1.8:0000000000000040 .LC2
-     /tmp/cc673G5Z.s:458    .text:00000000000002f0 .L0 
-GAS LISTING /tmp/cc673G5Z.s 			page 28
+     /tmp/cciiKsHz.s:647    .text:00000000000004b0 .L0 
+     /tmp/cciiKsHz.s:654    .text:00000000000004b8 .L0 
+     /tmp/cciiKsHz.s:655    .text:00000000000004b8 .L0 
+     /tmp/cciiKsHz.s:659    .text:00000000000004c8 .L0 
+     /tmp/cciiKsHz.s:660    .text:00000000000004c8 .L0 
+     /tmp/cciiKsHz.s:662    .text:00000000000004cc .L0 
+     /tmp/cciiKsHz.s:673    .text:00000000000004e8 .L0 
+     /tmp/cciiKsHz.s:674    .text:00000000000004ec .L0 
+     /tmp/cciiKsHz.s:675    .text:00000000000004ec .L0 
+     /tmp/cciiKsHz.s:677    .text:00000000000004f0 .L0 
+     /tmp/cciiKsHz.s:679    .text:00000000000004f4 .L0 
+     /tmp/cciiKsHz.s:681    .text:00000000000004f8 .L0 
+     /tmp/cciiKsHz.s:683    .text:00000000000004fc .L0 
+     /tmp/cciiKsHz.s:686    .text:0000000000000500 .L0 
+     /tmp/cciiKsHz.s:688    .text:0000000000000504 .L0 
+     /tmp/cciiKsHz.s:690    .text:0000000000000508 .L0 
+     /tmp/cciiKsHz.s:692    .text:000000000000050c .L0 
+     /tmp/cciiKsHz.s:694    .text:0000000000000510 .L0 
+     /tmp/cciiKsHz.s:698    .text:0000000000000514 .L0 
+     /tmp/cciiKsHz.s:702    .text:0000000000000518 .L0 
+     /tmp/cciiKsHz.s:709    .text:0000000000000530 .L0 
+     /tmp/cciiKsHz.s:743    .text:0000000000000530 _Z8userMainv
+     /tmp/cciiKsHz.s:747    .text:0000000000000530 .L0 
+     /tmp/cciiKsHz.s:748    .text:0000000000000530 .L0 
+     /tmp/cciiKsHz.s:749    .text:0000000000000534 .L0 
+     /tmp/cciiKsHz.s:752    .text:000000000000053c .L0 
+     /tmp/cciiKsHz.s:753    .text:000000000000053c .L0 
+     /tmp/cciiKsHz.s:755    .text:0000000000000540 .L0 
+     /tmp/cciiKsHz.s:757    .text:0000000000000540 .L0 
+     /tmp/cciiKsHz.s:758    .text:0000000000000540 .L0 
+     /tmp/cciiKsHz.s:762    .text:0000000000000550 .L0 
+     /tmp/cciiKsHz.s:763    .text:0000000000000550 .L0 
+     /tmp/cciiKsHz.s:766    .text:0000000000000558 .L0 
+     /tmp/cciiKsHz.s:767    .text:0000000000000558 .L0 
+     /tmp/cciiKsHz.s:771    .text:0000000000000568 .L0 
+     /tmp/cciiKsHz.s:772    .text:000000000000056c .L0 
+     /tmp/cciiKsHz.s:774    .text:0000000000000570 .L0 
+     /tmp/cciiKsHz.s:775    .text:0000000000000570 .L0 
+     /tmp/cciiKsHz.s:777    .text:0000000000000574 .L0 
+     /tmp/cciiKsHz.s:779    .text:0000000000000578 .L0 
+     /tmp/cciiKsHz.s:789    .bss:0000000000000000 threadEnd
+     /tmp/cciiKsHz.s:794    .bss:0000000000000008 waitForAll
+     /tmp/cciiKsHz.s:786    .bss:0000000000000000 .LANCHOR0
+     /tmp/cciiKsHz.s:804    .text:0000000000000578 .L0 
+     /tmp/cciiKsHz.s:8      .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cciiKsHz.s:62     .text:0000000000000044 .L0 
+     /tmp/cciiKsHz.s:93     .text:000000000000008c .L0 
+     /tmp/cciiKsHz.s:128    .rodata.str1.8:0000000000000008 .LC1
+     /tmp/cciiKsHz.s:162    .text:00000000000000f0 .L0 
+     /tmp/cciiKsHz.s:172    .text:0000000000000108 .L0 
+     /tmp/cciiKsHz.s:226    .rodata.str1.8:0000000000000010 .LC2
+     /tmp/cciiKsHz.s:263    .text:0000000000000198 .L0 
+     /tmp/cciiKsHz.s:282    .text:00000000000001c0 .L0 
+     /tmp/cciiKsHz.s:371    .rodata.str1.8:0000000000000018 .LC3
+     /tmp/cciiKsHz.s:427    .text:000000000000028c .L0 
+     /tmp/cciiKsHz.s:374    .rodata.str1.8:0000000000000038 .LC4
+     /tmp/cciiKsHz.s:447    .text:00000000000002c0 .L0 
+GAS LISTING /tmp/cciiKsHz.s 			page 28
 
 
-     /tmp/cc673G5Z.s:367    .rodata.str1.8:0000000000000058 .LC3
-     /tmp/cc673G5Z.s:470    .text:0000000000000314 .L0 
-     /tmp/cc673G5Z.s:370    .rodata.str1.8:0000000000000070 .LC4
-     /tmp/cc673G5Z.s:482    .text:0000000000000338 .L0 
-     /tmp/cc673G5Z.s:373    .rodata.str1.8:0000000000000078 .LC5
-     /tmp/cc673G5Z.s:505    .text:0000000000000370 .L0 
-     /tmp/cc673G5Z.s:376    .rodata.str1.8:00000000000000b8 .LC6
-     /tmp/cc673G5Z.s:514    .text:0000000000000384 .L0 
-     /tmp/cc673G5Z.s:525    .text:000000000000039c .L0 
-     /tmp/cc673G5Z.s:528    .text:00000000000003a8 .L0 
-     /tmp/cc673G5Z.s:578    .text:0000000000000424 .L0 
-     /tmp/cc673G5Z.s:589    .text:0000000000000440 .L0 
-     /tmp/cc673G5Z.s:617    .text:0000000000000480 .L0 
-     /tmp/cc673G5Z.s:627    .text:000000000000049c .L0 
-     /tmp/cc673G5Z.s:379    .rodata.str1.8:00000000000000e8 .LC7
-     /tmp/cc673G5Z.s:633    .text:00000000000004a8 .L0 
-     /tmp/cc673G5Z.s:382    .rodata.str1.8:00000000000000f0 .LC8
-     /tmp/cc673G5Z.s:642    .text:00000000000004c0 .L0 
-     /tmp/cc673G5Z.s:654    .text:00000000000004d8 .L0 
-     /tmp/cc673G5Z.s:666    .text:00000000000004f0 .L0 
-     /tmp/cc673G5Z.s:745    .rodata.str1.8:00000000000000f8 .LC9
-     /tmp/cc673G5Z.s:769    .text:0000000000000578 .L0 
-     /tmp/cc673G5Z.s:748    .rodata.str1.8:0000000000000108 .LC10
-     /tmp/cc673G5Z.s:778    .text:0000000000000590 .L0 
-     /tmp/cc673G5Z.s:41     .text:000000000000002c .L2
-     /tmp/cc673G5Z.s:76     .text:0000000000000070 .L3
-     /tmp/cc673G5Z.s:36     .text:0000000000000024 .L6
-     /tmp/cc673G5Z.s:152    .text:00000000000000f0 .L8
-     /tmp/cc673G5Z.s:183    .text:0000000000000134 .L9
-     /tmp/cc673G5Z.s:147    .text:00000000000000e8 .L12
-     /tmp/cc673G5Z.s:258    .text:00000000000001ac .L14
-     /tmp/cc673G5Z.s:291    .text:00000000000001ec .L16
-     /tmp/cc673G5Z.s:314    .text:0000000000000214 .L15
-     /tmp/cc673G5Z.s:244    .text:0000000000000194 .L20
-     /tmp/cc673G5Z.s:252    .text:00000000000001a0 .L21
-     /tmp/cc673G5Z.s:300    .text:00000000000001fc .L22
-     /tmp/cc673G5Z.s:502    .text:0000000000000370 .L38
-     /tmp/cc673G5Z.s:511    .text:0000000000000384 .L39
-     /tmp/cc673G5Z.s:521    .text:000000000000039c .L40
-     /tmp/cc673G5Z.s:518    .text:0000000000000394 .L25
-     /tmp/cc673G5Z.s:682    .text:0000000000000520 .L23
-     /tmp/cc673G5Z.s:602    .text:0000000000000464 .L29
-     /tmp/cc673G5Z.s:629    .text:00000000000004a8 .L27
-     /tmp/cc673G5Z.s:587    .text:0000000000000440 .L35
-     /tmp/cc673G5Z.s:590    .text:0000000000000448 .L28
-     /tmp/cc673G5Z.s:662    .text:00000000000004f0 .L30
-     /tmp/cc673G5Z.s:649    .text:00000000000004d4 .L31
-     /tmp/cc673G5Z.s:679    .text:000000000000051c .L32
-     /tmp/cc673G5Z.s:421    .text:0000000000000294 .LEHB0
-     /tmp/cc673G5Z.s:389    .text:0000000000000260 .LFB3
-     /tmp/cc673G5Z.s:494    .text:000000000000035c .LEHE0
-     /tmp/cc673G5Z.s:497    .text:0000000000000364 .LEHB1
-     /tmp/cc673G5Z.s:500    .text:000000000000036c .LEHE1
-     /tmp/cc673G5Z.s:708    .text:000000000000054c .L36
-     /tmp/cc673G5Z.s:506    .text:0000000000000378 .LEHB2
-     /tmp/cc673G5Z.s:719    .text:0000000000000568 .LEHE2
-     /tmp/cc673G5Z.s:2311   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-GAS LISTING /tmp/cc673G5Z.s 			page 29
+     /tmp/cciiKsHz.s:377    .rodata.str1.8:0000000000000058 .LC5
+     /tmp/cciiKsHz.s:465    .text:00000000000002f0 .L0 
+     /tmp/cciiKsHz.s:380    .rodata.str1.8:0000000000000070 .LC6
+     /tmp/cciiKsHz.s:477    .text:0000000000000314 .L0 
+     /tmp/cciiKsHz.s:383    .rodata.str1.8:0000000000000088 .LC7
+     /tmp/cciiKsHz.s:489    .text:0000000000000338 .L0 
+     /tmp/cciiKsHz.s:386    .rodata.str1.8:0000000000000090 .LC8
+     /tmp/cciiKsHz.s:512    .text:0000000000000370 .L0 
+     /tmp/cciiKsHz.s:389    .rodata.str1.8:00000000000000d0 .LC9
+     /tmp/cciiKsHz.s:521    .text:0000000000000384 .L0 
+     /tmp/cciiKsHz.s:533    .text:00000000000003a0 .L0 
+     /tmp/cciiKsHz.s:571    .text:00000000000003fc .L0 
+     /tmp/cciiKsHz.s:576    .text:000000000000040c .L0 
+     /tmp/cciiKsHz.s:588    .text:0000000000000428 .L0 
+     /tmp/cciiKsHz.s:616    .text:0000000000000468 .L0 
+     /tmp/cciiKsHz.s:626    .text:0000000000000484 .L0 
+     /tmp/cciiKsHz.s:643    .text:00000000000004a0 .L0 
+     /tmp/cciiKsHz.s:655    .text:00000000000004b8 .L0 
+     /tmp/cciiKsHz.s:734    .rodata.str1.8:0000000000000100 .LC10
+     /tmp/cciiKsHz.s:758    .text:0000000000000540 .L0 
+     /tmp/cciiKsHz.s:737    .rodata.str1.8:0000000000000110 .LC11
+     /tmp/cciiKsHz.s:767    .text:0000000000000558 .L0 
+     /tmp/cciiKsHz.s:48     .text:0000000000000030 .L2
+     /tmp/cciiKsHz.s:89     .text:0000000000000088 .L3
+     /tmp/cciiKsHz.s:43     .text:0000000000000028 .L6
+     /tmp/cciiKsHz.s:169    .text:0000000000000108 .L8
+     /tmp/cciiKsHz.s:200    .text:000000000000014c .L9
+     /tmp/cciiKsHz.s:159    .text:00000000000000f0 .L12
+     /tmp/cciiKsHz.s:278    .text:00000000000001c0 .L14
+     /tmp/cciiKsHz.s:311    .text:0000000000000200 .L16
+     /tmp/cciiKsHz.s:334    .text:0000000000000228 .L15
+     /tmp/cciiKsHz.s:259    .text:0000000000000198 .L20
+     /tmp/cciiKsHz.s:272    .text:00000000000001b4 .L21
+     /tmp/cciiKsHz.s:320    .text:0000000000000210 .L22
+     /tmp/cciiKsHz.s:509    .text:0000000000000370 .L38
+     /tmp/cciiKsHz.s:518    .text:0000000000000384 .L39
+     /tmp/cciiKsHz.s:528    .text:000000000000039c .L40
+     /tmp/cciiKsHz.s:525    .text:0000000000000394 .L25
+     /tmp/cciiKsHz.s:671    .text:00000000000004e8 .L23
+     /tmp/cciiKsHz.s:601    .text:000000000000044c .L29
+     /tmp/cciiKsHz.s:628    .text:0000000000000490 .L27
+     /tmp/cciiKsHz.s:586    .text:0000000000000428 .L35
+     /tmp/cciiKsHz.s:589    .text:0000000000000430 .L28
+     /tmp/cciiKsHz.s:651    .text:00000000000004b8 .L30
+     /tmp/cciiKsHz.s:638    .text:000000000000049c .L31
+     /tmp/cciiKsHz.s:668    .text:00000000000004e4 .L32
+     /tmp/cciiKsHz.s:428    .text:0000000000000294 .LEHB0
+     /tmp/cciiKsHz.s:396    .text:0000000000000260 .LFB3
+     /tmp/cciiKsHz.s:501    .text:000000000000035c .LEHE0
+     /tmp/cciiKsHz.s:504    .text:0000000000000364 .LEHB1
+     /tmp/cciiKsHz.s:507    .text:000000000000036c .LEHE1
+     /tmp/cciiKsHz.s:697    .text:0000000000000514 .L36
+     /tmp/cciiKsHz.s:513    .text:0000000000000378 .LEHB2
+     /tmp/cciiKsHz.s:708    .text:0000000000000530 .LEHE2
+     /tmp/cciiKsHz.s:2259   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cciiKsHz.s:3593   .debug_str:0000000000000598 .LASF107
+     /tmp/cciiKsHz.s:3425   .debug_str:00000000000000b6 .LASF108
+GAS LISTING /tmp/cciiKsHz.s 			page 29
 
 
-     /tmp/cc673G5Z.s:3649   .debug_str:0000000000000598 .LASF107
-     /tmp/cc673G5Z.s:3481   .debug_str:00000000000000b6 .LASF108
-     /tmp/cc673G5Z.s:3577   .debug_str:0000000000000374 .LASF109
-     /tmp/cc673G5Z.s:5      .text:0000000000000000 .Ltext0
-     /tmp/cc673G5Z.s:808    .text:00000000000005b0 .Letext0
-     /tmp/cc673G5Z.s:3449   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/cc673G5Z.s:3583   .debug_str:00000000000003af .LASF0
-     /tmp/cc673G5Z.s:3601   .debug_str:0000000000000423 .LASF1
-     /tmp/cc673G5Z.s:3569   .debug_str:000000000000034d .LASF2
-     /tmp/cc673G5Z.s:3541   .debug_str:0000000000000294 .LASF4
-     /tmp/cc673G5Z.s:3635   .debug_str:000000000000050a .LASF3
-     /tmp/cc673G5Z.s:3469   .debug_str:0000000000000067 .LASF5
-     /tmp/cc673G5Z.s:3607   .debug_str:0000000000000454 .LASF6
-     /tmp/cc673G5Z.s:3581   .debug_str:000000000000039c .LASF7
-     /tmp/cc673G5Z.s:3665   .debug_str:00000000000006c4 .LASF8
-     /tmp/cc673G5Z.s:3527   .debug_str:00000000000001fd .LASF9
-     /tmp/cc673G5Z.s:3617   .debug_str:00000000000004a5 .LASF10
-     /tmp/cc673G5Z.s:3653   .debug_str:0000000000000668 .LASF11
-     /tmp/cc673G5Z.s:3473   .debug_str:0000000000000074 .LASF12
-     /tmp/cc673G5Z.s:3457   .debug_str:0000000000000020 .LASF13
-     /tmp/cc673G5Z.s:3485   .debug_str:00000000000000d1 .LASF14
-     /tmp/cc673G5Z.s:3629   .debug_str:00000000000004dd .LASF15
-     /tmp/cc673G5Z.s:3493   .debug_str:0000000000000113 .LASF16
-     /tmp/cc673G5Z.s:3451   .debug_str:0000000000000000 .LASF17
-     /tmp/cc673G5Z.s:3463   .debug_str:000000000000003f .LASF62
-     /tmp/cc673G5Z.s:3509   .debug_str:000000000000017f .LASF18
-     /tmp/cc673G5Z.s:3647   .debug_str:000000000000057c .LASF20
-     /tmp/cc673G5Z.s:3623   .debug_str:00000000000004cc .LASF110
-     /tmp/cc673G5Z.s:3489   .debug_str:00000000000000e6 .LASF19
-     /tmp/cc673G5Z.s:3531   .debug_str:0000000000000219 .LASF21
-     /tmp/cc673G5Z.s:3609   .debug_str:0000000000000467 .LASF24
-     /tmp/cc673G5Z.s:3525   .debug_str:00000000000001e6 .LASF26
-     /tmp/cc673G5Z.s:3571   .debug_str:000000000000035b .LASF22
-     /tmp/cc673G5Z.s:3537   .debug_str:0000000000000255 .LASF23
-     /tmp/cc673G5Z.s:3461   .debug_str:0000000000000035 .LASF25
-     /tmp/cc673G5Z.s:3553   .debug_str:00000000000002d8 .LASF27
-     /tmp/cc673G5Z.s:3543   .debug_str:000000000000029b .LASF28
-     /tmp/cc673G5Z.s:3659   .debug_str:0000000000000696 .LASF29
-     /tmp/cc673G5Z.s:3565   .debug_str:0000000000000332 .LASF30
-     /tmp/cc673G5Z.s:3467   .debug_str:000000000000004e .LASF31
-     /tmp/cc673G5Z.s:3677   .debug_str:0000000000000721 .LASF111
-     /tmp/cc673G5Z.s:3585   .debug_str:00000000000003bc .LASF32
-     /tmp/cc673G5Z.s:3513   .debug_str:0000000000000192 .LASF34
-     /tmp/cc673G5Z.s:3611   .debug_str:0000000000000472 .LASF33
-     /tmp/cc673G5Z.s:3503   .debug_str:000000000000014b .LASF35
-     /tmp/cc673G5Z.s:3477   .debug_str:0000000000000089 .LASF112
-     /tmp/cc673G5Z.s:3671   .debug_str:00000000000006e7 .LASF113
-     /tmp/cc673G5Z.s:3521   .debug_str:00000000000001c4 .LASF36
-     /tmp/cc673G5Z.s:3639   .debug_str:000000000000052d .LASF37
-     /tmp/cc673G5Z.s:3501   .debug_str:0000000000000146 .LASF38
-     /tmp/cc673G5Z.s:3621   .debug_str:00000000000004c0 .LASF39
-     /tmp/cc673G5Z.s:3613   .debug_str:0000000000000486 .LASF114
-     /tmp/cc673G5Z.s:3637   .debug_str:000000000000051c .LASF115
-     /tmp/cc673G5Z.s:3547   .debug_str:00000000000002af .LASF40
-     /tmp/cc673G5Z.s:3591   .debug_str:00000000000003e2 .LASF41
-     /tmp/cc673G5Z.s:3589   .debug_str:00000000000003dc .LASF42
-     /tmp/cc673G5Z.s:3545   .debug_str:00000000000002a6 .LASF43
-GAS LISTING /tmp/cc673G5Z.s 			page 30
+     /tmp/cciiKsHz.s:3521   .debug_str:0000000000000374 .LASF109
+     /tmp/cciiKsHz.s:5      .text:0000000000000000 .Ltext0
+     /tmp/cciiKsHz.s:797    .text:0000000000000578 .Letext0
+     /tmp/cciiKsHz.s:3393   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cciiKsHz.s:3527   .debug_str:00000000000003af .LASF0
+     /tmp/cciiKsHz.s:3545   .debug_str:0000000000000423 .LASF1
+     /tmp/cciiKsHz.s:3513   .debug_str:000000000000034d .LASF2
+     /tmp/cciiKsHz.s:3485   .debug_str:0000000000000294 .LASF4
+     /tmp/cciiKsHz.s:3579   .debug_str:000000000000050a .LASF3
+     /tmp/cciiKsHz.s:3413   .debug_str:0000000000000067 .LASF5
+     /tmp/cciiKsHz.s:3551   .debug_str:0000000000000454 .LASF6
+     /tmp/cciiKsHz.s:3525   .debug_str:000000000000039c .LASF7
+     /tmp/cciiKsHz.s:3609   .debug_str:00000000000006c4 .LASF8
+     /tmp/cciiKsHz.s:3471   .debug_str:00000000000001fd .LASF9
+     /tmp/cciiKsHz.s:3561   .debug_str:00000000000004a5 .LASF10
+     /tmp/cciiKsHz.s:3597   .debug_str:0000000000000668 .LASF11
+     /tmp/cciiKsHz.s:3417   .debug_str:0000000000000074 .LASF12
+     /tmp/cciiKsHz.s:3401   .debug_str:0000000000000020 .LASF13
+     /tmp/cciiKsHz.s:3429   .debug_str:00000000000000d1 .LASF14
+     /tmp/cciiKsHz.s:3573   .debug_str:00000000000004dd .LASF15
+     /tmp/cciiKsHz.s:3437   .debug_str:0000000000000113 .LASF16
+     /tmp/cciiKsHz.s:3395   .debug_str:0000000000000000 .LASF17
+     /tmp/cciiKsHz.s:3407   .debug_str:000000000000003f .LASF62
+     /tmp/cciiKsHz.s:3453   .debug_str:000000000000017f .LASF18
+     /tmp/cciiKsHz.s:3591   .debug_str:000000000000057c .LASF20
+     /tmp/cciiKsHz.s:3567   .debug_str:00000000000004cc .LASF110
+     /tmp/cciiKsHz.s:3433   .debug_str:00000000000000e6 .LASF19
+     /tmp/cciiKsHz.s:3475   .debug_str:0000000000000219 .LASF21
+     /tmp/cciiKsHz.s:3553   .debug_str:0000000000000467 .LASF24
+     /tmp/cciiKsHz.s:3469   .debug_str:00000000000001e6 .LASF26
+     /tmp/cciiKsHz.s:3515   .debug_str:000000000000035b .LASF22
+     /tmp/cciiKsHz.s:3481   .debug_str:0000000000000255 .LASF23
+     /tmp/cciiKsHz.s:3405   .debug_str:0000000000000035 .LASF25
+     /tmp/cciiKsHz.s:3497   .debug_str:00000000000002d8 .LASF27
+     /tmp/cciiKsHz.s:3487   .debug_str:000000000000029b .LASF28
+     /tmp/cciiKsHz.s:3603   .debug_str:0000000000000696 .LASF29
+     /tmp/cciiKsHz.s:3509   .debug_str:0000000000000332 .LASF30
+     /tmp/cciiKsHz.s:3411   .debug_str:000000000000004e .LASF31
+     /tmp/cciiKsHz.s:3621   .debug_str:0000000000000721 .LASF111
+     /tmp/cciiKsHz.s:3529   .debug_str:00000000000003bc .LASF32
+     /tmp/cciiKsHz.s:3457   .debug_str:0000000000000192 .LASF34
+     /tmp/cciiKsHz.s:3555   .debug_str:0000000000000472 .LASF33
+     /tmp/cciiKsHz.s:3447   .debug_str:000000000000014b .LASF35
+     /tmp/cciiKsHz.s:3421   .debug_str:0000000000000089 .LASF112
+     /tmp/cciiKsHz.s:3615   .debug_str:00000000000006e7 .LASF113
+     /tmp/cciiKsHz.s:3465   .debug_str:00000000000001c4 .LASF36
+     /tmp/cciiKsHz.s:3583   .debug_str:000000000000052d .LASF37
+     /tmp/cciiKsHz.s:3445   .debug_str:0000000000000146 .LASF38
+     /tmp/cciiKsHz.s:3565   .debug_str:00000000000004c0 .LASF39
+     /tmp/cciiKsHz.s:3557   .debug_str:0000000000000486 .LASF114
+     /tmp/cciiKsHz.s:3581   .debug_str:000000000000051c .LASF115
+     /tmp/cciiKsHz.s:3491   .debug_str:00000000000002af .LASF40
+     /tmp/cciiKsHz.s:3535   .debug_str:00000000000003e2 .LASF41
+     /tmp/cciiKsHz.s:3533   .debug_str:00000000000003dc .LASF42
+     /tmp/cciiKsHz.s:3489   .debug_str:00000000000002a6 .LASF43
+     /tmp/cciiKsHz.s:3397   .debug_str:0000000000000009 .LASF44
+     /tmp/cciiKsHz.s:3537   .debug_str:00000000000003e7 .LASF45
+GAS LISTING /tmp/cciiKsHz.s 			page 30
 
 
-     /tmp/cc673G5Z.s:3453   .debug_str:0000000000000009 .LASF44
-     /tmp/cc673G5Z.s:3593   .debug_str:00000000000003e7 .LASF45
-     /tmp/cc673G5Z.s:3549   .debug_str:00000000000002b4 .LASF46
-     /tmp/cc673G5Z.s:3673   .debug_str:0000000000000706 .LASF116
-     /tmp/cc673G5Z.s:3539   .debug_str:000000000000026c .LASF117
-     /tmp/cc673G5Z.s:3567   .debug_str:000000000000033f .LASF118
-     /tmp/cc673G5Z.s:3479   .debug_str:000000000000009d .LASF119
-     /tmp/cc673G5Z.s:3507   .debug_str:0000000000000179 .LASF47
-     /tmp/cc673G5Z.s:3679   .debug_str:0000000000000729 .LASF48
-     /tmp/cc673G5Z.s:3627   .debug_str:00000000000004d6 .LASF49
-     /tmp/cc673G5Z.s:3497   .debug_str:0000000000000137 .LASF50
-     /tmp/cc673G5Z.s:3575   .debug_str:000000000000036f .LASF51
-     /tmp/cc673G5Z.s:3505   .debug_str:000000000000016a .LASF52
-     /tmp/cc673G5Z.s:3529   .debug_str:000000000000020b .LASF53
-     /tmp/cc673G5Z.s:3563   .debug_str:0000000000000328 .LASF54
-     /tmp/cc673G5Z.s:3663   .debug_str:00000000000006ba .LASF55
-     /tmp/cc673G5Z.s:3519   .debug_str:00000000000001b5 .LASF56
-     /tmp/cc673G5Z.s:3573   .debug_str:0000000000000367 .LASF57
-     /tmp/cc673G5Z.s:3605   .debug_str:0000000000000445 .LASF58
-     /tmp/cc673G5Z.s:3691   .debug_str:0000000000000778 .LASF120
-     /tmp/cc673G5Z.s:3631   .debug_str:00000000000004f3 .LASF121
-     /tmp/cc673G5Z.s:3465   .debug_str:0000000000000047 .LASF59
-     /tmp/cc673G5Z.s:3643   .debug_str:000000000000055e .LASF60
-     /tmp/cc673G5Z.s:3517   .debug_str:00000000000001aa .LASF61
-     /tmp/cc673G5Z.s:3523   .debug_str:00000000000001da .LASF63
-     /tmp/cc673G5Z.s:3475   .debug_str:0000000000000084 .LASF64
-     /tmp/cc673G5Z.s:3561   .debug_str:000000000000031e .LASF65
-     /tmp/cc673G5Z.s:3515   .debug_str:00000000000001a5 .LASF66
-     /tmp/cc673G5Z.s:3615   .debug_str:000000000000049c .LASF67
-     /tmp/cc673G5Z.s:3685   .debug_str:0000000000000752 .LASF68
-     /tmp/cc673G5Z.s:755    .text:0000000000000568 .LFB29
-     /tmp/cc673G5Z.s:791    .text:00000000000005b0 .LFE29
-     /tmp/cc673G5Z.s:771    .text:0000000000000588 .LVL91
-     /tmp/cc673G5Z.s:775    .text:0000000000000590 .LVL92
-     /tmp/cc673G5Z.s:780    .text:00000000000005a0 .LVL93
-     /tmp/cc673G5Z.s:3587   .debug_str:00000000000003c5 .LASF69
-     /tmp/cc673G5Z.s:3551   .debug_str:00000000000002bc .LASF70
-     /tmp/cc673G5Z.s:721    .text:0000000000000568 .LFE3
-     /tmp/cc673G5Z.s:3471   .debug_str:000000000000006e .LASF71
-     /tmp/cc673G5Z.s:3151   .debug_loc:0000000000000000 .LLST14
-     /tmp/cc673G5Z.s:3559   .debug_str:0000000000000314 .LASF72
-     /tmp/cc673G5Z.s:3162   .debug_loc:0000000000000036 .LLST15
-     /tmp/cc673G5Z.s:3173   .debug_loc:000000000000006c .LLST16
-     /tmp/cc673G5Z.s:3667   .debug_str:00000000000006d4 .LASF73
-     /tmp/cc673G5Z.s:3180   .debug_loc:000000000000008f .LLST17
-     /tmp/cc673G5Z.s:3681   .debug_str:0000000000000730 .LASF74
-     /tmp/cc673G5Z.s:3625   .debug_str:00000000000004d1 .LASF75
-     /tmp/cc673G5Z.s:3193   .debug_loc:00000000000000c7 .LLST18
-     /tmp/cc673G5Z.s:582    .text:0000000000000438 .LBB5
-     /tmp/cc673G5Z.s:630    .text:00000000000004a8 .LBE5
-     /tmp/cc673G5Z.s:3201   .debug_loc:00000000000000eb .LLST19
-     /tmp/cc673G5Z.s:598    .text:0000000000000460 .LVL73
-     /tmp/cc673G5Z.s:645    .text:00000000000004d0 .LBB6
-     /tmp/cc673G5Z.s:663    .text:00000000000004f0 .LBE6
-     /tmp/cc673G5Z.s:3208   .debug_loc:000000000000010e .LLST20
-     /tmp/cc673G5Z.s:656    .text:00000000000004e8 .LVL79
-     /tmp/cc673G5Z.s:423    .text:000000000000029c .LVL46
-GAS LISTING /tmp/cc673G5Z.s 			page 31
+     /tmp/cciiKsHz.s:3493   .debug_str:00000000000002b4 .LASF46
+     /tmp/cciiKsHz.s:3617   .debug_str:0000000000000706 .LASF116
+     /tmp/cciiKsHz.s:3483   .debug_str:000000000000026c .LASF117
+     /tmp/cciiKsHz.s:3511   .debug_str:000000000000033f .LASF118
+     /tmp/cciiKsHz.s:3423   .debug_str:000000000000009d .LASF119
+     /tmp/cciiKsHz.s:3451   .debug_str:0000000000000179 .LASF47
+     /tmp/cciiKsHz.s:3623   .debug_str:0000000000000729 .LASF48
+     /tmp/cciiKsHz.s:3571   .debug_str:00000000000004d6 .LASF49
+     /tmp/cciiKsHz.s:3441   .debug_str:0000000000000137 .LASF50
+     /tmp/cciiKsHz.s:3519   .debug_str:000000000000036f .LASF51
+     /tmp/cciiKsHz.s:3449   .debug_str:000000000000016a .LASF52
+     /tmp/cciiKsHz.s:3473   .debug_str:000000000000020b .LASF53
+     /tmp/cciiKsHz.s:3507   .debug_str:0000000000000328 .LASF54
+     /tmp/cciiKsHz.s:3607   .debug_str:00000000000006ba .LASF55
+     /tmp/cciiKsHz.s:3463   .debug_str:00000000000001b5 .LASF56
+     /tmp/cciiKsHz.s:3517   .debug_str:0000000000000367 .LASF57
+     /tmp/cciiKsHz.s:3549   .debug_str:0000000000000445 .LASF58
+     /tmp/cciiKsHz.s:3635   .debug_str:0000000000000778 .LASF120
+     /tmp/cciiKsHz.s:3575   .debug_str:00000000000004f3 .LASF121
+     /tmp/cciiKsHz.s:3409   .debug_str:0000000000000047 .LASF59
+     /tmp/cciiKsHz.s:3587   .debug_str:000000000000055e .LASF60
+     /tmp/cciiKsHz.s:3461   .debug_str:00000000000001aa .LASF61
+     /tmp/cciiKsHz.s:3467   .debug_str:00000000000001da .LASF63
+     /tmp/cciiKsHz.s:3419   .debug_str:0000000000000084 .LASF64
+     /tmp/cciiKsHz.s:3505   .debug_str:000000000000031e .LASF65
+     /tmp/cciiKsHz.s:3459   .debug_str:00000000000001a5 .LASF66
+     /tmp/cciiKsHz.s:3559   .debug_str:000000000000049c .LASF67
+     /tmp/cciiKsHz.s:3629   .debug_str:0000000000000752 .LASF68
+     /tmp/cciiKsHz.s:744    .text:0000000000000530 .LFB29
+     /tmp/cciiKsHz.s:780    .text:0000000000000578 .LFE29
+     /tmp/cciiKsHz.s:760    .text:0000000000000550 .LVL87
+     /tmp/cciiKsHz.s:764    .text:0000000000000558 .LVL88
+     /tmp/cciiKsHz.s:769    .text:0000000000000568 .LVL89
+     /tmp/cciiKsHz.s:3531   .debug_str:00000000000003c5 .LASF69
+     /tmp/cciiKsHz.s:3495   .debug_str:00000000000002bc .LASF70
+     /tmp/cciiKsHz.s:710    .text:0000000000000530 .LFE3
+     /tmp/cciiKsHz.s:3415   .debug_str:000000000000006e .LASF71
+     /tmp/cciiKsHz.s:3099   .debug_loc:0000000000000000 .LLST14
+     /tmp/cciiKsHz.s:3503   .debug_str:0000000000000314 .LASF72
+     /tmp/cciiKsHz.s:3110   .debug_loc:0000000000000036 .LLST15
+     /tmp/cciiKsHz.s:3121   .debug_loc:000000000000006c .LLST16
+     /tmp/cciiKsHz.s:3611   .debug_str:00000000000006d4 .LASF73
+     /tmp/cciiKsHz.s:3128   .debug_loc:000000000000008f .LLST17
+     /tmp/cciiKsHz.s:3625   .debug_str:0000000000000730 .LASF74
+     /tmp/cciiKsHz.s:3569   .debug_str:00000000000004d1 .LASF75
+     /tmp/cciiKsHz.s:3141   .debug_loc:00000000000000c7 .LLST18
+     /tmp/cciiKsHz.s:580    .text:0000000000000420 .LBB5
+     /tmp/cciiKsHz.s:629    .text:0000000000000490 .LBE5
+     /tmp/cciiKsHz.s:3149   .debug_loc:00000000000000eb .LLST19
+     /tmp/cciiKsHz.s:597    .text:0000000000000448 .LVL71
+     /tmp/cciiKsHz.s:634    .text:0000000000000498 .LBB6
+     /tmp/cciiKsHz.s:652    .text:00000000000004b8 .LBE6
+     /tmp/cciiKsHz.s:3156   .debug_loc:000000000000010e .LLST20
+     /tmp/cciiKsHz.s:645    .text:00000000000004b0 .LVL75
+     /tmp/cciiKsHz.s:430    .text:000000000000029c .LVL45
+     /tmp/cciiKsHz.s:437    .text:00000000000002b0 .LVL46
+     /tmp/cciiKsHz.s:442    .text:00000000000002bc .LVL47
+GAS LISTING /tmp/cciiKsHz.s 			page 31
 
 
-     /tmp/cc673G5Z.s:430    .text:00000000000002b0 .LVL47
-     /tmp/cc673G5Z.s:435    .text:00000000000002bc .LVL48
-     /tmp/cc673G5Z.s:442    .text:00000000000002d0 .LVL50
-     /tmp/cc673G5Z.s:448    .text:00000000000002e0 .LVL51
-     /tmp/cc673G5Z.s:453    .text:00000000000002ec .LVL52
-     /tmp/cc673G5Z.s:460    .text:0000000000000300 .LVL54
-     /tmp/cc673G5Z.s:467    .text:0000000000000314 .LVL55
-     /tmp/cc673G5Z.s:472    .text:0000000000000324 .LVL56
-     /tmp/cc673G5Z.s:479    .text:0000000000000338 .LVL57
-     /tmp/cc673G5Z.s:484    .text:0000000000000348 .LVL58
-     /tmp/cc673G5Z.s:493    .text:000000000000035c .LVL59
-     /tmp/cc673G5Z.s:499    .text:000000000000036c .LVL60
-     /tmp/cc673G5Z.s:508    .text:0000000000000380 .LVL61
-     /tmp/cc673G5Z.s:516    .text:0000000000000394 .LVL62
-     /tmp/cc673G5Z.s:530    .text:00000000000003b8 .LVL65
-     /tmp/cc673G5Z.s:537    .text:00000000000003cc .LVL66
-     /tmp/cc673G5Z.s:581    .text:0000000000000438 .LVL71
-     /tmp/cc673G5Z.s:635    .text:00000000000004b8 .LVL75
-     /tmp/cc673G5Z.s:639    .text:00000000000004c0 .LVL76
-     /tmp/cc673G5Z.s:644    .text:00000000000004d0 .LVL77
-     /tmp/cc673G5Z.s:668    .text:0000000000000500 .LVL82
-     /tmp/cc673G5Z.s:675    .text:0000000000000510 .LVL83
-     /tmp/cc673G5Z.s:678    .text:000000000000051c .LVL84
-     /tmp/cc673G5Z.s:715    .text:000000000000055c .LVL89
-     /tmp/cc673G5Z.s:718    .text:0000000000000568 .LVL90
-     /tmp/cc673G5Z.s:3533   .debug_str:0000000000000241 .LASF76
-     /tmp/cc673G5Z.s:3689   .debug_str:000000000000076f .LASF77
-     /tmp/cc673G5Z.s:3655   .debug_str:0000000000000677 .LASF78
-     /tmp/cc673G5Z.s:218    .text:000000000000016c .LFB2
-     /tmp/cc673G5Z.s:354    .text:0000000000000260 .LFE2
-     /tmp/cc673G5Z.s:3219   .debug_loc:0000000000000144 .LLST7
-     /tmp/cc673G5Z.s:3237   .debug_loc:0000000000000190 .LLST8
-     /tmp/cc673G5Z.s:3255   .debug_loc:00000000000001dc .LLST9
-     /tmp/cc673G5Z.s:3441   .debug_ranges:0000000000000000 .Ldebug_ranges0
-     /tmp/cc673G5Z.s:3279   .debug_loc:000000000000024c .LLST10
-     /tmp/cc673G5Z.s:249    .text:000000000000019c .LVL30
-     /tmp/cc673G5Z.s:257    .text:00000000000001ac .LVL32
-     /tmp/cc673G5Z.s:269    .text:00000000000001c4 .LVL33
-     /tmp/cc673G5Z.s:280    .text:00000000000001d8 .LVL36
-     /tmp/cc673G5Z.s:302    .text:00000000000001fc .LBB4
-     /tmp/cc673G5Z.s:315    .text:0000000000000214 .LBE4
-     /tmp/cc673G5Z.s:3286   .debug_loc:000000000000026f .LLST11
-     /tmp/cc673G5Z.s:307    .text:0000000000000208 .LVL38
-     /tmp/cc673G5Z.s:313    .text:0000000000000214 .LVL40
-     /tmp/cc673G5Z.s:321    .text:0000000000000220 .LVL41
-     /tmp/cc673G5Z.s:330    .text:0000000000000238 .LVL42
-     /tmp/cc673G5Z.s:335    .text:0000000000000244 .LVL43
-     /tmp/cc673G5Z.s:3599   .debug_str:000000000000041a .LASF79
-     /tmp/cc673G5Z.s:3661   .debug_str:00000000000006ac .LASF80
-     /tmp/cc673G5Z.s:123    .text:00000000000000c4 .LFB1
-     /tmp/cc673G5Z.s:212    .text:000000000000016c .LFE1
-     /tmp/cc673G5Z.s:3293   .debug_loc:0000000000000292 .LLST4
-     /tmp/cc673G5Z.s:3311   .debug_loc:00000000000002de .LLST5
-     /tmp/cc673G5Z.s:3329   .debug_loc:000000000000032a .LLST6
-     /tmp/cc673G5Z.s:151    .text:00000000000000f0 .LVL19
-     /tmp/cc673G5Z.s:164    .text:0000000000000110 .LVL20
-     /tmp/cc673G5Z.s:190    .text:0000000000000148 .LVL23
-GAS LISTING /tmp/cc673G5Z.s 			page 32
+     /tmp/cciiKsHz.s:449    .text:00000000000002d0 .LVL49
+     /tmp/cciiKsHz.s:455    .text:00000000000002e0 .LVL50
+     /tmp/cciiKsHz.s:460    .text:00000000000002ec .LVL51
+     /tmp/cciiKsHz.s:467    .text:0000000000000300 .LVL53
+     /tmp/cciiKsHz.s:474    .text:0000000000000314 .LVL54
+     /tmp/cciiKsHz.s:479    .text:0000000000000324 .LVL55
+     /tmp/cciiKsHz.s:486    .text:0000000000000338 .LVL56
+     /tmp/cciiKsHz.s:491    .text:0000000000000348 .LVL57
+     /tmp/cciiKsHz.s:500    .text:000000000000035c .LVL58
+     /tmp/cciiKsHz.s:506    .text:000000000000036c .LVL59
+     /tmp/cciiKsHz.s:515    .text:0000000000000380 .LVL60
+     /tmp/cciiKsHz.s:523    .text:0000000000000394 .LVL61
+     /tmp/cciiKsHz.s:535    .text:00000000000003b0 .LVL63
+     /tmp/cciiKsHz.s:579    .text:0000000000000420 .LVL68
+     /tmp/cciiKsHz.s:633    .text:0000000000000498 .LVL73
+     /tmp/cciiKsHz.s:657    .text:00000000000004c8 .LVL78
+     /tmp/cciiKsHz.s:664    .text:00000000000004d8 .LVL79
+     /tmp/cciiKsHz.s:667    .text:00000000000004e4 .LVL80
+     /tmp/cciiKsHz.s:704    .text:0000000000000524 .LVL85
+     /tmp/cciiKsHz.s:707    .text:0000000000000530 .LVL86
+     /tmp/cciiKsHz.s:3477   .debug_str:0000000000000241 .LASF76
+     /tmp/cciiKsHz.s:3633   .debug_str:000000000000076f .LASF77
+     /tmp/cciiKsHz.s:3599   .debug_str:0000000000000677 .LASF78
+     /tmp/cciiKsHz.s:233    .text:0000000000000170 .LFB2
+     /tmp/cciiKsHz.s:367    .text:0000000000000260 .LFE2
+     /tmp/cciiKsHz.s:3167   .debug_loc:0000000000000144 .LLST7
+     /tmp/cciiKsHz.s:3185   .debug_loc:0000000000000190 .LLST8
+     /tmp/cciiKsHz.s:3203   .debug_loc:00000000000001dc .LLST9
+     /tmp/cciiKsHz.s:3385   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/cciiKsHz.s:3227   .debug_loc:000000000000024c .LLST10
+     /tmp/cciiKsHz.s:265    .text:00000000000001a8 .LVL29
+     /tmp/cciiKsHz.s:269    .text:00000000000001b0 .LVL30
+     /tmp/cciiKsHz.s:277    .text:00000000000001c0 .LVL32
+     /tmp/cciiKsHz.s:289    .text:00000000000001d8 .LVL33
+     /tmp/cciiKsHz.s:300    .text:00000000000001ec .LVL36
+     /tmp/cciiKsHz.s:322    .text:0000000000000210 .LBB4
+     /tmp/cciiKsHz.s:335    .text:0000000000000228 .LBE4
+     /tmp/cciiKsHz.s:3234   .debug_loc:000000000000026f .LLST11
+     /tmp/cciiKsHz.s:327    .text:000000000000021c .LVL38
+     /tmp/cciiKsHz.s:333    .text:0000000000000228 .LVL40
+     /tmp/cciiKsHz.s:341    .text:0000000000000234 .LVL41
+     /tmp/cciiKsHz.s:348    .text:0000000000000244 .LVL42
+     /tmp/cciiKsHz.s:3543   .debug_str:000000000000041a .LASF79
+     /tmp/cciiKsHz.s:3605   .debug_str:00000000000006ac .LASF80
+     /tmp/cciiKsHz.s:135    .text:00000000000000cc .LFB1
+     /tmp/cciiKsHz.s:222    .text:0000000000000170 .LFE1
+     /tmp/cciiKsHz.s:3241   .debug_loc:0000000000000292 .LLST4
+     /tmp/cciiKsHz.s:3259   .debug_loc:00000000000002de .LLST5
+     /tmp/cciiKsHz.s:3277   .debug_loc:000000000000032a .LLST6
+     /tmp/cciiKsHz.s:164    .text:0000000000000100 .LVL18
+     /tmp/cciiKsHz.s:168    .text:0000000000000108 .LVL19
+     /tmp/cciiKsHz.s:181    .text:0000000000000128 .LVL20
+     /tmp/cciiKsHz.s:205    .text:0000000000000158 .LVL23
+     /tmp/cciiKsHz.s:3601   .debug_str:0000000000000685 .LASF81
+     /tmp/cciiKsHz.s:3499   .debug_str:00000000000002ed .LASF82
+     /tmp/cciiKsHz.s:15     .text:0000000000000000 .LFB0
+     /tmp/cciiKsHz.s:124    .text:00000000000000cc .LFE0
+GAS LISTING /tmp/cciiKsHz.s 			page 32
 
 
-     /tmp/cc673G5Z.s:195    .text:0000000000000154 .LVL24
-     /tmp/cc673G5Z.s:3657   .debug_str:0000000000000685 .LASF81
-     /tmp/cc673G5Z.s:3555   .debug_str:00000000000002ed .LASF82
-     /tmp/cc673G5Z.s:10     .text:0000000000000000 .LFB0
-     /tmp/cc673G5Z.s:117    .text:00000000000000c4 .LFE0
-     /tmp/cc673G5Z.s:3353   .debug_loc:000000000000039a .LLST0
-     /tmp/cc673G5Z.s:3371   .debug_loc:00000000000003e6 .LLST1
-     /tmp/cc673G5Z.s:3389   .debug_loc:0000000000000432 .LLST2
-     /tmp/cc673G5Z.s:3404   .debug_loc:000000000000047b .LLST3
-     /tmp/cc673G5Z.s:40     .text:000000000000002c .LVL3
-     /tmp/cc673G5Z.s:46     .text:0000000000000034 .LVL4
-     /tmp/cc673G5Z.s:57     .text:000000000000004c .LVL6
-     /tmp/cc673G5Z.s:88     .text:000000000000008c .LVL11
-     /tmp/cc673G5Z.s:95     .text:00000000000000a0 .LVL12
-     /tmp/cc673G5Z.s:100    .text:00000000000000ac .LVL13
-     /tmp/cc673G5Z.s:3597   .debug_str:0000000000000404 .LASF83
-     /tmp/cc673G5Z.s:3455   .debug_str:0000000000000011 .LASF85
-     /tmp/cc673G5Z.s:3495   .debug_str:0000000000000129 .LASF84
-     /tmp/cc673G5Z.s:3487   .debug_str:00000000000000dd .LASF86
-     /tmp/cc673G5Z.s:3683   .debug_str:000000000000073f .LASF87
-     /tmp/cc673G5Z.s:3619   .debug_str:00000000000004b4 .LASF88
-     /tmp/cc673G5Z.s:3687   .debug_str:000000000000075f .LASF89
-     /tmp/cc673G5Z.s:3499   .debug_str:000000000000013c .LASF90
-     /tmp/cc673G5Z.s:3595   .debug_str:00000000000003f1 .LASF91
-     /tmp/cc673G5Z.s:3651   .debug_str:000000000000065c .LASF92
-     /tmp/cc673G5Z.s:3603   .debug_str:0000000000000436 .LASF93
-     /tmp/cc673G5Z.s:3483   .debug_str:00000000000000c8 .LASF94
-     /tmp/cc673G5Z.s:3633   .debug_str:0000000000000504 .LASF98
-     /tmp/cc673G5Z.s:3675   .debug_str:0000000000000714 .LASF100
-     /tmp/cc673G5Z.s:3511   .debug_str:0000000000000189 .LASF95
-     /tmp/cc673G5Z.s:3557   .debug_str:0000000000000304 .LASF96
-     /tmp/cc673G5Z.s:3645   .debug_str:0000000000000572 .LASF97
-     /tmp/cc673G5Z.s:3693   .debug_str:0000000000000789 .LASF99
-     /tmp/cc673G5Z.s:3641   .debug_str:000000000000054e .LASF101
-     /tmp/cc673G5Z.s:3535   .debug_str:0000000000000246 .LASF102
-     /tmp/cc673G5Z.s:3491   .debug_str:00000000000000fb .LASF103
-     /tmp/cc673G5Z.s:3579   .debug_str:0000000000000397 .LASF104
-     /tmp/cc673G5Z.s:3669   .debug_str:00000000000006dc .LASF105
-     /tmp/cc673G5Z.s:3459   .debug_str:0000000000000030 .LASF106
-     /tmp/cc673G5Z.s:455    .text:00000000000002f0 .LVL53
-     /tmp/cc673G5Z.s:526    .text:00000000000003a4 .LVL64
-     /tmp/cc673G5Z.s:707    .text:000000000000054c .LVL87
-     /tmp/cc673G5Z.s:711    .text:0000000000000550 .LVL88
-     /tmp/cc673G5Z.s:437    .text:00000000000002c0 .LVL49
-     /tmp/cc673G5Z.s:695    .text:0000000000000534 .LVL86
-     /tmp/cc673G5Z.s:522    .text:000000000000039c .LVL63
-     /tmp/cc673G5Z.s:681    .text:0000000000000520 .LVL85
-     /tmp/cc673G5Z.s:545    .text:00000000000003e0 .LVL67
-     /tmp/cc673G5Z.s:558    .text:00000000000003fc .LVL69
-     /tmp/cc673G5Z.s:560    .text:0000000000000400 .LVL70
-     /tmp/cc673G5Z.s:586    .text:0000000000000440 .LVL72
-     /tmp/cc673G5Z.s:648    .text:00000000000004d4 .LVL78
-     /tmp/cc673G5Z.s:659    .text:00000000000004ec .LVL80
-     /tmp/cc673G5Z.s:661    .text:00000000000004f0 .LVL81
-     /tmp/cc673G5Z.s:221    .text:000000000000016c .LVL27
-     /tmp/cc673G5Z.s:243    .text:0000000000000194 .LVL29
-     /tmp/cc673G5Z.s:346    .text:0000000000000254 .LVL44
-GAS LISTING /tmp/cc673G5Z.s 			page 33
+     /tmp/cciiKsHz.s:3301   .debug_loc:000000000000039a .LLST0
+     /tmp/cciiKsHz.s:3319   .debug_loc:00000000000003e6 .LLST1
+     /tmp/cciiKsHz.s:3337   .debug_loc:0000000000000432 .LLST2
+     /tmp/cciiKsHz.s:3348   .debug_loc:0000000000000468 .LLST3
+     /tmp/cciiKsHz.s:47     .text:0000000000000030 .LVL3
+     /tmp/cciiKsHz.s:53     .text:0000000000000038 .LVL4
+     /tmp/cciiKsHz.s:64     .text:0000000000000054 .LVL6
+     /tmp/cciiKsHz.s:70     .text:0000000000000064 .LVL7
+     /tmp/cciiKsHz.s:99     .text:00000000000000a4 .LVL10
+     /tmp/cciiKsHz.s:104    .text:00000000000000b0 .LVL11
+     /tmp/cciiKsHz.s:3541   .debug_str:0000000000000404 .LASF83
+     /tmp/cciiKsHz.s:3399   .debug_str:0000000000000011 .LASF85
+     /tmp/cciiKsHz.s:3439   .debug_str:0000000000000129 .LASF84
+     /tmp/cciiKsHz.s:3431   .debug_str:00000000000000dd .LASF86
+     /tmp/cciiKsHz.s:3627   .debug_str:000000000000073f .LASF87
+     /tmp/cciiKsHz.s:3563   .debug_str:00000000000004b4 .LASF88
+     /tmp/cciiKsHz.s:3631   .debug_str:000000000000075f .LASF89
+     /tmp/cciiKsHz.s:3443   .debug_str:000000000000013c .LASF90
+     /tmp/cciiKsHz.s:3539   .debug_str:00000000000003f1 .LASF91
+     /tmp/cciiKsHz.s:3595   .debug_str:000000000000065c .LASF92
+     /tmp/cciiKsHz.s:3547   .debug_str:0000000000000436 .LASF93
+     /tmp/cciiKsHz.s:3427   .debug_str:00000000000000c8 .LASF94
+     /tmp/cciiKsHz.s:3577   .debug_str:0000000000000504 .LASF98
+     /tmp/cciiKsHz.s:3619   .debug_str:0000000000000714 .LASF100
+     /tmp/cciiKsHz.s:3455   .debug_str:0000000000000189 .LASF95
+     /tmp/cciiKsHz.s:3501   .debug_str:0000000000000304 .LASF96
+     /tmp/cciiKsHz.s:3589   .debug_str:0000000000000572 .LASF97
+     /tmp/cciiKsHz.s:3637   .debug_str:0000000000000789 .LASF99
+     /tmp/cciiKsHz.s:3585   .debug_str:000000000000054e .LASF101
+     /tmp/cciiKsHz.s:3479   .debug_str:0000000000000246 .LASF102
+     /tmp/cciiKsHz.s:3435   .debug_str:00000000000000fb .LASF103
+     /tmp/cciiKsHz.s:3523   .debug_str:0000000000000397 .LASF104
+     /tmp/cciiKsHz.s:3613   .debug_str:00000000000006dc .LASF105
+     /tmp/cciiKsHz.s:3403   .debug_str:0000000000000030 .LASF106
+     /tmp/cciiKsHz.s:462    .text:00000000000002f0 .LVL52
+     /tmp/cciiKsHz.s:583    .text:0000000000000424 .LVL69
+     /tmp/cciiKsHz.s:696    .text:0000000000000514 .LVL83
+     /tmp/cciiKsHz.s:700    .text:0000000000000518 .LVL84
+     /tmp/cciiKsHz.s:444    .text:00000000000002c0 .LVL48
+     /tmp/cciiKsHz.s:684    .text:00000000000004fc .LVL82
+     /tmp/cciiKsHz.s:529    .text:000000000000039c .LVL62
+     /tmp/cciiKsHz.s:670    .text:00000000000004e8 .LVL81
+     /tmp/cciiKsHz.s:543    .text:00000000000003c4 .LVL64
+     /tmp/cciiKsHz.s:556    .text:00000000000003e0 .LVL66
+     /tmp/cciiKsHz.s:558    .text:00000000000003e4 .LVL67
+     /tmp/cciiKsHz.s:585    .text:0000000000000428 .LVL70
+     /tmp/cciiKsHz.s:637    .text:000000000000049c .LVL74
+     /tmp/cciiKsHz.s:648    .text:00000000000004b4 .LVL76
+     /tmp/cciiKsHz.s:650    .text:00000000000004b8 .LVL77
+     /tmp/cciiKsHz.s:236    .text:0000000000000170 .LVL26
+     /tmp/cciiKsHz.s:258    .text:0000000000000198 .LVL28
+     /tmp/cciiKsHz.s:359    .text:0000000000000254 .LVL43
+     /tmp/cciiKsHz.s:253    .text:0000000000000190 .LVL27
+     /tmp/cciiKsHz.s:271    .text:00000000000001b4 .LVL31
+     /tmp/cciiKsHz.s:294    .text:00000000000001e0 .LVL34
+     /tmp/cciiKsHz.s:316    .text:0000000000000208 .LVL37
+     /tmp/cciiKsHz.s:362    .text:0000000000000258 .LVL44
+GAS LISTING /tmp/cciiKsHz.s 			page 33
 
 
-     /tmp/cc673G5Z.s:238    .text:000000000000018c .LVL28
-     /tmp/cc673G5Z.s:251    .text:00000000000001a0 .LVL31
-     /tmp/cc673G5Z.s:274    .text:00000000000001cc .LVL34
-     /tmp/cc673G5Z.s:296    .text:00000000000001f4 .LVL37
-     /tmp/cc673G5Z.s:349    .text:0000000000000258 .LVL45
-     /tmp/cc673G5Z.s:278    .text:00000000000001d0 .LVL35
-     /tmp/cc673G5Z.s:311    .text:000000000000020c .LVL39
-     /tmp/cc673G5Z.s:126    .text:00000000000000c4 .LVL16
-     /tmp/cc673G5Z.s:146    .text:00000000000000e8 .LVL18
-     /tmp/cc673G5Z.s:204    .text:0000000000000160 .LVL25
-     /tmp/cc673G5Z.s:141    .text:00000000000000e0 .LVL17
-     /tmp/cc673G5Z.s:169    .text:0000000000000118 .LVL21
-     /tmp/cc673G5Z.s:182    .text:0000000000000134 .LVL22
-     /tmp/cc673G5Z.s:207    .text:0000000000000164 .LVL26
-     /tmp/cc673G5Z.s:14     .text:0000000000000000 .LVL0
-     /tmp/cc673G5Z.s:35     .text:0000000000000024 .LVL2
-     /tmp/cc673G5Z.s:109    .text:00000000000000b8 .LVL14
-     /tmp/cc673G5Z.s:29     .text:000000000000001c .LVL1
-     /tmp/cc673G5Z.s:49     .text:0000000000000038 .LVL5
-     /tmp/cc673G5Z.s:75     .text:0000000000000070 .LVL8
-     /tmp/cc673G5Z.s:84     .text:0000000000000080 .LVL9
-     /tmp/cc673G5Z.s:86     .text:0000000000000084 .LVL10
-     /tmp/cc673G5Z.s:62     .text:0000000000000054 .LVL7
-     /tmp/cc673G5Z.s:112    .text:00000000000000bc .LVL15
-     /tmp/cc673G5Z.s:816    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/cc673G5Z.s:245    .text:0000000000000194 .LBB2
-     /tmp/cc673G5Z.s:259    .text:00000000000001ac .LBE2
-     /tmp/cc673G5Z.s:264    .text:00000000000001b8 .LBB3
-     /tmp/cc673G5Z.s:301    .text:00000000000001fc .LBE3
-     /tmp/cc673G5Z.s:724    .gcc_except_table:0000000000000000 .LLSDA3
+     /tmp/cciiKsHz.s:298    .text:00000000000001e4 .LVL35
+     /tmp/cciiKsHz.s:331    .text:0000000000000220 .LVL39
+     /tmp/cciiKsHz.s:138    .text:00000000000000cc .LVL15
+     /tmp/cciiKsHz.s:158    .text:00000000000000f0 .LVL17
+     /tmp/cciiKsHz.s:214    .text:0000000000000164 .LVL24
+     /tmp/cciiKsHz.s:153    .text:00000000000000e8 .LVL16
+     /tmp/cciiKsHz.s:186    .text:0000000000000130 .LVL21
+     /tmp/cciiKsHz.s:199    .text:000000000000014c .LVL22
+     /tmp/cciiKsHz.s:217    .text:0000000000000168 .LVL25
+     /tmp/cciiKsHz.s:19     .text:0000000000000000 .LVL0
+     /tmp/cciiKsHz.s:42     .text:0000000000000028 .LVL2
+     /tmp/cciiKsHz.s:116    .text:00000000000000c0 .LVL13
+     /tmp/cciiKsHz.s:36     .text:0000000000000020 .LVL1
+     /tmp/cciiKsHz.s:56     .text:000000000000003c .LVL5
+     /tmp/cciiKsHz.s:113    .text:00000000000000bc .LVL12
+     /tmp/cciiKsHz.s:75     .text:000000000000006c .LVL8
+     /tmp/cciiKsHz.s:88     .text:0000000000000088 .LVL9
+     /tmp/cciiKsHz.s:119    .text:00000000000000c4 .LVL14
+     /tmp/cciiKsHz.s:805    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/cciiKsHz.s:260    .text:0000000000000198 .LBB2
+     /tmp/cciiKsHz.s:279    .text:00000000000001c0 .LBE2
+     /tmp/cciiKsHz.s:284    .text:00000000000001cc .LBB3
+     /tmp/cciiKsHz.s:321    .text:0000000000000210 .LBE3
+     /tmp/cciiKsHz.s:713    .gcc_except_table:0000000000000000 .LLSDA3
 
 UNDEFINED SYMBOLS
 thread_dispatch
 getc
+_Z11printStringPKc
 _ZN6Buffer3putEi
-_Z8printIntiii
 sem_signal
 putc
 _ZN6Buffer3getEv
 _ZN6Buffer6getCntEv
-_Z11printStringPKc
 _Z9getStringPci
 _Z11stringToIntPKc
+_Z8printIntiii
 _Znwm
 _ZN6BufferC1Ei
 sem_open

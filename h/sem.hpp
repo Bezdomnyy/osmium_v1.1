@@ -28,7 +28,7 @@ private:
 
     unsigned init;
 
-    unsigned val;
+    long int val;
 };
 
 

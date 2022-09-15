@@ -92,7 +92,7 @@ void main() {
 
     //thread_dispatch();
     __print_string("hey!\n");
-    while(!threads[1]->isFinished()) { thread_dispatch(); }
+    while(!threads[1]->isFinished()) { /*__print_string("hello\n");*/thread_dispatch(); }
 
     __print_string("Finished\n");
 

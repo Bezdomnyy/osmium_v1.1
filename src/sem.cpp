@@ -19,6 +19,7 @@ int Sem::semWait() {
     //if (Scheduler::readyQueueEmpty()) return -1;
     if (--val < 0) {
         TCB *old = TCB::running;
+        //if (!TCB::running) __print_string("error!!!\n");
         old->setBlocked(true);
         list.putLast(old);
         thread_dispatch();
@@ -28,6 +29,7 @@ int Sem::semWait() {
 
 int Sem::semSignal() {
     if (++val <= 0) {
+        //if (!list.getFirst()) return -1;
         TCB* ready = list.takeFirst();
         ready->setBlocked(false);
         Scheduler::put(ready);
