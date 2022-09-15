@@ -33,6 +33,7 @@ TCB::TCB(Body body, void* args, uint64 timeSlice, bool ready)
 args(args),
 stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
 finished(false),
+blocked(false),
 timeSlice(timeSlice),
 context({
                 body != nullptr ? (uint64) &threadWrapper : 0,
@@ -49,7 +50,7 @@ void TCB::dispatch()
     //__print_string("TCB::dispatch()\n");
 
     TCB *old = running;
-    if (!old->isFinished()) { Scheduler::put(old); }
+    if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
     while (!running) { Scheduler::get(); }
 

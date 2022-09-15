@@ -12,6 +12,9 @@ void *operator new(size_t size);
 
 void operator delete(void *ptr);
 
+//class Thread;
+
+//void threadRunWrapper(Thread* thread);
 
 class Thread {
 public:
@@ -31,7 +34,12 @@ protected:
     virtual void run() {}
 
 private:
+    friend void threadRunWrapper(void* thread);
+
+    using Body = void (Thread::*) (void*);
     thread_t myHandle;
+    Body body;
+    void* args;
 };
 
 

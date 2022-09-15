@@ -36,6 +36,8 @@ void producerKeyboard(void *arg) {
     threadEnd = 1;
     data->buffer->put('!');
 
+    printInt((uint64)data->wait);
+
     sem_signal(data->wait);
 }
 
@@ -51,6 +53,8 @@ void producer(void *arg) {
             thread_dispatch();
         }
     }
+
+    printInt((uint64)data->wait);
 
     sem_signal(data->wait);
 }
@@ -78,6 +82,8 @@ void consumer(void *arg) {
         int key = data->buffer->get();
         putc(key);
     }
+
+    printInt((uint64)data->wait);
 
     sem_signal(data->wait);
 }
@@ -110,6 +116,8 @@ void producerConsumer_C_API() {
 
     sem_open(&waitForAll, 0);
 
+    printInt((uint64)waitForAll);
+
     thread_t threads[threadNum];
     thread_t consumerThread;
 
@@ -130,11 +138,16 @@ void producerConsumer_C_API() {
                       data + i);
     }
 
+    printString("here1\n");
+
     thread_dispatch();
+
+    printString("here2\n");
 
     for (int i = 0; i <= threadNum; i++) {
         sem_wait(waitForAll);
     }
+
 
     sem_close(waitForAll);
 

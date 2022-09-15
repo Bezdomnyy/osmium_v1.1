@@ -24,6 +24,10 @@ public:
 
     void setFinished(bool val) { finished = val; }
 
+    bool isBlocked() const { return blocked; }
+
+    void setBlocked(bool val) { blocked = val; }
+
     uint64 getTimeSlice() const { return timeSlice; }
 
     static TCB* running;
@@ -68,6 +72,7 @@ private:
     void *args;
     uint64 *stack;
     bool finished;
+    bool blocked;
     uint64 timeSlice;
     Context context;
 

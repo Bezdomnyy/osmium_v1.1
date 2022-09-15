@@ -84,8 +84,9 @@ void main() {
 
     TCB* threads[2] = {nullptr, nullptr};
     thread_create(&threads[0], nullptr, nullptr);
+    RiscV::setSstatus(RiscV::SIE);
     //__putc('?'); __putc('\n');
-    thread_create(&threads[1], (void(*)(void*))userMain, nullptr);
+    thread_create(&threads[1], (void(*)(void*))&userMain, nullptr);
     //thread_create(&threads[2], (void(*)(void*))userMain, nullptr);
     TCB::running = threads[0];
 

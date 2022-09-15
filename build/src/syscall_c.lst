@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cchqrlta.s 			page 1
+GAS LISTING /tmp/ccS9BMQu.s 			page 1
 
 
    1              		.file	"syscall_c.cpp"
@@ -6,242 +6,36 @@ GAS LISTING /tmp/cchqrlta.s 			page 1
    3              		.option norelax
    4              		.text
    5              	.Ltext0:
-   6              		.align	2
-   7              		.globl	time_sleep
-   9              	time_sleep:
-  10              	.LFB0:
-  11              		.file 1 "src/syscall_c.cpp"
-   1:src/syscall_c.cpp **** //
-   2:src/syscall_c.cpp **** // Created by os on 9/9/22.
-   3:src/syscall_c.cpp **** //
-   4:src/syscall_c.cpp **** 
-   5:src/syscall_c.cpp **** #include "../h/syscall_c.h"
-   6:src/syscall_c.cpp **** #include "../lib/console.h"
-   7:src/syscall_c.cpp **** 
-   8:src/syscall_c.cpp **** /*int thread_create(thread_t *handle,void(*start_routine)(void *),void *arg) {
-   9:src/syscall_c.cpp ****     return 0;
-  10:src/syscall_c.cpp **** }
-  11:src/syscall_c.cpp **** 
-  12:src/syscall_c.cpp **** int thread_exit() {
-  13:src/syscall_c.cpp ****     return 0;
-  14:src/syscall_c.cpp **** }
-  15:src/syscall_c.cpp **** 
-  16:src/syscall_c.cpp **** 
-  17:src/syscall_c.cpp **** void thread_dispatch();*/
-  18:src/syscall_c.cpp **** 
-  19:src/syscall_c.cpp **** /*int sem_open( sem_t *handle, unsigned init) {
-  20:src/syscall_c.cpp ****     return 0;
-  21:src/syscall_c.cpp **** }
-  22:src/syscall_c.cpp **** 
-  23:src/syscall_c.cpp **** int sem_close(sem_t handle) {
-  24:src/syscall_c.cpp ****     return 0;
-  25:src/syscall_c.cpp **** }
-  26:src/syscall_c.cpp **** 
-  27:src/syscall_c.cpp **** int sem_wait(sem_t id){
-  28:src/syscall_c.cpp ****     return 0;
-  29:src/syscall_c.cpp **** }
-  30:src/syscall_c.cpp **** 
-  31:src/syscall_c.cpp **** int sem_signal(sem_t id){
-  32:src/syscall_c.cpp ****     return 0;
-  33:src/syscall_c.cpp **** }*/
-  34:src/syscall_c.cpp **** 
-  35:src/syscall_c.cpp **** int time_sleep(time_t){
-  12              		.loc 1 35 23
-  13              		.cfi_startproc
-  14 0000 130101FF 		addi	sp,sp,-16
-  15              		.cfi_def_cfa_offset 16
-  16 0004 23348100 		sd	s0,8(sp)
-  17              		.cfi_offset 8, -8
-  18 0008 13040101 		addi	s0,sp,16
-  19              		.cfi_def_cfa 8, 0
-  36:src/syscall_c.cpp ****     return 0;
-  20              		.loc 1 36 5
-  37:src/syscall_c.cpp **** }
-  21              		.loc 1 37 1 is_stmt 0
-GAS LISTING /tmp/cchqrlta.s 			page 2
-
-
-  22 000c 13050000 		li	a0,0
-  23 0010 03348100 		ld	s0,8(sp)
-  24              		.cfi_restore 8
-  25              		.cfi_def_cfa 2, 16
-  26 0014 13010101 		addi	sp,sp,16
-  27              		.cfi_def_cfa_offset 0
-  28 0018 67800000 		jr	ra
-  29              		.cfi_endproc
-  30              	.LFE0:
-  32              		.align	2
-  33              		.globl	_Z4getcv
-  35              	_Z4getcv:
-  36              	.LFB1:
-  38:src/syscall_c.cpp **** 
-  39:src/syscall_c.cpp **** char getc(){
-  37              		.loc 1 39 12 is_stmt 1
-  38              		.cfi_startproc
-  39 001c 130101FF 		addi	sp,sp,-16
-  40              		.cfi_def_cfa_offset 16
-  41 0020 23341100 		sd	ra,8(sp)
-  42 0024 23308100 		sd	s0,0(sp)
-  43              		.cfi_offset 1, -8
-  44              		.cfi_offset 8, -16
-  45 0028 13040101 		addi	s0,sp,16
-  46              		.cfi_def_cfa 8, 0
-  40:src/syscall_c.cpp ****     return __getc();
-  47              		.loc 1 40 5
-  48              		.loc 1 40 18 is_stmt 0
-  49 002c 97000000 		call	__getc@plt
-  49      E7800000 
-  50              	.LVL0:
-  41:src/syscall_c.cpp **** }
-  51              		.loc 1 41 1
-  52 0034 83308100 		ld	ra,8(sp)
-  53              		.cfi_restore 1
-  54 0038 03340100 		ld	s0,0(sp)
-  55              		.cfi_restore 8
-  56              		.cfi_def_cfa 2, 16
-  57 003c 13010101 		addi	sp,sp,16
-  58              		.cfi_def_cfa_offset 0
-  59 0040 67800000 		jr	ra
-  60              		.cfi_endproc
-  61              	.LFE1:
-  63              		.align	2
-  64              		.globl	_Z4putcc
-  66              	_Z4putcc:
-  67              	.LFB2:
-  42:src/syscall_c.cpp **** 
-  43:src/syscall_c.cpp **** void putc(char c) {
-  68              		.loc 1 43 19 is_stmt 1
-  69              		.cfi_startproc
-  70              	.LVL1:
-  71 0044 130101FF 		addi	sp,sp,-16
-  72              		.cfi_def_cfa_offset 16
-  73 0048 23341100 		sd	ra,8(sp)
-  74 004c 23308100 		sd	s0,0(sp)
-  75              		.cfi_offset 1, -8
-GAS LISTING /tmp/cchqrlta.s 			page 3
-
-
-  76              		.cfi_offset 8, -16
-  77 0050 13040101 		addi	s0,sp,16
-  78              		.cfi_def_cfa 8, 0
-  44:src/syscall_c.cpp ****     __putc(c);
-  79              		.loc 1 44 5
-  80              		.loc 1 44 11 is_stmt 0
-  81 0054 97000000 		call	__putc@plt
-  81      E7800000 
-  82              	.LVL2:
-  45:src/syscall_c.cpp **** }...
-  83              		.loc 1 45 1
-  84 005c 83308100 		ld	ra,8(sp)
-  85              		.cfi_restore 1
-  86 0060 03340100 		ld	s0,0(sp)
-  87              		.cfi_restore 8
-  88              		.cfi_def_cfa 2, 16
-  89 0064 13010101 		addi	sp,sp,16
-  90              		.cfi_def_cfa_offset 0
-  91 0068 67800000 		jr	ra
-  92              		.cfi_endproc
-  93              	.LFE2:
-  95              	.Letext0:
-  96              		.file 2 "src/../h/../lib/hw.h"
-  97              		.file 3 "src/../lib/console.h"
-  98              		.file 4 "src/../h/syscall_c.h"
-GAS LISTING /tmp/cchqrlta.s 			page 4
+   6              	.Letext0:
+   7              		.file 1 "src/../h/../lib/hw.h"
+   8              		.file 2 "src/../h/syscall_c.h"
+GAS LISTING /tmp/ccS9BMQu.s 			page 2
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 syscall_c.cpp
-     /tmp/cchqrlta.s:9      .text:0000000000000000 time_sleep
-     /tmp/cchqrlta.s:13     .text:0000000000000000 .L0 
-     /tmp/cchqrlta.s:14     .text:0000000000000000 .L0 
-     /tmp/cchqrlta.s:15     .text:0000000000000004 .L0 
-     /tmp/cchqrlta.s:17     .text:0000000000000008 .L0 
-     /tmp/cchqrlta.s:19     .text:000000000000000c .L0 
-     /tmp/cchqrlta.s:21     .text:000000000000000c .L0 
-     /tmp/cchqrlta.s:22     .text:000000000000000c .L0 
-     /tmp/cchqrlta.s:24     .text:0000000000000014 .L0 
-     /tmp/cchqrlta.s:25     .text:0000000000000014 .L0 
-     /tmp/cchqrlta.s:27     .text:0000000000000018 .L0 
-     /tmp/cchqrlta.s:29     .text:000000000000001c .L0 
-     /tmp/cchqrlta.s:35     .text:000000000000001c _Z4getcv
-     /tmp/cchqrlta.s:38     .text:000000000000001c .L0 
-     /tmp/cchqrlta.s:39     .text:000000000000001c .L0 
-     /tmp/cchqrlta.s:40     .text:0000000000000020 .L0 
-     /tmp/cchqrlta.s:43     .text:0000000000000028 .L0 
-     /tmp/cchqrlta.s:44     .text:0000000000000028 .L0 
-     /tmp/cchqrlta.s:46     .text:000000000000002c .L0 
-     /tmp/cchqrlta.s:48     .text:000000000000002c .L0 
-     /tmp/cchqrlta.s:49     .text:000000000000002c .L0 
-     /tmp/cchqrlta.s:52     .text:0000000000000034 .L0 
-     /tmp/cchqrlta.s:53     .text:0000000000000038 .L0 
-     /tmp/cchqrlta.s:55     .text:000000000000003c .L0 
-     /tmp/cchqrlta.s:56     .text:000000000000003c .L0 
-     /tmp/cchqrlta.s:58     .text:0000000000000040 .L0 
-     /tmp/cchqrlta.s:60     .text:0000000000000044 .L0 
-     /tmp/cchqrlta.s:66     .text:0000000000000044 _Z4putcc
-     /tmp/cchqrlta.s:69     .text:0000000000000044 .L0 
-     /tmp/cchqrlta.s:71     .text:0000000000000044 .L0 
-     /tmp/cchqrlta.s:72     .text:0000000000000048 .L0 
-     /tmp/cchqrlta.s:75     .text:0000000000000050 .L0 
-     /tmp/cchqrlta.s:76     .text:0000000000000050 .L0 
-     /tmp/cchqrlta.s:78     .text:0000000000000054 .L0 
-     /tmp/cchqrlta.s:80     .text:0000000000000054 .L0 
-     /tmp/cchqrlta.s:81     .text:0000000000000054 .L0 
-     /tmp/cchqrlta.s:84     .text:000000000000005c .L0 
-     /tmp/cchqrlta.s:85     .text:0000000000000060 .L0 
-     /tmp/cchqrlta.s:87     .text:0000000000000064 .L0 
-     /tmp/cchqrlta.s:88     .text:0000000000000064 .L0 
-     /tmp/cchqrlta.s:90     .text:0000000000000068 .L0 
-     /tmp/cchqrlta.s:92     .text:000000000000006c .L0 
-     /tmp/cchqrlta.s:99     .text:000000000000006c .L0 
-     /tmp/cchqrlta.s:312    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/cchqrlta.s:673    .debug_str:000000000000013a .LASF23
-     /tmp/cchqrlta.s:665    .debug_str:00000000000000ec .LASF24
-     /tmp/cchqrlta.s:657    .debug_str:00000000000000a7 .LASF25
-     /tmp/cchqrlta.s:5      .text:0000000000000000 .Ltext0
-     /tmp/cchqrlta.s:95     .text:000000000000006c .Letext0
-     /tmp/cchqrlta.s:627    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/cchqrlta.s:631    .debug_str:000000000000000b .LASF0
-     /tmp/cchqrlta.s:671    .debug_str:0000000000000127 .LASF1
-     /tmp/cchqrlta.s:633    .debug_str:0000000000000018 .LASF2
-     /tmp/cchqrlta.s:651    .debug_str:000000000000008f .LASF4
-     /tmp/cchqrlta.s:647    .debug_str:000000000000006a .LASF3
-GAS LISTING /tmp/cchqrlta.s 			page 5
+     /tmp/ccS9BMQu.s:144    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccS9BMQu.s:334    .debug_str:000000000000010e .LASF17
+     /tmp/ccS9BMQu.s:326    .debug_str:00000000000000c0 .LASF18
+     /tmp/ccS9BMQu.s:322    .debug_str:0000000000000087 .LASF19
+     /tmp/ccS9BMQu.s:300    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccS9BMQu.s:302    .debug_str:0000000000000000 .LASF0
+     /tmp/ccS9BMQu.s:332    .debug_str:00000000000000fb .LASF1
+     /tmp/ccS9BMQu.s:304    .debug_str:000000000000000d .LASF2
+     /tmp/ccS9BMQu.s:318    .debug_str:0000000000000074 .LASF4
+     /tmp/ccS9BMQu.s:314    .debug_str:000000000000004f .LASF3
+     /tmp/ccS9BMQu.s:310    .debug_str:0000000000000038 .LASF5
+     /tmp/ccS9BMQu.s:316    .debug_str:0000000000000061 .LASF6
+     /tmp/ccS9BMQu.s:330    .debug_str:00000000000000e8 .LASF7
+     /tmp/ccS9BMQu.s:338    .debug_str:00000000000001e1 .LASF8
+     /tmp/ccS9BMQu.s:306    .debug_str:000000000000001b .LASF9
+     /tmp/ccS9BMQu.s:308    .debug_str:0000000000000029 .LASF10
+     /tmp/ccS9BMQu.s:336    .debug_str:00000000000001d2 .LASF11
+     /tmp/ccS9BMQu.s:312    .debug_str:000000000000003f .LASF12
+     /tmp/ccS9BMQu.s:340    .debug_str:00000000000001f1 .LASF13
+     /tmp/ccS9BMQu.s:320    .debug_str:000000000000007b .LASF14
+     /tmp/ccS9BMQu.s:328    .debug_str:00000000000000d2 .LASF15
+     /tmp/ccS9BMQu.s:324    .debug_str:00000000000000aa .LASF16
+     /tmp/ccS9BMQu.s:10     .debug_info:0000000000000000 .Ldebug_info0
 
-
-     /tmp/cchqrlta.s:639    .debug_str:0000000000000043 .LASF5
-     /tmp/cchqrlta.s:659    .debug_str:00000000000000ca .LASF6
-     /tmp/cchqrlta.s:649    .debug_str:000000000000007c .LASF7
-     /tmp/cchqrlta.s:669    .debug_str:0000000000000114 .LASF8
-     /tmp/cchqrlta.s:681    .debug_str:000000000000021b .LASF9
-     /tmp/cchqrlta.s:635    .debug_str:0000000000000026 .LASF10
-     /tmp/cchqrlta.s:637    .debug_str:0000000000000034 .LASF11
-     /tmp/cchqrlta.s:675    .debug_str:00000000000001fe .LASF12
-     /tmp/cchqrlta.s:641    .debug_str:000000000000004a .LASF13
-     /tmp/cchqrlta.s:685    .debug_str:0000000000000232 .LASF14
-     /tmp/cchqrlta.s:655    .debug_str:000000000000009b .LASF15
-     /tmp/cchqrlta.s:667    .debug_str:00000000000000fe .LASF16
-     /tmp/cchqrlta.s:663    .debug_str:00000000000000d6 .LASF17
-     /tmp/cchqrlta.s:679    .debug_str:0000000000000216 .LASF19
-     /tmp/cchqrlta.s:677    .debug_str:000000000000020d .LASF26
-     /tmp/cchqrlta.s:67     .text:0000000000000044 .LFB2
-     /tmp/cchqrlta.s:93     .text:000000000000006c .LFE2
-     /tmp/cchqrlta.s:600    .debug_loc:0000000000000000 .LLST0
-     /tmp/cchqrlta.s:82     .text:000000000000005c .LVL2
-     /tmp/cchqrlta.s:653    .debug_str:0000000000000096 .LASF18
-     /tmp/cchqrlta.s:661    .debug_str:00000000000000d1 .LASF27
-     /tmp/cchqrlta.s:645    .debug_str:0000000000000061 .LASF28
-     /tmp/cchqrlta.s:36     .text:000000000000001c .LFB1
-     /tmp/cchqrlta.s:61     .text:0000000000000044 .LFE1
-     /tmp/cchqrlta.s:50     .text:0000000000000034 .LVL0
-     /tmp/cchqrlta.s:629    .debug_str:0000000000000000 .LASF20
-     /tmp/cchqrlta.s:10     .text:0000000000000000 .LFB0
-     /tmp/cchqrlta.s:30     .text:000000000000001c .LFE0
-     /tmp/cchqrlta.s:683    .debug_str:000000000000022b .LASF21
-     /tmp/cchqrlta.s:643    .debug_str:000000000000005a .LASF22
-     /tmp/cchqrlta.s:70     .text:0000000000000044 .LVL1
-     /tmp/cchqrlta.s:100    .debug_info:0000000000000000 .Ldebug_info0
-
-UNDEFINED SYMBOLS
-__getc
-__putc
+NO UNDEFINED SYMBOLS

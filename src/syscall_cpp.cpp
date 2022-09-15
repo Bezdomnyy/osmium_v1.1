@@ -5,6 +5,10 @@
 #include "../h/syscall_cpp.hpp"
 #include "../h/scheduler.hpp"
 
+void threadRunWrapper(void* thread) {
+    Thread* t = (Thread*) thread;
+    t->run();
+}
 
 // THREAD
 
@@ -15,7 +19,7 @@ Thread::Thread(void (*body)(void *), void *arg) {
 Thread::~Thread() {}
 
 int Thread::start() {
-    Scheduler::put(myHandle);
+    thread_create(&myHandle,&threadRunWrapper, this);
     return 0;
 }
 
@@ -23,11 +27,12 @@ void Thread::dispatch() {
     thread_dispatch();
 }
 
-int Thread::sleep(time_t) {
-    return 0;
+int Thread::sleep(time_t time) {
+    return time_sleep(time);
 }
 
 Thread::Thread() {}
+
 
 
 

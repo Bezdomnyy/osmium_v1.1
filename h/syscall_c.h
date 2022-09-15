@@ -66,8 +66,8 @@ extern "C" int thread_create_deactivated(
 );
 
 //0x21
-class SEM;
-typedef SEM *sem_t;
+class Sem;
+typedef Sem *sem_t;
 
 extern "C" int sem_open(
         sem_t *handle,
@@ -116,7 +116,7 @@ extern "C" int time_sleep(time_t);
 //0x41
 const int EOF = -1;
 
-char getc();
+extern "C" char getc();
 /* Učitava jedan znak iz bafera znakova učitanih sa konzole.
  * U slučaju da je bafer prazan, suspenduje pozivajuću nit dok se znak ne pojavi.
  * Vraća učitani znak u slučaju uspeha, a konstantu EOF u slučaju greške.
@@ -124,7 +124,7 @@ char getc();
 
 
 //0x42
-void putc(char);
+extern "C" void putc(char);
 /* Ispisuje dati znak na konzolu. */
 
 

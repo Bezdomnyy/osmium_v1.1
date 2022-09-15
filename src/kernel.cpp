@@ -14,7 +14,7 @@ extern void userMain();
 void Kernel::initKernel() {
     MemoryAllocator::initMem();
     RiscV::writeStvec((uint64) &supervisorTrap);
-    RiscV::setSstatus(RiscV::SIE);
+    //RiscV::setSstatus(RiscV::SIE);
 }
 
 void Kernel::supervisorTrapHandler() {
@@ -31,7 +31,7 @@ void Kernel::supervisorTrapHandler() {
         RiscV::writeSepc(sepc);
         return;
     }
-    if (scause == 0x0000000000000007UL) {
+    /*if (scause == 0x0000000000000007UL) {
         uint64 sepc = RiscV::readSepc() + 4;
         __print_string("Nedozvoljena adresa upisa.\n");
         __print_string("scause: ");
@@ -40,7 +40,7 @@ void Kernel::supervisorTrapHandler() {
         //RiscV::clearSip(RiscV::SEIP);
         RiscV::writeSepc(sepc);
         return;
-    }
+    }*/
     if (scause == 0x8000000000000001UL) {
         Scheduler::timerInterrupt();
         TCB::incTimeSliceCounter();
@@ -62,16 +62,21 @@ void Kernel::supervisorTrapHandler() {
         return;
     }
 
-    //uint64 sepc = RiscV::readSepc() + 4;
+    uint64 sepc = RiscV::readSepc();
     __print_string("Neobradjen izuzetak.\n");
     __print_string("scause: ");
     //scause = RiscV::readScause();
     __print_uint64(scause);
     __putc('\n');
+    //__print_string("Neobradjen izuzetak.\n");
+    __print_string("sepc: ");
+    //scause = RiscV::readScause();
+    __print_uint64(sepc);
+    __putc('\n');
     /*RiscV::clearSip(RiscV::SSIP);
     //RiscV::writeSip(0);
     //console_handler();*/
-    //RiscV::writeSepc(sepc);
+    RiscV::writeSepc(sepc);
     return;
 }
 
@@ -114,6 +119,12 @@ void Kernel::syscall_handler() {
             break;
         case 0x31:
             Kernel::time_sleep_handler();
+            break;
+        case 0x41:
+            Kernel::getc_handler();
+            break;
+        case 0x42:
+            Kernel::putc_handler();
             break;
         default:
             asm volatile ("addi a0, zero, -1");

@@ -4,7 +4,8 @@ build/src/kernel.o: src/kernel.cpp src/../lib/hw.h src/../h/kernel.hpp \
  src/../h/sem.hpp src/../h/syscall_c.h src/../h/../h/list.hpp \
  src/../h/../h/../h/print.hpp src/../h/../h/scheduler.hpp \
  src/../h/../h/syscall_c.h src/../h/../h/list.hpp src/../h/../h/tcb.hpp \
- src/../h/memory_allocator.hpp src/../h/riscv.hpp
+ src/../h/memory_allocator.hpp src/../h/riscv.hpp \
+ src/../h/console_interface.hpp
 
 src/../lib/hw.h:
 
@@ -39,3 +40,5 @@ src/../h/../h/tcb.hpp:
 src/../h/memory_allocator.hpp:
 
 src/../h/riscv.hpp:
+
+src/../h/console_interface.hpp:

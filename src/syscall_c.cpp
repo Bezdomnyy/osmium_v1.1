@@ -32,6 +32,7 @@ int sem_signal(sem_t id){
     return 0;
 }*/
 
+/*
 int time_sleep(time_t){
     return 0;
 }
@@ -42,4 +43,4 @@ char getc(){
 
 void putc(char c) {
     __putc(c);
-}
+*/

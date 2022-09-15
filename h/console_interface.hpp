@@ -7,7 +7,7 @@
 
 #include "../lib/hw.h"
 
-class ConsoleInterface {
+/*class ConsoleInterface {
 public:
     static void console_handler();
 
@@ -36,7 +36,7 @@ inline void ConsoleInterface::console_handler() {
 
     }
 
-}
+}*/
 
 
 #endif //OSMIUM_CONSOLE_INTERFACE_HPP

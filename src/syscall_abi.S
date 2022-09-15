@@ -57,3 +57,21 @@ sem_signal:
     addi a7, zero, 0x24
     ecall
     ret
+
+.global time_sleep
+time_sleep:
+    addi a7, zero, 0x31
+    ecall
+    ret
+
+.global getc
+getc:
+    addi a7, zero, 0x41
+    ecall
+    ret
+
+.global putc
+putc:
+    addi a7, zero, 0x42
+    ecall
+    ret

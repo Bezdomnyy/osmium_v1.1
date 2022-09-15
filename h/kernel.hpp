@@ -29,6 +29,8 @@ private:
     static void sem_wait_handler();         //0x23
     static void sem_signal_handler();       //0x24
     static void time_sleep_handler();       //0x31
+    static void getc_handler();             //0x41
+    static void putc_handler();             //0x42
 };
 
 
@@ -109,7 +111,7 @@ inline void Kernel::sem_open_handler() {
     *(Sem**)arg0 = Sem::createSem((unsigned)arg1);
 
     asm volatile("mv a0, zero");
-    if (!(*(TCB**)arg0)) asm volatile("addi a0, a0, -1");
+    if (!(*(Sem**)arg0)) asm volatile("addi a0, a0, -1");
 }
 
 
@@ -129,7 +131,7 @@ inline void Kernel::sem_close_handler() {
 inline void Kernel::sem_wait_handler() {
     volatile uint64 arg0;
     asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
-    (*((Sem**)arg0))->semWait();
+    ((Sem*)arg0)->semWait();
 
     //asm volatile("mv a0, zero");
 }
@@ -140,7 +142,7 @@ inline void Kernel::sem_wait_handler() {
 inline void Kernel::sem_signal_handler() {
     volatile uint64 arg0;
     asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
-    (*((Sem**)arg0))->semSignal();
+    ((Sem*)arg0)->semSignal();
 }
 
 
@@ -152,5 +154,22 @@ inline void Kernel::time_sleep_handler() {
     Scheduler::timeSleep((time_t)arg0);
 }
 
+
+
+//0x41
+inline void Kernel::getc_handler() {
+    volatile uint64 arg0;
+    arg0 = __getc();
+    asm volatile ("mv a0, %[arg0]":: [arg0] "r"(arg0));
+}
+
+
+
+//0x42
+inline void Kernel::putc_handler() {
+    volatile uint64 arg0;
+    asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
+    __putc(arg0);
+}
 
 #endif //OSMIUM_KERNEL_HPP

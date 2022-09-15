@@ -22,11 +22,13 @@ void Scheduler::put(TCB* tcb) {
 }
 
 void Scheduler::timerInterrupt() {
+    //__putc('a');
     sleepNode *first = sleepQueue.getFirst();
+    if (!first) return;
     first->time--;
     while(first->time == 0) {
         sleepQueue.takeFirst();
-        first->thread->setFinished(false);
+        first->thread->setBlocked(false);
         Scheduler::put(first->thread);
         delete first;
         first = sleepQueue.getFirst();
@@ -35,7 +37,7 @@ void Scheduler::timerInterrupt() {
 
 void Scheduler::timeSleep(time_t time) {
     TCB* old = TCB::running;
-    old->setFinished(true);
+    old->setBlocked(true);
     sleepNode* sn = new sleepNode(time, old);
     sleepQueue.putSorted(sn);
     thread_dispatch();
