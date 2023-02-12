@@ -5,8 +5,6 @@
 #ifndef OSMIUM_PRINT_HPP
 #define OSMIUM_PRINT_HPP
 
-#include "../lib/hw.h"
-
 extern void __print_string(char const *string);
 
 extern void __print_uint64(uint64 integer);

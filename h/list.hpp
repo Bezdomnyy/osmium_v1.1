@@ -6,7 +6,10 @@
 #define OSMIUM_LIST_H
 
 #include "../lib/console.h"
-#include "../h/print.hpp"
+//#include "../h/print.hpp"
+
+#include "__print.hpp"
+#include "memory_allocator.hpp"
 
 template <typename T>
 class List {
@@ -16,6 +19,22 @@ private:
         Node *next;
 
         Node(T *data, Node *next) : data(data), next(next) {}
+
+        void* operator new(size_t size) {
+            return MemoryAllocator::allocate(size);
+        }
+
+        void* operator new[](size_t size) {
+            return MemoryAllocator::allocate(size);
+        }
+
+        void operator delete(void* ptr) {
+            MemoryAllocator::free(ptr);
+        }
+
+        void operator delete[](void* ptr) {
+            MemoryAllocator::free(ptr);
+        }
     };
 
     Node *head, *tail;

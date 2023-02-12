@@ -7,7 +7,7 @@
 
 #include "../lib/hw.h"
 #include "../lib/console.h"
-#include "print.hpp"
+#include "__print.hpp"
 
 class MemoryAllocator {
 public:

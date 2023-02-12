@@ -7,7 +7,8 @@
 
 #include "../lib/hw.h"
 //#include "../h/scheduler.hpp"
-#include "../h/riscv.hpp"
+#include "riscv.hpp"
+#include "memory_allocator.hpp"
 
 class Scheduler;
 
@@ -40,7 +41,23 @@ public:
     static uint64 getTimeSliceCounter() { return timeSliceCounter; }
     static void resetTimeSliceCounter() { timeSliceCounter = 0; }
 
-    ~TCB() { delete[] stack; }
+    ~TCB() { MemoryAllocator::free(stack); }
+
+    void* operator new(size_t size) {
+        return MemoryAllocator::allocate(size);
+    }
+
+    void* operator new[](size_t size) {
+        return MemoryAllocator::allocate(size);
+    }
+
+    void operator delete(void* ptr) {
+        MemoryAllocator::free(ptr);
+    }
+
+    void operator delete[](void* ptr) {
+        MemoryAllocator::free(ptr);
+    }
 
 private:
     //friend class Kernel;

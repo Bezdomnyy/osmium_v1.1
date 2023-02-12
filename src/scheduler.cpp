@@ -18,6 +18,7 @@ TCB* Scheduler::get() {
 void Scheduler::put(TCB* tcb) {
     //return readyQueue.putLast(tcb);
     readyQueue.putLast(tcb);
+    //putc('a');
     //readyQueue.printStatus();
 }
 

@@ -2,15 +2,14 @@
 // Created by os on 9/6/22.
 //
 
-#include "../h/print.hpp"
-#include "../h/riscv.hpp"
+#include "../lib/hw.h"
 #include "../lib/console.h"
-#include "../h/syscall_c.h"
+#include "../h/__print.hpp"
 
 void __print_string(char const *string) {
     //uint64 sstatus = RiscV::readSstatus();
     //RiscV::clearSstatus(RiscV::SIE);
-    for (char const *c = string; *c != '\0'; c++) putc(*c);
+    for (char const *c = string; *c != '\0'; c++) __putc(*c);
     //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
 }
 
@@ -23,14 +22,14 @@ void __print_uint64(uint64 integer) {
     do {
         output[i++] = digits[integer % 10];
     } while ((integer/=10) != 0);
-    while(--i >= 0) putc(output[i]);
+    while(--i >= 0) __putc(output[i]);
     //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
 }
 
 void __print_int(long long int integer) {
     //uint64 sstatus = RiscV::readSstatus();
     //RiscV::clearSstatus(RiscV::SIE);
-    if (integer < 0) putc('-'), integer *= -1;
+    if (integer < 0) __putc('-'), integer *= -1;
     __print_uint64(integer);
     //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
 }

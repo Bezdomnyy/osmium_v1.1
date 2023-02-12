@@ -22,6 +22,7 @@ int Sem::semWait() {
         //if (!TCB::running) __print_string("error!!!\n");
         old->setBlocked(true);
         list.putLast(old);
+        //list.printStatus();
         thread_dispatch();
     }
     return 0;

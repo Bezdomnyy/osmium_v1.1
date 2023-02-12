@@ -3,7 +3,7 @@
 //
 
 #include "../h/tcb.hpp"
-#include "../h/print.hpp"
+#include "../h/__print.hpp"
 #include "../h/syscall_c.h"
 #include "../h/scheduler.hpp"
 

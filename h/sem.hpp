@@ -6,7 +6,6 @@
 #define OSMIUM_SEM_HPP
 
 #include "../lib/hw.h"
-#include "syscall_c.h"
 #include "tcb.hpp"
 #include "../h/list.hpp"
 #include "../h/scheduler.hpp"
@@ -20,6 +19,22 @@ public:
     int semWait();
 
     int semSignal();
+
+    void* operator new(size_t size) {
+        return MemoryAllocator::allocate(size);
+    }
+
+    void* operator new[](size_t size) {
+        return MemoryAllocator::allocate(size);
+    }
+
+    void operator delete(void* ptr) {
+        MemoryAllocator::free(ptr);
+    }
+
+    void operator delete[](void* ptr) {
+        MemoryAllocator::free(ptr);
+    }
 
 private:
     Sem(unsigned init) : init(init), val(init) {}
