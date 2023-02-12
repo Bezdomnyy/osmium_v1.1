@@ -49,6 +49,7 @@ void producer(void *arg) {
     struct thread_data *data = (struct thread_data *) arg;
 
     int i = 0;
+
     while (!threadEnd) {
         data->buffer->put(data->id + '0');
         i++;
@@ -69,7 +70,8 @@ void consumer(void *arg) {
     struct thread_data *data = (struct thread_data *) arg;
 
     int i = 0;
-    while (!threadEnd) {
+    /* TODO: CORRECT THIS */
+    while (i < 240 /*!threadEnd*/) {
         int key = data->buffer->get();
         i++;
 
@@ -90,6 +92,8 @@ void consumer(void *arg) {
         putc(key);
     }
 
+    /* TODO: DELETE THIS */
+    threadEnd = 1;
     //printInt((uint64)data->wait);
 
     sem_signal(data->wait);
@@ -140,8 +144,10 @@ void producerConsumer_C_API() {
         data[i].buffer = buffer;
         data[i].wait = waitForAll;
 
+        /* TODO: CORRECT THIS */
         thread_create(threads + i,
-                      i > 0 ? producer : producerKeyboard,
+                      //i > 0 ? producer : producerKeyboard,
+                      producer,
                       data + i);
     }
 
@@ -157,6 +163,7 @@ void producerConsumer_C_API() {
         //printString("here4\n");
     }
 
+    printString("here5\n");
 
     sem_close(waitForAll);
 
