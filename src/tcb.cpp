@@ -19,6 +19,10 @@ TCB *TCB::createDeactivatedTCB(TCB::Body body, void *args) {
     return new TCB(body, args, DEFAULT_TIME_SLICE, 0);
 }
 
+TCB *TCB::createSupervisorTCB(TCB::Body body, void *args) {
+    return new TCB
+    (body, args,DEFAULT_TIME_SLICE, true, true);
+}
 /*void TCB::yield() {
     RiscV::pushRegisters();
 
@@ -28,7 +32,7 @@ TCB *TCB::createDeactivatedTCB(TCB::Body body, void *args) {
 }*/
 
 
-TCB::TCB(Body body, void* args, uint64 timeSlice, bool ready)
+TCB::TCB(Body body, void* args, uint64 timeSlice, bool ready, bool supervisor)
 : body(body),
 args(args),
 stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
@@ -36,29 +40,18 @@ finished(false),
 blocked(false),
 timeSlice(timeSlice),
 context({
-                body != nullptr ? (uint64) &threadWrapper : 0,
-                stack != nullptr ? (uint64) &stack[DEFAULT_STACK_SIZE] : 0
+    body != nullptr ? (uint64) (supervisor ? &sThreadWrapper : &threadWrapper) : 0,
+    stack != nullptr ? (uint64) &stack[DEFAULT_STACK_SIZE] : 0
         })
 {
     if (body != nullptr && ready) Scheduler::put(this);
 }
 
 
-void TCB::dispatch()
-{
-
-    //__print_string("TCB::dispatch()\n");
-
+void TCB::dispatch() {
     TCB *old = running;
     if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
-    //while (!running) { __print_string("oh no1\n"); Scheduler::get(); }
-
-    /*__print_string("old: ");
-    __print_uint64((uint64)old); __putc('\n');
-
-    __print_string("running: ");
-    __print_uint64((uint64)running); __putc('\n');*/
 
     TCB::contextSwitch(&old->context, &running->context);
 }
@@ -67,4 +60,10 @@ void TCB::threadWrapper() {
     RiscV::popSppSpie();
     running->body(running->args);
     thread_exit();
+}
+
+void TCB::sThreadWrapper() {
+    //RiscV::popSppSpie();
+    running->body(running->args);
+    running->setFinished(true);
 }

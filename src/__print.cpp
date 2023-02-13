@@ -3,35 +3,29 @@
 //
 
 #include "../lib/hw.h"
-#include "../lib/console.h"
+#include "../h/uart.hpp"
 #include "../h/__print.hpp"
 
 void __print_string(char const *string) {
-    //uint64 sstatus = RiscV::readSstatus();
-    //RiscV::clearSstatus(RiscV::SIE);
-    for (char const *c = string; *c != '\0'; c++) __putc(*c);
-    //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
+    Uart* uart = &(Uart::getInstance());
+    for (char const *c = string; *c != '\0'; c++) uart->txPut(*c);
 }
 
 void __print_uint64(uint64 integer) {
-    //uint64 sstatus = RiscV::readSstatus();
-    //RiscV::clearSstatus(RiscV::SIE);
+    Uart* uart = &(Uart::getInstance());
     static char digits[] = "0123456789";
     char output[20];
     int i = 0;
     do {
         output[i++] = digits[integer % 10];
     } while ((integer/=10) != 0);
-    while(--i >= 0) __putc(output[i]);
-    //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
+    while(--i >= 0) uart->txPut(output[i]);
 }
 
 void __print_int(long long int integer) {
-    //uint64 sstatus = RiscV::readSstatus();
-    //RiscV::clearSstatus(RiscV::SIE);
+    Uart* uart = &(Uart::getInstance());
     if (integer < 0) __putc('-'), integer *= -1;
-    __print_uint64(integer);
-    //RiscV::setSstatus(sstatus & RiscV::SIE ? RiscV::SIE : 0);
+    uart->txPut(integer);
 }
 
 /*void printInteger(uint64 integer)

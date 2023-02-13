@@ -21,6 +21,8 @@ public:
 
     static TCB* createDeactivatedTCB(Body body, void* args);
 
+    static TCB* createSupervisorTCB(Body body, void* args);
+
     bool isFinished() const { return finished; }
 
     void setFinished(bool val) { finished = val; }
@@ -76,7 +78,7 @@ private:
         if (body != nullptr) Scheduler::put(this);
     }*/
 
-    TCB(Body body, void* args, uint64 timeSlice, bool ready);
+    TCB(Body body, void* args, uint64 timeSlice, bool ready, bool supervisor = false);
 
     struct Context {
         uint64 ra;
@@ -96,6 +98,7 @@ private:
     static void contextSwitch(Context*, Context*);
 
     static void threadWrapper();
+    static void sThreadWrapper();
 
 };
 

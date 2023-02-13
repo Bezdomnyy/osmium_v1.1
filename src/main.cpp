@@ -6,6 +6,7 @@
 #include "../h/riscv.hpp"
 #include "../h/memory_allocator.hpp"
 #include "../h/tcb.hpp"
+#include "../h/uart_consumer.hpp"
 //#include "../test/userMain.cpp"
 
 void userMain();
@@ -13,20 +14,21 @@ void userMain();
 void main() {
     Kernel::initKernel();
 
-    TCB* threads[2] = {nullptr, nullptr};
-    thread_create(&threads[0], nullptr, nullptr);
+    TCB* main = TCB::createTCB(nullptr, nullptr);
     RiscV::setSstatus(RiscV::SIE);
-    //__putc('?'); __putc('\n');
-    thread_create(&threads[1], (void(*)(void*))&userMain, nullptr);
-    //thread_create(&threads[2], (void(*)(void*))userMain, nullptr);
-    TCB::running = threads[0];
+    TCB* user = TCB::createTCB((void(*)(void*))&userMain, nullptr);
+    TCB::running = main;
 
-    //thread_dispatch();
+    TCB* uart_tx = TCB::createTCB((void(*)(void*))uart_consumer, nullptr);
+
+
     __print_string("hey!\n");
-    while(!threads[1]->isFinished()) {
-        //__print_string("hello\n");
-        thread_dispatch();
+    while(!user->isFinished()) {
+        __print_string("hello\n");
+        TCB::dispatch();
     }
+
+    uart_tx->setFinished(true);
 
     __print_string("Finished\n");
 

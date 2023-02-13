@@ -7,8 +7,8 @@
 
 #include "../lib/hw.h"
 #include "tcb.hpp"
-#include "../h/list.hpp"
-#include "../h/scheduler.hpp"
+#include "list.hpp"
+#include "scheduler.hpp"
 
 class Sem {
 public:
