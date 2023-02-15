@@ -23,7 +23,8 @@ int Sem::semWait() {
         old->setBlocked(true);
         list.putLast(old);
         //list.printStatus();
-        thread_dispatch();
+        TCB::dispatch();
+        //thread_dispatch();
     }
     return 0;
 }

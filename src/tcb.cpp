@@ -12,11 +12,11 @@ TCB *TCB::running = nullptr;
 uint64 TCB::timeSliceCounter = 0;
 
 TCB *TCB::createTCB(TCB::Body body, void *args) {
-    return new TCB(body, args, DEFAULT_TIME_SLICE, 1);
+    return new TCB(body, args, DEFAULT_TIME_SLICE, 1, 0);
 }
 
 TCB *TCB::createDeactivatedTCB(TCB::Body body, void *args) {
-    return new TCB(body, args, DEFAULT_TIME_SLICE, 0);
+    return new TCB(body, args, DEFAULT_TIME_SLICE, 0, 0);
 }
 
 TCB *TCB::createSupervisorTCB(TCB::Body body, void *args) {
@@ -35,7 +35,7 @@ TCB *TCB::createSupervisorTCB(TCB::Body body, void *args) {
 TCB::TCB(Body body, void* args, uint64 timeSlice, bool ready, bool supervisor)
 : body(body),
 args(args),
-stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
+stack(body != nullptr ? (uint64*)MemoryAllocator::allocate(sizeof(uint64) * DEFAULT_STACK_SIZE) : nullptr),
 finished(false),
 blocked(false),
 timeSlice(timeSlice),
@@ -49,6 +49,7 @@ context({
 
 
 void TCB::dispatch() {
+    //__print_string("hello\n");
     TCB *old = running;
     if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
@@ -59,11 +60,16 @@ void TCB::dispatch() {
 void TCB::threadWrapper() {
     RiscV::popSppSpie();
     running->body(running->args);
+    running->setFinished(true);
     thread_exit();
 }
 
 void TCB::sThreadWrapper() {
-    //RiscV::popSppSpie();
+    RiscV::setSstatus(0x0000000000000001UL << 8);
+    RiscV::setSstatus(0x0000000000000001UL << 5);
+    RiscV::setSstatus(RiscV::SIE);
+    RiscV::popSppSpie();
     running->body(running->args);
     running->setFinished(true);
+    TCB::dispatch();
 }

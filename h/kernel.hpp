@@ -47,7 +47,6 @@ private:
     static void uart_handler();                         //0x0a
 
     //private fields
-    static Uart* uart;
     //TODO:
 };
 
@@ -206,7 +205,8 @@ inline void Kernel::time_sleep_handler() {
 inline void Kernel::getc_handler() {
     volatile uint64 arg0;
     //arg0 = __getc();
-    arg0 = uart->rxGet();
+    //__print_string("getc");
+    arg0 = Uart::rxGet();
     asm volatile ("mv a0, %[arg0]":: [arg0] "r"(arg0));
 }
 
@@ -215,21 +215,10 @@ inline void Kernel::putc_handler() {
     volatile uint64 arg0;
     asm volatile ("mv %[arg0], a0": [arg0] "=r"(arg0));
     //__putc(arg0);
-    uart->txPut(arg0);
+    Uart::txPut(arg0);
     //uart->tx
 }
 
-//0x0a - hardware
-inline void Kernel::uart_handler() {
-    int id = plic_claim();
-    if (id == 0x10) {
-        if (uart->getStatus() & Uart::TX) uart->txSignal();
-        while (uart->getStatus() & Uart::RX) {
-            if(uart->rxReceive() < 0) break;
-            //plic_complete(id);
-        }
-    }
-    plic_complete(id);
-}
+
 
 #endif //OSMIUM_KERNEL_HPP

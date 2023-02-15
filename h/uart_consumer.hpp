@@ -7,4 +7,6 @@
 
 extern void uart_consumer();
 
+extern void uart_producer();
+
 #endif //OSMIUM_UART_CONSUMER_HPP

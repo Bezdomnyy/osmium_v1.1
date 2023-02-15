@@ -19,6 +19,22 @@ private:
         TCB* thread;
 
         sleepNode(time_t time, TCB* thread) : time(time), thread(thread) {}
+
+        void* operator new(size_t size) {
+            return MemoryAllocator::allocate(size);
+        }
+
+        void* operator new[](size_t size) {
+            return MemoryAllocator::allocate(size);
+        }
+
+        void operator delete(void* ptr) {
+            MemoryAllocator::free(ptr);
+        }
+
+        void operator delete[](void* ptr) {
+            MemoryAllocator::free(ptr);
+        }
     };
 
     static List<sleepNode> sleepQueue;

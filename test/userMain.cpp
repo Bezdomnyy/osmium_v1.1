@@ -13,6 +13,12 @@
 
 void userMain() {
     __print_string("I am here!\n");
+
+    char c;
+    while(1) {
+        c = getc();
+        putc(c);
+    }
     //printString("I am here!");
     //Threads_C_API_test(); // zadatak 2., niti C API i sinhrona promena konteksta
     //Threads_CPP_API_test(); // zadatak 2., niti CPP API i sinhrona promena konteksta

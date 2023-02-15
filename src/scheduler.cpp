@@ -41,5 +41,5 @@ void Scheduler::timeSleep(time_t time) {
     old->setBlocked(true);
     sleepNode* sn = new sleepNode(time, old);
     sleepQueue.putSorted(sn);
-    thread_dispatch();
+    TCB::dispatch();
 }

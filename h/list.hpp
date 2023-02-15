@@ -132,27 +132,27 @@ public:
         __print_string("list contents:\n");
         __print_string(">head: ");
         __print_uint64((uint64)head);
-        __putc('\n');
+        __print_string("\n");
         __print_string(">tail: ");
         __print_uint64((uint64)tail);
-        __putc('\n');
+        __print_string("\n");
         int i = 0;
         while(curr) {
-            __print_string("Node["); __putc(i+48);
+            __print_string("Node["); __print_uint64(i);
             __print_string("]: ");
             __print_uint64((uint64)curr);
-            __putc('\n');
+            __print_string("\n");
             __print_string("  data: ");
             __print_uint64((uint64)curr->data);
-            __putc('\n');
+            __print_string("\n");
             __print_string("  next: ");
             __print_uint64((uint64)curr->next);
-            __putc('\n');
+            __print_string("\n");
             i++;
             curr = curr->next;
         }
-        __putc('\n');
-        __putc('\n');
+        __print_string("\n");
+        __print_string("\n");
     }
 };
 

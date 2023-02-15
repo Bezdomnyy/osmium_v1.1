@@ -64,9 +64,9 @@ PeriodicThread::PeriodicThread(time_t period) : period(period) {}
 //CONSOLE
 
 char Console::getc() {
-    return __getc();
+    return getc();
 }
 
 void Console::putc(char c) {
-    __putc(c);
+    putc(c);
 }
