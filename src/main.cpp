@@ -29,5 +29,4 @@ void main() {
 
     Kernel::finishKernel();
     delete userTCB;
-    delete backgroundTCB;
 }
