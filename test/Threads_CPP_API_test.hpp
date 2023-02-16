@@ -151,7 +151,6 @@ void Threads_CPP_API_test() {
     }
 
     while (!(finishedA && finishedB && finishedC && finishedD)) {
-        //printString("help\n");
         Thread::dispatch();
     }
 

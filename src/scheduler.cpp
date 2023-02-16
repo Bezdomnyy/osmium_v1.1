@@ -27,7 +27,8 @@ void Scheduler::timerInterrupt() {
     sleepNode *first = sleepQueue.getFirst();
     if (!first) return;
     first->time--;
-    while(first->time == 0) {
+    while(first) {
+        if (first->time != 0) break;
         sleepQueue.takeFirst();
         first->thread->setBlocked(false);
         Scheduler::put(first->thread);

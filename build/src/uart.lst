@@ -1,0 +1,1759 @@
+GAS LISTING /tmp/cc6R25C9.s 			page 1
+
+
+   1              		.file	"uart.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   8              	_Z41__static_initialization_and_destruction_0ii:
+   9              	.LFB75:
+  10              		.file 1 "src/uart.cpp"
+   1:src/uart.cpp  **** //
+   2:src/uart.cpp  **** // Created by os on 9/12/22.
+   3:src/uart.cpp  **** //
+   4:src/uart.cpp  **** 
+   5:src/uart.cpp  **** #include "../h/uart.hpp"
+   6:src/uart.cpp  **** 
+   7:src/uart.cpp  **** char Uart::rx_buffer[Uart::BUFFER_SIZE] = {0};
+   8:src/uart.cpp  **** char Uart::tx_buffer[Uart::BUFFER_SIZE] = {0};
+   9:src/uart.cpp  **** 
+  10:src/uart.cpp  **** Sem* Uart::tx_not_empty = nullptr;   // blocks the user thread until chars arrive in the input buff
+  11:src/uart.cpp  **** Sem* Uart::tx_not_full = nullptr;
+  12:src/uart.cpp  **** // Sem* input_not_full;
+  13:src/uart.cpp  **** Sem* Uart::rx_not_empty = nullptr;  // blocks the system thread until chars arrive in the output bu
+  14:src/uart.cpp  **** Sem* Uart::rx_not_full = nullptr;
+  15:src/uart.cpp  **** //Sem* output_not_full;
+  16:src/uart.cpp  **** Sem* Uart::tx_request = nullptr;
+  17:src/uart.cpp  **** Sem* Uart::rx_request = nullptr;
+  18:src/uart.cpp  **** 
+  19:src/uart.cpp  **** volatile char* Uart::STATUS = (char*) CONSOLE_STATUS;
+  20:src/uart.cpp  **** volatile char* Uart::RX_DATA = (char*) CONSOLE_RX_DATA;
+  21:src/uart.cpp  **** volatile char* Uart::TX_DATA = (char*) CONSOLE_TX_DATA;
+  22:src/uart.cpp  **** 
+  23:src/uart.cpp  **** /* output buffer */
+  24:src/uart.cpp  **** int Uart::txFront  = 0;
+  25:src/uart.cpp  **** int Uart::txRear = 0;
+  26:src/uart.cpp  **** volatile int Uart::txSize = 0;
+  27:src/uart.cpp  **** 
+  28:src/uart.cpp  **** /* input buffer */
+  29:src/uart.cpp  **** int Uart::rxFront = 0;
+  30:src/uart.cpp  **** int Uart::rxRear  = 0;
+  31:src/uart.cpp  **** int Uart::rxSize  = 0;
+  32:src/uart.cpp  **** 
+  33:src/uart.cpp  **** void Uart::initUart() {
+  34:src/uart.cpp  ****     rx_not_empty = Sem::createSem(0);
+  35:src/uart.cpp  ****     rx_not_full = Sem::createSem(BUFFER_SIZE);
+  36:src/uart.cpp  ****     rx_request = Sem::createSem(0);
+  37:src/uart.cpp  **** 
+  38:src/uart.cpp  ****     tx_not_empty = Sem::createSem(0);
+  39:src/uart.cpp  ****     tx_not_full = Sem::createSem(BUFFER_SIZE);
+  40:src/uart.cpp  ****     tx_request = Sem::createSem(0);
+  41:src/uart.cpp  **** }
+  42:src/uart.cpp  **** 
+  43:src/uart.cpp  **** 
+  44:src/uart.cpp  **** uint8 Uart::getStatus() {
+  45:src/uart.cpp  ****     uint8 ret = *((uint8*) CONSOLE_STATUS);
+  46:src/uart.cpp  ****     return ret;
+  47:src/uart.cpp  **** }
+  48:src/uart.cpp  **** 
+GAS LISTING /tmp/cc6R25C9.s 			page 2
+
+
+  49:src/uart.cpp  **** /* remove and return a char from the input (rx) buffer
+  50:src/uart.cpp  ****  * blocks if the buffer is empty
+  51:src/uart.cpp  ****  */
+  52:src/uart.cpp  **** char Uart::rxGet() {
+  53:src/uart.cpp  ****     char c;
+  54:src/uart.cpp  ****     rx_not_empty->semWait();
+  55:src/uart.cpp  ****     c = rx_buffer[rxFront];
+  56:src/uart.cpp  ****     rxFront = (rxFront + 1) & (BUFFER_SIZE - 1);
+  57:src/uart.cpp  ****     rxSize--;
+  58:src/uart.cpp  ****     //rx_not_full->semSignal();
+  59:src/uart.cpp  ****     return c;
+  60:src/uart.cpp  **** }
+  61:src/uart.cpp  **** 
+  62:src/uart.cpp  **** void Uart::rxPut(char c) {
+  63:src/uart.cpp  ****     //char c = *RX_DATA;
+  64:src/uart.cpp  ****     rx_not_full->semWait(); // wait producer
+  65:src/uart.cpp  ****     rx_buffer[txRear] = c;
+  66:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+  67:src/uart.cpp  ****     rxSize++;
+  68:src/uart.cpp  ****     rx_not_empty->semSignal(); // signal consumer
+  69:src/uart.cpp  **** }
+  70:src/uart.cpp  **** 
+  71:src/uart.cpp  **** /* receive a char from the UART controler
+  72:src/uart.cpp  ****  * place it in the input (rx) buffer
+  73:src/uart.cpp  ****  * returns 0 if succesful; -1 if the buffer is full
+  74:src/uart.cpp  ****  */
+  75:src/uart.cpp  **** char Uart::rxReceive() {
+  76:src/uart.cpp  ****     //return *RX_DATA;
+  77:src/uart.cpp  ****     if (rxSize >= BUFFER_SIZE) return -1;
+  78:src/uart.cpp  ****     char c = *(char*) CONSOLE_RX_DATA;
+  79:src/uart.cpp  ****     rx_buffer[rxRear] = c;
+  80:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+  81:src/uart.cpp  ****     rxSize++;
+  82:src/uart.cpp  ****     rx_not_empty->semSignal();
+  83:src/uart.cpp  ****     //__print_string("rx\n");
+  84:src/uart.cpp  ****     return 0;
+  85:src/uart.cpp  **** }
+  86:src/uart.cpp  **** 
+  87:src/uart.cpp  **** /* remove and return a char from the output (tx) buffer
+  88:src/uart.cpp  ****  * blocks if the buffer is empty
+  89:src/uart.cpp  ****  */
+  90:src/uart.cpp  **** char Uart::txGet() {
+  91:src/uart.cpp  ****     char c;
+  92:src/uart.cpp  ****     //tx_not_empty->semWait(); // wait consumer
+  93:src/uart.cpp  ****     while(txSize == 0) {thread_dispatch();}
+  94:src/uart.cpp  ****     c = tx_buffer[txFront];
+  95:src/uart.cpp  ****     txFront = (txFront + 1) & (BUFFER_SIZE - 1);
+  96:src/uart.cpp  ****     txSize--;
+  97:src/uart.cpp  ****     tx_not_full->semSignal(); // signal producer
+  98:src/uart.cpp  ****     return c;
+  99:src/uart.cpp  **** }
+ 100:src/uart.cpp  **** 
+ 101:src/uart.cpp  **** /* put a char in the output (tx) buffer
+ 102:src/uart.cpp  ****  * blocks if the buffer is full
+ 103:src/uart.cpp  ****  */
+ 104:src/uart.cpp  **** void Uart::txPut(char c) {
+ 105:src/uart.cpp  ****     //char c = *RX_DATA;
+GAS LISTING /tmp/cc6R25C9.s 			page 3
+
+
+ 106:src/uart.cpp  ****     tx_not_full->semWait(); // wait producer
+ 107:src/uart.cpp  ****     tx_buffer[txRear] = c;
+ 108:src/uart.cpp  ****     txRear = (txRear + 1) & (BUFFER_SIZE - 1);
+ 109:src/uart.cpp  ****     txSize++;
+ 110:src/uart.cpp  ****     tx_not_empty->semSignal(); // signal consumer
+ 111:src/uart.cpp  **** }
+ 112:src/uart.cpp  **** 
+ 113:src/uart.cpp  **** /* wrapper function to put a char in the TX_DATA register
+ 114:src/uart.cpp  ****  */
+ 115:src/uart.cpp  **** void Uart::txSend(char c) {
+ 116:src/uart.cpp  ****     *(char*)CONSOLE_TX_DATA = c;
+ 117:src/uart.cpp  **** }
+ 118:src/uart.cpp  **** 
+ 119:src/uart.cpp  **** void Uart::txWait() {
+ 120:src/uart.cpp  ****     tx_request->semWait();
+ 121:src/uart.cpp  **** }
+ 122:src/uart.cpp  **** 
+ 123:src/uart.cpp  **** void Uart::txSignal() {
+ 124:src/uart.cpp  ****     tx_request->semSignal();
+ 125:src/uart.cpp  **** }
+ 126:src/uart.cpp  **** 
+ 127:src/uart.cpp  **** void Uart::rxWait() {
+ 128:src/uart.cpp  ****     rx_request->semWait();
+ 129:src/uart.cpp  **** }
+ 130:src/uart.cpp  **** 
+ 131:src/uart.cpp  **** void Uart::rxSignal() {
+ 132:src/uart.cpp  ****     rx_request->semSignal();
+ 133:src/uart.cpp  **** }...
+  11              		.loc 1 133 1
+  12              		.cfi_startproc
+  13              	.LVL0:
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20              		.loc 1 133 1 is_stmt 0
+  21 000c 93071000 		li	a5,1
+  22 0010 6308F500 		beq	a0,a5,.L4
+  23              	.L1:
+  24 0014 03348100 		ld	s0,8(sp)
+  25              		.cfi_remember_state
+  26              		.cfi_restore 8
+  27              		.cfi_def_cfa 2, 16
+  28 0018 13010101 		addi	sp,sp,16
+  29              		.cfi_def_cfa_offset 0
+  30 001c 67800000 		jr	ra
+  31              	.L4:
+  32              		.cfi_restore_state
+  33              		.loc 1 133 1 discriminator 1
+  34 0020 B7070100 		li	a5,65536
+  35 0024 9387F7FF 		addi	a5,a5,-1
+  36 0028 E396F5FE 		bne	a1,a5,.L1
+  19:src/uart.cpp  **** volatile char* Uart::STATUS = (char*) CONSOLE_STATUS;
+  37              		.loc 1 19 31
+  38 002c 97070000 		la	a5,CONSOLE_STATUS
+GAS LISTING /tmp/cc6R25C9.s 			page 4
+
+
+  38      83B70700 
+  39 0034 03B70700 		ld	a4,0(a5)
+  19:src/uart.cpp  **** volatile char* Uart::STATUS = (char*) CONSOLE_STATUS;
+  40              		.loc 1 19 16
+  41 0038 97070000 		lla	a5,.LANCHOR0
+  41      93870700 
+  42 0040 23B0E700 		sd	a4,0(a5)
+  20:src/uart.cpp  **** volatile char* Uart::RX_DATA = (char*) CONSOLE_RX_DATA;
+  43              		.loc 1 20 32
+  44 0044 17070000 		la	a4,CONSOLE_RX_DATA
+  44      03370700 
+  45 004c 03370700 		ld	a4,0(a4)
+  20:src/uart.cpp  **** volatile char* Uart::RX_DATA = (char*) CONSOLE_RX_DATA;
+  46              		.loc 1 20 16
+  47 0050 23B4E700 		sd	a4,8(a5)
+  21:src/uart.cpp  **** volatile char* Uart::TX_DATA = (char*) CONSOLE_TX_DATA;
+  48              		.loc 1 21 32
+  49 0054 17070000 		la	a4,CONSOLE_TX_DATA
+  49      03370700 
+  50 005c 03370700 		ld	a4,0(a4)
+  21:src/uart.cpp  **** volatile char* Uart::TX_DATA = (char*) CONSOLE_TX_DATA;
+  51              		.loc 1 21 16
+  52 0060 23B8E700 		sd	a4,16(a5)
+  53              		.loc 1 133 1
+  54 0064 6FF01FFB 		j	.L1
+  55              		.cfi_endproc
+  56              	.LFE75:
+  58              		.align	2
+  59              		.globl	_ZN4Uart8initUartEv
+  61              	_ZN4Uart8initUartEv:
+  62              	.LFB59:
+  33:src/uart.cpp  **** void Uart::initUart() {
+  63              		.loc 1 33 23 is_stmt 1
+  64              		.cfi_startproc
+  65 0068 130101FE 		addi	sp,sp,-32
+  66              		.cfi_def_cfa_offset 32
+  67 006c 233C1100 		sd	ra,24(sp)
+  68 0070 23388100 		sd	s0,16(sp)
+  69 0074 23349100 		sd	s1,8(sp)
+  70              		.cfi_offset 1, -8
+  71              		.cfi_offset 8, -16
+  72              		.cfi_offset 9, -24
+  73 0078 13040102 		addi	s0,sp,32
+  74              		.cfi_def_cfa 8, 0
+  34:src/uart.cpp  ****     rx_not_empty = Sem::createSem(0);
+  75              		.loc 1 34 5
+  34:src/uart.cpp  ****     rx_not_empty = Sem::createSem(0);
+  76              		.loc 1 34 34 is_stmt 0
+  77 007c 13050000 		li	a0,0
+  78 0080 97000000 		call	_ZN3Sem9createSemEj@plt
+  78      E7800000 
+  79              	.LVL1:
+  34:src/uart.cpp  ****     rx_not_empty = Sem::createSem(0);
+  80              		.loc 1 34 18
+  81 0088 97040000 		lla	s1,.LANCHOR0
+  81      93840400 
+  82 0090 23BCA400 		sd	a0,24(s1)
+GAS LISTING /tmp/cc6R25C9.s 			page 5
+
+
+  35:src/uart.cpp  ****     rx_not_full = Sem::createSem(BUFFER_SIZE);
+  83              		.loc 1 35 5 is_stmt 1
+  35:src/uart.cpp  ****     rx_not_full = Sem::createSem(BUFFER_SIZE);
+  84              		.loc 1 35 33 is_stmt 0
+  85 0094 13050040 		li	a0,1024
+  86 0098 97000000 		call	_ZN3Sem9createSemEj@plt
+  86      E7800000 
+  87              	.LVL2:
+  35:src/uart.cpp  ****     rx_not_full = Sem::createSem(BUFFER_SIZE);
+  88              		.loc 1 35 17
+  89 00a0 23B0A402 		sd	a0,32(s1)
+  36:src/uart.cpp  ****     rx_request = Sem::createSem(0);
+  90              		.loc 1 36 5 is_stmt 1
+  36:src/uart.cpp  ****     rx_request = Sem::createSem(0);
+  91              		.loc 1 36 32 is_stmt 0
+  92 00a4 13050000 		li	a0,0
+  93 00a8 97000000 		call	_ZN3Sem9createSemEj@plt
+  93      E7800000 
+  94              	.LVL3:
+  36:src/uart.cpp  ****     rx_request = Sem::createSem(0);
+  95              		.loc 1 36 16
+  96 00b0 23B4A402 		sd	a0,40(s1)
+  38:src/uart.cpp  ****     tx_not_empty = Sem::createSem(0);
+  97              		.loc 1 38 5 is_stmt 1
+  38:src/uart.cpp  ****     tx_not_empty = Sem::createSem(0);
+  98              		.loc 1 38 34 is_stmt 0
+  99 00b4 13050000 		li	a0,0
+ 100 00b8 97000000 		call	_ZN3Sem9createSemEj@plt
+ 100      E7800000 
+ 101              	.LVL4:
+  38:src/uart.cpp  ****     tx_not_empty = Sem::createSem(0);
+ 102              		.loc 1 38 18
+ 103 00c0 23B8A402 		sd	a0,48(s1)
+  39:src/uart.cpp  ****     tx_not_full = Sem::createSem(BUFFER_SIZE);
+ 104              		.loc 1 39 5 is_stmt 1
+  39:src/uart.cpp  ****     tx_not_full = Sem::createSem(BUFFER_SIZE);
+ 105              		.loc 1 39 33 is_stmt 0
+ 106 00c4 13050040 		li	a0,1024
+ 107 00c8 97000000 		call	_ZN3Sem9createSemEj@plt
+ 107      E7800000 
+ 108              	.LVL5:
+  39:src/uart.cpp  ****     tx_not_full = Sem::createSem(BUFFER_SIZE);
+ 109              		.loc 1 39 17
+ 110 00d0 23BCA402 		sd	a0,56(s1)
+  40:src/uart.cpp  ****     tx_request = Sem::createSem(0);
+ 111              		.loc 1 40 5 is_stmt 1
+  40:src/uart.cpp  ****     tx_request = Sem::createSem(0);
+ 112              		.loc 1 40 32 is_stmt 0
+ 113 00d4 13050000 		li	a0,0
+ 114 00d8 97000000 		call	_ZN3Sem9createSemEj@plt
+ 114      E7800000 
+ 115              	.LVL6:
+  40:src/uart.cpp  ****     tx_request = Sem::createSem(0);
+ 116              		.loc 1 40 16
+ 117 00e0 23B0A404 		sd	a0,64(s1)
+  41:src/uart.cpp  **** }
+ 118              		.loc 1 41 1
+GAS LISTING /tmp/cc6R25C9.s 			page 6
+
+
+ 119 00e4 83308101 		ld	ra,24(sp)
+ 120              		.cfi_restore 1
+ 121 00e8 03340101 		ld	s0,16(sp)
+ 122              		.cfi_restore 8
+ 123              		.cfi_def_cfa 2, 32
+ 124 00ec 83348100 		ld	s1,8(sp)
+ 125              		.cfi_restore 9
+ 126 00f0 13010102 		addi	sp,sp,32
+ 127              		.cfi_def_cfa_offset 0
+ 128 00f4 67800000 		jr	ra
+ 129              		.cfi_endproc
+ 130              	.LFE59:
+ 132              		.align	2
+ 133              		.globl	_ZN4Uart9getStatusEv
+ 135              	_ZN4Uart9getStatusEv:
+ 136              	.LFB60:
+  44:src/uart.cpp  **** uint8 Uart::getStatus() {
+ 137              		.loc 1 44 25 is_stmt 1
+ 138              		.cfi_startproc
+ 139 00f8 130101FF 		addi	sp,sp,-16
+ 140              		.cfi_def_cfa_offset 16
+ 141 00fc 23348100 		sd	s0,8(sp)
+ 142              		.cfi_offset 8, -8
+ 143 0100 13040101 		addi	s0,sp,16
+ 144              		.cfi_def_cfa 8, 0
+  45:src/uart.cpp  ****     uint8 ret = *((uint8*) CONSOLE_STATUS);
+ 145              		.loc 1 45 5
+  45:src/uart.cpp  ****     uint8 ret = *((uint8*) CONSOLE_STATUS);
+ 146              		.loc 1 45 17 is_stmt 0
+ 147 0104 97070000 		la	a5,CONSOLE_STATUS
+ 147      83B70700 
+ 148 010c 83B70700 		ld	a5,0(a5)
+ 149              	.LVL7:
+  46:src/uart.cpp  ****     return ret;
+ 150              		.loc 1 46 5 is_stmt 1
+  47:src/uart.cpp  **** }
+ 151              		.loc 1 47 1 is_stmt 0
+ 152 0110 03C50700 		lbu	a0,0(a5)
+ 153 0114 03348100 		ld	s0,8(sp)
+ 154              		.cfi_restore 8
+ 155              		.cfi_def_cfa 2, 16
+ 156 0118 13010101 		addi	sp,sp,16
+ 157              		.cfi_def_cfa_offset 0
+ 158 011c 67800000 		jr	ra
+ 159              		.cfi_endproc
+ 160              	.LFE60:
+ 162              		.align	2
+ 163              		.globl	_ZN4Uart5rxGetEv
+ 165              	_ZN4Uart5rxGetEv:
+ 166              	.LFB61:
+  52:src/uart.cpp  **** char Uart::rxGet() {
+ 167              		.loc 1 52 20 is_stmt 1
+ 168              		.cfi_startproc
+ 169 0120 130101FE 		addi	sp,sp,-32
+ 170              		.cfi_def_cfa_offset 32
+ 171 0124 233C1100 		sd	ra,24(sp)
+ 172 0128 23388100 		sd	s0,16(sp)
+GAS LISTING /tmp/cc6R25C9.s 			page 7
+
+
+ 173 012c 23349100 		sd	s1,8(sp)
+ 174              		.cfi_offset 1, -8
+ 175              		.cfi_offset 8, -16
+ 176              		.cfi_offset 9, -24
+ 177 0130 13040102 		addi	s0,sp,32
+ 178              		.cfi_def_cfa 8, 0
+  53:src/uart.cpp  ****     char c;
+ 179              		.loc 1 53 5
+  54:src/uart.cpp  ****     rx_not_empty->semWait();
+ 180              		.loc 1 54 5
+  54:src/uart.cpp  ****     rx_not_empty->semWait();
+ 181              		.loc 1 54 26 is_stmt 0
+ 182 0134 97040000 		lla	s1,.LANCHOR0
+ 182      93840400 
+ 183 013c 03B58401 		ld	a0,24(s1)
+ 184 0140 97000000 		call	_ZN3Sem7semWaitEv@plt
+ 184      E7800000 
+ 185              	.LVL8:
+  55:src/uart.cpp  ****     c = rx_buffer[rxFront];
+ 186              		.loc 1 55 5 is_stmt 1
+  55:src/uart.cpp  ****     c = rx_buffer[rxFront];
+ 187              		.loc 1 55 26 is_stmt 0
+ 188 0148 83A78404 		lw	a5,72(s1)
+  55:src/uart.cpp  ****     c = rx_buffer[rxFront];
+ 189              		.loc 1 55 7
+ 190 014c 3387F400 		add	a4,s1,a5
+ 191              	.LVL9:
+  56:src/uart.cpp  ****     rxFront = (rxFront + 1) & (BUFFER_SIZE - 1);
+ 192              		.loc 1 56 5 is_stmt 1
+  56:src/uart.cpp  ****     rxFront = (rxFront + 1) & (BUFFER_SIZE - 1);
+ 193              		.loc 1 56 24 is_stmt 0
+ 194 0150 9B871700 		addiw	a5,a5,1
+  56:src/uart.cpp  ****     rxFront = (rxFront + 1) & (BUFFER_SIZE - 1);
+ 195              		.loc 1 56 29
+ 196 0154 93F7F73F 		andi	a5,a5,1023
+  56:src/uart.cpp  ****     rxFront = (rxFront + 1) & (BUFFER_SIZE - 1);
+ 197              		.loc 1 56 13
+ 198 0158 23A4F404 		sw	a5,72(s1)
+  57:src/uart.cpp  ****     rxSize--;
+ 199              		.loc 1 57 5 is_stmt 1
+  57:src/uart.cpp  ****     rxSize--;
+ 200              		.loc 1 57 11 is_stmt 0
+ 201 015c 83A70445 		lw	a5,1104(s1)
+ 202 0160 9B87F7FF 		addiw	a5,a5,-1
+ 203 0164 23A8F444 		sw	a5,1104(s1)
+  59:src/uart.cpp  ****     return c;
+ 204              		.loc 1 59 5 is_stmt 1
+  60:src/uart.cpp  **** }
+ 205              		.loc 1 60 1 is_stmt 0
+ 206 0168 03450705 		lbu	a0,80(a4)
+ 207 016c 83308101 		ld	ra,24(sp)
+ 208              		.cfi_restore 1
+ 209 0170 03340101 		ld	s0,16(sp)
+ 210              		.cfi_restore 8
+ 211              		.cfi_def_cfa 2, 32
+ 212 0174 83348100 		ld	s1,8(sp)
+ 213              		.cfi_restore 9
+GAS LISTING /tmp/cc6R25C9.s 			page 8
+
+
+ 214 0178 13010102 		addi	sp,sp,32
+ 215              		.cfi_def_cfa_offset 0
+ 216 017c 67800000 		jr	ra
+ 217              		.cfi_endproc
+ 218              	.LFE61:
+ 220              		.align	2
+ 221              		.globl	_ZN4Uart5rxPutEc
+ 223              	_ZN4Uart5rxPutEc:
+ 224              	.LFB62:
+  62:src/uart.cpp  **** void Uart::rxPut(char c) {
+ 225              		.loc 1 62 26 is_stmt 1
+ 226              		.cfi_startproc
+ 227              	.LVL10:
+ 228 0180 130101FE 		addi	sp,sp,-32
+ 229              		.cfi_def_cfa_offset 32
+ 230 0184 233C1100 		sd	ra,24(sp)
+ 231 0188 23388100 		sd	s0,16(sp)
+ 232 018c 23349100 		sd	s1,8(sp)
+ 233 0190 23302101 		sd	s2,0(sp)
+ 234              		.cfi_offset 1, -8
+ 235              		.cfi_offset 8, -16
+ 236              		.cfi_offset 9, -24
+ 237              		.cfi_offset 18, -32
+ 238 0194 13040102 		addi	s0,sp,32
+ 239              		.cfi_def_cfa 8, 0
+ 240 0198 13090500 		mv	s2,a0
+  64:src/uart.cpp  ****     rx_not_full->semWait(); // wait producer
+ 241              		.loc 1 64 5
+  64:src/uart.cpp  ****     rx_not_full->semWait(); // wait producer
+ 242              		.loc 1 64 25 is_stmt 0
+ 243 019c 97040000 		lla	s1,.LANCHOR0
+ 243      93840400 
+ 244 01a4 03B50402 		ld	a0,32(s1)
+ 245              	.LVL11:
+ 246 01a8 97000000 		call	_ZN3Sem7semWaitEv@plt
+ 246      E7800000 
+ 247              	.LVL12:
+  65:src/uart.cpp  ****     rx_buffer[txRear] = c;
+ 248              		.loc 1 65 5 is_stmt 1
+  65:src/uart.cpp  ****     rx_buffer[txRear] = c;
+ 249              		.loc 1 65 21 is_stmt 0
+ 250 01b0 83A74445 		lw	a5,1108(s1)
+  65:src/uart.cpp  ****     rx_buffer[txRear] = c;
+ 251              		.loc 1 65 23
+ 252 01b4 B387F400 		add	a5,s1,a5
+ 253 01b8 23882705 		sb	s2,80(a5)
+  66:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 254              		.loc 1 66 5 is_stmt 1
+  66:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 255              		.loc 1 66 22 is_stmt 0
+ 256 01bc 83A78445 		lw	a5,1112(s1)
+ 257 01c0 9B871700 		addiw	a5,a5,1
+  66:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 258              		.loc 1 66 27
+ 259 01c4 93F7F73F 		andi	a5,a5,1023
+  66:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 260              		.loc 1 66 12
+GAS LISTING /tmp/cc6R25C9.s 			page 9
+
+
+ 261 01c8 23ACF444 		sw	a5,1112(s1)
+  67:src/uart.cpp  ****     rxSize++;
+ 262              		.loc 1 67 5 is_stmt 1
+  67:src/uart.cpp  ****     rxSize++;
+ 263              		.loc 1 67 11 is_stmt 0
+ 264 01cc 83A70445 		lw	a5,1104(s1)
+ 265 01d0 9B871700 		addiw	a5,a5,1
+ 266 01d4 23A8F444 		sw	a5,1104(s1)
+  68:src/uart.cpp  ****     rx_not_empty->semSignal(); // signal consumer
+ 267              		.loc 1 68 5 is_stmt 1
+  68:src/uart.cpp  ****     rx_not_empty->semSignal(); // signal consumer
+ 268              		.loc 1 68 28 is_stmt 0
+ 269 01d8 03B58401 		ld	a0,24(s1)
+ 270 01dc 97000000 		call	_ZN3Sem9semSignalEv@plt
+ 270      E7800000 
+ 271              	.LVL13:
+  69:src/uart.cpp  **** }
+ 272              		.loc 1 69 1
+ 273 01e4 83308101 		ld	ra,24(sp)
+ 274              		.cfi_restore 1
+ 275 01e8 03340101 		ld	s0,16(sp)
+ 276              		.cfi_restore 8
+ 277              		.cfi_def_cfa 2, 32
+ 278 01ec 83348100 		ld	s1,8(sp)
+ 279              		.cfi_restore 9
+ 280 01f0 03390100 		ld	s2,0(sp)
+ 281              		.cfi_restore 18
+ 282 01f4 13010102 		addi	sp,sp,32
+ 283              		.cfi_def_cfa_offset 0
+ 284 01f8 67800000 		jr	ra
+ 285              		.cfi_endproc
+ 286              	.LFE62:
+ 288              		.align	2
+ 289              		.globl	_ZN4Uart9rxReceiveEv
+ 291              	_ZN4Uart9rxReceiveEv:
+ 292              	.LFB63:
+  75:src/uart.cpp  **** char Uart::rxReceive() {
+ 293              		.loc 1 75 24 is_stmt 1
+ 294              		.cfi_startproc
+  77:src/uart.cpp  ****     if (rxSize >= BUFFER_SIZE) return -1;
+ 295              		.loc 1 77 5
+  77:src/uart.cpp  ****     if (rxSize >= BUFFER_SIZE) return -1;
+ 296              		.loc 1 77 16 is_stmt 0
+ 297 01fc 17070000 		lw	a4,.LANCHOR0+1104
+ 297      03270700 
+  77:src/uart.cpp  ****     if (rxSize >= BUFFER_SIZE) return -1;
+ 298              		.loc 1 77 5
+ 299 0204 9307F03F 		li	a5,1023
+ 300 0208 63C6E706 		bgt	a4,a5,.L15
+  75:src/uart.cpp  **** char Uart::rxReceive() {
+ 301              		.loc 1 75 24
+ 302 020c 130101FF 		addi	sp,sp,-16
+ 303              		.cfi_def_cfa_offset 16
+ 304 0210 23341100 		sd	ra,8(sp)
+ 305 0214 23308100 		sd	s0,0(sp)
+ 306              		.cfi_offset 1, -8
+ 307              		.cfi_offset 8, -16
+GAS LISTING /tmp/cc6R25C9.s 			page 10
+
+
+ 308 0218 13040101 		addi	s0,sp,16
+ 309              		.cfi_def_cfa 8, 0
+  78:src/uart.cpp  ****     char c = *(char*) CONSOLE_RX_DATA;
+ 310              		.loc 1 78 5 is_stmt 1
+  78:src/uart.cpp  ****     char c = *(char*) CONSOLE_RX_DATA;
+ 311              		.loc 1 78 14 is_stmt 0
+ 312 021c 97070000 		la	a5,CONSOLE_RX_DATA
+ 312      83B70700 
+ 313 0224 83B70700 		ld	a5,0(a5)
+  78:src/uart.cpp  ****     char c = *(char*) CONSOLE_RX_DATA;
+ 314              		.loc 1 78 10
+ 315 0228 83C50700 		lbu	a1,0(a5)
+ 316              	.LVL14:
+  79:src/uart.cpp  ****     rx_buffer[rxRear] = c;
+ 317              		.loc 1 79 5 is_stmt 1
+  79:src/uart.cpp  ****     rx_buffer[rxRear] = c;
+ 318              		.loc 1 79 21 is_stmt 0
+ 319 022c 97060000 		lla	a3,.LANCHOR0
+ 319      93860600 
+ 320 0234 83A78645 		lw	a5,1112(a3)
+  79:src/uart.cpp  ****     rx_buffer[rxRear] = c;
+ 321              		.loc 1 79 23
+ 322 0238 3386F600 		add	a2,a3,a5
+ 323 023c 2308B604 		sb	a1,80(a2)
+  80:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 324              		.loc 1 80 5 is_stmt 1
+  80:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 325              		.loc 1 80 22 is_stmt 0
+ 326 0240 9B871700 		addiw	a5,a5,1
+  80:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 327              		.loc 1 80 27
+ 328 0244 93F7F73F 		andi	a5,a5,1023
+  80:src/uart.cpp  ****     rxRear = (rxRear + 1) & (BUFFER_SIZE - 1);
+ 329              		.loc 1 80 12
+ 330 0248 23ACF644 		sw	a5,1112(a3)
+  81:src/uart.cpp  ****     rxSize++;
+ 331              		.loc 1 81 5 is_stmt 1
+  81:src/uart.cpp  ****     rxSize++;
+ 332              		.loc 1 81 11 is_stmt 0
+ 333 024c 1B071700 		addiw	a4,a4,1
+ 334 0250 23A8E644 		sw	a4,1104(a3)
+  82:src/uart.cpp  ****     rx_not_empty->semSignal();
+ 335              		.loc 1 82 5 is_stmt 1
+  82:src/uart.cpp  ****     rx_not_empty->semSignal();
+ 336              		.loc 1 82 28 is_stmt 0
+ 337 0254 03B58601 		ld	a0,24(a3)
+ 338 0258 97000000 		call	_ZN3Sem9semSignalEv@plt
+ 338      E7800000 
+ 339              	.LVL15:
+  84:src/uart.cpp  ****     return 0;
+ 340              		.loc 1 84 5 is_stmt 1
+  84:src/uart.cpp  ****     return 0;
+ 341              		.loc 1 84 12 is_stmt 0
+ 342 0260 13050000 		li	a0,0
+  85:src/uart.cpp  **** }
+ 343              		.loc 1 85 1
+ 344 0264 83308100 		ld	ra,8(sp)
+GAS LISTING /tmp/cc6R25C9.s 			page 11
+
+
+ 345              		.cfi_restore 1
+ 346 0268 03340100 		ld	s0,0(sp)
+ 347              		.cfi_restore 8
+ 348              		.cfi_def_cfa 2, 16
+ 349 026c 13010101 		addi	sp,sp,16
+ 350              		.cfi_def_cfa_offset 0
+ 351 0270 67800000 		jr	ra
+ 352              	.L15:
+  77:src/uart.cpp  ****     if (rxSize >= BUFFER_SIZE) return -1;
+ 353              		.loc 1 77 40
+ 354 0274 1305F00F 		li	a0,255
+  85:src/uart.cpp  **** }
+ 355              		.loc 1 85 1
+ 356 0278 67800000 		ret
+ 357              		.cfi_endproc
+ 358              	.LFE63:
+ 360              		.align	2
+ 361              		.globl	_ZN4Uart5txGetEv
+ 363              	_ZN4Uart5txGetEv:
+ 364              	.LFB64:
+  90:src/uart.cpp  **** char Uart::txGet() {
+ 365              		.loc 1 90 20 is_stmt 1
+ 366              		.cfi_startproc
+ 367 027c 130101FE 		addi	sp,sp,-32
+ 368              		.cfi_def_cfa_offset 32
+ 369 0280 233C1100 		sd	ra,24(sp)
+ 370 0284 23388100 		sd	s0,16(sp)
+ 371 0288 23349100 		sd	s1,8(sp)
+ 372              		.cfi_offset 1, -8
+ 373              		.cfi_offset 8, -16
+ 374              		.cfi_offset 9, -24
+ 375 028c 13040102 		addi	s0,sp,32
+ 376              		.cfi_def_cfa 8, 0
+ 377              	.L22:
+  91:src/uart.cpp  ****     char c;
+ 378              		.loc 1 91 5 discriminator 2
+  93:src/uart.cpp  ****     while(txSize == 0) {thread_dispatch();}
+ 379              		.loc 1 93 5 discriminator 2
+  93:src/uart.cpp  ****     while(txSize == 0) {thread_dispatch();}
+ 380              		.loc 1 93 18 discriminator 2
+ 381 0290 97070000 		lw	a5,.LANCHOR0+1116
+ 381      83A70700 
+ 382 0298 63980700 		bnez	a5,.L21
+  93:src/uart.cpp  ****     while(txSize == 0) {thread_dispatch();}
+ 383              		.loc 1 93 25 discriminator 1
+  93:src/uart.cpp  ****     while(txSize == 0) {thread_dispatch();}
+ 384              		.loc 1 93 40 is_stmt 0 discriminator 1
+ 385 029c 97000000 		call	thread_dispatch@plt
+ 385      E7800000 
+ 386              	.LVL16:
+  93:src/uart.cpp  ****     while(txSize == 0) {thread_dispatch();}
+ 387              		.loc 1 93 5 discriminator 1
+ 388 02a4 6FF0DFFE 		j	.L22
+ 389              	.L21:
+  94:src/uart.cpp  ****     c = tx_buffer[txFront];
+ 390              		.loc 1 94 5 is_stmt 1
+  94:src/uart.cpp  ****     c = tx_buffer[txFront];
+GAS LISTING /tmp/cc6R25C9.s 			page 12
+
+
+ 391              		.loc 1 94 26 is_stmt 0
+ 392 02a8 97070000 		lla	a5,.LANCHOR0
+ 392      93870700 
+ 393 02b0 03A70746 		lw	a4,1120(a5)
+  94:src/uart.cpp  ****     c = tx_buffer[txFront];
+ 394              		.loc 1 94 7
+ 395 02b4 B386E700 		add	a3,a5,a4
+ 396 02b8 83C48646 		lbu	s1,1128(a3)
+ 397              	.LVL17:
+  95:src/uart.cpp  ****     txFront = (txFront + 1) & (BUFFER_SIZE - 1);
+ 398              		.loc 1 95 5 is_stmt 1
+  95:src/uart.cpp  ****     txFront = (txFront + 1) & (BUFFER_SIZE - 1);
+ 399              		.loc 1 95 24 is_stmt 0
+ 400 02bc 1B071700 		addiw	a4,a4,1
+  95:src/uart.cpp  ****     txFront = (txFront + 1) & (BUFFER_SIZE - 1);
+ 401              		.loc 1 95 29
+ 402 02c0 1377F73F 		andi	a4,a4,1023
+  95:src/uart.cpp  ****     txFront = (txFront + 1) & (BUFFER_SIZE - 1);
+ 403              		.loc 1 95 13
+ 404 02c4 23A0E746 		sw	a4,1120(a5)
+  96:src/uart.cpp  ****     txSize--;
+ 405              		.loc 1 96 5 is_stmt 1
+  96:src/uart.cpp  ****     txSize--;
+ 406              		.loc 1 96 11 is_stmt 0
+ 407 02c8 03A7C745 		lw	a4,1116(a5)
+ 408 02cc 1B07F7FF 		addiw	a4,a4,-1
+ 409 02d0 23AEE744 		sw	a4,1116(a5)
+  97:src/uart.cpp  ****     tx_not_full->semSignal(); // signal producer
+ 410              		.loc 1 97 5 is_stmt 1
+  97:src/uart.cpp  ****     tx_not_full->semSignal(); // signal producer
+ 411              		.loc 1 97 27 is_stmt 0
+ 412 02d4 03B58703 		ld	a0,56(a5)
+ 413 02d8 97000000 		call	_ZN3Sem9semSignalEv@plt
+ 413      E7800000 
+ 414              	.LVL18:
+  98:src/uart.cpp  ****     return c;
+ 415              		.loc 1 98 5 is_stmt 1
+  99:src/uart.cpp  **** }
+ 416              		.loc 1 99 1 is_stmt 0
+ 417 02e0 13850400 		mv	a0,s1
+ 418 02e4 83308101 		ld	ra,24(sp)
+ 419              		.cfi_restore 1
+ 420 02e8 03340101 		ld	s0,16(sp)
+ 421              		.cfi_restore 8
+ 422              		.cfi_def_cfa 2, 32
+ 423 02ec 83348100 		ld	s1,8(sp)
+ 424              		.cfi_restore 9
+ 425              	.LVL19:
+ 426 02f0 13010102 		addi	sp,sp,32
+ 427              		.cfi_def_cfa_offset 0
+ 428 02f4 67800000 		jr	ra
+ 429              		.cfi_endproc
+ 430              	.LFE64:
+ 432              		.align	2
+ 433              		.globl	_ZN4Uart5txPutEc
+ 435              	_ZN4Uart5txPutEc:
+ 436              	.LFB65:
+GAS LISTING /tmp/cc6R25C9.s 			page 13
+
+
+ 104:src/uart.cpp  **** void Uart::txPut(char c) {
+ 437              		.loc 1 104 26 is_stmt 1
+ 438              		.cfi_startproc
+ 439              	.LVL20:
+ 440 02f8 130101FE 		addi	sp,sp,-32
+ 441              		.cfi_def_cfa_offset 32
+ 442 02fc 233C1100 		sd	ra,24(sp)
+ 443 0300 23388100 		sd	s0,16(sp)
+ 444 0304 23349100 		sd	s1,8(sp)
+ 445 0308 23302101 		sd	s2,0(sp)
+ 446              		.cfi_offset 1, -8
+ 447              		.cfi_offset 8, -16
+ 448              		.cfi_offset 9, -24
+ 449              		.cfi_offset 18, -32
+ 450 030c 13040102 		addi	s0,sp,32
+ 451              		.cfi_def_cfa 8, 0
+ 452 0310 13090500 		mv	s2,a0
+ 106:src/uart.cpp  ****     tx_not_full->semWait(); // wait producer
+ 453              		.loc 1 106 5
+ 106:src/uart.cpp  ****     tx_not_full->semWait(); // wait producer
+ 454              		.loc 1 106 25 is_stmt 0
+ 455 0314 97040000 		lla	s1,.LANCHOR0
+ 455      93840400 
+ 456 031c 03B58403 		ld	a0,56(s1)
+ 457              	.LVL21:
+ 458 0320 97000000 		call	_ZN3Sem7semWaitEv@plt
+ 458      E7800000 
+ 459              	.LVL22:
+ 107:src/uart.cpp  ****     tx_buffer[txRear] = c;
+ 460              		.loc 1 107 5 is_stmt 1
+ 107:src/uart.cpp  ****     tx_buffer[txRear] = c;
+ 461              		.loc 1 107 21 is_stmt 0
+ 462 0328 83A74445 		lw	a5,1108(s1)
+ 107:src/uart.cpp  ****     tx_buffer[txRear] = c;
+ 463              		.loc 1 107 23
+ 464 032c 3387F400 		add	a4,s1,a5
+ 465 0330 23042747 		sb	s2,1128(a4)
+ 108:src/uart.cpp  ****     txRear = (txRear + 1) & (BUFFER_SIZE - 1);
+ 466              		.loc 1 108 5 is_stmt 1
+ 108:src/uart.cpp  ****     txRear = (txRear + 1) & (BUFFER_SIZE - 1);
+ 467              		.loc 1 108 22 is_stmt 0
+ 468 0334 9B871700 		addiw	a5,a5,1
+ 108:src/uart.cpp  ****     txRear = (txRear + 1) & (BUFFER_SIZE - 1);
+ 469              		.loc 1 108 27
+ 470 0338 93F7F73F 		andi	a5,a5,1023
+ 108:src/uart.cpp  ****     txRear = (txRear + 1) & (BUFFER_SIZE - 1);
+ 471              		.loc 1 108 12
+ 472 033c 23AAF444 		sw	a5,1108(s1)
+ 109:src/uart.cpp  ****     txSize++;
+ 473              		.loc 1 109 5 is_stmt 1
+ 109:src/uart.cpp  ****     txSize++;
+ 474              		.loc 1 109 11 is_stmt 0
+ 475 0340 83A7C445 		lw	a5,1116(s1)
+ 476 0344 9B871700 		addiw	a5,a5,1
+ 477 0348 23AEF444 		sw	a5,1116(s1)
+ 110:src/uart.cpp  ****     tx_not_empty->semSignal(); // signal consumer
+ 478              		.loc 1 110 5 is_stmt 1
+GAS LISTING /tmp/cc6R25C9.s 			page 14
+
+
+ 110:src/uart.cpp  ****     tx_not_empty->semSignal(); // signal consumer
+ 479              		.loc 1 110 28 is_stmt 0
+ 480 034c 03B50403 		ld	a0,48(s1)
+ 481 0350 97000000 		call	_ZN3Sem9semSignalEv@plt
+ 481      E7800000 
+ 482              	.LVL23:
+ 111:src/uart.cpp  **** }
+ 483              		.loc 1 111 1
+ 484 0358 83308101 		ld	ra,24(sp)
+ 485              		.cfi_restore 1
+ 486 035c 03340101 		ld	s0,16(sp)
+ 487              		.cfi_restore 8
+ 488              		.cfi_def_cfa 2, 32
+ 489 0360 83348100 		ld	s1,8(sp)
+ 490              		.cfi_restore 9
+ 491 0364 03390100 		ld	s2,0(sp)
+ 492              		.cfi_restore 18
+ 493 0368 13010102 		addi	sp,sp,32
+ 494              		.cfi_def_cfa_offset 0
+ 495 036c 67800000 		jr	ra
+ 496              		.cfi_endproc
+ 497              	.LFE65:
+ 499              		.align	2
+ 500              		.globl	_ZN4Uart6txSendEc
+ 502              	_ZN4Uart6txSendEc:
+ 503              	.LFB66:
+ 115:src/uart.cpp  **** void Uart::txSend(char c) {
+ 504              		.loc 1 115 27 is_stmt 1
+ 505              		.cfi_startproc
+ 506              	.LVL24:
+ 507 0370 130101FF 		addi	sp,sp,-16
+ 508              		.cfi_def_cfa_offset 16
+ 509 0374 23348100 		sd	s0,8(sp)
+ 510              		.cfi_offset 8, -8
+ 511 0378 13040101 		addi	s0,sp,16
+ 512              		.cfi_def_cfa 8, 0
+ 116:src/uart.cpp  ****     *(char*)CONSOLE_TX_DATA = c;
+ 513              		.loc 1 116 5
+ 514 037c 97070000 		la	a5,CONSOLE_TX_DATA
+ 514      83B70700 
+ 515 0384 83B70700 		ld	a5,0(a5)
+ 116:src/uart.cpp  ****     *(char*)CONSOLE_TX_DATA = c;
+ 516              		.loc 1 116 29 is_stmt 0
+ 517 0388 2380A700 		sb	a0,0(a5)
+ 117:src/uart.cpp  **** }
+ 518              		.loc 1 117 1
+ 519 038c 03348100 		ld	s0,8(sp)
+ 520              		.cfi_restore 8
+ 521              		.cfi_def_cfa 2, 16
+ 522 0390 13010101 		addi	sp,sp,16
+ 523              		.cfi_def_cfa_offset 0
+ 524 0394 67800000 		jr	ra
+ 525              		.cfi_endproc
+ 526              	.LFE66:
+ 528              		.align	2
+ 529              		.globl	_ZN4Uart6txWaitEv
+ 531              	_ZN4Uart6txWaitEv:
+GAS LISTING /tmp/cc6R25C9.s 			page 15
+
+
+ 532              	.LFB67:
+ 119:src/uart.cpp  **** void Uart::txWait() {
+ 533              		.loc 1 119 21 is_stmt 1
+ 534              		.cfi_startproc
+ 535 0398 130101FF 		addi	sp,sp,-16
+ 536              		.cfi_def_cfa_offset 16
+ 537 039c 23341100 		sd	ra,8(sp)
+ 538 03a0 23308100 		sd	s0,0(sp)
+ 539              		.cfi_offset 1, -8
+ 540              		.cfi_offset 8, -16
+ 541 03a4 13040101 		addi	s0,sp,16
+ 542              		.cfi_def_cfa 8, 0
+ 120:src/uart.cpp  ****     tx_request->semWait();
+ 543              		.loc 1 120 5
+ 120:src/uart.cpp  ****     tx_request->semWait();
+ 544              		.loc 1 120 24 is_stmt 0
+ 545 03a8 17050000 		ld	a0,.LANCHOR0+64
+ 545      03350500 
+ 546 03b0 97000000 		call	_ZN3Sem7semWaitEv@plt
+ 546      E7800000 
+ 547              	.LVL25:
+ 121:src/uart.cpp  **** }
+ 548              		.loc 1 121 1
+ 549 03b8 83308100 		ld	ra,8(sp)
+ 550              		.cfi_restore 1
+ 551 03bc 03340100 		ld	s0,0(sp)
+ 552              		.cfi_restore 8
+ 553              		.cfi_def_cfa 2, 16
+ 554 03c0 13010101 		addi	sp,sp,16
+ 555              		.cfi_def_cfa_offset 0
+ 556 03c4 67800000 		jr	ra
+ 557              		.cfi_endproc
+ 558              	.LFE67:
+ 560              		.align	2
+ 561              		.globl	_ZN4Uart8txSignalEv
+ 563              	_ZN4Uart8txSignalEv:
+ 564              	.LFB68:
+ 123:src/uart.cpp  **** void Uart::txSignal() {
+ 565              		.loc 1 123 23 is_stmt 1
+ 566              		.cfi_startproc
+ 567 03c8 130101FF 		addi	sp,sp,-16
+ 568              		.cfi_def_cfa_offset 16
+ 569 03cc 23341100 		sd	ra,8(sp)
+ 570 03d0 23308100 		sd	s0,0(sp)
+ 571              		.cfi_offset 1, -8
+ 572              		.cfi_offset 8, -16
+ 573 03d4 13040101 		addi	s0,sp,16
+ 574              		.cfi_def_cfa 8, 0
+ 124:src/uart.cpp  ****     tx_request->semSignal();
+ 575              		.loc 1 124 5
+ 124:src/uart.cpp  ****     tx_request->semSignal();
+ 576              		.loc 1 124 26 is_stmt 0
+ 577 03d8 17050000 		ld	a0,.LANCHOR0+64
+ 577      03350500 
+ 578 03e0 97000000 		call	_ZN3Sem9semSignalEv@plt
+ 578      E7800000 
+ 579              	.LVL26:
+GAS LISTING /tmp/cc6R25C9.s 			page 16
+
+
+ 125:src/uart.cpp  **** }
+ 580              		.loc 1 125 1
+ 581 03e8 83308100 		ld	ra,8(sp)
+ 582              		.cfi_restore 1
+ 583 03ec 03340100 		ld	s0,0(sp)
+ 584              		.cfi_restore 8
+ 585              		.cfi_def_cfa 2, 16
+ 586 03f0 13010101 		addi	sp,sp,16
+ 587              		.cfi_def_cfa_offset 0
+ 588 03f4 67800000 		jr	ra
+ 589              		.cfi_endproc
+ 590              	.LFE68:
+ 592              		.align	2
+ 593              		.globl	_ZN4Uart6rxWaitEv
+ 595              	_ZN4Uart6rxWaitEv:
+ 596              	.LFB69:
+ 127:src/uart.cpp  **** void Uart::rxWait() {
+ 597              		.loc 1 127 21 is_stmt 1
+ 598              		.cfi_startproc
+ 599 03f8 130101FF 		addi	sp,sp,-16
+ 600              		.cfi_def_cfa_offset 16
+ 601 03fc 23341100 		sd	ra,8(sp)
+ 602 0400 23308100 		sd	s0,0(sp)
+ 603              		.cfi_offset 1, -8
+ 604              		.cfi_offset 8, -16
+ 605 0404 13040101 		addi	s0,sp,16
+ 606              		.cfi_def_cfa 8, 0
+ 128:src/uart.cpp  ****     rx_request->semWait();
+ 607              		.loc 1 128 5
+ 128:src/uart.cpp  ****     rx_request->semWait();
+ 608              		.loc 1 128 24 is_stmt 0
+ 609 0408 17050000 		ld	a0,.LANCHOR0+40
+ 609      03350500 
+ 610 0410 97000000 		call	_ZN3Sem7semWaitEv@plt
+ 610      E7800000 
+ 611              	.LVL27:
+ 129:src/uart.cpp  **** }
+ 612              		.loc 1 129 1
+ 613 0418 83308100 		ld	ra,8(sp)
+ 614              		.cfi_restore 1
+ 615 041c 03340100 		ld	s0,0(sp)
+ 616              		.cfi_restore 8
+ 617              		.cfi_def_cfa 2, 16
+ 618 0420 13010101 		addi	sp,sp,16
+ 619              		.cfi_def_cfa_offset 0
+ 620 0424 67800000 		jr	ra
+ 621              		.cfi_endproc
+ 622              	.LFE69:
+ 624              		.align	2
+ 625              		.globl	_ZN4Uart8rxSignalEv
+ 627              	_ZN4Uart8rxSignalEv:
+ 628              	.LFB70:
+ 131:src/uart.cpp  **** void Uart::rxSignal() {
+ 629              		.loc 1 131 23 is_stmt 1
+ 630              		.cfi_startproc
+ 631 0428 130101FF 		addi	sp,sp,-16
+ 632              		.cfi_def_cfa_offset 16
+GAS LISTING /tmp/cc6R25C9.s 			page 17
+
+
+ 633 042c 23341100 		sd	ra,8(sp)
+ 634 0430 23308100 		sd	s0,0(sp)
+ 635              		.cfi_offset 1, -8
+ 636              		.cfi_offset 8, -16
+ 637 0434 13040101 		addi	s0,sp,16
+ 638              		.cfi_def_cfa 8, 0
+ 132:src/uart.cpp  ****     rx_request->semSignal();
+ 639              		.loc 1 132 5
+ 132:src/uart.cpp  ****     rx_request->semSignal();
+ 640              		.loc 1 132 26 is_stmt 0
+ 641 0438 17050000 		ld	a0,.LANCHOR0+40
+ 641      03350500 
+ 642 0440 97000000 		call	_ZN3Sem9semSignalEv@plt
+ 642      E7800000 
+ 643              	.LVL28:
+ 644              		.loc 1 133 1
+ 645 0448 83308100 		ld	ra,8(sp)
+ 646              		.cfi_restore 1
+ 647 044c 03340100 		ld	s0,0(sp)
+ 648              		.cfi_restore 8
+ 649              		.cfi_def_cfa 2, 16
+ 650 0450 13010101 		addi	sp,sp,16
+ 651              		.cfi_def_cfa_offset 0
+ 652 0454 67800000 		jr	ra
+ 653              		.cfi_endproc
+ 654              	.LFE70:
+ 656              		.align	2
+ 658              	_GLOBAL__sub_I__ZN4Uart9rx_bufferE:
+ 659              	.LFB76:
+ 660              		.loc 1 133 1 is_stmt 1
+ 661              		.cfi_startproc
+ 662 0458 130101FF 		addi	sp,sp,-16
+ 663              		.cfi_def_cfa_offset 16
+ 664 045c 23341100 		sd	ra,8(sp)
+ 665 0460 23308100 		sd	s0,0(sp)
+ 666              		.cfi_offset 1, -8
+ 667              		.cfi_offset 8, -16
+ 668 0464 13040101 		addi	s0,sp,16
+ 669              		.cfi_def_cfa 8, 0
+ 670              		.loc 1 133 1 is_stmt 0
+ 671 0468 B7050100 		li	a1,65536
+ 672 046c 9385F5FF 		addi	a1,a1,-1
+ 673 0470 13051000 		li	a0,1
+ 674 0474 97000000 		call	_Z41__static_initialization_and_destruction_0ii
+ 674      E7800000 
+ 675              	.LVL29:
+ 676 047c 83308100 		ld	ra,8(sp)
+ 677              		.cfi_restore 1
+ 678 0480 03340100 		ld	s0,0(sp)
+ 679              		.cfi_restore 8
+ 680              		.cfi_def_cfa 2, 16
+ 681 0484 13010101 		addi	sp,sp,16
+ 682              		.cfi_def_cfa_offset 0
+ 683 0488 67800000 		jr	ra
+ 684              		.cfi_endproc
+ 685              	.LFE76:
+ 687              		.section	.init_array,"aw"
+GAS LISTING /tmp/cc6R25C9.s 			page 18
+
+
+ 688              		.align	3
+ 689 0000 00000000 		.dword	_GLOBAL__sub_I__ZN4Uart9rx_bufferE
+ 689      00000000 
+ 690              		.globl	_ZN4Uart6rxSizeE
+ 691              		.globl	_ZN4Uart6rxRearE
+ 692              		.globl	_ZN4Uart7rxFrontE
+ 693              		.globl	_ZN4Uart6txSizeE
+ 694              		.globl	_ZN4Uart6txRearE
+ 695              		.globl	_ZN4Uart7txFrontE
+ 696              		.globl	_ZN4Uart7TX_DATAE
+ 697              		.globl	_ZN4Uart7RX_DATAE
+ 698              		.globl	_ZN4Uart6STATUSE
+ 699              		.globl	_ZN4Uart10rx_requestE
+ 700              		.globl	_ZN4Uart10tx_requestE
+ 701              		.globl	_ZN4Uart11rx_not_fullE
+ 702              		.globl	_ZN4Uart12rx_not_emptyE
+ 703              		.globl	_ZN4Uart11tx_not_fullE
+ 704              		.globl	_ZN4Uart12tx_not_emptyE
+ 705              		.globl	_ZN4Uart9tx_bufferE
+ 706              		.globl	_ZN4Uart9rx_bufferE
+ 707              		.bss
+ 708              		.align	3
+ 709              		.set	.LANCHOR0,. + 0
+ 712              	_ZN4Uart6STATUSE:
+ 713 0000 00000000 		.zero	8
+ 713      00000000 
+ 716              	_ZN4Uart7RX_DATAE:
+ 717 0008 00000000 		.zero	8
+ 717      00000000 
+ 720              	_ZN4Uart7TX_DATAE:
+ 721 0010 00000000 		.zero	8
+ 721      00000000 
+ 724              	_ZN4Uart12rx_not_emptyE:
+ 725 0018 00000000 		.zero	8
+ 725      00000000 
+ 728              	_ZN4Uart11rx_not_fullE:
+ 729 0020 00000000 		.zero	8
+ 729      00000000 
+ 732              	_ZN4Uart10rx_requestE:
+ 733 0028 00000000 		.zero	8
+ 733      00000000 
+ 736              	_ZN4Uart12tx_not_emptyE:
+ 737 0030 00000000 		.zero	8
+ 737      00000000 
+ 740              	_ZN4Uart11tx_not_fullE:
+ 741 0038 00000000 		.zero	8
+ 741      00000000 
+ 744              	_ZN4Uart10tx_requestE:
+ 745 0040 00000000 		.zero	8
+ 745      00000000 
+ 748              	_ZN4Uart7rxFrontE:
+ 749 0048 00000000 		.zero	4
+ 750 004c 00000000 		.zero	4
+ 753              	_ZN4Uart9rx_bufferE:
+ 754 0050 00000000 		.zero	1024
+ 754      00000000 
+ 754      00000000 
+GAS LISTING /tmp/cc6R25C9.s 			page 19
+
+
+ 754      00000000 
+ 754      00000000 
+ 757              	_ZN4Uart6rxSizeE:
+ 758 0450 00000000 		.zero	4
+ 761              	_ZN4Uart6txRearE:
+ 762 0454 00000000 		.zero	4
+ 765              	_ZN4Uart6rxRearE:
+ 766 0458 00000000 		.zero	4
+ 769              	_ZN4Uart6txSizeE:
+ 770 045c 00000000 		.zero	4
+ 773              	_ZN4Uart7txFrontE:
+ 774 0460 00000000 		.zero	4
+ 775 0464 00000000 		.zero	4
+ 778              	_ZN4Uart9tx_bufferE:
+ 779 0468 00000000 		.zero	1024
+ 779      00000000 
+ 779      00000000 
+ 779      00000000 
+ 779      00000000 
+ 780              		.text
+ 781              	.Letext0:
+ 782              		.file 2 "src/../h/../lib/hw.h"
+ 783              		.file 3 "src/../h/tcb.hpp"
+ 784              		.file 4 "src/../h/sem.hpp"
+ 785              		.file 5 "src/../h/list.hpp"
+ 786              		.file 6 "src/../h/uart.hpp"
+ 787              		.file 7 "src/../h/syscall_c.h"
+GAS LISTING /tmp/cc6R25C9.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 uart.cpp
+     /tmp/cc6R25C9.s:8      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/cc6R25C9.s:12     .text:0000000000000000 .L0 
+     /tmp/cc6R25C9.s:14     .text:0000000000000000 .L0 
+     /tmp/cc6R25C9.s:15     .text:0000000000000004 .L0 
+     /tmp/cc6R25C9.s:17     .text:0000000000000008 .L0 
+     /tmp/cc6R25C9.s:19     .text:000000000000000c .L0 
+     /tmp/cc6R25C9.s:21     .text:000000000000000c .L0 
+     /tmp/cc6R25C9.s:25     .text:0000000000000018 .L0 
+     /tmp/cc6R25C9.s:26     .text:0000000000000018 .L0 
+     /tmp/cc6R25C9.s:27     .text:0000000000000018 .L0 
+     /tmp/cc6R25C9.s:29     .text:000000000000001c .L0 
+     /tmp/cc6R25C9.s:32     .text:0000000000000020 .L0 
+     /tmp/cc6R25C9.s:34     .text:0000000000000020 .L0 
+     /tmp/cc6R25C9.s:38     .text:000000000000002c .L0 
+     /tmp/cc6R25C9.s:41     .text:0000000000000038 .L0 
+     /tmp/cc6R25C9.s:44     .text:0000000000000044 .L0 
+     /tmp/cc6R25C9.s:47     .text:0000000000000050 .L0 
+     /tmp/cc6R25C9.s:49     .text:0000000000000054 .L0 
+     /tmp/cc6R25C9.s:52     .text:0000000000000060 .L0 
+     /tmp/cc6R25C9.s:54     .text:0000000000000064 .L0 
+     /tmp/cc6R25C9.s:55     .text:0000000000000068 .L0 
+     /tmp/cc6R25C9.s:61     .text:0000000000000068 _ZN4Uart8initUartEv
+     /tmp/cc6R25C9.s:64     .text:0000000000000068 .L0 
+     /tmp/cc6R25C9.s:65     .text:0000000000000068 .L0 
+     /tmp/cc6R25C9.s:66     .text:000000000000006c .L0 
+     /tmp/cc6R25C9.s:70     .text:0000000000000078 .L0 
+     /tmp/cc6R25C9.s:71     .text:0000000000000078 .L0 
+     /tmp/cc6R25C9.s:72     .text:0000000000000078 .L0 
+     /tmp/cc6R25C9.s:74     .text:000000000000007c .L0 
+     /tmp/cc6R25C9.s:76     .text:000000000000007c .L0 
+     /tmp/cc6R25C9.s:77     .text:000000000000007c .L0 
+     /tmp/cc6R25C9.s:81     .text:0000000000000088 .L0 
+     /tmp/cc6R25C9.s:84     .text:0000000000000094 .L0 
+     /tmp/cc6R25C9.s:85     .text:0000000000000094 .L0 
+     /tmp/cc6R25C9.s:89     .text:00000000000000a0 .L0 
+     /tmp/cc6R25C9.s:91     .text:00000000000000a4 .L0 
+     /tmp/cc6R25C9.s:92     .text:00000000000000a4 .L0 
+     /tmp/cc6R25C9.s:96     .text:00000000000000b0 .L0 
+     /tmp/cc6R25C9.s:98     .text:00000000000000b4 .L0 
+     /tmp/cc6R25C9.s:99     .text:00000000000000b4 .L0 
+     /tmp/cc6R25C9.s:103    .text:00000000000000c0 .L0 
+     /tmp/cc6R25C9.s:105    .text:00000000000000c4 .L0 
+     /tmp/cc6R25C9.s:106    .text:00000000000000c4 .L0 
+     /tmp/cc6R25C9.s:110    .text:00000000000000d0 .L0 
+     /tmp/cc6R25C9.s:112    .text:00000000000000d4 .L0 
+     /tmp/cc6R25C9.s:113    .text:00000000000000d4 .L0 
+     /tmp/cc6R25C9.s:117    .text:00000000000000e0 .L0 
+     /tmp/cc6R25C9.s:119    .text:00000000000000e4 .L0 
+     /tmp/cc6R25C9.s:120    .text:00000000000000e8 .L0 
+     /tmp/cc6R25C9.s:122    .text:00000000000000ec .L0 
+     /tmp/cc6R25C9.s:123    .text:00000000000000ec .L0 
+     /tmp/cc6R25C9.s:125    .text:00000000000000f0 .L0 
+     /tmp/cc6R25C9.s:127    .text:00000000000000f4 .L0 
+     /tmp/cc6R25C9.s:129    .text:00000000000000f8 .L0 
+     /tmp/cc6R25C9.s:135    .text:00000000000000f8 _ZN4Uart9getStatusEv
+GAS LISTING /tmp/cc6R25C9.s 			page 21
+
+
+     /tmp/cc6R25C9.s:138    .text:00000000000000f8 .L0 
+     /tmp/cc6R25C9.s:139    .text:00000000000000f8 .L0 
+     /tmp/cc6R25C9.s:140    .text:00000000000000fc .L0 
+     /tmp/cc6R25C9.s:142    .text:0000000000000100 .L0 
+     /tmp/cc6R25C9.s:144    .text:0000000000000104 .L0 
+     /tmp/cc6R25C9.s:146    .text:0000000000000104 .L0 
+     /tmp/cc6R25C9.s:147    .text:0000000000000104 .L0 
+     /tmp/cc6R25C9.s:151    .text:0000000000000110 .L0 
+     /tmp/cc6R25C9.s:152    .text:0000000000000110 .L0 
+     /tmp/cc6R25C9.s:154    .text:0000000000000118 .L0 
+     /tmp/cc6R25C9.s:155    .text:0000000000000118 .L0 
+     /tmp/cc6R25C9.s:157    .text:000000000000011c .L0 
+     /tmp/cc6R25C9.s:159    .text:0000000000000120 .L0 
+     /tmp/cc6R25C9.s:165    .text:0000000000000120 _ZN4Uart5rxGetEv
+     /tmp/cc6R25C9.s:168    .text:0000000000000120 .L0 
+     /tmp/cc6R25C9.s:169    .text:0000000000000120 .L0 
+     /tmp/cc6R25C9.s:170    .text:0000000000000124 .L0 
+     /tmp/cc6R25C9.s:174    .text:0000000000000130 .L0 
+     /tmp/cc6R25C9.s:175    .text:0000000000000130 .L0 
+     /tmp/cc6R25C9.s:176    .text:0000000000000130 .L0 
+     /tmp/cc6R25C9.s:178    .text:0000000000000134 .L0 
+     /tmp/cc6R25C9.s:180    .text:0000000000000134 .L0 
+     /tmp/cc6R25C9.s:181    .text:0000000000000134 .L0 
+     /tmp/cc6R25C9.s:182    .text:0000000000000134 .L0 
+     /tmp/cc6R25C9.s:187    .text:0000000000000148 .L0 
+     /tmp/cc6R25C9.s:188    .text:0000000000000148 .L0 
+     /tmp/cc6R25C9.s:190    .text:000000000000014c .L0 
+     /tmp/cc6R25C9.s:193    .text:0000000000000150 .L0 
+     /tmp/cc6R25C9.s:194    .text:0000000000000150 .L0 
+     /tmp/cc6R25C9.s:196    .text:0000000000000154 .L0 
+     /tmp/cc6R25C9.s:198    .text:0000000000000158 .L0 
+     /tmp/cc6R25C9.s:200    .text:000000000000015c .L0 
+     /tmp/cc6R25C9.s:201    .text:000000000000015c .L0 
+     /tmp/cc6R25C9.s:205    .text:0000000000000168 .L0 
+     /tmp/cc6R25C9.s:206    .text:0000000000000168 .L0 
+     /tmp/cc6R25C9.s:208    .text:0000000000000170 .L0 
+     /tmp/cc6R25C9.s:210    .text:0000000000000174 .L0 
+     /tmp/cc6R25C9.s:211    .text:0000000000000174 .L0 
+     /tmp/cc6R25C9.s:213    .text:0000000000000178 .L0 
+     /tmp/cc6R25C9.s:215    .text:000000000000017c .L0 
+     /tmp/cc6R25C9.s:217    .text:0000000000000180 .L0 
+     /tmp/cc6R25C9.s:223    .text:0000000000000180 _ZN4Uart5rxPutEc
+     /tmp/cc6R25C9.s:226    .text:0000000000000180 .L0 
+     /tmp/cc6R25C9.s:228    .text:0000000000000180 .L0 
+     /tmp/cc6R25C9.s:229    .text:0000000000000184 .L0 
+     /tmp/cc6R25C9.s:234    .text:0000000000000194 .L0 
+     /tmp/cc6R25C9.s:235    .text:0000000000000194 .L0 
+     /tmp/cc6R25C9.s:236    .text:0000000000000194 .L0 
+     /tmp/cc6R25C9.s:237    .text:0000000000000194 .L0 
+     /tmp/cc6R25C9.s:239    .text:0000000000000198 .L0 
+     /tmp/cc6R25C9.s:242    .text:000000000000019c .L0 
+     /tmp/cc6R25C9.s:243    .text:000000000000019c .L0 
+     /tmp/cc6R25C9.s:249    .text:00000000000001b0 .L0 
+     /tmp/cc6R25C9.s:250    .text:00000000000001b0 .L0 
+     /tmp/cc6R25C9.s:252    .text:00000000000001b4 .L0 
+     /tmp/cc6R25C9.s:255    .text:00000000000001bc .L0 
+     /tmp/cc6R25C9.s:256    .text:00000000000001bc .L0 
+GAS LISTING /tmp/cc6R25C9.s 			page 22
+
+
+     /tmp/cc6R25C9.s:259    .text:00000000000001c4 .L0 
+     /tmp/cc6R25C9.s:261    .text:00000000000001c8 .L0 
+     /tmp/cc6R25C9.s:263    .text:00000000000001cc .L0 
+     /tmp/cc6R25C9.s:264    .text:00000000000001cc .L0 
+     /tmp/cc6R25C9.s:268    .text:00000000000001d8 .L0 
+     /tmp/cc6R25C9.s:269    .text:00000000000001d8 .L0 
+     /tmp/cc6R25C9.s:273    .text:00000000000001e4 .L0 
+     /tmp/cc6R25C9.s:274    .text:00000000000001e8 .L0 
+     /tmp/cc6R25C9.s:276    .text:00000000000001ec .L0 
+     /tmp/cc6R25C9.s:277    .text:00000000000001ec .L0 
+     /tmp/cc6R25C9.s:279    .text:00000000000001f0 .L0 
+     /tmp/cc6R25C9.s:281    .text:00000000000001f4 .L0 
+     /tmp/cc6R25C9.s:283    .text:00000000000001f8 .L0 
+     /tmp/cc6R25C9.s:285    .text:00000000000001fc .L0 
+     /tmp/cc6R25C9.s:291    .text:00000000000001fc _ZN4Uart9rxReceiveEv
+     /tmp/cc6R25C9.s:294    .text:00000000000001fc .L0 
+     /tmp/cc6R25C9.s:295    .text:00000000000001fc .L0 
+     /tmp/cc6R25C9.s:296    .text:00000000000001fc .L0 
+     /tmp/cc6R25C9.s:297    .text:00000000000001fc .L0 
+     /tmp/cc6R25C9.s:299    .text:0000000000000204 .L0 
+     /tmp/cc6R25C9.s:302    .text:000000000000020c .L0 
+     /tmp/cc6R25C9.s:303    .text:0000000000000210 .L0 
+     /tmp/cc6R25C9.s:306    .text:0000000000000218 .L0 
+     /tmp/cc6R25C9.s:307    .text:0000000000000218 .L0 
+     /tmp/cc6R25C9.s:309    .text:000000000000021c .L0 
+     /tmp/cc6R25C9.s:311    .text:000000000000021c .L0 
+     /tmp/cc6R25C9.s:312    .text:000000000000021c .L0 
+     /tmp/cc6R25C9.s:315    .text:0000000000000228 .L0 
+     /tmp/cc6R25C9.s:318    .text:000000000000022c .L0 
+     /tmp/cc6R25C9.s:319    .text:000000000000022c .L0 
+     /tmp/cc6R25C9.s:322    .text:0000000000000238 .L0 
+     /tmp/cc6R25C9.s:325    .text:0000000000000240 .L0 
+     /tmp/cc6R25C9.s:326    .text:0000000000000240 .L0 
+     /tmp/cc6R25C9.s:328    .text:0000000000000244 .L0 
+     /tmp/cc6R25C9.s:330    .text:0000000000000248 .L0 
+     /tmp/cc6R25C9.s:332    .text:000000000000024c .L0 
+     /tmp/cc6R25C9.s:333    .text:000000000000024c .L0 
+     /tmp/cc6R25C9.s:336    .text:0000000000000254 .L0 
+     /tmp/cc6R25C9.s:337    .text:0000000000000254 .L0 
+     /tmp/cc6R25C9.s:341    .text:0000000000000260 .L0 
+     /tmp/cc6R25C9.s:342    .text:0000000000000260 .L0 
+     /tmp/cc6R25C9.s:344    .text:0000000000000264 .L0 
+     /tmp/cc6R25C9.s:345    .text:0000000000000268 .L0 
+     /tmp/cc6R25C9.s:347    .text:000000000000026c .L0 
+     /tmp/cc6R25C9.s:348    .text:000000000000026c .L0 
+     /tmp/cc6R25C9.s:350    .text:0000000000000270 .L0 
+     /tmp/cc6R25C9.s:354    .text:0000000000000274 .L0 
+     /tmp/cc6R25C9.s:356    .text:0000000000000278 .L0 
+     /tmp/cc6R25C9.s:357    .text:000000000000027c .L0 
+     /tmp/cc6R25C9.s:363    .text:000000000000027c _ZN4Uart5txGetEv
+     /tmp/cc6R25C9.s:366    .text:000000000000027c .L0 
+     /tmp/cc6R25C9.s:367    .text:000000000000027c .L0 
+     /tmp/cc6R25C9.s:368    .text:0000000000000280 .L0 
+     /tmp/cc6R25C9.s:372    .text:000000000000028c .L0 
+     /tmp/cc6R25C9.s:373    .text:000000000000028c .L0 
+     /tmp/cc6R25C9.s:374    .text:000000000000028c .L0 
+     /tmp/cc6R25C9.s:376    .text:0000000000000290 .L0 
+GAS LISTING /tmp/cc6R25C9.s 			page 23
+
+
+     /tmp/cc6R25C9.s:379    .text:0000000000000290 .L0 
+     /tmp/cc6R25C9.s:380    .text:0000000000000290 .L0 
+     /tmp/cc6R25C9.s:381    .text:0000000000000290 .L0 
+     /tmp/cc6R25C9.s:384    .text:000000000000029c .L0 
+     /tmp/cc6R25C9.s:385    .text:000000000000029c .L0 
+     /tmp/cc6R25C9.s:388    .text:00000000000002a4 .L0 
+     /tmp/cc6R25C9.s:391    .text:00000000000002a8 .L0 
+     /tmp/cc6R25C9.s:392    .text:00000000000002a8 .L0 
+     /tmp/cc6R25C9.s:395    .text:00000000000002b4 .L0 
+     /tmp/cc6R25C9.s:399    .text:00000000000002bc .L0 
+     /tmp/cc6R25C9.s:400    .text:00000000000002bc .L0 
+     /tmp/cc6R25C9.s:402    .text:00000000000002c0 .L0 
+     /tmp/cc6R25C9.s:404    .text:00000000000002c4 .L0 
+     /tmp/cc6R25C9.s:406    .text:00000000000002c8 .L0 
+     /tmp/cc6R25C9.s:407    .text:00000000000002c8 .L0 
+     /tmp/cc6R25C9.s:411    .text:00000000000002d4 .L0 
+     /tmp/cc6R25C9.s:412    .text:00000000000002d4 .L0 
+     /tmp/cc6R25C9.s:416    .text:00000000000002e0 .L0 
+     /tmp/cc6R25C9.s:417    .text:00000000000002e0 .L0 
+     /tmp/cc6R25C9.s:419    .text:00000000000002e8 .L0 
+     /tmp/cc6R25C9.s:421    .text:00000000000002ec .L0 
+     /tmp/cc6R25C9.s:422    .text:00000000000002ec .L0 
+     /tmp/cc6R25C9.s:424    .text:00000000000002f0 .L0 
+     /tmp/cc6R25C9.s:427    .text:00000000000002f4 .L0 
+     /tmp/cc6R25C9.s:429    .text:00000000000002f8 .L0 
+     /tmp/cc6R25C9.s:435    .text:00000000000002f8 _ZN4Uart5txPutEc
+     /tmp/cc6R25C9.s:438    .text:00000000000002f8 .L0 
+     /tmp/cc6R25C9.s:440    .text:00000000000002f8 .L0 
+     /tmp/cc6R25C9.s:441    .text:00000000000002fc .L0 
+     /tmp/cc6R25C9.s:446    .text:000000000000030c .L0 
+     /tmp/cc6R25C9.s:447    .text:000000000000030c .L0 
+     /tmp/cc6R25C9.s:448    .text:000000000000030c .L0 
+     /tmp/cc6R25C9.s:449    .text:000000000000030c .L0 
+     /tmp/cc6R25C9.s:451    .text:0000000000000310 .L0 
+     /tmp/cc6R25C9.s:454    .text:0000000000000314 .L0 
+     /tmp/cc6R25C9.s:455    .text:0000000000000314 .L0 
+     /tmp/cc6R25C9.s:461    .text:0000000000000328 .L0 
+     /tmp/cc6R25C9.s:462    .text:0000000000000328 .L0 
+     /tmp/cc6R25C9.s:464    .text:000000000000032c .L0 
+     /tmp/cc6R25C9.s:467    .text:0000000000000334 .L0 
+     /tmp/cc6R25C9.s:468    .text:0000000000000334 .L0 
+     /tmp/cc6R25C9.s:470    .text:0000000000000338 .L0 
+     /tmp/cc6R25C9.s:472    .text:000000000000033c .L0 
+     /tmp/cc6R25C9.s:474    .text:0000000000000340 .L0 
+     /tmp/cc6R25C9.s:475    .text:0000000000000340 .L0 
+     /tmp/cc6R25C9.s:479    .text:000000000000034c .L0 
+     /tmp/cc6R25C9.s:480    .text:000000000000034c .L0 
+     /tmp/cc6R25C9.s:484    .text:0000000000000358 .L0 
+     /tmp/cc6R25C9.s:485    .text:000000000000035c .L0 
+     /tmp/cc6R25C9.s:487    .text:0000000000000360 .L0 
+     /tmp/cc6R25C9.s:488    .text:0000000000000360 .L0 
+     /tmp/cc6R25C9.s:490    .text:0000000000000364 .L0 
+     /tmp/cc6R25C9.s:492    .text:0000000000000368 .L0 
+     /tmp/cc6R25C9.s:494    .text:000000000000036c .L0 
+     /tmp/cc6R25C9.s:496    .text:0000000000000370 .L0 
+     /tmp/cc6R25C9.s:502    .text:0000000000000370 _ZN4Uart6txSendEc
+     /tmp/cc6R25C9.s:505    .text:0000000000000370 .L0 
+GAS LISTING /tmp/cc6R25C9.s 			page 24
+
+
+     /tmp/cc6R25C9.s:507    .text:0000000000000370 .L0 
+     /tmp/cc6R25C9.s:508    .text:0000000000000374 .L0 
+     /tmp/cc6R25C9.s:510    .text:0000000000000378 .L0 
+     /tmp/cc6R25C9.s:512    .text:000000000000037c .L0 
+     /tmp/cc6R25C9.s:514    .text:000000000000037c .L0 
+     /tmp/cc6R25C9.s:517    .text:0000000000000388 .L0 
+     /tmp/cc6R25C9.s:519    .text:000000000000038c .L0 
+     /tmp/cc6R25C9.s:520    .text:0000000000000390 .L0 
+     /tmp/cc6R25C9.s:521    .text:0000000000000390 .L0 
+     /tmp/cc6R25C9.s:523    .text:0000000000000394 .L0 
+     /tmp/cc6R25C9.s:525    .text:0000000000000398 .L0 
+     /tmp/cc6R25C9.s:531    .text:0000000000000398 _ZN4Uart6txWaitEv
+     /tmp/cc6R25C9.s:534    .text:0000000000000398 .L0 
+     /tmp/cc6R25C9.s:535    .text:0000000000000398 .L0 
+     /tmp/cc6R25C9.s:536    .text:000000000000039c .L0 
+     /tmp/cc6R25C9.s:539    .text:00000000000003a4 .L0 
+     /tmp/cc6R25C9.s:540    .text:00000000000003a4 .L0 
+     /tmp/cc6R25C9.s:542    .text:00000000000003a8 .L0 
+     /tmp/cc6R25C9.s:544    .text:00000000000003a8 .L0 
+     /tmp/cc6R25C9.s:545    .text:00000000000003a8 .L0 
+     /tmp/cc6R25C9.s:549    .text:00000000000003b8 .L0 
+     /tmp/cc6R25C9.s:550    .text:00000000000003bc .L0 
+     /tmp/cc6R25C9.s:552    .text:00000000000003c0 .L0 
+     /tmp/cc6R25C9.s:553    .text:00000000000003c0 .L0 
+     /tmp/cc6R25C9.s:555    .text:00000000000003c4 .L0 
+     /tmp/cc6R25C9.s:557    .text:00000000000003c8 .L0 
+     /tmp/cc6R25C9.s:563    .text:00000000000003c8 _ZN4Uart8txSignalEv
+     /tmp/cc6R25C9.s:566    .text:00000000000003c8 .L0 
+     /tmp/cc6R25C9.s:567    .text:00000000000003c8 .L0 
+     /tmp/cc6R25C9.s:568    .text:00000000000003cc .L0 
+     /tmp/cc6R25C9.s:571    .text:00000000000003d4 .L0 
+     /tmp/cc6R25C9.s:572    .text:00000000000003d4 .L0 
+     /tmp/cc6R25C9.s:574    .text:00000000000003d8 .L0 
+     /tmp/cc6R25C9.s:576    .text:00000000000003d8 .L0 
+     /tmp/cc6R25C9.s:577    .text:00000000000003d8 .L0 
+     /tmp/cc6R25C9.s:581    .text:00000000000003e8 .L0 
+     /tmp/cc6R25C9.s:582    .text:00000000000003ec .L0 
+     /tmp/cc6R25C9.s:584    .text:00000000000003f0 .L0 
+     /tmp/cc6R25C9.s:585    .text:00000000000003f0 .L0 
+     /tmp/cc6R25C9.s:587    .text:00000000000003f4 .L0 
+     /tmp/cc6R25C9.s:589    .text:00000000000003f8 .L0 
+     /tmp/cc6R25C9.s:595    .text:00000000000003f8 _ZN4Uart6rxWaitEv
+     /tmp/cc6R25C9.s:598    .text:00000000000003f8 .L0 
+     /tmp/cc6R25C9.s:599    .text:00000000000003f8 .L0 
+     /tmp/cc6R25C9.s:600    .text:00000000000003fc .L0 
+     /tmp/cc6R25C9.s:603    .text:0000000000000404 .L0 
+     /tmp/cc6R25C9.s:604    .text:0000000000000404 .L0 
+     /tmp/cc6R25C9.s:606    .text:0000000000000408 .L0 
+     /tmp/cc6R25C9.s:608    .text:0000000000000408 .L0 
+     /tmp/cc6R25C9.s:609    .text:0000000000000408 .L0 
+     /tmp/cc6R25C9.s:613    .text:0000000000000418 .L0 
+     /tmp/cc6R25C9.s:614    .text:000000000000041c .L0 
+     /tmp/cc6R25C9.s:616    .text:0000000000000420 .L0 
+     /tmp/cc6R25C9.s:617    .text:0000000000000420 .L0 
+     /tmp/cc6R25C9.s:619    .text:0000000000000424 .L0 
+     /tmp/cc6R25C9.s:621    .text:0000000000000428 .L0 
+     /tmp/cc6R25C9.s:627    .text:0000000000000428 _ZN4Uart8rxSignalEv
+GAS LISTING /tmp/cc6R25C9.s 			page 25
+
+
+     /tmp/cc6R25C9.s:630    .text:0000000000000428 .L0 
+     /tmp/cc6R25C9.s:631    .text:0000000000000428 .L0 
+     /tmp/cc6R25C9.s:632    .text:000000000000042c .L0 
+     /tmp/cc6R25C9.s:635    .text:0000000000000434 .L0 
+     /tmp/cc6R25C9.s:636    .text:0000000000000434 .L0 
+     /tmp/cc6R25C9.s:638    .text:0000000000000438 .L0 
+     /tmp/cc6R25C9.s:640    .text:0000000000000438 .L0 
+     /tmp/cc6R25C9.s:641    .text:0000000000000438 .L0 
+     /tmp/cc6R25C9.s:645    .text:0000000000000448 .L0 
+     /tmp/cc6R25C9.s:646    .text:000000000000044c .L0 
+     /tmp/cc6R25C9.s:648    .text:0000000000000450 .L0 
+     /tmp/cc6R25C9.s:649    .text:0000000000000450 .L0 
+     /tmp/cc6R25C9.s:651    .text:0000000000000454 .L0 
+     /tmp/cc6R25C9.s:653    .text:0000000000000458 .L0 
+     /tmp/cc6R25C9.s:658    .text:0000000000000458 _GLOBAL__sub_I__ZN4Uart9rx_bufferE
+     /tmp/cc6R25C9.s:661    .text:0000000000000458 .L0 
+     /tmp/cc6R25C9.s:662    .text:0000000000000458 .L0 
+     /tmp/cc6R25C9.s:663    .text:000000000000045c .L0 
+     /tmp/cc6R25C9.s:666    .text:0000000000000464 .L0 
+     /tmp/cc6R25C9.s:667    .text:0000000000000464 .L0 
+     /tmp/cc6R25C9.s:669    .text:0000000000000468 .L0 
+     /tmp/cc6R25C9.s:671    .text:0000000000000468 .L0 
+     /tmp/cc6R25C9.s:677    .text:0000000000000480 .L0 
+     /tmp/cc6R25C9.s:679    .text:0000000000000484 .L0 
+     /tmp/cc6R25C9.s:680    .text:0000000000000484 .L0 
+     /tmp/cc6R25C9.s:682    .text:0000000000000488 .L0 
+     /tmp/cc6R25C9.s:684    .text:000000000000048c .L0 
+     /tmp/cc6R25C9.s:757    .bss:0000000000000450 _ZN4Uart6rxSizeE
+     /tmp/cc6R25C9.s:765    .bss:0000000000000458 _ZN4Uart6rxRearE
+     /tmp/cc6R25C9.s:748    .bss:0000000000000048 _ZN4Uart7rxFrontE
+     /tmp/cc6R25C9.s:769    .bss:000000000000045c _ZN4Uart6txSizeE
+     /tmp/cc6R25C9.s:761    .bss:0000000000000454 _ZN4Uart6txRearE
+     /tmp/cc6R25C9.s:773    .bss:0000000000000460 _ZN4Uart7txFrontE
+     /tmp/cc6R25C9.s:720    .bss:0000000000000010 _ZN4Uart7TX_DATAE
+     /tmp/cc6R25C9.s:716    .bss:0000000000000008 _ZN4Uart7RX_DATAE
+     /tmp/cc6R25C9.s:712    .bss:0000000000000000 _ZN4Uart6STATUSE
+     /tmp/cc6R25C9.s:732    .bss:0000000000000028 _ZN4Uart10rx_requestE
+     /tmp/cc6R25C9.s:744    .bss:0000000000000040 _ZN4Uart10tx_requestE
+     /tmp/cc6R25C9.s:728    .bss:0000000000000020 _ZN4Uart11rx_not_fullE
+     /tmp/cc6R25C9.s:724    .bss:0000000000000018 _ZN4Uart12rx_not_emptyE
+     /tmp/cc6R25C9.s:740    .bss:0000000000000038 _ZN4Uart11tx_not_fullE
+     /tmp/cc6R25C9.s:736    .bss:0000000000000030 _ZN4Uart12tx_not_emptyE
+     /tmp/cc6R25C9.s:778    .bss:0000000000000468 _ZN4Uart9tx_bufferE
+     /tmp/cc6R25C9.s:753    .bss:0000000000000050 _ZN4Uart9rx_bufferE
+     /tmp/cc6R25C9.s:709    .bss:0000000000000000 .LANCHOR0
+     /tmp/cc6R25C9.s:788    .text:000000000000048c .L0 
+     /tmp/cc6R25C9.s:38     .text:000000000000002c .L0 
+     /tmp/cc6R25C9.s:41     .text:0000000000000038 .L0 
+     /tmp/cc6R25C9.s:44     .text:0000000000000044 .L0 
+     /tmp/cc6R25C9.s:49     .text:0000000000000054 .L0 
+     /tmp/cc6R25C9.s:81     .text:0000000000000088 .L0 
+     /tmp/cc6R25C9.s:147    .text:0000000000000104 .L0 
+     /tmp/cc6R25C9.s:182    .text:0000000000000134 .L0 
+     /tmp/cc6R25C9.s:243    .text:000000000000019c .L0 
+     /tmp/cc6R25C9.s:297    .text:00000000000001fc .L0 
+     /tmp/cc6R25C9.s:312    .text:000000000000021c .L0 
+     /tmp/cc6R25C9.s:319    .text:000000000000022c .L0 
+GAS LISTING /tmp/cc6R25C9.s 			page 26
+
+
+     /tmp/cc6R25C9.s:381    .text:0000000000000290 .L0 
+     /tmp/cc6R25C9.s:392    .text:00000000000002a8 .L0 
+     /tmp/cc6R25C9.s:455    .text:0000000000000314 .L0 
+     /tmp/cc6R25C9.s:514    .text:000000000000037c .L0 
+     /tmp/cc6R25C9.s:545    .text:00000000000003a8 .L0 
+     /tmp/cc6R25C9.s:577    .text:00000000000003d8 .L0 
+     /tmp/cc6R25C9.s:609    .text:0000000000000408 .L0 
+     /tmp/cc6R25C9.s:641    .text:0000000000000438 .L0 
+     /tmp/cc6R25C9.s:31     .text:0000000000000020 .L4
+     /tmp/cc6R25C9.s:23     .text:0000000000000014 .L1
+     /tmp/cc6R25C9.s:352    .text:0000000000000274 .L15
+     /tmp/cc6R25C9.s:389    .text:00000000000002a8 .L21
+     /tmp/cc6R25C9.s:377    .text:0000000000000290 .L22
+     /tmp/cc6R25C9.s:2444   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cc6R25C9.s:3735   .debug_str:0000000000000965 .LASF179
+     /tmp/cc6R25C9.s:3657   .debug_str:0000000000000734 .LASF180
+     /tmp/cc6R25C9.s:3703   .debug_str:0000000000000898 .LASF181
+     /tmp/cc6R25C9.s:5      .text:0000000000000000 .Ltext0
+     /tmp/cc6R25C9.s:781    .text:000000000000048c .Letext0
+     /tmp/cc6R25C9.s:3421   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cc6R25C9.s:3561   .debug_str:000000000000047e .LASF0
+     /tmp/cc6R25C9.s:3585   .debug_str:0000000000000524 .LASF1
+     /tmp/cc6R25C9.s:3673   .debug_str:00000000000007b2 .LASF2
+     /tmp/cc6R25C9.s:3513   .debug_str:00000000000002de .LASF3
+     /tmp/cc6R25C9.s:3423   .debug_str:0000000000000000 .LASF4
+     /tmp/cc6R25C9.s:3683   .debug_str:0000000000000800 .LASF5
+     /tmp/cc6R25C9.s:3569   .debug_str:00000000000004ae .LASF6
+     /tmp/cc6R25C9.s:3441   .debug_str:00000000000000aa .LASF7
+     /tmp/cc6R25C9.s:3647   .debug_str:00000000000006dd .LASF8
+     /tmp/cc6R25C9.s:3577   .debug_str:00000000000004e7 .LASF9
+     /tmp/cc6R25C9.s:3531   .debug_str:0000000000000348 .LASF10
+     /tmp/cc6R25C9.s:3539   .debug_str:000000000000038e .LASF11
+     /tmp/cc6R25C9.s:3471   .debug_str:00000000000001a4 .LASF12
+     /tmp/cc6R25C9.s:3523   .debug_str:000000000000031d .LASF13
+     /tmp/cc6R25C9.s:3485   .debug_str:000000000000020c .LASF14
+     /tmp/cc6R25C9.s:3469   .debug_str:0000000000000194 .LASF15
+     /tmp/cc6R25C9.s:3717   .debug_str:0000000000000911 .LASF16
+     /tmp/cc6R25C9.s:3509   .debug_str:00000000000002b7 .LASF17
+     /tmp/cc6R25C9.s:3709   .debug_str:00000000000008d8 .LASF18
+     /tmp/cc6R25C9.s:3721   .debug_str:0000000000000926 .LASF80
+     /tmp/cc6R25C9.s:3787   .debug_str:0000000000000ba4 .LASF19
+     /tmp/cc6R25C9.s:3737   .debug_str:0000000000000a29 .LASF21
+     /tmp/cc6R25C9.s:3635   .debug_str:0000000000000697 .LASF182
+     /tmp/cc6R25C9.s:3611   .debug_str:00000000000005ee .LASF20
+     /tmp/cc6R25C9.s:3697   .debug_str:0000000000000860 .LASF22
+     /tmp/cc6R25C9.s:3583   .debug_str:0000000000000510 .LASF23
+     /tmp/cc6R25C9.s:3795   .debug_str:0000000000000bde .LASF24
+     /tmp/cc6R25C9.s:3723   .debug_str:000000000000092e .LASF27
+     /tmp/cc6R25C9.s:3617   .debug_str:000000000000061e .LASF29
+     /tmp/cc6R25C9.s:3453   .debug_str:000000000000011b .LASF25
+     /tmp/cc6R25C9.s:3749   .debug_str:0000000000000a6a .LASF26
+     /tmp/cc6R25C9.s:3677   .debug_str:00000000000007cd .LASF28
+     /tmp/cc6R25C9.s:3465   .debug_str:000000000000016d .LASF30
+     /tmp/cc6R25C9.s:3725   .debug_str:0000000000000939 .LASF31
+     /tmp/cc6R25C9.s:3519   .debug_str:00000000000002f8 .LASF32
+     /tmp/cc6R25C9.s:3591   .debug_str:0000000000000553 .LASF33
+     /tmp/cc6R25C9.s:3755   .debug_str:0000000000000abc .LASF34
+GAS LISTING /tmp/cc6R25C9.s 			page 27
+
+
+     /tmp/cc6R25C9.s:3733   .debug_str:000000000000095d .LASF183
+     /tmp/cc6R25C9.s:3499   .debug_str:0000000000000269 .LASF35
+     /tmp/cc6R25C9.s:3479   .debug_str:00000000000001d7 .LASF37
+     /tmp/cc6R25C9.s:3501   .debug_str:0000000000000272 .LASF36
+     /tmp/cc6R25C9.s:3679   .debug_str:00000000000007d7 .LASF38
+     /tmp/cc6R25C9.s:3597   .debug_str:000000000000057e .LASF115
+     /tmp/cc6R25C9.s:3543   .debug_str:00000000000003b7 .LASF117
+     /tmp/cc6R25C9.s:3629   .debug_str:000000000000066e .LASF39
+     /tmp/cc6R25C9.s:3753   .debug_str:0000000000000a9b .LASF40
+     /tmp/cc6R25C9.s:3685   .debug_str:0000000000000807 .LASF41
+     /tmp/cc6R25C9.s:3437   .debug_str:0000000000000092 .LASF42
+     /tmp/cc6R25C9.s:3791   .debug_str:0000000000000bc8 .LASF43
+     /tmp/cc6R25C9.s:3537   .debug_str:0000000000000382 .LASF44
+     /tmp/cc6R25C9.s:3461   .debug_str:0000000000000151 .LASF45
+     /tmp/cc6R25C9.s:3529   .debug_str:000000000000033c .LASF46
+     /tmp/cc6R25C9.s:3429   .debug_str:0000000000000023 .LASF47
+     /tmp/cc6R25C9.s:3605   .debug_str:00000000000005c1 .LASF49
+     /tmp/cc6R25C9.s:3707   .debug_str:00000000000008c5 .LASF48
+     /tmp/cc6R25C9.s:3675   .debug_str:00000000000007c0 .LASF50
+     /tmp/cc6R25C9.s:3425   .debug_str:0000000000000007 .LASF75
+     /tmp/cc6R25C9.s:3691   .debug_str:000000000000082f .LASF139
+     /tmp/cc6R25C9.s:3427   .debug_str:000000000000001e .LASF51
+     /tmp/cc6R25C9.s:3785   .debug_str:0000000000000b9f .LASF52
+     /tmp/cc6R25C9.s:3701   .debug_str:0000000000000892 .LASF53
+     /tmp/cc6R25C9.s:3719   .debug_str:000000000000091d .LASF54
+     /tmp/cc6R25C9.s:3631   .debug_str:0000000000000684 .LASF55
+     /tmp/cc6R25C9.s:3739   .debug_str:0000000000000a45 .LASF56
+     /tmp/cc6R25C9.s:3747   .debug_str:0000000000000a62 .LASF57
+     /tmp/cc6R25C9.s:3491   .debug_str:000000000000023b .LASF87
+     /tmp/cc6R25C9.s:3435   .debug_str:000000000000006a .LASF88
+     /tmp/cc6R25C9.s:3459   .debug_str:0000000000000143 .LASF58
+     /tmp/cc6R25C9.s:3593   .debug_str:0000000000000560 .LASF60
+     /tmp/cc6R25C9.s:3521   .debug_str:000000000000030e .LASF59
+     /tmp/cc6R25C9.s:3789   .debug_str:0000000000000bae .LASF61
+     /tmp/cc6R25C9.s:3665   .debug_str:0000000000000775 .LASF62
+     /tmp/cc6R25C9.s:3705   .debug_str:00000000000008bb .LASF63
+     /tmp/cc6R25C9.s:3603   .debug_str:00000000000005ad .LASF64
+     /tmp/cc6R25C9.s:3595   .debug_str:0000000000000579 .LASF65
+     /tmp/cc6R25C9.s:3655   .debug_str:0000000000000728 .LASF66
+     /tmp/cc6R25C9.s:3641   .debug_str:00000000000006b7 .LASF67
+     /tmp/cc6R25C9.s:3467   .debug_str:0000000000000182 .LASF68
+     /tmp/cc6R25C9.s:3455   .debug_str:0000000000000127 .LASF69
+     /tmp/cc6R25C9.s:3587   .debug_str:0000000000000537 .LASF70
+     /tmp/cc6R25C9.s:3533   .debug_str:0000000000000358 .LASF71
+     /tmp/cc6R25C9.s:3623   .debug_str:0000000000000643 .LASF72
+     /tmp/cc6R25C9.s:3575   .debug_str:00000000000004da .LASF73
+     /tmp/cc6R25C9.s:3515   .debug_str:00000000000002e4 .LASF74
+     /tmp/cc6R25C9.s:3463   .debug_str:0000000000000161 .LASF76
+     /tmp/cc6R25C9.s:3783   .debug_str:0000000000000b9a .LASF77
+     /tmp/cc6R25C9.s:3451   .debug_str:0000000000000116 .LASF78
+     /tmp/cc6R25C9.s:3767   .debug_str:0000000000000b24 .LASF79
+     /tmp/cc6R25C9.s:3495   .debug_str:0000000000000253 .LASF81
+     /tmp/cc6R25C9.s:3581   .debug_str:000000000000050b .LASF82
+     /tmp/cc6R25C9.s:3473   .debug_str:00000000000001b3 .LASF83
+     /tmp/cc6R25C9.s:3433   .debug_str:000000000000004b .LASF84
+     /tmp/cc6R25C9.s:3445   .debug_str:00000000000000c9 .LASF85
+     /tmp/cc6R25C9.s:3431   .debug_str:0000000000000033 .LASF86
+GAS LISTING /tmp/cc6R25C9.s 			page 28
+
+
+     /tmp/cc6R25C9.s:3475   .debug_str:00000000000001b8 .LASF89
+     /tmp/cc6R25C9.s:3607   .debug_str:00000000000005ce .LASF184
+     /tmp/cc6R25C9.s:3713   .debug_str:0000000000000901 .LASF90
+     /tmp/cc6R25C9.s:3619   .debug_str:0000000000000635 .LASF91
+     /tmp/cc6R25C9.s:3613   .debug_str:0000000000000603 .LASF92
+     /tmp/cc6R25C9.s:3711   .debug_str:00000000000008ee .LASF93
+     /tmp/cc6R25C9.s:3507   .debug_str:00000000000002a0 .LASF94
+     /tmp/cc6R25C9.s:3493   .debug_str:0000000000000249 .LASF185
+     /tmp/cc6R25C9.s:3667   .debug_str:000000000000077a .LASF186
+     /tmp/cc6R25C9.s:3527   .debug_str:0000000000000333 .LASF95
+     /tmp/cc6R25C9.s:3551   .debug_str:000000000000041b .LASF96
+     /tmp/cc6R25C9.s:3589   .debug_str:000000000000054b .LASF97
+     /tmp/cc6R25C9.s:3687   .debug_str:000000000000080c .LASF98
+     /tmp/cc6R25C9.s:3681   .debug_str:00000000000007f6 .LASF99
+     /tmp/cc6R25C9.s:3535   .debug_str:0000000000000364 .LASF100
+     /tmp/cc6R25C9.s:3645   .debug_str:00000000000006d3 .LASF101
+     /tmp/cc6R25C9.s:3541   .debug_str:000000000000039c .LASF102
+     /tmp/cc6R25C9.s:3771   .debug_str:0000000000000b39 .LASF103
+     /tmp/cc6R25C9.s:3773   .debug_str:0000000000000b42 .LASF104
+     /tmp/cc6R25C9.s:3639   .debug_str:00000000000006ae .LASF105
+     /tmp/cc6R25C9.s:3751   .debug_str:0000000000000a81 .LASF106
+     /tmp/cc6R25C9.s:3797   .debug_str:0000000000000c05 .LASF107
+     /tmp/cc6R25C9.s:3653   .debug_str:000000000000070f .LASF108
+     /tmp/cc6R25C9.s:3729   .debug_str:0000000000000949 .LASF109
+     /tmp/cc6R25C9.s:3659   .debug_str:0000000000000741 .LASF110
+     /tmp/cc6R25C9.s:3505   .debug_str:0000000000000297 .LASF111
+     /tmp/cc6R25C9.s:3741   .debug_str:0000000000000a4f .LASF112
+     /tmp/cc6R25C9.s:3693   .debug_str:0000000000000840 .LASF113
+     /tmp/cc6R25C9.s:3643   .debug_str:00000000000006bf .LASF114
+     /tmp/cc6R25C9.s:3563   .debug_str:000000000000048b .LASF116
+     /tmp/cc6R25C9.s:3669   .debug_str:0000000000000791 .LASF118
+     /tmp/cc6R25C9.s:3765   .debug_str:0000000000000b1e .LASF119
+     /tmp/cc6R25C9.s:3555   .debug_str:000000000000044c .LASF120
+     /tmp/cc6R25C9.s:3571   .debug_str:00000000000004c0 .LASF121
+     /tmp/cc6R25C9.s:3761   .debug_str:0000000000000af5 .LASF122
+     /tmp/cc6R25C9.s:3699   .debug_str:0000000000000888 .LASF123
+     /tmp/cc6R25C9.s:3651   .debug_str:00000000000006fa .LASF124
+     /tmp/cc6R25C9.s:3477   .debug_str:00000000000001d1 .LASF125
+     /tmp/cc6R25C9.s:3567   .debug_str:000000000000049d .LASF126
+     /tmp/cc6R25C9.s:3743   .debug_str:0000000000000a54 .LASF127
+     /tmp/cc6R25C9.s:3625   .debug_str:000000000000064f .LASF128
+     /tmp/cc6R25C9.s:3661   .debug_str:000000000000075f .LASF129
+     /tmp/cc6R25C9.s:3481   .debug_str:00000000000001ea .LASF130
+     /tmp/cc6R25C9.s:3609   .debug_str:00000000000005e7 .LASF131
+     /tmp/cc6R25C9.s:3779   .debug_str:0000000000000b76 .LASF132
+     /tmp/cc6R25C9.s:3793   .debug_str:0000000000000bd5 .LASF133
+     /tmp/cc6R25C9.s:3601   .debug_str:0000000000000599 .LASF134
+     /tmp/cc6R25C9.s:3517   .debug_str:00000000000002f1 .LASF135
+     /tmp/cc6R25C9.s:3457   .debug_str:0000000000000131 .LASF136
+     /tmp/cc6R25C9.s:3621   .debug_str:000000000000063a .LASF137
+     /tmp/cc6R25C9.s:3573   .debug_str:00000000000004c6 .LASF138
+     /tmp/cc6R25C9.s:3439   .debug_str:000000000000009e .LASF187
+     /tmp/cc6R25C9.s:3745   .debug_str:0000000000000a5b .LASF140
+     /tmp/cc6R25C9.s:3731   .debug_str:0000000000000955 .LASF141
+     /tmp/cc6R25C9.s:3775   .debug_str:0000000000000b5c .LASF142
+     /tmp/cc6R25C9.s:3757   .debug_str:0000000000000ad5 .LASF143
+     /tmp/cc6R25C9.s:3487   .debug_str:000000000000021c .LASF144
+GAS LISTING /tmp/cc6R25C9.s 			page 29
+
+
+     /tmp/cc6R25C9.s:3525   .debug_str:000000000000032c .LASF145
+     /tmp/cc6R25C9.s:3689   .debug_str:0000000000000828 .LASF146
+     /tmp/cc6R25C9.s:3649   .debug_str:00000000000006f0 .LASF147
+     /tmp/cc6R25C9.s:3565   .debug_str:0000000000000495 .LASF148
+     /tmp/cc6R25C9.s:3799   .debug_str:0000000000000c0d .LASF149
+     /tmp/cc6R25C9.s:3599   .debug_str:0000000000000592 .LASF150
+     /tmp/cc6R25C9.s:3559   .debug_str:0000000000000471 .LASF151
+     /tmp/cc6R25C9.s:3671   .debug_str:00000000000007a6 .LASF152
+     /tmp/cc6R25C9.s:3627   .debug_str:0000000000000661 .LASF153
+     /tmp/cc6R25C9.s:3545   .debug_str:00000000000003d6 .LASF154
+     /tmp/cc6R25C9.s:3769   .debug_str:0000000000000b2e .LASF155
+     /tmp/cc6R25C9.s:3715   .debug_str:0000000000000906 .LASF156
+     /tmp/cc6R25C9.s:3727   .debug_str:0000000000000944 .LASF157
+     /tmp/cc6R25C9.s:3553   .debug_str:0000000000000438 .LASF158
+     /tmp/cc6R25C9.s:3557   .debug_str:000000000000045d .LASF159
+     /tmp/cc6R25C9.s:3763   .debug_str:0000000000000b06 .LASF160
+     /tmp/cc6R25C9.s:3489   .debug_str:0000000000000224 .LASF161
+     /tmp/cc6R25C9.s:3443   .debug_str:00000000000000b1 .LASF162
+     /tmp/cc6R25C9.s:3695   .debug_str:0000000000000849 .LASF163
+     /tmp/cc6R25C9.s:3759   .debug_str:0000000000000adf .LASF164
+     /tmp/cc6R25C9.s:3615   .debug_str:0000000000000608 .LASF165
+     /tmp/cc6R25C9.s:3579   .debug_str:00000000000004fa .LASF166
+     /tmp/cc6R25C9.s:3637   .debug_str:000000000000069c .LASF167
+     /tmp/cc6R25C9.s:3777   .debug_str:0000000000000b64 .LASF168
+     /tmp/cc6R25C9.s:3781   .debug_str:0000000000000b88 .LASF169
+     /tmp/cc6R25C9.s:3511   .debug_str:00000000000002cd .LASF170
+     /tmp/cc6R25C9.s:3497   .debug_str:0000000000000258 .LASF171
+     /tmp/cc6R25C9.s:3447   .debug_str:00000000000000e1 .LASF172
+     /tmp/cc6R25C9.s:3503   .debug_str:0000000000000286 .LASF173
+     /tmp/cc6R25C9.s:3483   .debug_str:00000000000001fb .LASF174
+     /tmp/cc6R25C9.s:3449   .debug_str:00000000000000f3 .LASF175
+     /tmp/cc6R25C9.s:659    .text:0000000000000458 .LFB76
+     /tmp/cc6R25C9.s:685    .text:000000000000048c .LFE76
+     /tmp/cc6R25C9.s:675    .text:000000000000047c .LVL29
+     /tmp/cc6R25C9.s:3547   .debug_str:00000000000003e2 .LASF176
+     /tmp/cc6R25C9.s:9      .text:0000000000000000 .LFB75
+     /tmp/cc6R25C9.s:56     .text:0000000000000068 .LFE75
+     /tmp/cc6R25C9.s:3549   .debug_str:000000000000040c .LASF177
+     /tmp/cc6R25C9.s:3633   .debug_str:000000000000068c .LASF178
+     /tmp/cc6R25C9.s:628    .text:0000000000000428 .LFB70
+     /tmp/cc6R25C9.s:654    .text:0000000000000458 .LFE70
+     /tmp/cc6R25C9.s:643    .text:0000000000000448 .LVL28
+     /tmp/cc6R25C9.s:596    .text:00000000000003f8 .LFB69
+     /tmp/cc6R25C9.s:622    .text:0000000000000428 .LFE69
+     /tmp/cc6R25C9.s:611    .text:0000000000000418 .LVL27
+     /tmp/cc6R25C9.s:564    .text:00000000000003c8 .LFB68
+     /tmp/cc6R25C9.s:590    .text:00000000000003f8 .LFE68
+     /tmp/cc6R25C9.s:579    .text:00000000000003e8 .LVL26
+     /tmp/cc6R25C9.s:532    .text:0000000000000398 .LFB67
+     /tmp/cc6R25C9.s:558    .text:00000000000003c8 .LFE67
+     /tmp/cc6R25C9.s:547    .text:00000000000003b8 .LVL25
+     /tmp/cc6R25C9.s:503    .text:0000000000000370 .LFB66
+     /tmp/cc6R25C9.s:526    .text:0000000000000398 .LFE66
+     /tmp/cc6R25C9.s:436    .text:00000000000002f8 .LFB65
+     /tmp/cc6R25C9.s:497    .text:0000000000000370 .LFE65
+     /tmp/cc6R25C9.s:3362   .debug_loc:0000000000000000 .LLST3
+     /tmp/cc6R25C9.s:459    .text:0000000000000328 .LVL22
+GAS LISTING /tmp/cc6R25C9.s 			page 30
+
+
+     /tmp/cc6R25C9.s:482    .text:0000000000000358 .LVL23
+     /tmp/cc6R25C9.s:364    .text:000000000000027c .LFB64
+     /tmp/cc6R25C9.s:430    .text:00000000000002f8 .LFE64
+     /tmp/cc6R25C9.s:3376   .debug_loc:0000000000000039 .LLST2
+     /tmp/cc6R25C9.s:386    .text:00000000000002a4 .LVL16
+     /tmp/cc6R25C9.s:414    .text:00000000000002e0 .LVL18
+     /tmp/cc6R25C9.s:292    .text:00000000000001fc .LFB63
+     /tmp/cc6R25C9.s:358    .text:000000000000027c .LFE63
+     /tmp/cc6R25C9.s:3387   .debug_loc:000000000000006f .LLST1
+     /tmp/cc6R25C9.s:339    .text:0000000000000260 .LVL15
+     /tmp/cc6R25C9.s:224    .text:0000000000000180 .LFB62
+     /tmp/cc6R25C9.s:286    .text:00000000000001fc .LFE62
+     /tmp/cc6R25C9.s:3394   .debug_loc:0000000000000092 .LLST0
+     /tmp/cc6R25C9.s:247    .text:00000000000001b0 .LVL12
+     /tmp/cc6R25C9.s:271    .text:00000000000001e4 .LVL13
+     /tmp/cc6R25C9.s:166    .text:0000000000000120 .LFB61
+     /tmp/cc6R25C9.s:218    .text:0000000000000180 .LFE61
+     /tmp/cc6R25C9.s:185    .text:0000000000000148 .LVL8
+     /tmp/cc6R25C9.s:136    .text:00000000000000f8 .LFB60
+     /tmp/cc6R25C9.s:160    .text:0000000000000120 .LFE60
+     /tmp/cc6R25C9.s:62     .text:0000000000000068 .LFB59
+     /tmp/cc6R25C9.s:130    .text:00000000000000f8 .LFE59
+     /tmp/cc6R25C9.s:79     .text:0000000000000088 .LVL1
+     /tmp/cc6R25C9.s:87     .text:00000000000000a0 .LVL2
+     /tmp/cc6R25C9.s:94     .text:00000000000000b0 .LVL3
+     /tmp/cc6R25C9.s:101    .text:00000000000000c0 .LVL4
+     /tmp/cc6R25C9.s:108    .text:00000000000000d0 .LVL5
+     /tmp/cc6R25C9.s:115    .text:00000000000000e0 .LVL6
+     /tmp/cc6R25C9.s:3663   .debug_str:0000000000000765 .LASF188
+     /tmp/cc6R25C9.s:439    .text:00000000000002f8 .LVL20
+     /tmp/cc6R25C9.s:457    .text:0000000000000320 .LVL21
+     /tmp/cc6R25C9.s:397    .text:00000000000002bc .LVL17
+     /tmp/cc6R25C9.s:425    .text:00000000000002f0 .LVL19
+     /tmp/cc6R25C9.s:316    .text:000000000000022c .LVL14
+     /tmp/cc6R25C9.s:227    .text:0000000000000180 .LVL10
+     /tmp/cc6R25C9.s:245    .text:00000000000001a8 .LVL11
+     /tmp/cc6R25C9.s:789    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+CONSOLE_STATUS
+CONSOLE_RX_DATA
+CONSOLE_TX_DATA
+_ZN3Sem9createSemEj
+_ZN3Sem7semWaitEv
+_ZN3Sem9semSignalEv
+thread_dispatch

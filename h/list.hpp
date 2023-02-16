@@ -66,16 +66,17 @@ public:
     void putSorted(T* data) {
         Node *newNode = new Node(data, 0);
         if (!head) { head = tail = newNode; return; }
-        Node* curr = head, *prev = nullptr;
-        while (curr && *(uint64*)data > *(uint64*)(curr->data)) {
-            prev = curr;
+        Node* curr = head;
+        uint64 nodeTime = *(uint64*)data;
+        uint64 currTime = *(uint64*)(curr->data);
+        if (nodeTime < currTime) { *(uint64*)(curr->data) -= nodeTime; putFirst(data); return; }
+        while (curr->next && *(uint64*)data > *(uint64*)(curr->data)) {
             curr = curr->next;
-            *(uint64*)data -= *(uint64*)curr;
+            *(uint64*)data -= *(uint64*)curr->data;
         }
-        newNode->next = curr;
-        if (prev) prev->next = newNode;
-        else head = newNode;
-        if(!curr) tail = newNode;
+        newNode->next = curr->next;
+        curr->next = newNode;
+        if (!curr->next) tail = newNode;
     }
 
     T* takeFirst() {

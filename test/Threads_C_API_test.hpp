@@ -26,7 +26,6 @@ void workerBodyA(void* arg) {
     }
     printString("A finished!\n");
     finishedA = true;
-    //thread_exit();
 }
 
 void workerBodyB(void* arg) {
@@ -39,8 +38,7 @@ void workerBodyB(void* arg) {
     }
     printString("B finished!\n");
     finishedB = true;
-    //thread_dispatch();
-    //thread_exit();
+    thread_dispatch();
 }
 
 void workerBodyC(void* arg) {
@@ -67,8 +65,7 @@ void workerBodyC(void* arg) {
 
     printString("A finished!\n");
     finishedC = true;
-    //thread_dispatch();
-    //thread_exit();
+    thread_dispatch();
 }
 
 void workerBodyD(void* arg) {
@@ -90,8 +87,7 @@ void workerBodyD(void* arg) {
 
     printString("D finished!\n");
     finishedD = true;
-    //thread_dispatch();
-    //thread_exit();
+    thread_dispatch();
 }
 
 
@@ -112,6 +108,7 @@ void Threads_C_API_test() {
     while (!(finishedA && finishedB && finishedC && finishedD)) {
         thread_dispatch();
     }
+
 }
 
 #endif //XV6_THREADS_C_API_TEST_HPP

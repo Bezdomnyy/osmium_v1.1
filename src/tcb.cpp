@@ -61,7 +61,8 @@ void TCB::threadWrapper() {
     RiscV::popSppSpie();
     running->body(running->args);
     running->setFinished(true);
-    thread_exit();
+    //thread_exit();
+    thread_dispatch();
 }
 
 void TCB::sThreadWrapper() {
@@ -70,6 +71,7 @@ void TCB::sThreadWrapper() {
     RiscV::setSstatus(RiscV::SIE);
     RiscV::popSppSpie();
     running->body(running->args);
-    running->setFinished(true);
-    TCB::dispatch();
+    //running->setFinished(true);
+    thread_exit();
+    //thread_dispatch();
 }
