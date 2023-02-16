@@ -102,7 +102,7 @@ void Kernel::uart_handler() {
         }*/
         //if (uart->getStatus() & Uart::RX) uart->rxSignal();
         while (Uart::getStatus() & Uart::RX) {
-            //__print_string("rx\n");
+            __print_string("rx\n");
             if(Uart::rxReceive() < 0) break;
             //plic_complete(id);
         }

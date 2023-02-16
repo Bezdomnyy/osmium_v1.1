@@ -32,12 +32,14 @@ void Scheduler::timerInterrupt() {
         sleepQueue.takeFirst();
         first->thread->setBlocked(false);
         Scheduler::put(first->thread);
+        //__print_string("wake\n");
         delete first;
         first = sleepQueue.getFirst();
     }
 }
 
 void Scheduler::timeSleep(time_t time) {
+    //__print_string("tck\n");
     TCB* old = TCB::running;
     old->setBlocked(true);
     sleepNode* sn = new sleepNode(time, old);

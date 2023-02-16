@@ -17,5 +17,6 @@ void main() {
     RiscV::setSstatus(RiscV::SIE);
     while(!user->isFinished()) {
         TCB::dispatch();
+        //thread_dispatch();
     }
 }

@@ -6,7 +6,6 @@
 #define OSMIUM_LIST_H
 
 #include "../lib/console.h"
-//#include "../h/print.hpp"
 
 #include "__print.hpp"
 #include "memory_allocator.hpp"
@@ -67,28 +66,18 @@ public:
         Node *newNode = new Node(data, 0);
         if (!head) { head = tail = newNode; return; }
         Node* curr = head, *prev = nullptr;
-        uint64 nodeTime = *(uint64*)data;
-        uint64 currTime = *(uint64*)(curr->data);
-        if (nodeTime < currTime) { *(uint64*)(curr->data) -= nodeTime; putFirst(data); return; }
         while (curr) {
-            if (*(uint64*)data >= *(uint64*)(curr->data)) {
-                *(uint64*)data -= *(uint64*)curr->data;
+            if (*(uint64*)(newNode->data) < *(uint64*)(curr->data)) {
                 break;
             }
+            *(uint64*)(newNode->data) -= *(uint64*)(curr->data);
             prev = curr;
             curr = curr->next;
-            *(uint64*)data -= *(uint64*)curr->data;
         }
-        if (curr) {
-            newNode->next = curr->next;
-            curr->next = newNode;
-            if (!curr->next) tail = newNode;
-        }
-        else if (prev) {
-            prev->next = newNode;
-            tail = newNode;
-        }
-        else head = tail = newNode;
+        if (prev) prev->next = newNode;
+        else head = newNode;
+        if (curr) {newNode->next = curr; *(uint64*)(curr->data) -= *(uint64*)(newNode->data);}
+        else prev->next = newNode;
     }
 
     T* takeFirst() {
