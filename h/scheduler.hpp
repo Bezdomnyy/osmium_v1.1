@@ -42,10 +42,12 @@ private:
 public:
     static TCB* get();
     static void put(TCB*);
-    static bool readyQueueEmpty() { return readyQueue.getFirst(); }
+    //static bool readyQueueEmpty() { return readyQueue.getFirst(); }
 
     static void timerInterrupt();
     static void timeSleep(time_t);
+
+    static void finish();
 };
 
 

@@ -10,11 +10,15 @@
 
 //Uart* Kernel::uart = nullptr;
 
+volatile bool Kernel::finished = false;
+volatile int Kernel::sysThread = 0;
+
 extern void userMain();
 
 void Kernel::initKernel() {
     MemoryAllocator::initMem();
     RiscV::writeStvec((uint64) &supervisorTrap);
+    //sysThread = Sem::createSem(0);
 
     Uart::initUart();
     //RiscV::setSstatus(RiscV::SIE);
@@ -36,12 +40,12 @@ void Kernel::supervisorTrapHandler() {
         return;
     }
     if (scause == TIMER_IRQ) {
-        //__print_string("timer\n");
         if (!TCB::running) { RiscV::clearSip(RiscV::SSIP); return; }
         Scheduler::timerInterrupt();
         TCB::incTimeSliceCounter();
         if (TCB::getTimeSliceCounter() >= TCB::running->getTimeSlice())
         {
+            //__print_string("timer\n");
             uint64 sepc = RiscV::readSepc();
             uint64 sstatus = RiscV::readSstatus();
             TCB::resetTimeSliceCounter();
@@ -55,7 +59,7 @@ void Kernel::supervisorTrapHandler() {
     if (scause == HARDWARE_IRQ) {
         //console_handler();
         //ConsoleInterface::console_handler();
-        hw_irq_handler();
+        uart_handler();
         RiscV::clearSip(RiscV::SEIP);
         return;
     }
@@ -73,39 +77,12 @@ void Kernel::supervisorTrapHandler() {
     return;
 }
 
-void Kernel::hw_irq_handler() {
-    //int hw_irq_id = plic_claim();
-
-    //__print_string("hw\n");
-    uart_handler();
-    //plic_complete(hw_irq_id);
-    /*switch (hw_irq_id) {
-        case 10:
-            //uart_handler();
-            console_handler();
-            //break;
-        default:
-            plic_complete(hw_irq_id);
-            break;
-    }*/
+void Kernel::finishKernel() {
+    finished = true;
+    Scheduler::finish();
+    //Uart::finish();
 }
 
-//0x0a - hardware
-void Kernel::uart_handler() {
-    int id = plic_claim();
-    //__print_string("handle_uart\n");
-    if (id == 0x0a) {
-        //__print_string("handle_uart\n");
-        /*if (Uart::getStatus() & Uart::TX) {
-            //__print_string("tx\n");
-            Uart::txSignal();
-        }*/
-        //if (uart->getStatus() & Uart::RX) uart->rxSignal();
-        while (Uart::getStatus() & Uart::RX) {
-            __print_string("rx\n");
-            if(Uart::rxReceive() < 0) break;
-            //plic_complete(id);
-        }
-    }
-    plic_complete(id);
+bool Kernel::isFinished() {
+    return finished;
 }

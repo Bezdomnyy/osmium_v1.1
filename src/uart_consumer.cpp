@@ -4,11 +4,11 @@
 
 #include "../h/uart_consumer.hpp"
 #include "../h/uart.hpp"
+#include "../h/kernel.hpp"
 //#include "../h/tcb.hpp"
 
 void uart_consumer() {
     while(1) {
-        //RiscV::setSstatus(RiscV::SIE);
         while (Uart::getStatus() & Uart::TX) {
             //__print_string("h");
             char c = Uart::txGet();
@@ -16,9 +16,6 @@ void uart_consumer() {
             Uart::txSend(c);
             //TCB::dispatch();
         }
-        //__print_string("hello1\n");
-        //Uart::txWait();
-        //__print_string("hello11\n");
     }
 }
 

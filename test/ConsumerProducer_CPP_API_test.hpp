@@ -54,7 +54,6 @@ namespace ConsumerProducerCPP {
                 i++;
                 Thread::sleep((i+td->id)%5);
             }
-
             td->sem->signal();
         }
     };

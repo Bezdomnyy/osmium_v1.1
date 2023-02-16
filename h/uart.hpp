@@ -33,6 +33,7 @@ public:
         TX = (1 << 5),  // status bit mask: ready to transmit data to the console
     };
 
+    //static void finish();
 private:
     static constexpr uint16 BUFFER_SIZE = 1024;
 

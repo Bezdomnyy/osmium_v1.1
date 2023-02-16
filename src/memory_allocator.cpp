@@ -5,9 +5,6 @@
 #include "../h/memory_allocator.hpp"
 
 MemoryAllocator::FreeMem* MemoryAllocator::fMemHead = nullptr;
-/*const void* MemoryAllocator::FreeMemStart = HEAP_START_ADDR;
-const void* MemoryAllocator::FreeMemEnd = HEAP_END_ADDR;
-const size_t MemoryAllocator::BlockSize = MEM_BLOCK_SIZE;*/
 
 void *MemoryAllocator::allocate(size_t size) {
     //printMem();

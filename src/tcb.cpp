@@ -3,7 +3,6 @@
 //
 
 #include "../h/tcb.hpp"
-#include "../h/__print.hpp"
 #include "../h/syscall_c.h"
 #include "../h/scheduler.hpp"
 
@@ -23,14 +22,6 @@ TCB *TCB::createSupervisorTCB(TCB::Body body, void *args) {
     return new TCB
     (body, args,DEFAULT_TIME_SLICE, true, true);
 }
-/*void TCB::yield() {
-    RiscV::pushRegisters();
-
-    dispatch();
-
-    RiscV::popRegisters();
-}*/
-
 
 TCB::TCB(Body body, void* args, uint64 timeSlice, bool ready, bool supervisor)
 : body(body),
@@ -49,7 +40,6 @@ context({
 
 
 void TCB::dispatch() {
-    //__print_string("hello\n");
     TCB *old = running;
     if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
@@ -71,7 +61,7 @@ void TCB::sThreadWrapper() {
     RiscV::setSstatus(RiscV::SIE);
     RiscV::popSppSpie();
     running->body(running->args);
-    //running->setFinished(true);
-    thread_exit();
-    //thread_dispatch();
+    running->setFinished(true);
+    //thread_exit();
+    thread_dispatch();
 }

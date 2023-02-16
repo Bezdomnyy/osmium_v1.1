@@ -3,6 +3,7 @@
 //
 
 #include "../h/uart.hpp"
+#include "../h/kernel.hpp"
 
 char Uart::rx_buffer[Uart::BUFFER_SIZE] = {0};
 char Uart::tx_buffer[Uart::BUFFER_SIZE] = {0};
@@ -90,7 +91,10 @@ char Uart::rxReceive() {
 char Uart::txGet() {
     char c;
     //tx_not_empty->semWait(); // wait consumer
-    while(txSize == 0) {thread_dispatch();}
+    while(txSize == 0) {
+        //if (Kernel::isFinished()) return 0;
+        thread_dispatch();
+    }
     c = tx_buffer[txFront];
     txFront = (txFront + 1) & (BUFFER_SIZE - 1);
     txSize--;
@@ -131,3 +135,13 @@ void Uart::rxWait() {
 void Uart::rxSignal() {
     rx_request->semSignal();
 }
+
+/*void Uart::finish() {
+    delete rx_not_empty;
+    delete rx_not_full;
+    delete rx_request;
+
+    delete tx_not_empty;
+    delete tx_not_full;
+    delete tx_request;
+}*/

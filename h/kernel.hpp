@@ -10,7 +10,6 @@
 
 #include "memory_allocator.hpp"
 #include "tcb.hpp"
-//#include "sem.hpp"
 #include "uart.hpp"
 
 class Kernel {
@@ -22,11 +21,12 @@ public:
 
     static void initKernel();
     static void supervisorTrap();
+    static void finishKernel();
+    static bool isFinished();
 private:
     /* supervisor Trap routines */
     static void supervisorTrapHandler();
     static void syscall_handler();
-    static void hw_irq_handler();
 
     /* software syscall_c handlers */
     static void mem_alloc_handler();                    //0x01
@@ -47,7 +47,9 @@ private:
     static void uart_handler();                         //0x0a
 
     //private fields
-    //TODO:
+    static volatile bool finished;
+
+    static volatile int sysThread;
 };
 
 inline void Kernel::syscall_handler() {
@@ -219,6 +221,15 @@ inline void Kernel::putc_handler() {
     //uart->tx
 }
 
-
+//0x0a - hardware
+inline void Kernel::uart_handler() {
+    int id = plic_claim();
+    if (id == 0x0a) {
+        while (Uart::getStatus() & Uart::RX) {
+            if(Uart::rxReceive() < 0) break;
+        }
+    }
+    plic_complete(id);
+}
 
 #endif //OSMIUM_KERNEL_HPP

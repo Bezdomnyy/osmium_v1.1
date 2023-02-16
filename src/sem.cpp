@@ -16,22 +16,17 @@ Sem::~Sem() {
 }
 
 int Sem::semWait() {
-    //if (Scheduler::readyQueueEmpty()) return -1;
     if (--val < 0) {
         TCB *old = TCB::running;
-        //if (!TCB::running) __print_string("error!!!\n");
         old->setBlocked(true);
         list.putLast(old);
-        //list.printStatus();
         TCB::dispatch();
-        //thread_dispatch();
     }
     return 0;
 }
 
 int Sem::semSignal() {
     if (++val <= 0) {
-        //if (!list.getFirst()) return -1;
         TCB* ready = list.takeFirst();
         ready->setBlocked(false);
         Scheduler::put(ready);

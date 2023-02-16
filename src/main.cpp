@@ -4,19 +4,30 @@
 
 void userMain();
 
+void background() {
+    while(!Kernel::isFinished()) {
+        thread_dispatch();
+    }
+}
+
 void main() {
     Kernel::initKernel();
 
-    TCB* main = TCB::createTCB(nullptr, nullptr);
-    TCB* user = TCB::createTCB((void(*)(void*))&userMain, nullptr);
-    TCB::running = main;
+    TCB* mainTCB = TCB::createTCB(nullptr, nullptr);
+    TCB* userTCB = TCB::createTCB((void(*)(void*))&userMain, nullptr);
+    TCB* backgroundTCB = TCB::createTCB((void(*)(void*))&background, nullptr);
+    TCB::running = mainTCB;
 
-    TCB* uart_tx = TCB::createSupervisorTCB((void(*)(void*))uart_consumer, nullptr);
+    TCB* uartTX_TCB = TCB::createTCB((void(*)(void*))&uart_consumer, nullptr);
 
-    uart_tx->isFinished();
+    uartTX_TCB->isFinished();
+    backgroundTCB->isFinished();
     RiscV::setSstatus(RiscV::SIE);
-    while(!user->isFinished()) {
+    while(!userTCB->isFinished()) {
         TCB::dispatch();
-        //thread_dispatch();
     }
+
+    Kernel::finishKernel();
+    delete userTCB;
+    delete backgroundTCB;
 }

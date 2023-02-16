@@ -6,7 +6,6 @@
 #define OSMIUM_MEMORY_ALLOCATOR_HPP
 
 #include "../lib/hw.h"
-#include "../lib/console.h"
 #include "__print.hpp"
 
 class MemoryAllocator {
@@ -23,7 +22,7 @@ public:
         FreeMem *next;
     };
 
-    static void printMem() {
+/*    static void printMem() {
         if (!fMemHead) __print_string("it happened :/\n"), initMem();
         FreeMem* curr = fMemHead;
         __print_string("Memory Insight:\n");
@@ -42,7 +41,7 @@ public:
             i++;
             curr = curr->next;
         }
-    }
+    }*/
 private:
 
     static FreeMem* fMemHead;

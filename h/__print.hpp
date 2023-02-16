@@ -13,7 +13,7 @@ extern void __print_uint64(uint64 integer);
 
 //extern void printInteger(uint64 integer);
 
-extern void __print_int(long long int integer);
+//extern void __print_int(long long int integer);
 
 
 #endif //OSMIUM_PRINT_HPP

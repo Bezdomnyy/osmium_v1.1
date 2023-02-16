@@ -62,22 +62,6 @@ public:
     }
 
 private:
-    //friend class Kernel;
-
-    /*TCB(Body body, void* args, uint64 timeSlice)
-            : body(body),
-            args(args),
-            stack(body != nullptr ? new uint64[DEFAULT_STACK_SIZE] : nullptr),
-            finished(false),
-            timeSlice(timeSlice),
-            context({
-                body != nullptr ? (uint64) &threadWrapper : 0,
-                stack != nullptr ? (uint64) &stack[DEFAULT_STACK_SIZE] : 0
-            })
-    {
-        if (body != nullptr) Scheduler::put(this);
-    }*/
-
     TCB(Body body, void* args, uint64 timeSlice, bool ready, bool supervisor = false);
 
     struct Context {
