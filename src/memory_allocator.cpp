@@ -37,6 +37,7 @@ void MemoryAllocator::free(void* addr) {
     tryToMerge(newNode);
     tryToMerge(curr);
     //printMem();
+    return;
 }
 
 void MemoryAllocator::initMem()  {

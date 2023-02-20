@@ -8,10 +8,11 @@
 //#include "../h/tcb.hpp"
 
 void uart_consumer() {
-    while(1) {
+    while(!Kernel::isFinished()) {
         while (Uart::getStatus() & Uart::TX) {
             //__print_string("h");
             char c = Uart::txGet();
+            if (c == 0) break;
 
             Uart::txSend(c);
             //TCB::dispatch();

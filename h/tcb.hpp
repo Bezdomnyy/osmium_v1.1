@@ -23,7 +23,7 @@ public:
 
     static TCB* createSupervisorTCB(Body body, void* args);
 
-    bool isFinished() const { return finished; }
+    bool isFinished() const { bool ret = finished; return ret; }
 
     void setFinished(bool val) { finished = val; }
 

@@ -92,7 +92,7 @@ char Uart::txGet() {
     char c;
     //tx_not_empty->semWait(); // wait consumer
     while(txSize == 0) {
-        //if (Kernel::isFinished()) return 0;
+        if (Kernel::isFinished()) return 0;
         thread_dispatch();
     }
     c = tx_buffer[txFront];

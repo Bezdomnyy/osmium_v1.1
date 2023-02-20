@@ -79,7 +79,7 @@ void Kernel::supervisorTrapHandler() {
 
 void Kernel::finishKernel() {
     finished = true;
-    Scheduler::finish();
+    //Scheduler::finish();
     //Uart::finish();
 }
 

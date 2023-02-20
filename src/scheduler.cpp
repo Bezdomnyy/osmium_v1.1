@@ -19,7 +19,7 @@ void Scheduler::put(TCB* tcb) {
 void Scheduler::timerInterrupt() {
     sleepNode *first = sleepQueue.getFirst();
     while(first) {
-        //__print_uint64(first->time);
+        //  __print_uint64(first->time);
         //__print_string("\n");
         if (first->time != 0) break;
         sleepQueue.takeFirst();

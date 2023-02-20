@@ -22,11 +22,32 @@ void main() {
 
     uartTX_TCB->isFinished();
     backgroundTCB->isFinished();
+
     RiscV::setSstatus(RiscV::SIE);
-    while(!userTCB->isFinished()) {
+
+    /*while(!uartTX_TCB->isFinished()) {
         TCB::dispatch();
+    }*/
+
+    while(!userTCB->isFinished()) {
+        thread_dispatch();
     }
 
+    //delete userTCB;
+
     Kernel::finishKernel();
+
+    while(!backgroundTCB->isFinished()) {
+        thread_dispatch();
+    }
+
+    while(!uartTX_TCB->isFinished()) {
+        thread_dispatch();
+    }
+
     delete userTCB;
+    delete backgroundTCB;
+    delete uartTX_TCB;
+
+    Scheduler::finish();
 }
